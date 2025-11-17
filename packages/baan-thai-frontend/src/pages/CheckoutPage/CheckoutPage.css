@@ -1,11 +1,111 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
 .checkout-wrapper {
+	width: 100%;
+	min-height: 100vh;
+	background-color: #e4dace;
 }
 
 .hero-section {
+	max-width: 1200px;
+	background-image: url('../../assets/hero-img.png');
+	background-size: cover;
+	background-position: center;
+	height: 40rem;
+	min-width: 100%;
+	margin-bottom: 2rem;
 }
 
+/* MAIN CHECKOUT CONTENT HERE */
 .checkout-section {
+	width: 100%;
+	max-width: 1200px;
+	display: flex;
+	justify-content: center;
+	min-width: 100%;
 }
 
 .order-section {
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	gap: 3.5rem;
+	padding: 1rem;
+}
+
+.text-label {
+	font-weight: 500;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 1rem;
+}
+
+/* ORDER-SECTION ARTICLES  */
+.order-section article {
+	max-width: 30rem;
+	background: rgb(233, 233, 233);
+	color: rgb(20, 20, 20);
+	padding: 2rem;
+	border-radius: 0.3rem;
+	display: flex;
+	flex-direction: column;
+	background-color: #a88661;
+}
+
+.checkout-wrapper__heading {
+	text-align: center;
+	color: rgb(26, 26, 26);
+}
+
+/* CONFIRM ORDER SECTION */
+.confirm-order__section {
+	margin-left: 2rem;
+	background-color: #59390b;
+	border-radius: 0.3rem;
+	max-height: 40rem;
+	padding: 1rem;
+	margin: 1rem;
+	min-width: 20rem;
+}
+
+.PLACEHOLDER-TXT-FOR-SPACING {
+	margin: 3rem 0rem 3rem 0rem;
+}
+
+input {
+	background-color: white;
+	border-style: none;
+	border-radius: 0.3rem;
+	padding: 1rem 2rem;
+	margin-bottom: 1.5rem;
+	cursor: pointer;
+}
+
+.radio-label {
+	background-color: rgb(233, 233, 233);
+	margin-bottom: 1.5rem;
+	border-radius: 0.3rem;
+	padding: 0.5rem;
+
+	display: flex;
+	align-items: center;
+	gap: 0.3rem;
+
+	cursor: pointer;
+}
+
+.customer-info__notice {
+	font-style: italic;
+	margin-top: 1rem;
+}
+
+.confirm-article__pay-btn {
+	border-radius: 0.3rem;
+	border-style: none;
+	background-color: #69491a;
+	padding: 0.8rem 3rem;
 }
