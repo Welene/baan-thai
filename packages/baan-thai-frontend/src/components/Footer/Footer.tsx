@@ -1,11 +1,11 @@
 import React from 'react';
 import './Footer.css';
 
-function Header() {
-	return <div>Header</div>;
+function Footer() {
+	return <div>Footer</div>;
 }
 
-export default Header;
+export default Footer;
 
 // Författare: Helene
 // Footer komponent

@@ -1,3 +1,49 @@
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.header {
+	display: flex;
+	flex-direction: row;
+	background-color: #e4dace;
+	justify-content: space-between;
+	padding: 1.5rem;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	font-size: 1.5rem;
+}
+
+.header__logo {
+	cursor: pointer;
+}
+
+.header__options-section {
+	display: flex;
+	flex-direction: column;
+	color: #59390b;
+	justify-content: space-between;
+}
+
+.header__icons {
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	justify-content: flex-end;
+	cursor: pointer;
+}
+
+.header__nav-list {
+	display: flex;
+	flex-direction: row;
+	list-style: none;
+	gap: 2rem;
+}
+
+.header__nav-item {
+	cursor: pointer;
+}
+
 /* Författare: Helene
 Header komponent
 

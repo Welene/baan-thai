@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MenuPage from '../pages/MenuPage/MenuPage';
-import Header from '../components/Footer/Footer';
+import Header from '../components/Header/Header';
 /* Importera era sidor här som jag gjort med MenuPage */
 
 export default function AppRouter() {
