@@ -23,5 +23,8 @@
 	"bugs": {
 		"url": "https://github.com/Welene/baan-thai/issues"
 	},
-	"homepage": "https://github.com/Welene/baan-thai#readme"
+	"homepage": "https://github.com/Welene/baan-thai#readme",
+	"dependencies": {
+		"react-router-dom": "^7.9.6"
+	}
 }
