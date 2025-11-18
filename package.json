@@ -10,7 +10,9 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"test": "echo \"Error: no test specified\" && exit 1"
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"dev": "npm run dev --workspace=packages/baan-thai-frontend",
+		"dev:backend": "npm run dev --workspace=packages/baan-thai-backend"
 	},
 	"repository": {
 		"type": "git",
