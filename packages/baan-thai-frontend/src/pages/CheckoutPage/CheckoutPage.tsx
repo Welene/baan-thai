@@ -11,9 +11,9 @@ function CheckoutPage() {
 			<section className="checkout-wrapper">
 				<section className="hero-section"></section>
 
-				<hr className="divider" />
+				<hr className="divider--h1" />
 				<h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
-				<hr className="divider" />
+				<hr className="divider--h1" />
 
 				<section className="checkout-section">
 					<section className="order-section">
@@ -207,7 +207,7 @@ function CheckoutPage() {
 							</section>
 
 							<button className="confirm-article__pay-btn">
-								Betala
+								BETALA
 							</button>
 						</article>
 					</section>

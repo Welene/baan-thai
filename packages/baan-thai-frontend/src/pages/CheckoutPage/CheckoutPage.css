@@ -11,11 +11,22 @@
 	min-height: 100vh;
 	background-color: #e4dace;
 	font-family: 'Quicksand', sans-serif;
+	padding-bottom: 15rem;
 }
 
 .checkout-wrapper__heading {
 	font-size: 2.5rem;
 	margin: 0.5rem 0rem 0.5rem 0rem;
+	color: rgb(51, 51, 51);
+}
+
+.divider--h1 {
+	width: 96%;
+	margin: 0 auto;
+	border-radius: 2px;
+	border: none;
+	height: 2px;
+	background-color: #676464;
 }
 
 .hero-section {
@@ -57,6 +68,7 @@
 	display: flex;
 	flex-direction: column;
 	margin-bottom: 2rem;
+	gap: 0.5rem;
 }
 
 .icontxt-container {
@@ -104,6 +116,8 @@
 	/* change to a better way than 9.9 rem here ^ */
 	min-width: 35rem;
 	filter: drop-shadow(#3023168e 0px 5px 10px);
+	color: rgb(241, 241, 241);
+	position: relative;
 }
 
 .confirm-order__section p {
@@ -150,6 +164,12 @@ input {
 	cursor: pointer;
 }
 
+input[type='radio'] {
+	transform: scale(1.8);
+	cursor: pointer;
+	accent-color: #59390b;
+}
+
 .customer-info__notice {
 	font-style: italic;
 	margin-bottom: 1rem;
@@ -173,6 +193,12 @@ input {
 	padding: 0.8rem 3rem;
 	height: 4rem;
 	width: 15rem;
+	cursor: pointer;
+	color: rgb(241, 241, 241);
+	position: absolute;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
 }
 
 /* Författare: Helene */
