@@ -1,5 +1,9 @@
 import React from 'react';
 import './CheckoutPage.css';
+import Delivery from '../../assets/delivery.png';
+import Pay from '../../assets/pay.png';
+import Edit from '../../assets/edit.png';
+import Clock from '../../assets/clock.png';
 
 function CheckoutPage() {
 	return (
@@ -15,6 +19,18 @@ function CheckoutPage() {
 					<section className="order-section">
 						{/* PICKUP TYPE SECTION */}
 						{/* Kanske vi tar bort denna, sedan det endast er take away anyway? Och ha en text som säger "Välg blablabla för avhämtning blablabla"?  */}
+						<div className="icontxt-container">
+							<figure className="order-section__icon">
+								<img
+									className="order-section__img"
+									src={Delivery}
+									alt="Delivery icon"
+								/>
+							</figure>
+							<h2 className="order-section__heading">
+								Leveranssätt
+							</h2>
+						</div>
 						<article className="delivery-method">
 							<label className="radio-label">
 								<input
@@ -27,6 +43,18 @@ function CheckoutPage() {
 						</article>
 
 						{/* PICKUP TIME SECTION */}
+						<div className="icontxt-container">
+							<figure className="order-section__icon">
+								<img
+									className="order-section__img"
+									src={Clock}
+									alt="Delivery icon"
+								/>
+							</figure>
+							<h2 className="order-section__heading">
+								Upphämtningstid
+							</h2>
+						</div>
 						<article className="pickup-time">
 							<label className="radio-label">
 								<input
@@ -48,12 +76,25 @@ function CheckoutPage() {
 						</article>
 
 						{/* CUSTOMER INFO SECTION */}
+						<div className="icontxt-container">
+							<figure className="order-section__icon">
+								<img
+									className="order-section__img"
+									src={Edit}
+									alt="Delivery icon"
+								/>
+							</figure>
+							<h2 className="order-section__heading">
+								Dina uppgifter
+							</h2>
+						</div>
 						<article className="customer-info">
 							<label className="text-label">
 								Namn:
 								<input
 									className="customer-info__name"
 									type="text"
+									placeholder="Förnamn & efternamn"
 								/>
 							</label>
 
@@ -62,6 +103,7 @@ function CheckoutPage() {
 								<input
 									className="customer-info__phone"
 									type="text"
+									placeholder="Ditt telefonnummer"
 								/>
 							</label>
 
@@ -70,6 +112,7 @@ function CheckoutPage() {
 								<input
 									className="customer-info__mail"
 									type="text"
+									placeholder="Ditt e-mejl"
 								/>
 							</label>
 							<p className="customer-info__notice">
@@ -79,6 +122,18 @@ function CheckoutPage() {
 						</article>
 
 						{/* PAYMENT SECTION */}
+						<div className="icontxt-container">
+							<figure className="order-section__icon">
+								<img
+									className="order-section__img"
+									src={Pay}
+									alt="Delivery icon"
+								/>
+							</figure>
+							<h2 className="order-section__heading">
+								Betalning
+							</h2>
+						</div>
 						<article className="payment-method">
 							<label className="radio-label">
 								<input
@@ -107,7 +162,7 @@ function CheckoutPage() {
 								Du är nästan klar!
 							</h2>
 							{/* SUMMERING mini-section*/}
-							<section className="confirm-group">
+							<section className="confirm-group1">
 								<hr className="divider" />
 								<h3 className="confirm-article__sub-heading">
 									Summering
@@ -120,7 +175,7 @@ function CheckoutPage() {
 							</section>
 
 							{/*  TYPE + DATE mini-section */}
-							<section className="confirm-group">
+							<section className="confirm-group2">
 								<hr className="divider" />
 								<p className="confirm-article__type">Type</p>
 								{/* dynamic type here */}
@@ -130,7 +185,7 @@ function CheckoutPage() {
 							</section>
 
 							{/*  CAMPAIGN CODE INPUT mini-section */}
-							<section className="confirm-group">
+							<section className="confirm-group3">
 								<p className="confirm-article__code">
 									Kampanjkod
 								</p>
@@ -140,11 +195,11 @@ function CheckoutPage() {
 										type="text"
 									/>
 								</label>
-								<hr className="divider" />
 							</section>
+							<hr className="divider" />
 
 							{/*  TOTAL PRICE mini-section */}
-							<section className="confirm-group">
+							<section className="confirm-group4">
 								<p className="confirm-article__total">
 									Total inkl. moms
 								</p>
@@ -160,7 +215,12 @@ function CheckoutPage() {
 			</section>
 		</>
 	);
-	// import footer here
 }
 
 export default CheckoutPage;
+
+/* Författare: Helene */
+/* CSS för betalningssida/min bästllning */
+
+/* Changes made by: */
+/* Changes that were made: */

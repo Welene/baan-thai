@@ -1,4 +1,9 @@
 .env
+.env.local
+.env.local*.local
+node_modules
+**/node_modules/
+dist
 
 # Logs
 logs
