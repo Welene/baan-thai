@@ -7,3 +7,19 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: blueviolet;
 }
+.hero-section {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
+.page__images-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: 4em 60px;
+
+    img {
+        width: 300px;
+        height: auto;
+    }
+}
