@@ -1,0 +1,122 @@
+[
+  {
+    "PK": "USER#<admin>",
+    "SK": "PROFILE",
+    "type": "User",
+    "userId": "<admin>",
+    "username": "admin",
+    "email": "admin@baanthai.se",
+    "passwordHash": "$2b$10$placeholder",
+    "role": "admin",
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "PROFILE",
+    "type": "User",
+    "userId": "<customer>",
+    "username": "jannekund",
+    "email": "Janne@example.com",
+    "passwordHash": "$2b$10$placeholder",
+    "role": "customer",
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "PRODUCT#1",
+    "SK": "DETAILS",
+    "type": "Product",
+    "productId": 1,
+    "name": "Edamamebönor med salt",
+    "description": "Saltade sojabönor.",
+    "price": 59,
+    "category": "Sushi",
+    "categoryKey": "sushi",
+    "available": true,
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "INDEX#CATEGORY#sushi",
+    "SK": "PRODUCT#1",
+    "type": "ProductIndex",
+    "productId": 1
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "CART",
+    "type": "Cart",
+    "userId": "<customer>",
+    "items": [
+      { "productId": 1, "name": "Edamamebönor med salt", "price": 59, "qty": 2 }
+    ],
+    "total": 118,
+    "updatedAt": "2025-11-18T12:05:00Z"
+  },
+  {
+    "PK": "ORDER#<order1>",
+    "SK": "ORDER",
+    "type": "Order",
+    "orderId": "<order1>",
+    "userId": "<customer>",
+    "status": "NEW",
+    "items": [
+      { "productId": 1, "qty": 2, "price": 59 }
+    ],
+    "total": 118,
+    "createdAt": "2025-11-18T12:06:00Z"
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "ORDER#20251118T120600#<order1>",
+    "type": "UserOrderRef",
+    "orderId": "<order1>",
+    "total": 118,
+    "status": "NEW",
+    "createdAt": "2025-11-18T12:06:00Z"
+  },
+  {
+    "PK": "ORDER#<order1>",
+    "SK": "MSG#20251118T120700#<msg1>",
+    "type": "Message",
+    "messageId": "<msg1>",
+    "authorId": "<customer>",
+    "authorRole": "customer",
+    "text": "Kan göra mindre stark?",
+    "createdAt": "2025-11-18T12:07:00Z"
+  },
+  {
+    "PK": "ORDER#<order1>",
+    "SK": "PAYMENT#<pay1>",
+    "type": "Payment",
+    "paymentId": "<pay1>",
+    "amount": 118,
+    "status": "PENDING",
+    "createdAt": "2025-11-18T12:08:00Z"
+  },
+  {
+    "PK": "INDEX#ORDER_STATUS#NEW",
+    "SK": "ORDER#20251118T120600#<order1>",
+    "type": "OrderIndex",
+    "orderId": "<order1>",
+    "total": 118,
+    "createdAt": "2025-11-18T12:06:00Z"
+  },
+  {
+    "PK": "INGREDIENT#ris",
+    "SK": "DETAILS",
+    "type": "Ingredient",
+    "ingredientName": "ris",
+    "amount": 50,
+    "unit": "kg",
+    "minAmount": 10,
+    "createdAt": "2025-11-18T12:00:00Z",
+    "updatedAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "INDEX#INGREDIENTS",
+    "SK": "INGREDIENT#ris",
+    "type": "IngredientIndex",
+    "ingredientName": "ris",
+    "amount": 50,
+    "minAmount": 10
+  }
+]
