@@ -6,7 +6,11 @@ import basketIcon from '../../assets/basket.png';
 import bellIcon from '../../assets/bell.png';
 import { useNavigate } from 'react-router-dom';
 
+
+
 function Header() {
+	const navigate = useNavigate();
+	
 	return (
 		<header className="header">
 			<section className="header__logo-section">
@@ -14,31 +18,38 @@ function Header() {
 					src={logo}
 					alt="Baan Thaikök logo"
 					className="header__logo"
+					onClick={() => navigate('/')} 
+					// / = PATH TIL LANDINGPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ LANDINGPAGE
+
 				/>
 			</section>
 
 			<section className="header__options-section">
 				<section className="header__icons">
 					<figure className="header__icon">
-						<img src={manIcon} alt="Profil ikon" />
+						<img src={manIcon} alt="Profil ikon" onClick={() => navigate(`/profile/${userId}`)} />
+					 {/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ PROFILPAGE */}
 					</figure>
 
 					<figure className="header__icon">
-						<img src={basketIcon} alt="Handlekurv ikon" />
+						<img src={basketIcon} alt="Handlekurv ikon" onClick={() => navigate(`/cart/${userId}`)} />
+						 {/* /cart = PATH TIL CARTPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ PARTPAGE */}
 					</figure>
 
 					<figure className="header__icon">
-						<img src={bellIcon} alt="Varsler ikon" />
+						<img src={bellIcon} alt="Varsler ikon" onClick={() => navigate(`/notifications`)} />
+						{/* /notifications = PATH TIL NOTIS-PAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ NOTIS-PAGE */}
 					</figure>
 				</section>
 
 				<section className="header__navigation">
 					<nav className="header__nav">
 						<ul className="header__nav-list">
-							<li className="header__nav-item">Hem</li>
-							<li className="header__nav-item">Sushi</li>
-							<li className="header__nav-item">Thailändsk mat</li>
-							<li className="header__nav-item">Om oss</li>
+							<li className="header__nav-item" onClick={() => navigate('/')}>Hem</li>
+							<li className="header__nav-item" onClick={() => navigate('/menu/sushi')}>Sushi</li>
+							<li className="header__nav-item" onClick={() => navigate('/menu/thai')}>Thailändsk mat</li>
+							<li className="header__nav-item" onClick={() => navigate('/about')}>Om oss</li>
+							{/* har inte skapad alla pages än, så ändra / path bara när man vet */}
 						</ul>
 					</nav>
 				</section>

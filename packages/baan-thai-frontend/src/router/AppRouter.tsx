@@ -18,7 +18,6 @@ export default function AppRouter() {
 				{/* lägg till er sida under här tex
         <Route path="/Landing" element={<LandingPage />} />  */}
 
-				<Route path="/header" element={<Header />} />
 
 				<Route path="/menu" element={<MenuPage />} />
 			</Routes>
