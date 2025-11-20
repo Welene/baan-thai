@@ -26,7 +26,7 @@ export const AboutUsPage: React.FC = () => {
         {
             name: "Kevin",
             role: "Servitris",
-            image: "",
+            image: ""
 
         }
     ];
@@ -35,9 +35,13 @@ export const AboutUsPage: React.FC = () => {
         <div className="aboutUs-page">
             <section className="hero-section">
                 <h1 className="page-title__big">OM OSS</h1>
+                <figure className="page__images-grid">
+                    <img src={omOssBig} alt="Thaikök restaurant" />
+                    <img src={omOssSmall1} alt="Thaikök restaurant" />
+                    <img src={omOssSmall2} alt="Thaikök restaurant" />
+                </figure>
             </section>
             <section className="story-section">
-                <h2 className="page-subtitle">VD:n budskap</h2>
                 <p className="content-text">
                     Vår passion för att tillaga thailändska rätter med en touch av kärlek och med noggrant utvalda färska ingredienser gör oss unika. 
                     Kom och besök vår restaurang på Kyrkogatan 36 i Arvika eller beställ en takeaway för att njuta av en smakupplevelse utöver det vanliga. 
