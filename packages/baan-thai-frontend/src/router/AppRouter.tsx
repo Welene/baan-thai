@@ -21,10 +21,9 @@ export default function AppRouter() {
 
 				<Route path="/menu" element={<MenuPage />} />
 
-				{/* for testing footer, remove later */}
-				<Route path="/footer" element={<Footer />} /> 
+
 			</Routes>
-			{/* <Footer/> */}
+			<Footer/>
 		</BrowserRouter>
 	);
 }
