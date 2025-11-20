@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MenuPage from '../pages/MenuPage/MenuPage';
 import Header from '../components/Header/Header';
-// import Footer from '../components/Footer/Footer';
+import Footer from '../components/Footer/Footer';
 /* Importera era sidor här som jag gjort med MenuPage */
 
 export default function AppRouter() {
@@ -20,6 +20,9 @@ export default function AppRouter() {
 
 
 				<Route path="/menu" element={<MenuPage />} />
+
+				{/* for testing footer, remove later */}
+				<Route path="/footer" element={<Footer />} /> 
 			</Routes>
 			{/* <Footer/> */}
 		</BrowserRouter>

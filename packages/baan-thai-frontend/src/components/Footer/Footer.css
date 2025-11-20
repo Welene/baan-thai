@@ -1,3 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Radley:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+/* GIFT CARD SECTION */
+
+.gift-section{
+    display: flex;
+    flex-direction: column;
+    align-content: center; 
+    color: rgb(31, 31, 31);
+}
+
+.gift-section h3{
+    font-family: 'Rakkas', serif;
+    font-weight: 600;
+    color: rgb(31, 31, 31);
+    font-size: 1.7rem;
+    margin-bottom: 1rem;
+}
+
+.gift-section p{
+    font-family: 'Raleway', serif;
+    font-weight: 600;
+    color: rgb(31, 31, 31);
+    font-size: 1.5rem;
+    letter-spacing: .1rem;
+}
+
+
+.gift-card {
+    background-color: #A88661;
+    display: flex;
+    flex-direction: row;
+    gap: 8rem;
+    padding: 5rem;
+    align-items: center;
+}
+
+.gift-info__container {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+
+.gift-card__container {
+    height: 30rem;
+    width: 30rem;
+    background-color: #E4DACE;
+    padding: 5rem;
+    border-radius: 999rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: drop-shadow(0px 6px 5px rgba(37, 21, 13, 0.474));
+}
+
+/* INFO - MAP- ABOUT SECTION */
+
+.us-info {
+    background-color: #E4DACE;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    justify-content: space-evenly;  
+    align-items: flex-start;
+    padding: 4rem 2rem;
+    margin: 0 auto;
+    width: 100%;
+    
+}
+
+.us-info article {
+    flex: 1;
+    max-width: 20rem;
+    padding: 8rem;
+}
+
+.us-info .open-times {
+    padding: 0rem;
+}
+
+.us-info .contact {
+    padding: 0rem;
+}
+
+.us-info .location {
+    padding: 0rem;
+}
+
+.us-info .open-times__time--red {
+    margin-top: 1rem;
+    color: rgb(193, 4, 4);
+    font-size: 1.3rem;;
+}
+
+
 /* Författare: Helene
 Footer komponent
 
