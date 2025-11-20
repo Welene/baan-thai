@@ -58,7 +58,7 @@ function Header() {
 							<li className="header__nav-item" onClick={() => navigate('/')}>Hem</li>
 							<li className="header__nav-item" onClick={() => navigate('/menu/sushi')}>Sushi</li>
 							<li className="header__nav-item" onClick={() => navigate('/menu/thai')}>Thailändsk mat</li>
-							<li className="header__nav-item" onClick={() => navigate('/about')}>Om oss</li>
+							<li className="header__nav-item" onClick={() => navigate('/om-oss')}>Om oss</li>
 							{/* har inte skapad alla pages än, så ändra / path bara när man vet */}
 						</ul>
 					</nav>
