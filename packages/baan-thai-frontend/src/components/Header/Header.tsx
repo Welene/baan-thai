@@ -11,9 +11,13 @@ import type { User } from '../../interfaces/user';
 
 function Header() {
 	const userString = localStorage.getItem("user");
+	// gets the user from localstorage and saves it in userString
+
 	const user: User | null = userString ? JSON.parse(userString) : null;
+	// changes the JSON string from localstorage into a User object (parsing it) - or empty (null) if user hasn't been made yet
 
 	const userId = user?.userId ?? "";
+	// get userId, or empty if no user is made yet
 
 	const navigate = useNavigate();
 	
