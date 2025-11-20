@@ -3,6 +3,7 @@ import './aboutUs.css';
 import omOssBig from '../../assets/omOss-big.jpg';
 import omOssSmall1 from '../../assets/omOss-small-1.jpg';
 import omOssSmall2 from '../../assets/omOss-small-2.jpg';
+import person from '../../assets/person.png';
 
 interface TeamMember {
     name: string;
@@ -23,7 +24,7 @@ export const AboutUsPage: React.FC = () => {
             image: ""
         },
         {
-            name: "Laila",
+            name: "Kevin",
             role: "Servitris",
             image: "",
 
@@ -31,7 +32,7 @@ export const AboutUsPage: React.FC = () => {
     ];
 
     return (
-        <div className="about-us-page">
+        <div className="aboutUs-page">
             <section className="hero-section">
                 <h1 className="page-title__big">OM OSS</h1>
                 <figure className="page__images-grid">
@@ -53,7 +54,7 @@ export const AboutUsPage: React.FC = () => {
                 <aside className="team-grid">
                     {teamMembers.map((member, index) => (
                         <div className="team-member" key={index}>
-                            <img src="#" alt="" className="team-image" />
+                            <img src={person} alt="" className="team-image" />
                             <h3 className="member-name">{member.name}</h3>
                             <span className="member-role">{member.role}</span>
                         </div>
