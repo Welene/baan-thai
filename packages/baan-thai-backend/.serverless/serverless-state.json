@@ -1,0 +1,4375 @@
+{
+  "service": {
+    "service": "baan-thai-backend",
+    "serviceObject": {
+      "name": "baan-thai-backend"
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "node22.x",
+      "region": "eu-north-1",
+      "iam": {
+        "role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+      },
+      "environment": {
+        "TABLE_NAME": "RestaurantTable",
+        "JWT_SECRET": "dev-secret-change-in-prod"
+      },
+      "httpApi": {
+        "cors": {
+          "allowedOrigins": [
+            "*"
+          ],
+          "allowedHeaders": [
+            "Content-Type",
+            "Authorization"
+          ],
+          "allowedMethods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "stage": "dev",
+      "versionFunctions": true,
+      "compiledCloudFormationTemplate": {
+        "AWSTemplateFormatVersion": "2010-09-09",
+        "Description": "The AWS CloudFormation template for this Serverless application",
+        "Resources": {
+          "HandleRegisterLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-handleRegister"
+            }
+          },
+          "HandleLoginLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-handleLogin"
+            }
+          },
+          "GetUserProfileLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getUserProfile"
+            }
+          },
+          "GetMenuLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getMenu"
+            }
+          },
+          "GetProductLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getProduct"
+            }
+          },
+          "CreateMenuItemLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-createMenuItem"
+            }
+          },
+          "UpdateMenuItemLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-updateMenuItem"
+            }
+          },
+          "DeleteMenuItemLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-deleteMenuItem"
+            }
+          },
+          "GetAllIngredientsLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getAllIngredients"
+            }
+          },
+          "GetIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getIngredient"
+            }
+          },
+          "CreateIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-createIngredient"
+            }
+          },
+          "UpdateIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-updateIngredient"
+            }
+          },
+          "DeleteIngredientLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-deleteIngredient"
+            }
+          },
+          "CreateOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-createOrder"
+            }
+          },
+          "GetAllOrdersLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getAllOrders"
+            }
+          },
+          "GetOrderbyUserIdLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getOrderbyUserId"
+            }
+          },
+          "GetOrdersByStatusLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getOrdersByStatus"
+            }
+          },
+          "UpdateOrderStatusLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-updateOrderStatus"
+            }
+          },
+          "CancelOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-cancelOrder"
+            }
+          },
+          "LockOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-lockOrder"
+            }
+          },
+          "DeleteOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-deleteOrder"
+            }
+          },
+          "EditOrderLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-editOrder"
+            }
+          },
+          "AddOrderMessageLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-addOrderMessage"
+            }
+          },
+          "GetOrderMessagesLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getOrderMessages"
+            }
+          },
+          "CreatePaymentLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-createPayment"
+            }
+          },
+          "GetPaymentLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getPayment"
+            }
+          },
+          "UpdatePaymentStatusLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-updatePaymentStatus"
+            }
+          },
+          "GetCartLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-getCart"
+            }
+          },
+          "UpdateCartLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-updateCart"
+            }
+          },
+          "ClearCartLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/baan-thai-backend-dev-clearCart"
+            }
+          },
+          "HandleRegisterLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/handleRegister.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-handleRegister",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "HandleRegisterLogGroup"
+            ]
+          },
+          "HandleLoginLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/handleLogin.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-handleLogin",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "HandleLoginLogGroup"
+            ]
+          },
+          "GetUserProfileLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getUserProfile.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getUserProfile",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetUserProfileLogGroup"
+            ]
+          },
+          "GetMenuLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getMenu.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getMenu",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetMenuLogGroup"
+            ]
+          },
+          "GetProductLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getProduct.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getProduct",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetProductLogGroup"
+            ]
+          },
+          "CreateMenuItemLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/createMenuItem.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-createMenuItem",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "CreateMenuItemLogGroup"
+            ]
+          },
+          "UpdateMenuItemLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/updateMenuItem.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-updateMenuItem",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "UpdateMenuItemLogGroup"
+            ]
+          },
+          "DeleteMenuItemLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/deleteMenuItem.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-deleteMenuItem",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "DeleteMenuItemLogGroup"
+            ]
+          },
+          "GetAllIngredientsLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getAllIngredients.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getAllIngredients",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetAllIngredientsLogGroup"
+            ]
+          },
+          "GetIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getIngredient.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetIngredientLogGroup"
+            ]
+          },
+          "CreateIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/createIngredient.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-createIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "CreateIngredientLogGroup"
+            ]
+          },
+          "UpdateIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/updateIngredient.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-updateIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "UpdateIngredientLogGroup"
+            ]
+          },
+          "DeleteIngredientLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/deleteIngredient.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-deleteIngredient",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "DeleteIngredientLogGroup"
+            ]
+          },
+          "CreateOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/createOrder.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-createOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "CreateOrderLogGroup"
+            ]
+          },
+          "GetAllOrdersLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getAllOrders.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getAllOrders",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetAllOrdersLogGroup"
+            ]
+          },
+          "GetOrderbyUserIdLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getOrdersByUserId.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getOrderbyUserId",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetOrderbyUserIdLogGroup"
+            ]
+          },
+          "GetOrdersByStatusLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getOrdersByStatus.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getOrdersByStatus",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetOrdersByStatusLogGroup"
+            ]
+          },
+          "UpdateOrderStatusLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/updateOrderStatus.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-updateOrderStatus",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "UpdateOrderStatusLogGroup"
+            ]
+          },
+          "CancelOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/cancelOrder.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-cancelOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "CancelOrderLogGroup"
+            ]
+          },
+          "LockOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/lockOrder.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-lockOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "LockOrderLogGroup"
+            ]
+          },
+          "DeleteOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/deleteOrder.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-deleteOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "DeleteOrderLogGroup"
+            ]
+          },
+          "EditOrderLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/editOrder.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-editOrder",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "EditOrderLogGroup"
+            ]
+          },
+          "AddOrderMessageLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/addOrderMessage.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-addOrderMessage",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "AddOrderMessageLogGroup"
+            ]
+          },
+          "GetOrderMessagesLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getOrderMessages.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getOrderMessages",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetOrderMessagesLogGroup"
+            ]
+          },
+          "CreatePaymentLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/createPayment.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-createPayment",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "CreatePaymentLogGroup"
+            ]
+          },
+          "GetPaymentLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getPayment.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getPayment",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetPaymentLogGroup"
+            ]
+          },
+          "UpdatePaymentStatusLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/updatePaymentStatus.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-updatePaymentStatus",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "UpdatePaymentStatusLogGroup"
+            ]
+          },
+          "GetCartLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/getCart.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-getCart",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "GetCartLogGroup"
+            ]
+          },
+          "UpdateCartLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/updateCart.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-updateCart",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "UpdateCartLogGroup"
+            ]
+          },
+          "ClearCartLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+              },
+              "Handler": "functions/clearCart.handler",
+              "Runtime": "node22.x",
+              "FunctionName": "baan-thai-backend-dev-clearCart",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "TABLE_NAME": "RestaurantTable",
+                  "JWT_SECRET": "dev-secret-change-in-prod"
+                }
+              },
+              "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+            },
+            "DependsOn": [
+              "ClearCartLogGroup"
+            ]
+          },
+          "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HandleRegisterLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "HandleLoginLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetUserProfileLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetMenuLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetProductLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateMenuItemLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateMenuItemLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteMenuItemLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllIngredientsLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetIngredientLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateIngredientLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateIngredientLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteIngredientLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateOrderLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetAllOrdersLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetOrderbyUserIdLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetOrdersByStatusLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateOrderStatusLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CancelOrderLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "LockOrderLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "DeleteOrderLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "EditOrderLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "AddOrderMessageLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetOrderMessagesLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreatePaymentLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetPaymentLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdatePaymentStatusLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetCartLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdateCartLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ClearCartLambdaFunction"
+              },
+              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+            }
+          },
+          "HttpApi": {
+            "Type": "AWS::ApiGatewayV2::Api",
+            "Properties": {
+              "Name": "dev-baan-thai-backend",
+              "ProtocolType": "HTTP",
+              "CorsConfiguration": {
+                "AllowHeaders": [
+                  "Content-Type",
+                  "Authorization"
+                ],
+                "AllowMethods": [
+                  "GET",
+                  "POST",
+                  "PUT",
+                  "DELETE"
+                ],
+                "AllowOrigins": [
+                  "*"
+                ]
+              }
+            }
+          },
+          "HttpApiStage": {
+            "Type": "AWS::ApiGatewayV2::Stage",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "StageName": "$default",
+              "AutoDeploy": true,
+              "DefaultRouteSettings": {
+                "DetailedMetricsEnabled": false
+              }
+            }
+          },
+          "HandleRegisterLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HandleRegisterLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationHandleRegister": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"HandleRegisterLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiRegister": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/register",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationHandleRegister"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationHandleRegister"
+          },
+          "HandleLoginLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "HandleLoginLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationHandleLogin": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"HandleLoginLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiLogin": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/login",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationHandleLogin"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationHandleLogin"
+          },
+          "GetUserProfileLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetUserProfileLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetUserProfile": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetUserProfileLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiProfileUseridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/profile/{userId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetUserProfile"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetUserProfile"
+          },
+          "GetMenuLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetMenuLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetMenu": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetMenuLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiMenu": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/menu",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetMenu"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetMenu"
+          },
+          "GetProductLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetProductLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetProduct": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetProductLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiMenuProdidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/menu/{prodId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetProduct"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetProduct"
+          },
+          "CreateMenuItemLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateMenuItemLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateMenuItem": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateMenuItemLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiMenu": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/menu",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateMenuItem"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateMenuItem"
+          },
+          "UpdateMenuItemLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateMenuItemLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdateMenuItem": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateMenuItemLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiMenuProdidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/menu/{prodId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdateMenuItem"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdateMenuItem"
+          },
+          "DeleteMenuItemLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteMenuItemLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteMenuItem": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteMenuItemLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteApiMenuProdidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /api/menu/{prodId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteMenuItem"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteMenuItem"
+          },
+          "GetAllIngredientsLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllIngredientsLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAllIngredients": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAllIngredientsLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiIngredients": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/ingredients",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAllIngredients"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAllIngredients"
+          },
+          "GetIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiIngredientsIngredientnameVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/ingredients/{ingredientName}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetIngredient"
+          },
+          "CreateIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiIngredients": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/ingredients",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateIngredient"
+          },
+          "UpdateIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdateIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiIngredientsIngredientnameVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/ingredients/{ingredientName}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdateIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdateIngredient"
+          },
+          "DeleteIngredientLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteIngredientLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteIngredient": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteIngredientLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteApiIngredientsIngredientnameVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /api/ingredients/{ingredientName}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteIngredient"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteIngredient"
+          },
+          "CreateOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreateOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreateOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiOrders": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/orders",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreateOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreateOrder"
+          },
+          "GetAllOrdersLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetAllOrdersLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetAllOrders": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetAllOrdersLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiOrders": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/orders",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetAllOrders"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetAllOrders"
+          },
+          "GetOrderbyUserIdLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetOrderbyUserIdLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetOrderbyUserId": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetOrderbyUserIdLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiOrdersUseridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/orders/{userId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetOrderbyUserId"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetOrderbyUserId"
+          },
+          "GetOrdersByStatusLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetOrdersByStatusLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetOrdersByStatus": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetOrdersByStatusLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiOrdersStatusStatusVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/orders/status/{status}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetOrdersByStatus"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetOrdersByStatus"
+          },
+          "UpdateOrderStatusLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateOrderStatusLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdateOrderStatus": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateOrderStatusLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiOrdersOrderidVarStatus": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/orders/{orderId}/status",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdateOrderStatus"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdateOrderStatus"
+          },
+          "CancelOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CancelOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCancelOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CancelOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiOrdersOrderidVarCancel": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/orders/{orderId}/cancel",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCancelOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCancelOrder"
+          },
+          "LockOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "LockOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationLockOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"LockOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiOrdersOrderidVarLock": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/orders/{orderId}/lock",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationLockOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationLockOrder"
+          },
+          "DeleteOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "DeleteOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationDeleteOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"DeleteOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteApiOrdersOrderidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /api/orders/{orderId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationDeleteOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationDeleteOrder"
+          },
+          "EditOrderLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "EditOrderLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationEditOrder": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"EditOrderLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiOrdersOrderidVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/orders/{orderId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationEditOrder"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationEditOrder"
+          },
+          "AddOrderMessageLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "AddOrderMessageLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationAddOrderMessage": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"AddOrderMessageLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiOrdersOrderidVarMessages": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/orders/{orderId}/messages",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationAddOrderMessage"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationAddOrderMessage"
+          },
+          "GetOrderMessagesLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetOrderMessagesLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetOrderMessages": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetOrderMessagesLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiOrdersOrderidVarMessages": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/orders/{orderId}/messages",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetOrderMessages"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetOrderMessages"
+          },
+          "CreatePaymentLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreatePaymentLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationCreatePayment": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"CreatePaymentLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePostApiOrdersOrderidVarPayment": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "POST /api/orders/{orderId}/payment",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationCreatePayment"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationCreatePayment"
+          },
+          "GetPaymentLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetPaymentLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetPayment": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetPaymentLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiOrdersOrderidVarPayment": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/orders/{orderId}/payment",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetPayment"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetPayment"
+          },
+          "UpdatePaymentStatusLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdatePaymentStatusLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdatePaymentStatus": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdatePaymentStatusLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiPaymentsPaymentidVarStatus": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/payments/{paymentId}/status",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdatePaymentStatus"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdatePaymentStatus"
+          },
+          "GetCartLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetCartLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationGetCart": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"GetCartLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteGetApiCartUseridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "GET /api/cart/{userId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationGetCart"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationGetCart"
+          },
+          "UpdateCartLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdateCartLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationUpdateCart": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"UpdateCartLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRoutePutApiCartUseridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "PUT /api/cart/{userId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationUpdateCart"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationUpdateCart"
+          },
+          "ClearCartLambdaPermissionHttpApi": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ClearCartLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "HttpApi"
+                    },
+                    "/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "HttpApiIntegrationClearCart": {
+            "Type": "AWS::ApiGatewayV2::Integration",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "IntegrationType": "AWS_PROXY",
+              "IntegrationUri": {
+                "$ref": "$[\"service\"][\"provider\"][\"compiledCloudFormationTemplate\"][\"Resources\"][\"ClearCartLambdaPermissionHttpApi\"][\"Properties\"][\"FunctionName\"]"
+              },
+              "PayloadFormatVersion": "2.0",
+              "TimeoutInMillis": 30000
+            }
+          },
+          "HttpApiRouteDeleteApiCartUseridVar": {
+            "Type": "AWS::ApiGatewayV2::Route",
+            "Properties": {
+              "ApiId": {
+                "Ref": "HttpApi"
+              },
+              "RouteKey": "DELETE /api/cart/{userId}",
+              "Target": {
+                "Fn::Join": [
+                  "/",
+                  [
+                    "integrations",
+                    {
+                      "Ref": "HttpApiIntegrationClearCart"
+                    }
+                  ]
+                ]
+              }
+            },
+            "DependsOn": "HttpApiIntegrationClearCart"
+          }
+        },
+        "Outputs": {
+          "ServerlessDeploymentBucketName": {
+            "Value": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-ServerlessDeploymentBucketName"
+            }
+          },
+          "HandleRegisterLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-HandleRegisterLambdaFunctionQualifiedArn"
+            }
+          },
+          "HandleLoginLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-HandleLoginLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetUserProfileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetUserProfileLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetMenuLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetMenuLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetProductLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetProductLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateMenuItemLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-CreateMenuItemLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateMenuItemLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-UpdateMenuItemLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteMenuItemLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-DeleteMenuItemLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllIngredientsLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-CreateIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-UpdateIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteIngredientLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-DeleteIngredientLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-CreateOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetAllOrdersLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetAllOrdersLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetOrderbyUserIdLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetOrderbyUserIdLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetOrdersByStatusLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetOrdersByStatusLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateOrderStatusLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-UpdateOrderStatusLambdaFunctionQualifiedArn"
+            }
+          },
+          "CancelOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-CancelOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "LockOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-LockOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "DeleteOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-DeleteOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "EditOrderLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-EditOrderLambdaFunctionQualifiedArn"
+            }
+          },
+          "AddOrderMessageLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-AddOrderMessageLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetOrderMessagesLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetOrderMessagesLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreatePaymentLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-CreatePaymentLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetPaymentLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetPaymentLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdatePaymentStatusLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-UpdatePaymentStatusLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetCartLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-GetCartLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdateCartLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-UpdateCartLambdaFunctionQualifiedArn"
+            }
+          },
+          "ClearCartLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-ClearCartLambdaFunctionQualifiedArn"
+            }
+          },
+          "HttpApiId": {
+            "Description": "Id of the HTTP API",
+            "Value": {
+              "Ref": "HttpApi"
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-HttpApiId"
+            }
+          },
+          "HttpApiUrl": {
+            "Description": "URL of the HTTP API",
+            "Value": {
+              "Fn::Join": [
+                "",
+                [
+                  "https://",
+                  {
+                    "Ref": "HttpApi"
+                  },
+                  ".execute-api.",
+                  {
+                    "Ref": "AWS::Region"
+                  },
+                  ".",
+                  {
+                    "Ref": "AWS::URLSuffix"
+                  }
+                ]
+              ]
+            },
+            "Export": {
+              "Name": "sls-baan-thai-backend-dev-HttpApiUrl"
+            }
+          }
+        }
+      },
+      "vpc": {}
+    },
+    "pluginsData": {},
+    "functions": {
+      "handleRegister": {
+        "handler": "functions/handleRegister.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/register",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/register"
+          }
+        ],
+        "name": "baan-thai-backend-dev-handleRegister",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk"
+      },
+      "handleLogin": {
+        "handler": "functions/handleLogin.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/login",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/login"
+          }
+        ],
+        "name": "baan-thai-backend-dev-handleLogin",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0"
+      },
+      "getUserProfile": {
+        "handler": "functions/getUserProfile.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/profile/{userId}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/profile/{userId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getUserProfile",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY"
+      },
+      "getMenu": {
+        "handler": "functions/getMenu.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/menu",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/menu"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getMenu",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI"
+      },
+      "getProduct": {
+        "handler": "functions/getProduct.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/menu/{prodId}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/menu/{prodId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getProduct",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo"
+      },
+      "createMenuItem": {
+        "handler": "functions/createMenuItem.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/menu",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/menu"
+          }
+        ],
+        "name": "baan-thai-backend-dev-createMenuItem",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY"
+      },
+      "updateMenuItem": {
+        "handler": "functions/updateMenuItem.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/menu/{prodId}",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/menu/{prodId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-updateMenuItem",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY"
+      },
+      "deleteMenuItem": {
+        "handler": "functions/deleteMenuItem.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/menu/{prodId}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/api/menu/{prodId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-deleteMenuItem",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc"
+      },
+      "getAllIngredients": {
+        "handler": "functions/getAllIngredients.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/ingredients",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/ingredients"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getAllIngredients",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM"
+      },
+      "getIngredient": {
+        "handler": "functions/getIngredient.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/ingredients/{ingredientName}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/ingredients/{ingredientName}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0"
+      },
+      "createIngredient": {
+        "handler": "functions/createIngredient.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/ingredients",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/ingredients"
+          }
+        ],
+        "name": "baan-thai-backend-dev-createIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU"
+      },
+      "updateIngredient": {
+        "handler": "functions/updateIngredient.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/ingredients/{ingredientName}",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/ingredients/{ingredientName}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-updateIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU"
+      },
+      "deleteIngredient": {
+        "handler": "functions/deleteIngredient.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/ingredients/{ingredientName}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/api/ingredients/{ingredientName}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-deleteIngredient",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw"
+      },
+      "createOrder": {
+        "handler": "functions/createOrder.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/orders"
+          }
+        ],
+        "name": "baan-thai-backend-dev-createOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc"
+      },
+      "getAllOrders": {
+        "handler": "functions/getAllOrders.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/orders"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getAllOrders",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4"
+      },
+      "getOrderbyUserId": {
+        "handler": "functions/getOrdersByUserId.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{userId}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/orders/{userId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getOrderbyUserId",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU"
+      },
+      "getOrdersByStatus": {
+        "handler": "functions/getOrdersByStatus.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/status/{status}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/orders/status/{status}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getOrdersByStatus",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ"
+      },
+      "updateOrderStatus": {
+        "handler": "functions/updateOrderStatus.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/status",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/orders/{orderId}/status"
+          }
+        ],
+        "name": "baan-thai-backend-dev-updateOrderStatus",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ"
+      },
+      "cancelOrder": {
+        "handler": "functions/cancelOrder.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/cancel",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/orders/{orderId}/cancel"
+          }
+        ],
+        "name": "baan-thai-backend-dev-cancelOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q"
+      },
+      "lockOrder": {
+        "handler": "functions/lockOrder.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/lock",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/orders/{orderId}/lock"
+          }
+        ],
+        "name": "baan-thai-backend-dev-lockOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU"
+      },
+      "deleteOrder": {
+        "handler": "functions/deleteOrder.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/api/orders/{orderId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-deleteOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM"
+      },
+      "editOrder": {
+        "handler": "functions/editOrder.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/orders/{orderId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-editOrder",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04"
+      },
+      "addOrderMessage": {
+        "handler": "functions/addOrderMessage.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/messages",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/orders/{orderId}/messages"
+          }
+        ],
+        "name": "baan-thai-backend-dev-addOrderMessage",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s"
+      },
+      "getOrderMessages": {
+        "handler": "functions/getOrderMessages.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/messages",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/orders/{orderId}/messages"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getOrderMessages",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU"
+      },
+      "createPayment": {
+        "handler": "functions/createPayment.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/payment",
+              "method": "POST"
+            },
+            "resolvedMethod": "POST",
+            "resolvedPath": "/api/orders/{orderId}/payment"
+          }
+        ],
+        "name": "baan-thai-backend-dev-createPayment",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go"
+      },
+      "getPayment": {
+        "handler": "functions/getPayment.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/orders/{orderId}/payment",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/orders/{orderId}/payment"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getPayment",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys"
+      },
+      "updatePaymentStatus": {
+        "handler": "functions/updatePaymentStatus.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/payments/{paymentId}/status",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/payments/{paymentId}/status"
+          }
+        ],
+        "name": "baan-thai-backend-dev-updatePaymentStatus",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE"
+      },
+      "getCart": {
+        "handler": "functions/getCart.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/cart/{userId}",
+              "method": "GET"
+            },
+            "resolvedMethod": "GET",
+            "resolvedPath": "/api/cart/{userId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-getCart",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA"
+      },
+      "updateCart": {
+        "handler": "functions/updateCart.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/cart/{userId}",
+              "method": "PUT"
+            },
+            "resolvedMethod": "PUT",
+            "resolvedPath": "/api/cart/{userId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-updateCart",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE"
+      },
+      "clearCart": {
+        "handler": "functions/clearCart.handler",
+        "events": [
+          {
+            "httpApi": {
+              "path": "/api/cart/{userId}",
+              "method": "DELETE"
+            },
+            "resolvedMethod": "DELETE",
+            "resolvedPath": "/api/cart/{userId}"
+          }
+        ],
+        "name": "baan-thai-backend-dev-clearCart",
+        "package": {},
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "node22.x",
+        "vpc": {},
+        "versionLogicalId": "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s"
+      }
+    },
+    "configValidationMode": "warn",
+    "serviceFilename": "serverless",
+    "initialServerlessConfig": {
+      "service": "baan-thai-backend",
+      "provider": {
+        "$ref": "$[\"service\"][\"provider\"]"
+      },
+      "functions": {
+        "$ref": "$[\"service\"][\"functions\"]"
+      }
+    },
+    "appId": null,
+    "orgId": null,
+    "layers": {},
+    "artifact": "C:\\Users\\Tivva\\OneDrive\\Skrivbord\\Thai baan\\baan-thai\\packages\\baan-thai-backend\\.serverless\\baan-thai-backend.zip"
+  },
+  "package": {
+    "artifactDirectoryName": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z",
+    "artifact": "baan-thai-backend.zip"
+  }
+}
