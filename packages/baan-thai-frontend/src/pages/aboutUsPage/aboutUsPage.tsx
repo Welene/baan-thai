@@ -1,9 +1,12 @@
 import React from "react";
 import './aboutUs.css';
+<<<<<<< HEAD
 import omOssBig from '../../assets/omOss-big.jpg';
 import omOssSmall1 from '../../assets/omOss-small-1.jpg';
 import omOssSmall2 from '../../assets/omOss-small-2.jpg';
 import person from '../../assets/person.png';
+=======
+>>>>>>> parent of c08f688 (Added images to about us page.)
 
 interface TeamMember {
     name: string;
@@ -35,11 +38,6 @@ export const AboutUsPage: React.FC = () => {
         <div className="aboutUs-page">
             <section className="hero-section">
                 <h1 className="page-title__big">OM OSS</h1>
-                <figure className="page__images-grid">
-                    <img src={omOssBig} alt="Thaikök restaurant" />
-                    <img src={omOssSmall1} alt="Thaikök restaurant" />
-                    <img src={omOssSmall2} alt="Thaikök restaurant" />
-                </figure>
             </section>
             <section className="story-section">
                 <h2 className="page-subtitle">VD:n budskap</h2>
