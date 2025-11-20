@@ -1,12 +1,9 @@
 import React from "react";
 import './aboutUs.css';
-<<<<<<< HEAD
 import omOssBig from '../../assets/omOss-big.jpg';
 import omOssSmall1 from '../../assets/omOss-small-1.jpg';
 import omOssSmall2 from '../../assets/omOss-small-2.jpg';
 import person from '../../assets/person.png';
-=======
->>>>>>> parent of c08f688 (Added images to about us page.)
 
 interface TeamMember {
     name: string;
