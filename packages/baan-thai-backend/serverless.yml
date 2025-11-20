@@ -4,9 +4,8 @@ provider:
   name: aws
   runtime: nodejs22.x
   region: eu-north-1
-
   iam:
-    role:
+    role: 
 
   environment:
     TABLE_NAME: RestaurantTable
