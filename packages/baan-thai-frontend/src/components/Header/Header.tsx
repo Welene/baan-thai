@@ -4,6 +4,7 @@ import logo from '../../assets/logo.png';
 import manIcon from '../../assets/man.png';
 import basketIcon from '../../assets/basket.png';
 import bellIcon from '../../assets/bell.png';
+import { useNavigate } from 'react-router-dom';
 
 function Header() {
 	return (
