@@ -5,7 +5,6 @@ import omOssSmall1 from '../../assets/omOss-small-1.jpg';
 import omOssSmall2 from '../../assets/omOss-small-2.jpg';
 import person from '../../assets/person.png';
 
-
 interface TeamMember {
     name: string;
     image?: string;
