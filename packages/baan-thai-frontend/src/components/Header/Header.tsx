@@ -5,10 +5,16 @@ import manIcon from '../../assets/man.png';
 import basketIcon from '../../assets/basket.png';
 import bellIcon from '../../assets/bell.png';
 import { useNavigate } from 'react-router-dom';
+import type { User } from '../../interfaces/user';
 
 
 
 function Header() {
+	const userString = localStorage.getItem("user");
+	const user: User | null = userString ? JSON.parse(userString) : null;
+
+	const userId = user?.userId ?? "";
+
 	const navigate = useNavigate();
 	
 	return (
