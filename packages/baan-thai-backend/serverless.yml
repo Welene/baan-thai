@@ -5,7 +5,7 @@ provider:
   runtime: nodejs22.x
   region: eu-north-1
   iam:
-    role: 
+    role: ${env:IAM_ROLE_ARN}
 
   environment:
     TABLE_NAME: RestaurantTable
@@ -242,21 +242,20 @@ functions:
       - httpApi:
           path: /api/cart/{userId}
           method: DELETE
-
-resources:
-  Resources:
-    CloudDbTable:
-      Type: AWS::DynamoDB::Table
-      Properties:
-        TableName: RestaurantTable
-        AttributeDefinitions:
-          - AttributeName: PK
-            AttributeType: S
-          - AttributeName: SK
-            AttributeType: S
-        KeySchema:
-          - AttributeName: PK
-            KeyType: HASH
-          - AttributeName: SK
-            KeyType: RANGE
-            BillingMode: PAY_PER_REQUEST
+# resources:
+#   Resources:
+#     CloudDbTable:
+#       Type: AWS::DynamoDB::Table
+#       Properties:
+#         TableName: RestaurantTable
+#         AttributeDefinitions:
+#           - AttributeName: PK
+#             AttributeType: S
+#           - AttributeName: SK
+#             AttributeType: S
+#         KeySchema:
+#           - AttributeName: PK
+#             KeyType: HASH
+#           - AttributeName: SK
+#             KeyType: RANGE
+#         BillingMode: PAY_PER_REQUEST

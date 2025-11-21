@@ -6,14 +6,13 @@
     },
     "provider": {
       "name": "aws",
-      "runtime": "node22.x",
+      "runtime": "nodejs22.x",
       "region": "eu-north-1",
       "iam": {
         "role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
       },
       "environment": {
-        "TABLE_NAME": "RestaurantTable",
-        "JWT_SECRET": "dev-secret-change-in-prod"
+        "TABLE_NAME": "RestaurantTable"
       },
       "httpApi": {
         "cors": {
@@ -223,17 +222,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/handleRegister.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-handleRegister",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -247,17 +245,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/handleLogin.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-handleLogin",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -271,17 +268,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getUserProfile.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getUserProfile",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -295,17 +291,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getMenu.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getMenu",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -319,17 +314,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getProduct.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getProduct",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -343,17 +337,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/createMenuItem.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-createMenuItem",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -367,17 +360,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/updateMenuItem.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-updateMenuItem",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -391,17 +383,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/deleteMenuItem.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-deleteMenuItem",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -415,17 +406,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getAllIngredients.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getAllIngredients",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -439,17 +429,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getIngredient.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getIngredient",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -463,17 +452,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/createIngredient.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-createIngredient",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -487,17 +475,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/updateIngredient.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-updateIngredient",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -511,17 +498,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/deleteIngredient.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-deleteIngredient",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -535,17 +521,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/createOrder.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-createOrder",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -559,17 +544,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getAllOrders.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getAllOrders",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -583,17 +567,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getOrdersByUserId.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getOrderbyUserId",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -607,17 +590,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getOrdersByStatus.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getOrdersByStatus",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -631,17 +613,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/updateOrderStatus.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-updateOrderStatus",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -655,17 +636,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/cancelOrder.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-cancelOrder",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -679,17 +659,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/lockOrder.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-lockOrder",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -703,17 +682,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/deleteOrder.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-deleteOrder",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -727,17 +705,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/editOrder.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-editOrder",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -751,17 +728,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/addOrderMessage.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-addOrderMessage",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -775,17 +751,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getOrderMessages.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getOrderMessages",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -799,17 +774,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/createPayment.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-createPayment",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -823,17 +797,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getPayment.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getPayment",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -847,17 +820,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/updatePaymentStatus.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-updatePaymentStatus",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -871,17 +843,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/getCart.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-getCart",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -895,17 +866,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/updateCart.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-updateCart",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -919,17 +889,16 @@
             "Properties": {
               "Code": {
                 "S3Bucket": "serverless-framework-deployments-eu-north-1-4cb0c3bb-7835",
-                "S3Key": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z/baan-thai-backend.zip"
+                "S3Key": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z/baan-thai-backend.zip"
               },
               "Handler": "functions/clearCart.handler",
-              "Runtime": "node22.x",
+              "Runtime": "nodejs22.x",
               "FunctionName": "baan-thai-backend-dev-clearCart",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "TABLE_NAME": "RestaurantTable",
-                  "JWT_SECRET": "dev-secret-change-in-prod"
+                  "TABLE_NAME": "RestaurantTable"
                 }
               },
               "Role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
@@ -938,304 +907,304 @@
               "ClearCartLogGroup"
             ]
           },
-          "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk": {
+          "HandleRegisterLambdaVersiondjTkErQWsYfWQ8Y11oWFBq5oD7CLVOk17Rx2xO0iU2g": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandleRegisterLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0": {
+          "HandleLoginLambdaVersionX72ikTXr7FUQBxH8BQxei1Dw7hXEKHZ4ni7PwYh3dA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HandleLoginLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY": {
+          "GetUserProfileLambdaVersionEhfeRuki6TIT5epMbzzWMDxliRrRF4Oyzz3gDQvE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserProfileLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI": {
+          "GetMenuLambdaVersionXAcEG9jGt00aTDagORpatfp6DlfQl1pL28QsSvuQ2Ls": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetMenuLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo": {
+          "GetProductLambdaVersion8oWbUyBMQUCwnjODNePIXoAAFcw9g7x1mz7wRdOLc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetProductLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY": {
+          "CreateMenuItemLambdaVersion4GFPdF2ZkUQsLiTloggFrrSOGqh9DPMBxpQlgCwoGU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateMenuItemLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY": {
+          "UpdateMenuItemLambdaVersionCcHEzx6UqR7xbwqdEucaX907LRILIHW6QRz9FeI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateMenuItemLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc": {
+          "DeleteMenuItemLambdaVersionksS08RYphUD9mLskEwrE6LcqLBj3vC3Tzjan9K8fM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteMenuItemLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM": {
+          "GetAllIngredientsLambdaVersiongEwaPH779YfjoZG2oBGLafsxoprhFbljojlFG5MK56E": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetAllIngredientsLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0": {
+          "GetIngredientLambdaVersionOjhP5Qrq7TpgMpG4YOUrDs2GeMJqbYq7fTlPnLjtOQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetIngredientLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU": {
+          "CreateIngredientLambdaVersionyVn7cSW5HpeqxxTDh9UwBtjp2M0JaEG3QAYYcKJHQ": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateIngredientLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU": {
+          "UpdateIngredientLambdaVersionGt7k1KHONATscTJeFqjg35BpUPCRSebKTHGED575c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateIngredientLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw": {
+          "DeleteIngredientLambdaVersionRPl20QfBJY50ziofJiGKeqDuowIukgz2XiLW6i6aE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteIngredientLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc": {
+          "CreateOrderLambdaVersionh27dBGZGOEdYRzGdf74DgSB10340BZZXXnCZiDyc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateOrderLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4": {
+          "GetAllOrdersLambdaVersionvknGF4JDRlPc5dXcRA3wljpX2bXjp63AQnOsh7HI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetAllOrdersLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU": {
+          "GetOrderbyUserIdLambdaVersionY1rWZvHIt04M6ORPBiiZnjsdqiEkGFVgte4wAq3hzJ4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetOrderbyUserIdLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ": {
+          "GetOrdersByStatusLambdaVersionDlyFxmxArt7UIh4wL3wNCL4spY9n1srFdRNqXHn185c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetOrdersByStatusLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ": {
+          "UpdateOrderStatusLambdaVersionels1vZgX3GmRrY6c7qpE2ohkb1vjsxJMZQwhA57xo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateOrderStatusLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q": {
+          "CancelOrderLambdaVersioncoGgRZfn6QVao5pRbDEhJ1nhQ70n1uRLIB4RVYcA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CancelOrderLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU": {
+          "LockOrderLambdaVersionZFXShF4PLPHrHEZxR25qgQwng6QdSYjFIzdcbrFsI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "LockOrderLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM": {
+          "DeleteOrderLambdaVersionncM9WN93fxYC8vdgtTeUDohINUFhAKike6G5xM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteOrderLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04": {
+          "EditOrderLambdaVersionmCqzCynWrZbRM6L2K8QTV2g4QMjW1s8JK5MU7jg": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "EditOrderLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s": {
+          "AddOrderMessageLambdaVersionIWV6QKE9dHO9K174G7NObWTnWH1nrISK5TS31WiXho": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "AddOrderMessageLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU": {
+          "GetOrderMessagesLambdaVersionKrNXrFQfDhEdlxmlCfR6cUY4zibiQaj1WH71S6gU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetOrderMessagesLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go": {
+          "CreatePaymentLambdaVersionEYETOHP8naIMFIZ8ZJ4a5yexTUZsStnSZWQLQJYZC4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreatePaymentLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys": {
+          "GetPaymentLambdaVersionHNLgyIQXdfrPAH6QdsMfUn0SewKTlkkZ3nVyqh0Po": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetPaymentLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE": {
+          "UpdatePaymentStatusLambdaVersionXYpXA3Bs5jTu3zWkqG5RWsgOlTd0DrCdIPCZ8ZTU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdatePaymentStatusLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA": {
+          "GetCartLambdaVersion3Z46H81ouXvLZYFimL8bTR366ZndtVLBYApKNu6kEs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetCartLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE": {
+          "UpdateCartLambdaVersion8rlXjCvOvh0spBYrq7lZvYihylEQxRMsu5jthYIC0Gk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdateCartLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
-          "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s": {
+          "ClearCartLambdaVersionqRaUfASw4iz9czvuoXLoWFlmLxtV9UhBV2JjDFYrE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ClearCartLambdaFunction"
               },
-              "CodeSha256": "4CnghJQUbWgLOMbUfjeCRJ2fZo8V/7A7GU6Yw2ZRPiU="
+              "CodeSha256": "1ijlmg0W0yHGR2RBWRbzHDAfyPbqu84p08Gl/Q7X+xs="
             }
           },
           "HttpApi": {
@@ -3444,7 +3413,7 @@
           "HandleRegisterLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk"
+              "Ref": "HandleRegisterLambdaVersiondjTkErQWsYfWQ8Y11oWFBq5oD7CLVOk17Rx2xO0iU2g"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-HandleRegisterLambdaFunctionQualifiedArn"
@@ -3453,7 +3422,7 @@
           "HandleLoginLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0"
+              "Ref": "HandleLoginLambdaVersionX72ikTXr7FUQBxH8BQxei1Dw7hXEKHZ4ni7PwYh3dA"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-HandleLoginLambdaFunctionQualifiedArn"
@@ -3462,7 +3431,7 @@
           "GetUserProfileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY"
+              "Ref": "GetUserProfileLambdaVersionEhfeRuki6TIT5epMbzzWMDxliRrRF4Oyzz3gDQvE"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetUserProfileLambdaFunctionQualifiedArn"
@@ -3471,7 +3440,7 @@
           "GetMenuLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI"
+              "Ref": "GetMenuLambdaVersionXAcEG9jGt00aTDagORpatfp6DlfQl1pL28QsSvuQ2Ls"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetMenuLambdaFunctionQualifiedArn"
@@ -3480,7 +3449,7 @@
           "GetProductLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo"
+              "Ref": "GetProductLambdaVersion8oWbUyBMQUCwnjODNePIXoAAFcw9g7x1mz7wRdOLc"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetProductLambdaFunctionQualifiedArn"
@@ -3489,7 +3458,7 @@
           "CreateMenuItemLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY"
+              "Ref": "CreateMenuItemLambdaVersion4GFPdF2ZkUQsLiTloggFrrSOGqh9DPMBxpQlgCwoGU"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-CreateMenuItemLambdaFunctionQualifiedArn"
@@ -3498,7 +3467,7 @@
           "UpdateMenuItemLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY"
+              "Ref": "UpdateMenuItemLambdaVersionCcHEzx6UqR7xbwqdEucaX907LRILIHW6QRz9FeI"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-UpdateMenuItemLambdaFunctionQualifiedArn"
@@ -3507,7 +3476,7 @@
           "DeleteMenuItemLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc"
+              "Ref": "DeleteMenuItemLambdaVersionksS08RYphUD9mLskEwrE6LcqLBj3vC3Tzjan9K8fM"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-DeleteMenuItemLambdaFunctionQualifiedArn"
@@ -3516,7 +3485,7 @@
           "GetAllIngredientsLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM"
+              "Ref": "GetAllIngredientsLambdaVersiongEwaPH779YfjoZG2oBGLafsxoprhFbljojlFG5MK56E"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetAllIngredientsLambdaFunctionQualifiedArn"
@@ -3525,7 +3494,7 @@
           "GetIngredientLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0"
+              "Ref": "GetIngredientLambdaVersionOjhP5Qrq7TpgMpG4YOUrDs2GeMJqbYq7fTlPnLjtOQ"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetIngredientLambdaFunctionQualifiedArn"
@@ -3534,7 +3503,7 @@
           "CreateIngredientLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU"
+              "Ref": "CreateIngredientLambdaVersionyVn7cSW5HpeqxxTDh9UwBtjp2M0JaEG3QAYYcKJHQ"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-CreateIngredientLambdaFunctionQualifiedArn"
@@ -3543,7 +3512,7 @@
           "UpdateIngredientLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU"
+              "Ref": "UpdateIngredientLambdaVersionGt7k1KHONATscTJeFqjg35BpUPCRSebKTHGED575c"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-UpdateIngredientLambdaFunctionQualifiedArn"
@@ -3552,7 +3521,7 @@
           "DeleteIngredientLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw"
+              "Ref": "DeleteIngredientLambdaVersionRPl20QfBJY50ziofJiGKeqDuowIukgz2XiLW6i6aE"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-DeleteIngredientLambdaFunctionQualifiedArn"
@@ -3561,7 +3530,7 @@
           "CreateOrderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc"
+              "Ref": "CreateOrderLambdaVersionh27dBGZGOEdYRzGdf74DgSB10340BZZXXnCZiDyc"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-CreateOrderLambdaFunctionQualifiedArn"
@@ -3570,7 +3539,7 @@
           "GetAllOrdersLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4"
+              "Ref": "GetAllOrdersLambdaVersionvknGF4JDRlPc5dXcRA3wljpX2bXjp63AQnOsh7HI"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetAllOrdersLambdaFunctionQualifiedArn"
@@ -3579,7 +3548,7 @@
           "GetOrderbyUserIdLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU"
+              "Ref": "GetOrderbyUserIdLambdaVersionY1rWZvHIt04M6ORPBiiZnjsdqiEkGFVgte4wAq3hzJ4"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetOrderbyUserIdLambdaFunctionQualifiedArn"
@@ -3588,7 +3557,7 @@
           "GetOrdersByStatusLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ"
+              "Ref": "GetOrdersByStatusLambdaVersionDlyFxmxArt7UIh4wL3wNCL4spY9n1srFdRNqXHn185c"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetOrdersByStatusLambdaFunctionQualifiedArn"
@@ -3597,7 +3566,7 @@
           "UpdateOrderStatusLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ"
+              "Ref": "UpdateOrderStatusLambdaVersionels1vZgX3GmRrY6c7qpE2ohkb1vjsxJMZQwhA57xo"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-UpdateOrderStatusLambdaFunctionQualifiedArn"
@@ -3606,7 +3575,7 @@
           "CancelOrderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q"
+              "Ref": "CancelOrderLambdaVersioncoGgRZfn6QVao5pRbDEhJ1nhQ70n1uRLIB4RVYcA"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-CancelOrderLambdaFunctionQualifiedArn"
@@ -3615,7 +3584,7 @@
           "LockOrderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU"
+              "Ref": "LockOrderLambdaVersionZFXShF4PLPHrHEZxR25qgQwng6QdSYjFIzdcbrFsI"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-LockOrderLambdaFunctionQualifiedArn"
@@ -3624,7 +3593,7 @@
           "DeleteOrderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM"
+              "Ref": "DeleteOrderLambdaVersionncM9WN93fxYC8vdgtTeUDohINUFhAKike6G5xM"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-DeleteOrderLambdaFunctionQualifiedArn"
@@ -3633,7 +3602,7 @@
           "EditOrderLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04"
+              "Ref": "EditOrderLambdaVersionmCqzCynWrZbRM6L2K8QTV2g4QMjW1s8JK5MU7jg"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-EditOrderLambdaFunctionQualifiedArn"
@@ -3642,7 +3611,7 @@
           "AddOrderMessageLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s"
+              "Ref": "AddOrderMessageLambdaVersionIWV6QKE9dHO9K174G7NObWTnWH1nrISK5TS31WiXho"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-AddOrderMessageLambdaFunctionQualifiedArn"
@@ -3651,7 +3620,7 @@
           "GetOrderMessagesLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU"
+              "Ref": "GetOrderMessagesLambdaVersionKrNXrFQfDhEdlxmlCfR6cUY4zibiQaj1WH71S6gU"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetOrderMessagesLambdaFunctionQualifiedArn"
@@ -3660,7 +3629,7 @@
           "CreatePaymentLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go"
+              "Ref": "CreatePaymentLambdaVersionEYETOHP8naIMFIZ8ZJ4a5yexTUZsStnSZWQLQJYZC4"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-CreatePaymentLambdaFunctionQualifiedArn"
@@ -3669,7 +3638,7 @@
           "GetPaymentLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys"
+              "Ref": "GetPaymentLambdaVersionHNLgyIQXdfrPAH6QdsMfUn0SewKTlkkZ3nVyqh0Po"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetPaymentLambdaFunctionQualifiedArn"
@@ -3678,7 +3647,7 @@
           "UpdatePaymentStatusLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE"
+              "Ref": "UpdatePaymentStatusLambdaVersionXYpXA3Bs5jTu3zWkqG5RWsgOlTd0DrCdIPCZ8ZTU"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-UpdatePaymentStatusLambdaFunctionQualifiedArn"
@@ -3687,7 +3656,7 @@
           "GetCartLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA"
+              "Ref": "GetCartLambdaVersion3Z46H81ouXvLZYFimL8bTR366ZndtVLBYApKNu6kEs"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-GetCartLambdaFunctionQualifiedArn"
@@ -3696,7 +3665,7 @@
           "UpdateCartLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE"
+              "Ref": "UpdateCartLambdaVersion8rlXjCvOvh0spBYrq7lZvYihylEQxRMsu5jthYIC0Gk"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-UpdateCartLambdaFunctionQualifiedArn"
@@ -3705,7 +3674,7 @@
           "ClearCartLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s"
+              "Ref": "ClearCartLambdaVersionqRaUfASw4iz9czvuoXLoWFlmLxtV9UhBV2JjDFYrE"
             },
             "Export": {
               "Name": "sls-baan-thai-backend-dev-ClearCartLambdaFunctionQualifiedArn"
@@ -3767,9 +3736,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "HandleRegisterLambdaVersionviRdzN3LGpGpFeBwGIRL8GOXgVZVN6MwzTByaHZiSQk"
+        "versionLogicalId": "HandleRegisterLambdaVersiondjTkErQWsYfWQ8Y11oWFBq5oD7CLVOk17Rx2xO0iU2g"
       },
       "handleLogin": {
         "handler": "functions/handleLogin.handler",
@@ -3787,9 +3756,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "HandleLoginLambdaVersionerFqcz1jLSkAIQkKcsbKaLvnfcufI6bSQihJ5DTaL0"
+        "versionLogicalId": "HandleLoginLambdaVersionX72ikTXr7FUQBxH8BQxei1Dw7hXEKHZ4ni7PwYh3dA"
       },
       "getUserProfile": {
         "handler": "functions/getUserProfile.handler",
@@ -3807,9 +3776,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetUserProfileLambdaVersion91ECjCJirSKlYkjiukk4jNunCDJClP5AWMXaXksSpmY"
+        "versionLogicalId": "GetUserProfileLambdaVersionEhfeRuki6TIT5epMbzzWMDxliRrRF4Oyzz3gDQvE"
       },
       "getMenu": {
         "handler": "functions/getMenu.handler",
@@ -3827,9 +3796,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetMenuLambdaVersionjpTHOx45SnoPSYGWA1uN3VVtD63rYnlWPPDEg3eEI"
+        "versionLogicalId": "GetMenuLambdaVersionXAcEG9jGt00aTDagORpatfp6DlfQl1pL28QsSvuQ2Ls"
       },
       "getProduct": {
         "handler": "functions/getProduct.handler",
@@ -3847,9 +3816,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetProductLambdaVersionmDpisGkXDwLlktxS47o5Kirz5hygqxTccLEsGm8E5qo"
+        "versionLogicalId": "GetProductLambdaVersion8oWbUyBMQUCwnjODNePIXoAAFcw9g7x1mz7wRdOLc"
       },
       "createMenuItem": {
         "handler": "functions/createMenuItem.handler",
@@ -3867,9 +3836,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CreateMenuItemLambdaVersionTDIm6hAMLTB192eBBsn1i34AxPDvm6QwLSSIq2RogY"
+        "versionLogicalId": "CreateMenuItemLambdaVersion4GFPdF2ZkUQsLiTloggFrrSOGqh9DPMBxpQlgCwoGU"
       },
       "updateMenuItem": {
         "handler": "functions/updateMenuItem.handler",
@@ -3887,9 +3856,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdateMenuItemLambdaVersion2SBXxMUx9aTsnASQZIoWvpV5kVkDFgDx9pABVJkkVY"
+        "versionLogicalId": "UpdateMenuItemLambdaVersionCcHEzx6UqR7xbwqdEucaX907LRILIHW6QRz9FeI"
       },
       "deleteMenuItem": {
         "handler": "functions/deleteMenuItem.handler",
@@ -3907,9 +3876,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "DeleteMenuItemLambdaVersionHlIHbh6tO4fl4jdtvuZCTwieRU9dCQdyLxXkM397Kcc"
+        "versionLogicalId": "DeleteMenuItemLambdaVersionksS08RYphUD9mLskEwrE6LcqLBj3vC3Tzjan9K8fM"
       },
       "getAllIngredients": {
         "handler": "functions/getAllIngredients.handler",
@@ -3927,9 +3896,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetAllIngredientsLambdaVersionK6CfzNw6SBhEYx8LILFtenbMjHKOMEEecrzxyFseLAM"
+        "versionLogicalId": "GetAllIngredientsLambdaVersiongEwaPH779YfjoZG2oBGLafsxoprhFbljojlFG5MK56E"
       },
       "getIngredient": {
         "handler": "functions/getIngredient.handler",
@@ -3947,9 +3916,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetIngredientLambdaVersionTVmcCzFRCKFqU8pbBIzjKtM8chnkI4v2cork6nEY7H0"
+        "versionLogicalId": "GetIngredientLambdaVersionOjhP5Qrq7TpgMpG4YOUrDs2GeMJqbYq7fTlPnLjtOQ"
       },
       "createIngredient": {
         "handler": "functions/createIngredient.handler",
@@ -3967,9 +3936,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CreateIngredientLambdaVersionCq1VzbUQ0NN8Ucqy1isivoachhQTYoisx2QtF6rAU"
+        "versionLogicalId": "CreateIngredientLambdaVersionyVn7cSW5HpeqxxTDh9UwBtjp2M0JaEG3QAYYcKJHQ"
       },
       "updateIngredient": {
         "handler": "functions/updateIngredient.handler",
@@ -3987,9 +3956,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdateIngredientLambdaVersionPnxxJIvmZMmgmGlLWT5mvaWXpy6zOu2ENpSpm3atU"
+        "versionLogicalId": "UpdateIngredientLambdaVersionGt7k1KHONATscTJeFqjg35BpUPCRSebKTHGED575c"
       },
       "deleteIngredient": {
         "handler": "functions/deleteIngredient.handler",
@@ -4007,9 +3976,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "DeleteIngredientLambdaVersionb0ky8b3P2Q16kzrcy7UoxJro66qDD2J4UBxMRfHudw"
+        "versionLogicalId": "DeleteIngredientLambdaVersionRPl20QfBJY50ziofJiGKeqDuowIukgz2XiLW6i6aE"
       },
       "createOrder": {
         "handler": "functions/createOrder.handler",
@@ -4027,9 +3996,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CreateOrderLambdaVersionJxkGIhgDh1OnnZvxScMydzIsXtDiLRzPuv7oPaWHVWc"
+        "versionLogicalId": "CreateOrderLambdaVersionh27dBGZGOEdYRzGdf74DgSB10340BZZXXnCZiDyc"
       },
       "getAllOrders": {
         "handler": "functions/getAllOrders.handler",
@@ -4047,9 +4016,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetAllOrdersLambdaVersion7gj03E3qSobOBvEZOILPkYKIYkK5X423HnQFtRDWg4"
+        "versionLogicalId": "GetAllOrdersLambdaVersionvknGF4JDRlPc5dXcRA3wljpX2bXjp63AQnOsh7HI"
       },
       "getOrderbyUserId": {
         "handler": "functions/getOrdersByUserId.handler",
@@ -4067,9 +4036,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetOrderbyUserIdLambdaVersionLIFWlqQcsoySHAJRN6vNA2Nz4gJ4DXgmnKc5IQN4eqU"
+        "versionLogicalId": "GetOrderbyUserIdLambdaVersionY1rWZvHIt04M6ORPBiiZnjsdqiEkGFVgte4wAq3hzJ4"
       },
       "getOrdersByStatus": {
         "handler": "functions/getOrdersByStatus.handler",
@@ -4087,9 +4056,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetOrdersByStatusLambdaVersionSVVBGNP2hhhfsmBeAeyPqOJ96kLNmztoIneRPpynoQ"
+        "versionLogicalId": "GetOrdersByStatusLambdaVersionDlyFxmxArt7UIh4wL3wNCL4spY9n1srFdRNqXHn185c"
       },
       "updateOrderStatus": {
         "handler": "functions/updateOrderStatus.handler",
@@ -4107,9 +4076,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdateOrderStatusLambdaVersiongQPgD6FHSwKnMVzrBEEbElrwjEspJoWtf7gvcClSQ"
+        "versionLogicalId": "UpdateOrderStatusLambdaVersionels1vZgX3GmRrY6c7qpE2ohkb1vjsxJMZQwhA57xo"
       },
       "cancelOrder": {
         "handler": "functions/cancelOrder.handler",
@@ -4127,9 +4096,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CancelOrderLambdaVersionWuGl9r3uMJsoU8Yt6Wto6bAGX9Msn2jBOUkLcLfC57Q"
+        "versionLogicalId": "CancelOrderLambdaVersioncoGgRZfn6QVao5pRbDEhJ1nhQ70n1uRLIB4RVYcA"
       },
       "lockOrder": {
         "handler": "functions/lockOrder.handler",
@@ -4147,9 +4116,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "LockOrderLambdaVersionWutFeXDas7QONMt2O1xQ48WyYwL1kq1noIvx6UKBU"
+        "versionLogicalId": "LockOrderLambdaVersionZFXShF4PLPHrHEZxR25qgQwng6QdSYjFIzdcbrFsI"
       },
       "deleteOrder": {
         "handler": "functions/deleteOrder.handler",
@@ -4167,9 +4136,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "DeleteOrderLambdaVersionqdbFiFZVKvRHWeC8D4g0OEx41UpB1QZM2N5JcqU4IM"
+        "versionLogicalId": "DeleteOrderLambdaVersionncM9WN93fxYC8vdgtTeUDohINUFhAKike6G5xM"
       },
       "editOrder": {
         "handler": "functions/editOrder.handler",
@@ -4187,9 +4156,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "EditOrderLambdaVersionenenS894nqlIxeuiX2kGd6vHS0ayvjViW1bjrkLmr04"
+        "versionLogicalId": "EditOrderLambdaVersionmCqzCynWrZbRM6L2K8QTV2g4QMjW1s8JK5MU7jg"
       },
       "addOrderMessage": {
         "handler": "functions/addOrderMessage.handler",
@@ -4207,9 +4176,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "AddOrderMessageLambdaVersionDIRKCyhqqYMb3You135aTfqQb30FH4lu61C0Da1u5s"
+        "versionLogicalId": "AddOrderMessageLambdaVersionIWV6QKE9dHO9K174G7NObWTnWH1nrISK5TS31WiXho"
       },
       "getOrderMessages": {
         "handler": "functions/getOrderMessages.handler",
@@ -4227,9 +4196,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetOrderMessagesLambdaVersionNPkhcpzeD4H61RfSCc7bvGcU5Vf6MYFv4nMY8GPHVU"
+        "versionLogicalId": "GetOrderMessagesLambdaVersionKrNXrFQfDhEdlxmlCfR6cUY4zibiQaj1WH71S6gU"
       },
       "createPayment": {
         "handler": "functions/createPayment.handler",
@@ -4247,9 +4216,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "CreatePaymentLambdaVersionEsQhDE0uEsYU3nbRUubqAr3bihkdNaP1hxikN2dd5Go"
+        "versionLogicalId": "CreatePaymentLambdaVersionEYETOHP8naIMFIZ8ZJ4a5yexTUZsStnSZWQLQJYZC4"
       },
       "getPayment": {
         "handler": "functions/getPayment.handler",
@@ -4267,9 +4236,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetPaymentLambdaVersionjjrz9etYYoFkmf02vuAHnUJ7p6wzsCQ8NgyIOjRXys"
+        "versionLogicalId": "GetPaymentLambdaVersionHNLgyIQXdfrPAH6QdsMfUn0SewKTlkkZ3nVyqh0Po"
       },
       "updatePaymentStatus": {
         "handler": "functions/updatePaymentStatus.handler",
@@ -4287,9 +4256,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdatePaymentStatusLambdaVersionOxujMdzrUgFX1vy33JF3WuWC6myXD7r7jZkP0GyCXE"
+        "versionLogicalId": "UpdatePaymentStatusLambdaVersionXYpXA3Bs5jTu3zWkqG5RWsgOlTd0DrCdIPCZ8ZTU"
       },
       "getCart": {
         "handler": "functions/getCart.handler",
@@ -4307,9 +4276,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "GetCartLambdaVersionoOTi1BW9gfYIzeuprRCYEmXTfSOBafTbVLQFVP4esA"
+        "versionLogicalId": "GetCartLambdaVersion3Z46H81ouXvLZYFimL8bTR366ZndtVLBYApKNu6kEs"
       },
       "updateCart": {
         "handler": "functions/updateCart.handler",
@@ -4327,9 +4296,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "UpdateCartLambdaVersionpWF4VjgXQuPTWg6CM8XqOv8ECZUrgZUJvmlmIs3oE"
+        "versionLogicalId": "UpdateCartLambdaVersion8rlXjCvOvh0spBYrq7lZvYihylEQxRMsu5jthYIC0Gk"
       },
       "clearCart": {
         "handler": "functions/clearCart.handler",
@@ -4347,9 +4316,9 @@
         "package": {},
         "memory": 1024,
         "timeout": 6,
-        "runtime": "node22.x",
+        "runtime": "nodejs22.x",
         "vpc": {},
-        "versionLogicalId": "ClearCartLambdaVersionek9CTe37x7g4NFXFAtk589gbWHtc5i6RDSpzXV8139s"
+        "versionLogicalId": "ClearCartLambdaVersionqRaUfASw4iz9czvuoXLoWFlmLxtV9UhBV2JjDFYrE"
       }
     },
     "configValidationMode": "warn",
@@ -4369,7 +4338,7 @@
     "artifact": "C:\\Users\\Tivva\\OneDrive\\Skrivbord\\Thai baan\\baan-thai\\packages\\baan-thai-backend\\.serverless\\baan-thai-backend.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/baan-thai-backend/dev/1763486564469-2025-11-18T17:22:44.469Z",
+    "artifactDirectoryName": "serverless/baan-thai-backend/dev/1763719966346-2025-11-21T10:12:46.346Z",
     "artifact": "baan-thai-backend.zip"
   }
 }
