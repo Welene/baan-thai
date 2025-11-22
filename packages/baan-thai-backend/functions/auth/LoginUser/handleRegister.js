@@ -1,7 +1,7 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, QueryCommand, PutCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
-const { hash } = require('../utils/password');
-const { generateToken } = require('../utils/auth');
+const { hash } = require('../../../utils/password');
+const { generateToken } = require('../../../utils/auth');
 const { v4: uuidv4 } = require('uuid');
 
 // Setup DynamoDB client
