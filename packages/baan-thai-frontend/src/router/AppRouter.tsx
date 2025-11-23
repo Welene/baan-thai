@@ -2,14 +2,15 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MenuPage from '../pages/MenuPage/MenuPage';
 import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
-import { AboutUsPage } from "../pages/aboutUsPage/aboutUsPage";
+import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import { LandingPage } from '../pages/landingPage/landingPage';
+import RegisterPage from '../pages/RegisterPage/RegisterPage';
 /* Importera era sidor här som jag gjort med MenuPage */
 
 export default function AppRouter() {
 	return (
 		<BrowserRouter>
-		<Header/>
+			<Header />
 			<Routes>
 				{/* ta bort raden under denna text som navigerar till /menu 
         kan även behövas ta bort navigate i importen högst upp eller 
@@ -18,14 +19,12 @@ export default function AppRouter() {
 				<Route path="/" element={<Navigate to="/landing" replace />} />
 
 				{/* lägg till er sida under här tex  */}
-        <Route path="/landing" element={<LandingPage />} />
-
-
+				<Route path="/landing" element={<LandingPage />} />
 				<Route path="/menu" element={<MenuPage />} />
-        		<Route path="/om-oss" element={<AboutUsPage />} />
-
+				<Route path="/om-oss" element={<AboutUsPage />} />
+				<Route path="/register" element={<RegisterPage />} />
 			</Routes>
-			<Footer/>
+			<Footer />
 		</BrowserRouter>
 	);
 }
