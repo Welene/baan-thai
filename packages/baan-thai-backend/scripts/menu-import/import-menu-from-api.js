@@ -66,16 +66,6 @@ function transformMenuItem(apiItem) {
   };
 }
 
-// Skapa kategori-index post
-function createCategoryIndex(productId, categoryKey) {
-  return {
-    PK: `INDEX#CATEGORY#${categoryKey}`,
-    SK: `PRODUCT#${productId}`,
-    type: 'ProductIndex',
-    productId: productId
-  };
-}
-
 // Skriv items i batches (max 25 per batch)
 async function writeBatch(items) {
   const batches = [];
@@ -130,10 +120,8 @@ async function run() {
       seenIds.add(apiItem.id);
       
       const product = transformMenuItem(apiItem);
-      const categoryIndex = createCategoryIndex(apiItem.id, product.categoryKey);
-      
       allItems.push(product);
-      allItems.push(categoryIndex);
+      // GSI on categoryKey - no need for separate index items
     }
     
     if (duplicates.length > 0) {
@@ -141,7 +129,7 @@ async function run() {
       console.log('These items were skipped.\n');
     }
 
-    console.log(`Prepared ${allItems.length} items (products + indexes) for DynamoDB`);
+    console.log(`Prepared ${allItems.length} products for DynamoDB`);
     console.log(`Writing to ${TABLE_NAME} in ${REGION}...`);
 
     await writeBatch(allItems);

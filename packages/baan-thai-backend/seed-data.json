@@ -35,12 +35,6 @@
     "createdAt": "2025-11-18T12:00:00Z"
   },
   {
-    "PK": "INDEX#CATEGORY#sushi",
-    "SK": "PRODUCT#1",
-    "type": "ProductIndex",
-    "productId": 1
-  },
-  {
     "PK": "USER#<customer>",
     "SK": "CART",
     "type": "Cart",
@@ -57,12 +51,27 @@
     "type": "Order",
     "orderId": "<order1>",
     "userId": "<customer>",
-    "status": "NEW",
+    "status": "PAID",
     "items": [
-      { "productId": 1, "qty": 2, "price": 59 }
+      { "productId": 1, "name": "Edamamebönor med salt", "qty": 2, "price": 59 }
     ],
     "total": 118,
-    "createdAt": "2025-11-18T12:06:00Z"
+    "messages": [
+      {
+        "text": "Kan göra mindre stark?",
+        "authorId": "<customer>",
+        "authorRole": "customer",
+        "timestamp": "2025-11-18T12:07:00Z"
+      },
+      {
+        "text": "Absolut, vi gör den mindre stark!",
+        "authorId": "<admin>",
+        "authorRole": "staff",
+        "timestamp": "2025-11-18T12:08:00Z"
+      }
+    ],
+    "createdAt": "2025-11-18T12:06:00Z",
+    "paidAt": "2025-11-18T12:08:00Z"
   },
   {
     "PK": "USER#<customer>",
@@ -70,27 +79,8 @@
     "type": "UserOrderRef",
     "orderId": "<order1>",
     "total": 118,
-    "status": "NEW",
+    "status": "PAID",
     "createdAt": "2025-11-18T12:06:00Z"
-  },
-  {
-    "PK": "ORDER#<order1>",
-    "SK": "MSG#20251118T120700#<msg1>",
-    "type": "Message",
-    "messageId": "<msg1>",
-    "authorId": "<customer>",
-    "authorRole": "customer",
-    "text": "Kan göra mindre stark?",
-    "createdAt": "2025-11-18T12:07:00Z"
-  },
-  {
-    "PK": "ORDER#<order1>",
-    "SK": "PAYMENT#<pay1>",
-    "type": "Payment",
-    "paymentId": "<pay1>",
-    "amount": 118,
-    "status": "PENDING",
-    "createdAt": "2025-11-18T12:08:00Z"
   },
   {
     "PK": "INDEX#ORDER_STATUS#NEW",
@@ -99,24 +89,5 @@
     "orderId": "<order1>",
     "total": 118,
     "createdAt": "2025-11-18T12:06:00Z"
-  },
-  {
-    "PK": "INGREDIENT#ris",
-    "SK": "DETAILS",
-    "type": "Ingredient",
-    "ingredientName": "ris",
-    "amount": 50,
-    "unit": "kg",
-    "minAmount": 10,
-    "createdAt": "2025-11-18T12:00:00Z",
-    "updatedAt": "2025-11-18T12:00:00Z"
-  },
-  {
-    "PK": "INDEX#INGREDIENTS",
-    "SK": "INGREDIENT#ris",
-    "type": "IngredientIndex",
-    "ingredientName": "ris",
-    "amount": 50,
-    "minAmount": 10
   }
 ]
