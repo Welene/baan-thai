@@ -12214,5 +12214,432 @@
         }
       }
     }
+  },
+  "C:\\Users\\helen\\OneDrive\\Skrivebord\\Fullstack-Gruppe\\packages\\baan-thai-backend\\serverless.yml": {
+    "versionFramework": "4.25.0",
+    "servicePath": "C:\\Users\\helen\\OneDrive\\Skrivebord\\Fullstack-Gruppe\\packages\\baan-thai-backend\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "baan-thai-backend",
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs22.x",
+        "region": "eu-north-1",
+        "iam": {
+          "role": "${env:IAM_ROLE_ARN}"
+        },
+        "environment": {
+          "TABLE_NAME": "RestaurantTable"
+        },
+        "httpApi": {
+          "cors": {
+            "allowedOrigins": [
+              "*"
+            ],
+            "allowedHeaders": [
+              "Content-Type",
+              "Authorization"
+            ],
+            "allowedMethods": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ]
+          }
+        }
+      },
+      "functions": {
+        "handleRegister": {
+          "handler": "functions/handleRegister.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/register",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "handleLogin": {
+          "handler": "functions/handleLogin.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/login",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "getUserProfile": {
+          "handler": "functions/getUserProfile.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/profile/{userId}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "getMenu": {
+          "handler": "functions/getMenu.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "getProduct": {
+          "handler": "functions/getProduct.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "createMenuItem": {
+          "handler": "functions/createMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "updateMenuItem": {
+          "handler": "functions/updateMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "deleteMenuItem": {
+          "handler": "functions/deleteMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "DELETE"
+              }
+            }
+          ]
+        },
+        "getAllIngredients": {
+          "handler": "functions/getAllIngredients.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/ingredients",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "getIngredient": {
+          "handler": "functions/getIngredient.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/ingredients/{ingredientName}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "createIngredient": {
+          "handler": "functions/createIngredient.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/ingredients",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "updateIngredient": {
+          "handler": "functions/updateIngredient.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/ingredients/{ingredientName}",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "deleteIngredient": {
+          "handler": "functions/deleteIngredient.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/ingredients/{ingredientName}",
+                "method": "DELETE"
+              }
+            }
+          ]
+        },
+        "createOrder": {
+          "handler": "functions/createOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "getAllOrders": {
+          "handler": "functions/getAllOrders.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "getOrderbyUserId": {
+          "handler": "functions/getOrdersByUserId.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{userId}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "getOrdersByStatus": {
+          "handler": "functions/getOrdersByStatus.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/status/{status}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "updateOrderStatus": {
+          "handler": "functions/updateOrderStatus.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/status",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "cancelOrder": {
+          "handler": "functions/cancelOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/cancel",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "lockOrder": {
+          "handler": "functions/lockOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/lock",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "deleteOrder": {
+          "handler": "functions/deleteOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}",
+                "method": "DELETE"
+              }
+            }
+          ]
+        },
+        "editOrder": {
+          "handler": "functions/editOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "addOrderMessage": {
+          "handler": "functions/addOrderMessage.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/messages",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "getOrderMessages": {
+          "handler": "functions/getOrderMessages.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/messages",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "createPayment": {
+          "handler": "functions/createPayment.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/payment",
+                "method": "POST"
+              }
+            }
+          ]
+        },
+        "getPayment": {
+          "handler": "functions/getPayment.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/payment",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "updatePaymentStatus": {
+          "handler": "functions/updatePaymentStatus.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/payments/{paymentId}/status",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "getCart": {
+          "handler": "functions/getCart.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/cart/{userId}",
+                "method": "GET"
+              }
+            }
+          ]
+        },
+        "updateCart": {
+          "handler": "functions/updateCart.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/cart/{userId}",
+                "method": "PUT"
+              }
+            }
+          ]
+        },
+        "clearCart": {
+          "handler": "functions/clearCart.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/cart/{userId}",
+                "method": "DELETE"
+              }
+            }
+          ]
+        }
+      },
+      "plugins": [
+        "serverless-offline"
+      ]
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs22.x",
+      "region": "eu-north-1",
+      "iam": {
+        "role": "${env:IAM_ROLE_ARN}"
+      },
+      "environment": {
+        "TABLE_NAME": "RestaurantTable"
+      },
+      "httpApi": {
+        "cors": {
+          "allowedOrigins": [
+            "*"
+          ],
+          "allowedHeaders": [
+            "Content-Type",
+            "Authorization"
+          ],
+          "allowedMethods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      }
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "error": {
+      "message": "Cannot resolve '${env:IAM_ROLE_ARN}' variable at 'provider.iam.role'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.",
+      "stack": "Error: Cannot resolve '${env:IAM_ROLE_ARN}' variable at 'provider.iam.role'. No value is available for this variable, and no default value was provided. Please check your variable definitions or provide a default value.\n    at _ResolverManager.resolve (file:///C:/Users/helen/.serverless/releases/4.25.0/package/dist/sf-core.js:726:32288)\n    at async #handlePlaceholderNode (file:///C:/Users/helen/.serverless/releases/4.25.0/package/dist/sf-core.js:726:30476)\n    at async file:///C:/Users/helen/.serverless/releases/4.25.0/package/dist/sf-core.js:726:28321\n    at async processNodeAndHandleCompletion (file:///C:/Users/helen/.serverless/releases/4.25.0/package/dist/sf-core.js:726:16724)",
+      "code": "MISSING_VARIABLE_RESULT"
+    },
+    "serviceRawFile": "service: baan-thai-backend\r\n\r\nprovider:\r\n    name: aws\r\n    runtime: nodejs22.x\r\n    region: eu-north-1\r\n    iam:\r\n        role: ${env:IAM_ROLE_ARN}\r\n\r\n    environment:\r\n        TABLE_NAME: RestaurantTable\r\n\r\n    httpApi:\r\n        cors:\r\n            allowedOrigins:\r\n                - '*'\r\n            allowedHeaders:\r\n                - Content-Type\r\n                - Authorization\r\n            allowedMethods:\r\n                - GET\r\n                - POST\r\n                - PUT\r\n                - DELETE\r\n\r\n# as we create functions --> we need to add api endpoints to those functions\r\n\r\nfunctions:\r\n    #  -------------------USER---------------------\r\n    handleRegister: # register as user or admin\r\n        handler: functions/handleRegister.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/register\r\n                  method: POST\r\n\r\n    handleLogin: # logs in user or admin\r\n        handler: functions/handleLogin.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/login\r\n                  method: POST\r\n\r\n    getUserProfile: # gets the userId's profile\r\n        handler: functions/getUserProfile.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/profile/{userId}\r\n                  method: GET\r\n\r\n    #  -------------------MENU---------------------\r\n    getMenu: # get all meals from the menu\r\n        handler: functions/getMenu.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/menu\r\n                  method: GET\r\n\r\n    getProduct: # gets a single menu item\r\n        handler: functions/getProduct.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/menu/{prodId}\r\n                  method: GET\r\n\r\n    createMenuItem: # add a new meal to menu\r\n        handler: functions/createMenuItem.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/menu\r\n                  method: POST\r\n\r\n    updateMenuItem: # change a meal in menu\r\n        handler: functions/updateMenuItem.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/menu/{prodId}\r\n                  method: PUT\r\n\r\n    deleteMenuItem: # removes menu product (menu item === a meal)\r\n        handler: functions/deleteMenuItem.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/menu/{prodId}\r\n                  method: DELETE\r\n\r\n    #  ---------- INGREDIENTS ----------\r\n    getAllIngredients: # check all ingredients and how much we have of them (ingredient - amount)\r\n        handler: functions/getAllIngredients.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/ingredients\r\n                  method: GET\r\n\r\n    getIngredient: # check amount of a specific ingredient\r\n        handler: functions/getIngredient.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/ingredients/{ingredientName}\r\n                  method: GET\r\n\r\n    createIngredient: # add new ingredient\r\n        handler: functions/createIngredient.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/ingredients\r\n                  method: POST\r\n\r\n    updateIngredient: # change ingredient\r\n        handler: functions/updateIngredient.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/ingredients/{ingredientName}\r\n                  method: PUT\r\n\r\n    deleteIngredient: # remove ingredient\r\n        handler: functions/deleteIngredient.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/ingredients/{ingredientName}\r\n                  method: DELETE\r\n\r\n    #  -------------------ORDERS---------------------\r\n    createOrder: # creates an order\r\n        handler: functions/createOrder.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders\r\n                  method: POST\r\n\r\n    getAllOrders: # gets all orders\r\n        handler: functions/getAllOrders.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders\r\n                  method: GET\r\n\r\n    getOrderbyUserId: # gets all orders by userId\r\n        handler: functions/getOrdersByUserId.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{userId}\r\n                  method: GET\r\n\r\n    getOrdersByStatus: # gets all orders by status (pending, locked, completed)\r\n        handler: functions/getOrdersByStatus.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/status/{status}\r\n                  method: GET\r\n\r\n    updateOrderStatus: # change order status (pending, locked, complete)\r\n        handler: functions/updateOrderStatus.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/status\r\n                  method: PUT\r\n\r\n    cancelOrder: # userId cancels order\r\n        handler: functions/cancelOrder.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/cancel\r\n                  method: PUT\r\n\r\n    lockOrder: # admin locks order (no more edits by user can be done)\r\n        handler: functions/lockOrder.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/lock\r\n                  method: PUT\r\n\r\n    deleteOrder: # removes an order\r\n        handler: functions/deleteOrder.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}\r\n                  method: DELETE\r\n\r\n    editOrder: # changes an order in case user did something wrong/forgot to add something\r\n        handler: functions/editOrder.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}\r\n                  method: PUT\r\n\r\n    #  -------------------MESSAGES---------------------\r\n    addOrderMessage: # add message to order (customer or staff)\r\n        handler: functions/addOrderMessage.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/messages\r\n                  method: POST\r\n\r\n    getOrderMessages: # get all messages for an order\r\n        handler: functions/getOrderMessages.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/messages\r\n                  method: GET\r\n\r\n    #  -------------------PAYMENTS---------------------\r\n    createPayment: # create payment for order\r\n        handler: functions/createPayment.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/payment\r\n                  method: POST\r\n\r\n    getPayment: # get payment status\r\n        handler: functions/getPayment.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/orders/{orderId}/payment\r\n                  method: GET\r\n\r\n    updatePaymentStatus: # update payment status (webhook from provider)\r\n        handler: functions/updatePaymentStatus.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/payments/{paymentId}/status\r\n                  method: PUT\r\n\r\n    #  -------------------CART---------------------\r\n    getCart: # gets the userId's cart\r\n        handler: functions/getCart.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/cart/{userId}\r\n                  method: GET\r\n\r\n    updateCart: # updates the userId's cart\r\n        handler: functions/updateCart.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/cart/{userId}\r\n                  method: PUT\r\n\r\n    clearCart: # empties the userId's cart\r\n        handler: functions/clearCart.handler\r\n        events:\r\n            - httpApi:\r\n                  path: /api/cart/{userId}\r\n                  method: DELETE\r\n# resources:\r\n#   Resources:\r\n#     CloudDbTable:\r\n#       Type: AWS::DynamoDB::Table\r\n#       Properties:\r\n#         TableName: RestaurantTable\r\n#         AttributeDefinitions:\r\n#           - AttributeName: PK\r\n#             AttributeType: S\r\n#           - AttributeName: SK\r\n#             AttributeType: S\r\n#         KeySchema:\r\n#           - AttributeName: PK\r\n#             KeyType: HASH\r\n#           - AttributeName: SK\r\n#             KeyType: RANGE\r\n#         BillingMode: PAY_PER_REQUEST\r\nplugins:\r\n    - serverless-offline\r\n",
+    "command": [
+      "offline"
+    ],
+    "options": {},
+    "orgId": "67d65fe6-fcec-4953-8f2c-9196658302b5",
+    "orgName": "welene",
+    "userId": "MtfCL1QF8KyHmTcyXv",
+    "userName": "welene",
+    "serviceProviderAwsCfStackId": null,
+    "serviceProviderAwsCfStackCreated": null,
+    "serviceProviderAwsCfStackUpdated": null,
+    "serviceProviderAwsCfStackStatus": null,
+    "serviceProviderAwsCfStackOutputs": null
   }
 }

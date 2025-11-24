@@ -7,11 +7,12 @@ function RegisterPage() {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState<RegisterUser>({
 		// formData --> has all the input info from user, ready to be sent to backend!
-		namn: '',
-		epost: '',
-		lösenord: '',
-		adress: '',
-		telefonnummer: '',
+		name: '',
+		password: '',
+		email: '',
+		username: '',
+		phoneNumber: '',
+		address: '',
 	});
 	// makes sure to use the interface, so correct datatype is used in each inputfield
 
@@ -27,8 +28,30 @@ function RegisterPage() {
 		}));
 	};
 
-	const handleRegister = (e: FormEvent): void => {
+	const handleRegister = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
+
+		try {
+			const response = await fetch('http://localhost:3000/api/register', {
+				// swap out to your url when testing, this is mine, from offline serverless
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify(formData),
+			});
+
+			const data = await response.json();
+
+			if (!response.ok) {
+				throw new Error(data.error || 'Could not register user');
+				return;
+			}
+
+			localStorage.setItem('token', data.token);
+			navigate('/landing');
+		} catch (error) {
+			console.error('Registration failed:', error);
+			throw new Error('Could not register user');
+		}
 	};
 
 	const handleLogin = (): void => {
@@ -54,9 +77,26 @@ function RegisterPage() {
 						<input
 							type="text"
 							id="namn"
-							name="namn"
+							name="name"
 							placeholder="Namn"
-							value={formData.namn}
+							value={formData.name}
+							onChange={handleChange}
+							className="register__input"
+							required
+						/>
+					</div>
+
+					{/* behövs username? */}
+					<div>
+						<label htmlFor="username" className="sr-only">
+							Användarnamn
+						</label>
+						<input
+							type="text"
+							id="username"
+							name="username"
+							placeholder="Användarnamn"
+							value={formData.username}
 							onChange={handleChange}
 							className="register__input"
 							required
@@ -70,9 +110,9 @@ function RegisterPage() {
 						<input
 							type="email"
 							id="epost"
-							name="epost"
+							name="email"
 							placeholder="Epost"
-							value={formData.epost}
+							value={formData.email}
 							onChange={handleChange}
 							className="register__input"
 							required
@@ -86,9 +126,9 @@ function RegisterPage() {
 						<input
 							type="password"
 							id="lösenord"
-							name="lösenord"
+							name="password"
 							placeholder="Lösenord"
-							value={formData.lösenord}
+							value={formData.password}
 							onChange={handleChange}
 							className="register__input"
 							required
@@ -102,9 +142,9 @@ function RegisterPage() {
 						<input
 							type="text"
 							id="adress"
-							name="adress"
+							name="address"
 							placeholder="Adress"
-							value={formData.adress}
+							value={formData.address}
 							onChange={handleChange}
 							className="register__input"
 						/>
@@ -117,9 +157,9 @@ function RegisterPage() {
 						<input
 							type="tel"
 							id="telefonnummer"
-							name="telefonnummer"
+							name="phoneNumber"
 							placeholder="Telefonnummer"
-							value={formData.telefonnummer}
+							value={formData.phoneNumber}
 							onChange={handleChange}
 							className="register__input"
 							required
