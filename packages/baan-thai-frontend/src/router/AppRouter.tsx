@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import MenuPage from '../pages/MenuPage/MenuPage';
 import CheckoutPage from '../pages/CheckoutPage/CheckoutPage';
+import Cart from '../components/Cart/Cart';
 /* Importera era sidor här som jag gjort med MenuPage */
 
 export default function AppRouter() {
@@ -18,6 +19,7 @@ export default function AppRouter() {
         <Route path="/Landing" element={<LandingPage />} />  */}
 
 				<Route path="/menu" element={<MenuPage />} />
+				<Route path="/cart" element={<Cart />} />
 			</Routes>
 		</BrowserRouter>
 	);
