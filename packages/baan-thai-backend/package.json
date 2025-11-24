@@ -6,9 +6,7 @@
   "scripts": {
     "deploy": "serverless deploy",
     "seed": "node scripts/seed.js",
-    "import-menu": "node scripts/menu-import/import-menu-from-api.js",
-    "cleanup": "node scripts/cleanup-old-items.js",
-    "fix-orders": "node scripts/fix-order-items.js"
+    "import-menu": "node scripts/menu-import/import-menu-from-api.js"
   },
   "keywords": [],
   "author": "",
