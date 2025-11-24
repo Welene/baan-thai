@@ -18,4 +18,5 @@ export const handler = middy(async () => {
       orders,
     });
   }
-}).use(errorHandler());
+})
+  .use(errorHandler());

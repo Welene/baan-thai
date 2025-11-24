@@ -51,6 +51,63 @@ export const addOrder = async ({ id, firstName, lastName, email, phoneNumber, or
   }
 }
 
+// PUT uppdatera order
+export const editOrder = async (orderId, updateData) => {
+  const GetCommand = new GetCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: "ORDER",
+      SK: orderId,
+    },
+  });
+
+  let existingOrder;
+  try {
+    const getResult = await docClient.send(GetCommand);
+    if (!getResult.Item) {
+      return { success: false, message: `Order with id ${orderId} not found` };
+    }
+    existingOrder = getResult.Item;
+  } catch (error) {
+    console.error(`Error fetching order with id ${orderId}:`, error.message);
+    return { success: false, message: `Error fetching order: ${error.message}` };
+  }
+
+  if (updateData.order) {
+    existingOrder.order = [
+      ...updateData.order,
+    ];
+  }
+
+  const calculateTotalPrice = (orderItems) => {
+    return orderItems.reduce((total, item) => total + item.price * item.amount, 0);
+  }
+
+  existingOrder.totalPrice = calculateTotalPrice(existingOrder.order);
+
+  const updatecommand = new UpdateCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: "ORDER",
+      SK: orderId,
+    },
+    UpdateExpression: updateData.order
+      ? "SET #order = :order, totalPrice = :totalPrice"
+      : "SET totalPrice = :totalPrice",
+    ExpressionAttributeNames: {
+      "#order": "order",
+    },
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const result = await docClient.send(updatecommand);
+    return  { success: true, updatedOrder: result.Attributes };
+  } catch (error) {
+    return { success: false, message: `Error updating order: ${error.message}` };
+  }
+}
+
 // DELETE radera order
 export const deleteOrder = async (orderId) => {
   try {
