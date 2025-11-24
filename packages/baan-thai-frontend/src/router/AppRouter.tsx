@@ -5,7 +5,6 @@ import Footer from '../components/Footer/Footer';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import { LandingPage } from '../pages/landingPage/landingPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
-/* Importera era sidor här som jag gjort med MenuPage */
 
 export default function AppRouter() {
 	return (
@@ -18,11 +17,11 @@ export default function AppRouter() {
 
 				<Route path="/" element={<Navigate to="/landing" replace />} />
 
-				{/* lägg till er sida under här tex  */}
-				<Route path="/landing" element={<LandingPage />} />
-				<Route path="/menu" element={<MenuPage />} />
-				<Route path="/om-oss" element={<AboutUsPage />} />
-				<Route path="/register" element={<RegisterPage />} />
+			{/* lägg till er sida under här tex  */}
+			<Route path="/landing" element={<LandingPage />} />
+			<Route path="/menu" element={<MenuPage />} />
+			<Route path="/om-oss" element={<AboutUsPage />} />
+			<Route path="/register" element={<RegisterPage />} />
 			</Routes>
 			<Footer />
 		</BrowserRouter>
