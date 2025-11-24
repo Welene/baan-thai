@@ -1,0 +1,93 @@
+[
+  {
+    "PK": "USER#<admin>",
+    "SK": "PROFILE",
+    "type": "User",
+    "userId": "<admin>",
+    "username": "admin",
+    "email": "admin@baanthai.se",
+    "passwordHash": "$2b$10$placeholder",
+    "role": "admin",
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "PROFILE",
+    "type": "User",
+    "userId": "<customer>",
+    "username": "jannekund",
+    "email": "Janne@example.com",
+    "passwordHash": "$2b$10$placeholder",
+    "role": "customer",
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "PRODUCT#1",
+    "SK": "DETAILS",
+    "type": "Product",
+    "productId": 1,
+    "name": "Edamamebönor med salt",
+    "description": "Saltade sojabönor.",
+    "price": 59,
+    "category": "Sushi",
+    "categoryKey": "sushi",
+    "available": true,
+    "createdAt": "2025-11-18T12:00:00Z"
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "CART",
+    "type": "Cart",
+    "userId": "<customer>",
+    "items": [
+      { "productId": 1, "name": "Edamamebönor med salt", "price": 59, "qty": 2 }
+    ],
+    "total": 118,
+    "updatedAt": "2025-11-18T12:05:00Z"
+  },
+  {
+    "PK": "ORDER#<order1>",
+    "SK": "ORDER",
+    "type": "Order",
+    "orderId": "<order1>",
+    "userId": "<customer>",
+    "status": "PAID",
+    "items": [
+      { "productId": 1, "name": "Edamamebönor med salt", "qty": 2, "price": 59 }
+    ],
+    "total": 118,
+    "messages": [
+      {
+        "text": "Kan göra mindre stark?",
+        "authorId": "<customer>",
+        "authorRole": "customer",
+        "timestamp": "2025-11-18T12:07:00Z"
+      },
+      {
+        "text": "Absolut, vi gör den mindre stark!",
+        "authorId": "<admin>",
+        "authorRole": "staff",
+        "timestamp": "2025-11-18T12:08:00Z"
+      }
+    ],
+    "createdAt": "2025-11-18T12:06:00Z",
+    "paidAt": "2025-11-18T12:08:00Z"
+  },
+  {
+    "PK": "USER#<customer>",
+    "SK": "ORDER#20251118T120600#<order1>",
+    "type": "UserOrderRef",
+    "orderId": "<order1>",
+    "total": 118,
+    "status": "PAID",
+    "createdAt": "2025-11-18T12:06:00Z"
+  },
+  {
+    "PK": "INDEX#ORDER_STATUS#NEW",
+    "SK": "ORDER#20251118T120600#<order1>",
+    "type": "OrderIndex",
+    "orderId": "<order1>",
+    "total": 118,
+    "createdAt": "2025-11-18T12:06:00Z"
+  }
+]
