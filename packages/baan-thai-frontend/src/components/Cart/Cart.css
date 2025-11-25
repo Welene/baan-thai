@@ -1,0 +1,71 @@
+.overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: rgba(0, 0, 0, 0.5);
+	z-index: 2;
+}
+
+.cart {
+	position: fixed;
+	top: 8%;
+	right: 1.5%;
+	width: 30rem;
+	max-height: 50vh;
+	overflow-y: auto;
+	background-color: #5a390d;
+	border-radius: 0.5rem;
+	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.377);
+	z-index: 3;
+	padding: 1.5rem;
+}
+
+.cart h3,
+.cart p,
+.cart span {
+	color: rgb(238, 238, 238);
+}
+
+.cart__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	position: relative;
+}
+
+.cart__header-text {
+	display: flex;
+	flex-direction: column;
+}
+
+.cart__header-title {
+	margin: 0;
+	color: white;
+}
+
+.cart__header-subtitle {
+	margin: 0;
+	font-size: 0.9rem;
+	color: #eee;
+}
+
+.cart__header-close {
+	font-size: 2rem;
+	border: none;
+	background: none;
+	color: white;
+	cursor: pointer;
+	line-height: 1;
+	padding: 0;
+	margin-left: 1rem;
+}
+
+.cart-items {
+}
+
+.cart-item {
+}
+
+/* // Helene */

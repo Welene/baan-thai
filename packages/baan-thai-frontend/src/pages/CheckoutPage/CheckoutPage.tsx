@@ -4,12 +4,19 @@ import Delivery from '../../assets/delivery.png';
 import Pay from '../../assets/pay.png';
 import Edit from '../../assets/edit.png';
 import Clock from '../../assets/clock.png';
+import Hero from '../../assets/hero-img.png';
 
 function CheckoutPage() {
 	return (
 		<>
 			<section className="checkout-wrapper">
-				<section className="hero-section"></section>
+				<section
+					className="hero-section"
+					style={
+						{
+							backgroundImage: `url(${Hero})`,
+						} as React.CSSProperties
+					}></section>
 
 				<hr className="divider--h1" />
 				<h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>

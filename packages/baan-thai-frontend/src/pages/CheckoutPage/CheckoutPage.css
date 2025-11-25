@@ -32,7 +32,6 @@
 .hero-section {
 	width: 100%;
 	/* max-width: 1200px; */
-	background-image: url('../../assets/hero-img.png');
 	background-position: center;
 	background-repeat: no-repeat;
 	background-size: cover;
