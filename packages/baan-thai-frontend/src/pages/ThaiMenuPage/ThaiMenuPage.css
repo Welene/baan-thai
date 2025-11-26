@@ -1,17 +1,44 @@
+.menu-page.thai-menu {
+  background-color: #E4DACE;
+}
+
 .thai-menu {
   padding: 2rem;
 }
 
-.thai-menu h1 {
-  text-align: center;
-  margin-bottom: 0.5rem;
+/* Hero Image - Full bredd */
+.hero-image {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
 }
 
-.thai-menu .subtitle {
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.thai-hero .hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   text-align: center;
-  color: #666;
-  margin-bottom: 2rem;
-  font-style: italic;
+  width: 100%;
+}
+
+.thai-hero .hero-text h1 {
+  font-family: var(--font);
+  color: var(--color-brown);
+  font-size: 2.5rem;
+  text-align: center;
+  background-color: rgba(228, 218, 206, 0.6);
+  padding: 3rem;
+  height: auto;
+  width: 100%;
 }
 
 .thai-menu .error {
@@ -21,41 +48,6 @@
   background: #fee;
   border-radius: 4px;
   margin-bottom: 1rem;
-}
-
-/* Kategori-navigering */
-.thai-menu .category-nav {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-  justify-content: center;
-  margin-bottom: 2.5rem;
-  padding: 1.5rem;
-  background: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.thai-menu .category-nav-button {
-  padding: 0.6rem 1.2rem;
-  background: #fff;
-  color: #8B4513;
-  border: 2px solid #D2691E;
-  border-radius: 20px;
-  font-size: 0.95rem;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.thai-menu .category-nav-button:hover {
-  background: #D2691E;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(210, 105, 30, 0.3);
 }
 
 .thai-menu .category-section {
@@ -75,8 +67,4 @@
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 1.5rem;
   margin-top: 1rem;
-}
-.add-button {
-  background-color: #D2691E;
-  color: white;
 }

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { MenuCard } from "../../components/MenuCard";
+import { MenuCard } from "../../components/MenuCard/MenuCard";
+import { CategoryNav } from "../../components/CategoryNav/CategoryNav";
 import "./ThaiMenuPage.css";
+import thaiHero from "../../assets/Tom-yam-Goong 1.png";
 
 // Thailändska kategorier (inkluderar alla som ska visas)
 const THAI_CATEGORIES = [
@@ -28,8 +30,12 @@ export default function ThaiMenuPage() {
 
   useEffect(() => {
     console.log('ThaiMenuPage! Fetching from AWS...');
-    // Hämta från DynamoDB via AWS API
-    fetch("https://6kpqtftjk5.execute-api.eu-north-1.amazonaws.com/api/menu")
+    fetch("https://6kpqtftjk5.execute-api.eu-north-1.amazonaws.com/api/menu", {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
       .then(res => {
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
         return res.json();
@@ -157,31 +163,31 @@ export default function ThaiMenuPage() {
   };
 
   return (
-    <div className="menu-page thai-menu">
-      <h1>Thailändsk Mat</h1>
-      <p className="subtitle">Samtliga rätter serveras med kokt ris.</p>
+    <>
+      {/* Hero Image med text overlay - full bredd */}
+      <div className="hero-image thai-hero">
+        <img src={thaiHero} alt="Tom Yam Goong" />
+        <div className="hero-text">
+          <h1>EN SMAKFULL UPPLEVELSE</h1>
+        </div>
+      </div>
 
-      {error && <p className="error">{error}</p>}
+      {/* Kategori-navigering - full bredd */}
+      {!loading && sortedCategories.length > 0 && (
+        <CategoryNav 
+          categories={sortedCategories}
+          categoryNames={categoryNames}
+          onCategoryClick={scrollToCategory}
+        />
+      )}
+
+      <div className="menu-page thai-menu">
+        {error && <p className="error">{error}</p>}
 
       {loading && <p>Laddar meny...</p>}
       
       {!loading && Array.isArray(items) && items.length === 0 && (
         <p>Inga thailändska rätter hittades.</p>
-      )}
-
-      {/* Kategori-navigering */}
-      {!loading && sortedCategories.length > 0 && (
-        <nav className="category-nav">
-          {sortedCategories.map((categoryKey) => (
-            <button
-              key={categoryKey}
-              className="category-nav-button"
-              onClick={() => scrollToCategory(categoryKey)}
-            >
-              {categoryNames[categoryKey] || categoryKey}
-            </button>
-          ))}
-        </nav>
       )}
 
       {!loading && sortedCategories.map((categoryKey) => (
@@ -194,6 +200,7 @@ export default function ThaiMenuPage() {
           </div>
         </section>
       ))}
-    </div>
+      </div>
+    </>
   );
 }
