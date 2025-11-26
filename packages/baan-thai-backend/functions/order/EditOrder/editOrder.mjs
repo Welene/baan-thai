@@ -6,7 +6,7 @@ import { errorHandler } from "../../middlewares/errorHandler.mjs";
 import { updateOrderSchema } from "../../models/updateOrderSchema.mjs";
 
 export const handler = middy(async (event) => {
-  const { error, value } = updateOrderSchema.validate(event.body);
+  const { error } = updateOrderSchema.validate(event.body);
   if (error) {
     return sendResponse(400, { message: error.details[0].message });
   }

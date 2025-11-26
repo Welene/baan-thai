@@ -1,6 +1,8 @@
 import { docClient } from "./client.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { generateId } from "../utils/uuid.mjs";
 
+// GET alla orders
 export const getAllOrders = async () => {
   const command = new QueryCommand({
     TableName: "RestaurantTable",
@@ -14,113 +16,193 @@ export const getAllOrders = async () => {
     const result = await docClient.send(command);
     return result.Items || [];
   } catch (error) {
-    console.error({ message: `${error.message} from getAllOrder` });
+    console.error({ message: `${error.message} from getAllOrders` });
     throw new Error("Could not fetch orders");
   }
-}
+};
 
 // POST skapa order
-export const addOrder = async ({ id, firstName, lastName, email, phoneNumber, order, totalPrice, message, payment }) => {
-  const orderId = id;
+export const addOrder = async ({ userId, order, orderId = null }) => {
+  if (!orderId) {
+    orderId = generateId(8);
+  }
 
-  const item = {
-    PK: "ORDER",
-    SK: orderId,
-    firstName,
-    lastName,
-    email,
-    phoneNumber,
+  const totalPrice = order.reduce(
+    (sum, item) => sum + item.price * item.amount,
+    0
+  );
+
+  const newOrder = {
+    PK: `ORDER#${orderId}`,
+    SK: "ORDER",
+    type: "Order",
+    userId,
     order,
     totalPrice,
-    message,
-    payment,
-    createdAt: new Date().toDateString()
+    status: "pending",
+    createdAt: new Date().toISOString(),
   };
 
   const command = new PutCommand({
     TableName: "RestaurantTable",
-    Item: item
+    Item: newOrder,
   });
 
   try {
     await docClient.send(command);
-    return { succes: true, id, firstName, lastName, email, phoneNumber, order, totalPrice, message, payment }
+    return {
+      success: true,
+      orderId,
+      userId,
+      order,
+      totalPrice
+    };
   } catch (error) {
-    console.error(`Error from db: `, error.message);
+    console.error("Error saving order:", error.message);
     return { success: false, message: `Error saving order: ${error.message}` };
   }
-}
+};
+
+// GET en order
+export const queryOrder = async (orderId) => {
+  const command = new GetCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: `ORDER#${orderId}`,
+      SK: "ORDER",
+    },
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return result.Item || null;
+  } catch (error) {
+    console.error("Error fetching order:", error.message);
+    return null;
+  }
+};
 
 // PUT uppdatera order
 export const editOrder = async (orderId, updateData) => {
-  const GetCommand = new GetCommand({
-    TableName: "RestaurantTable",
-    Key: {
-      PK: "ORDER",
-      SK: orderId,
-    },
-  });
+  const existingOrder = await queryOrder(orderId);
 
-  let existingOrder;
-  try {
-    const getResult = await docClient.send(GetCommand);
-    if (!getResult.Item) {
-      return { success: false, message: `Order with id ${orderId} not found` };
-    }
-    existingOrder = getResult.Item;
-  } catch (error) {
-    console.error(`Error fetching order with id ${orderId}:`, error.message);
-    return { success: false, message: `Error fetching order: ${error.message}` };
+  if (!existingOrder) {
+    return { success: false, message: `Order with id ${orderId} not found` };
   }
 
   if (updateData.order) {
-    existingOrder.order = [
-      ...updateData.order,
-    ];
+    existingOrder.order = [...updateData.order];
   }
 
-  const calculateTotalPrice = (orderItems) => {
-    return orderItems.reduce((total, item) => total + item.price * item.amount, 0);
-  }
+  existingOrder.totalPrice = existingOrder.order.reduce(
+    (total, item) => total + item.price * item.amount,
+    0
+  );
 
-  existingOrder.totalPrice = calculateTotalPrice(existingOrder.order);
-
-  const updatecommand = new UpdateCommand({
+  const command = new UpdateCommand({
     TableName: "RestaurantTable",
-    Key: {
-      PK: "ORDER",
-      SK: orderId,
-    },
-    UpdateExpression: updateData.order
-      ? "SET #order = :order, totalPrice = :totalPrice"
-      : "SET totalPrice = :totalPrice",
+    Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
+    UpdateExpression: "SET #order = :order, totalPrice = :totalPrice",
     ExpressionAttributeNames: {
       "#order": "order",
     },
-    ReturnValues: "ALL_NEW"
+    ExpressionAttributeValues: {
+      ":order": existingOrder.order,
+      ":totalPrice": existingOrder.totalPrice,
+    },
+    ReturnValues: "ALL_NEW",
   });
 
   try {
-    const result = await docClient.send(updatecommand);
-    return  { success: true, updatedOrder: result.Attributes };
+    const result = await docClient.send(command);
+    return { success: true, updatedOrder: result.Attributes };
   } catch (error) {
     return { success: false, message: `Error updating order: ${error.message}` };
   }
-}
+};
+
+// PUT status uppdatering
+export const updateOrderStatus = async (orderId, status) => {
+  const command = new UpdateCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: `ORDER#${orderId}`,
+      SK: "ORDER",
+    },
+    UpdateExpression: "SET #status = :status",
+    ExpressionAttributeNames: {
+      "#status": "status",
+    },
+    ExpressionAttributeValues: {
+      ":status": status,
+    },
+    ReturnValues: "ALL_NEW",
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return { success: true, updatedOrder: result.Attributes };
+  } catch (error) {
+    return { success: false, message: `Error updating order status: ${error.message}` };
+  }
+};
+
+// GET oredr by status
+export const getOrdersByStatus = async (status) => {
+  const command = new ScanCommand({
+    TableName: "RestaurantTable",
+    FilterExpression: "#status = :status",
+    ExpressionAttributeNames: {
+      "#status": "status",
+    },
+    ExpressionAttributeValues: {
+      ":status": status,
+    },
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return result.Items || [];
+  } catch (error) {
+    console.error("Error scanning orders:", error.message);
+    return [];
+  }
+};
+
+// GET orders by userId
+export const getOrdersByUserId = async (userId) => {
+  const command = new ScanCommand({
+    TableName: "RestaurantTable",
+    FilterExpression: "#userId = :userId",
+    ExpressionAttributeNames: {
+      "#userId": "userId",
+    },
+    ExpressionAttributeValues: {
+      ":userId": userId,
+    },
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return result.Items || [];
+  } catch (error) {
+    console.error(`Error fetching orders for userId ${userId}:`, error.message);
+    return [];
+  }
+};
 
 // DELETE radera order
 export const deleteOrder = async (orderId) => {
-  try {
-    const params = {
-      TableName: "RestaurantTable",
-      Key: {
-        PK: "ORDER",
-        SK: orderId,
-      },
-      ReturnValues: "ALL_OLD",
-    };
+  const command = new DeleteCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: `ORDER#${orderId}`,
+      SK: "ORDER",
+    },
+    ReturnValues: "ALL_OLD",
+  });
 
-    const command = new DeleteCommand(params);
+  try {
     const result = await docClient.send(command);
     return result.Attributes;
   } catch (error) {

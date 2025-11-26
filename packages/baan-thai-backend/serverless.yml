@@ -84,42 +84,6 @@ functions:
           path: /api/menu/{prodId}
           method: DELETE
 
-  #  ---------- INGREDIENTS ----------
-  getAllIngredients: # check all ingredients and how much we have of them (ingredient - amount)
-    handler: functions/getAllIngredients.handler
-    events:
-      - httpApi:
-          path: /api/ingredients
-          method: GET
-
-  getIngredient: # check amount of a specific ingredient
-    handler: functions/getIngredient.handler
-    events:
-      - httpApi:
-          path: /api/ingredients/{ingredientName}
-          method: GET
-
-  createIngredient: # add new ingredient
-    handler: functions/createIngredient.handler
-    events:
-      - httpApi:
-          path: /api/ingredients
-          method: POST
-
-  updateIngredient: # change ingredient
-    handler: functions/updateIngredient.handler
-    events:
-      - httpApi:
-          path: /api/ingredients/{ingredientName}
-          method: PUT
-
-  deleteIngredient: # remove ingredient
-    handler: functions/deleteIngredient.handler
-    events:
-      - httpApi:
-          path: /api/ingredients/{ingredientName}
-          method: DELETE
-
   #  -------------------ORDERS---------------------
   createOrder: # creates an order
     handler: functions/createOrder.handler
@@ -185,41 +149,20 @@ functions:
           method: PUT
 
   #  -------------------MESSAGES---------------------
-  addOrderMessage: # add message to order (customer or staff)
+  addOrderMessage: # add message to order's messages array
     handler: functions/addOrderMessage.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}/messages
           method: POST
 
-  getOrderMessages: # get all messages for an order
-    handler: functions/getOrderMessages.handler
-    events:
-      - httpApi:
-          path: /api/orders/{orderId}/messages
-          method: GET
-
-  #  -------------------PAYMENTS---------------------
-  createPayment: # create payment for order
+  #  -------------------PAYMENTS (MOCK)---------------------
+  createPayment: # mock payment
     handler: functions/createPayment.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}/payment
           method: POST
-
-  getPayment: # get payment status
-    handler: functions/getPayment.handler
-    events:
-      - httpApi:
-          path: /api/orders/{orderId}/payment
-          method: GET
-
-  updatePaymentStatus: # update payment status (webhook from provider)
-    handler: functions/updatePaymentStatus.handler
-    events:
-      - httpApi:
-          path: /api/payments/{paymentId}/status
-          method: PUT
 
   #  -------------------CART---------------------
   getCart: # gets the userId's cart
@@ -253,9 +196,24 @@ functions:
 #             AttributeType: S
 #           - AttributeName: SK
 #             AttributeType: S
+#           - AttributeName: categoryKey
+#             AttributeType: S
 #         KeySchema:
 #           - AttributeName: PK
 #             KeyType: HASH
 #           - AttributeName: SK
 #             KeyType: RANGE
+#         GlobalSecondaryIndexes:
+#           - IndexName: CategoryIndex
+#             KeySchema:
+#               - AttributeName: categoryKey
+#                 KeyType: HASH
+#               - AttributeName: SK
+#                 KeyType: RANGE
+#             Projection:
+#               ProjectionType: ALL
 #         BillingMode: PAY_PER_REQUEST
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-offline
