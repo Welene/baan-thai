@@ -3,6 +3,7 @@ import Layout from "../components/Layout/Layout";
 import LandingPage from "../pages/landingPage/landingPage";
 import MenuPage from "../pages/MenuPage/MenuPage";
 import ThaiMenuPage from "../pages/ThaiMenuPage/ThaiMenuPage";
+import SushiMenuPage from "../pages/SushiMenuPage/SushiMenuPage";
 import { AboutUsPage } from "../pages/aboutUsPage/aboutUsPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 /* Importera era sidor här som jag gjort med MenuPage */
@@ -16,6 +17,7 @@ export default function AppRouter() {
           <Route path="/landing" element={<LandingPage />} />
           <Route path="/menu" element={<MenuPage />} />
           <Route path="/menu/thai" element={<ThaiMenuPage />} />
+          <Route path="/menu/sushi" element={<SushiMenuPage />} />
           <Route path="/about" element={<AboutUsPage />} />
           <Route path="/register" element={<RegisterPage />} />
         </Route>
