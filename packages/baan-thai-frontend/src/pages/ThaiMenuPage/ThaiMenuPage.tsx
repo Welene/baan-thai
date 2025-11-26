@@ -227,3 +227,5 @@ export default function ThaiMenuPage({
 		</>
 	);
 }
+
+// added onAddToCart and MenuItem type here. Removed mockup alert. - Helene

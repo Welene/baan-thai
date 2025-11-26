@@ -2,8 +2,21 @@ import './Cart.css';
 import { useState } from 'react';
 import { CartItem } from '../../interfaces/cart';
 import { CartProps } from '../../interfaces/props';
+import { useNavigate } from 'react-router-dom';
+import { User } from '../../interfaces/user';
+import { useCallback } from 'react';
+import { ButtonProps } from '../../interfaces/button';
 
-function Cart({ cartItems, setCartItems, onClose }: CartProps) {
+function Cart({
+	cartItems,
+	setCartItems,
+	onClose,
+	user,
+}: CartProps & { user: User | null }) {
+	// cart gets user so it can check if logged in or not
+	const navigate = useNavigate();
+
+	// change amount of the chosen menu item, when clicking + or -
 	const changeQuantity = (id: number, delta: number) => {
 		const updated = cartItems
 			.map((item) =>
@@ -15,10 +28,23 @@ function Cart({ cartItems, setCartItems, onClose }: CartProps) {
 		setCartItems(updated);
 	};
 
+	// calculated total price
 	const total = cartItems.reduce(
 		(sum, item) => sum + item.price * item.quantity,
 		0
 	);
+
+	const handleCheckout = useCallback(() => {
+		// useCallBack only rerenders/changes the handleCheckout --> inside checkout button
+
+		if (!user) {
+			// so if the user is not logged in:
+			navigate('/register'); // useCallBack changes the checkout button to know that and send them to login
+		} else {
+			// or if logged in:
+			navigate('/checkout'); // updates it to /checkout
+		}
+	}, [user, navigate]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
 
 	return (
 		<>
@@ -73,8 +99,8 @@ function Cart({ cartItems, setCartItems, onClose }: CartProps) {
 				<hr className="cart__divider" />
 
 				<footer className="cart__footer">
-					<button className="cart__checkout">
-						Checkout {total} kr
+					<button className="cart__checkout" onClick={handleCheckout}>
+						BETALA: {total} kr
 					</button>
 				</footer>
 			</aside>

@@ -7,6 +7,7 @@ import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import { User } from '../interfaces/user';
 
 /* Importera era sidor här som jag gjort med MenuPage */
 
@@ -18,6 +19,7 @@ export default function AppRouter() {
 	// MOVE THIS TO ANOTHER FOLDER LATER AND IMPORT HERE, for now this is here
 	const [cartItems, setCartItems] = useState<CartItem[]>([]);
 	const [cartOpen, setCartOpen] = useState(false);
+	const [currentUser, setCurrentUser] = useState<User | null>(null); //sets a current logged in user, saves in currentUser state (not logged in --> null)
 
 	const addItemToCart = (menuItem: MenuItem) => {
 		setCartItems((prev: CartItem[]) => {
@@ -51,6 +53,7 @@ export default function AppRouter() {
 					cartItems={cartItems}
 					setCartItems={setCartItems}
 					onClose={() => setCartOpen(false)}
+					user={currentUser} // gives currently logged in user to the cart component
 				/>
 			)}
 			<Routes>

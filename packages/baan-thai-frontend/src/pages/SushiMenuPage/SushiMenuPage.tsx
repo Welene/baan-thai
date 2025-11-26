@@ -241,3 +241,5 @@ export default function SushiMenuPage({
 		</>
 	);
 }
+
+// added onAddToCart and MenuItem type here. Removed mockup alert. - Helene
