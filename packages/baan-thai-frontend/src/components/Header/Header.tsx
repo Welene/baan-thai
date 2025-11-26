@@ -82,7 +82,7 @@ function Header({ cartItemCount, onCartClick }: HeaderProps) {
 							</li>
 							<li
 								className="header__nav-item"
-								onClick={() => navigate('/om-oss')}>
+								onClick={() => navigate('/about')}>
 								Om oss
 							</li>
 							{/* har inte skapad alla pages än, så ändra / path bara när man vet */}

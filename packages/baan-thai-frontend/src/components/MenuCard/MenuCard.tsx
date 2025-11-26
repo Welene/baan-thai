@@ -1,6 +1,6 @@
 import React from 'react';
 import './MenuCard.css';
-import { MenuItem } from '../interfaces/menu';
+import { MenuItem } from '../../interfaces/menu';
 
 interface MenuCardProps {
 	menuItem: MenuItem;

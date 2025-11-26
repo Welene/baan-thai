@@ -1,13 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import MenuPage from '../pages/MenuPage/MenuPage';
 import CheckoutPage from '../pages/CheckoutPage/CheckoutPage';
 import Cart from '../components/Cart/Cart';
-/* Importera era sidor här som jag gjort med MenuPage */
-import Header from '../components/Header/Header';
-import Footer from '../components/Footer/Footer';
+import Layout from '../components/Layout/Layout';
+import LandingPage from '../pages/landingPage/landingPage';
+import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
+import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
-import { LandingPage } from '../pages/landingPage/landingPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+
+/* Importera era sidor här som jag gjort med MenuPage */
+
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';
@@ -44,10 +46,6 @@ export default function AppRouter() {
 
 	return (
 		<BrowserRouter>
-			<Header
-				cartItemCount={cartItems.length}
-				onCartClick={() => setCartOpen(!cartOpen)}
-			/>
 			{cartOpen && (
 				<Cart
 					cartItems={cartItems}
@@ -55,19 +53,31 @@ export default function AppRouter() {
 					onClose={() => setCartOpen(false)}
 				/>
 			)}
-
 			<Routes>
-				<Route path="/" element={<Navigate to="/landing" replace />} />
-				<Route path="/landing" element={<LandingPage />} />
 				<Route
-					path="/menu"
-					element={<MenuPage onAddToCart={addItemToCart} />}
-				/>
-				<Route path="/om-oss" element={<AboutUsPage />} />
-				<Route path="/register" element={<RegisterPage />} />
-				<Route path="/checkout" element={<CheckoutPage />} />
+					element={
+						<Layout
+							cartItemCount={cartItems.length}
+							onCartClick={() => setCartOpen(!cartOpen)}
+						/>
+					}>
+					<Route
+						path="/"
+						element={<Navigate to="/landing" replace />}
+					/>
+					<Route path="/landing" element={<LandingPage />} />
+					<Route
+						path="/menu/thai"
+						element={<ThaiMenuPage onAddToCart={addItemToCart} />}
+					/>
+					<Route
+						path="/menu/sushi"
+						element={<SushiMenuPage onAddToCart={addItemToCart} />}
+					/>
+					<Route path="/about" element={<AboutUsPage />} />
+					<Route path="/register" element={<RegisterPage />} />
+				</Route>
 			</Routes>
-			<Footer />
 		</BrowserRouter>
 	);
 }
