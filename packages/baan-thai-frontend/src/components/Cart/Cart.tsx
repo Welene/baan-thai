@@ -69,30 +69,41 @@ function Cart({
 					{cartItems.length === 0 && (
 						<p className="cart__empty">Cart is empty</p>
 					)}
-					{cartItems.map((item) => (
-						<article key={item.id} className="cart__item">
-							<section className="cart__item-info">
-								<span className="cart__item-name">
-									{item.name} ({item.price} kr)
-								</span>
-							</section>
 
-							<section className="cart__item-controls">
-								<button
-									className="cart__item-btn"
-									onClick={() => changeQuantity(item.id, -1)}>
-									-
-								</button>
-								<span className="cart__item-quantity">
-									{item.quantity}
-								</span>
-								<button
-									className="cart__item-btn"
-									onClick={() => changeQuantity(item.id, +1)}>
-									+
-								</button>
-							</section>
-						</article>
+					{cartItems.map((item, index) => (
+						<div key={item.id}>
+							<article className="cart__item">
+								<section className="cart__item-info">
+									<span className="cart__item-name">
+										{item.name} ({item.price} kr)
+									</span>
+								</section>
+
+								<section className="cart__item-controls">
+									<button
+										className="cart__item-btn"
+										onClick={() =>
+											changeQuantity(item.id, -1)
+										}>
+										-
+									</button>
+									<span className="cart__item-quantity">
+										{item.quantity}
+									</span>
+									<button
+										className="cart__item-btn cart__item-btn--plus"
+										onClick={() =>
+											changeQuantity(item.id, +1)
+										}>
+										+
+									</button>
+								</section>
+							</article>
+
+							{index < cartItems.length - 1 && (
+								<hr className="cart__item-divider" />
+							)}
+						</div>
 					))}
 				</section>
 
@@ -100,7 +111,7 @@ function Cart({
 
 				<footer className="cart__footer">
 					<button className="cart__checkout" onClick={handleCheckout}>
-						BETALA: {total} kr
+						TILL KASSAN: -{total} kr
 					</button>
 				</footer>
 			</aside>
