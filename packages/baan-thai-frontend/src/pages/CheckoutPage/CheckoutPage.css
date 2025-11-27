@@ -1,0 +1,207 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+}
+
+.checkout-wrapper {
+	width: 100%;
+	min-height: 100vh;
+	background-color: #e4dace;
+	font-family: 'Quicksand', sans-serif;
+	padding-bottom: 15rem;
+}
+
+.checkout-wrapper__heading {
+	font-size: 2.5rem;
+	margin: 0.5rem 0rem 0.5rem 0rem;
+	color: rgb(51, 51, 51);
+}
+
+.divider--h1 {
+	width: 96%;
+	margin: 0 auto;
+	border-radius: 2px;
+	border: none;
+	height: 2px;
+	background-color: #676464;
+}
+
+.hero-section {
+	width: 100%;
+	/* max-width: 1200px; */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	min-height: 60rem;
+	min-width: 100%;
+	margin-bottom: 3rem;
+	filter: drop-shadow(#3023168e 0px 10px 6px);
+}
+
+/* MAIN CHECKOUT CONTENT HERE */
+.checkout-section {
+	width: 100%;
+	max-width: 1200px;
+	display: flex;
+	justify-content: center;
+	min-width: 100%;
+}
+
+.order-section {
+	max-width: 1200px;
+	display: flex;
+	flex-direction: column;
+	padding: 2rem;
+}
+
+.order-section__heading {
+	color: rgb(59, 59, 59);
+}
+
+.text-label {
+	font-weight: 500;
+	font-size: 1.7rem;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 2rem;
+	gap: 0.5rem;
+}
+
+.icontxt-container {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	margin-bottom: 1rem;
+	margin-top: 4rem;
+	font-size: 1.3rem;
+}
+
+.order-section__img {
+	height: 35px;
+	width: 35px;
+}
+
+/* ORDER-SECTION ARTICLES  */
+.order-section article {
+	width: 48rem; /* was 40rem */
+	background: rgb(233, 233, 233);
+	color: rgb(49, 49, 49);
+	padding: 2rem;
+	border-radius: 0.5rem;
+	display: flex;
+	flex-direction: column;
+	gap: 2rem;
+	background-color: #a88661;
+	filter: drop-shadow(#3023168e 0px 5px 10px);
+}
+
+.checkout-wrapper__heading {
+	text-align: center;
+	color: rgb(26, 26, 26);
+}
+
+/* CONFIRM ORDER SECTION */
+.confirm-order__section {
+	margin-left: 2rem;
+	background-color: #59390b;
+	border-radius: 0.5rem;
+	max-height: 40rem;
+	padding: 1.8rem;
+	margin: 1rem;
+	margin-top: 9.9rem;
+	/* change to a better way than 9.9 rem here ^ */
+	min-width: 35rem;
+	filter: drop-shadow(#3023168e 0px 5px 10px);
+	color: rgb(241, 241, 241);
+	position: relative;
+}
+
+.confirm-order__section p {
+	margin: 1rem 0rem 1rem 0rem;
+	font-size: 1.5rem;
+}
+
+.confirm-group3 {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.confirm-article__field {
+	padding: 1rem;
+}
+
+.PLACEHOLDER-TXT-FOR-SPACING {
+	margin: 3rem 0rem 3rem 0rem;
+}
+
+input {
+	background-color: rgb(236, 236, 236);
+	border-style: none;
+	border-radius: 0.3rem;
+	padding: 2rem;
+	cursor: pointer;
+}
+
+.text-label input::placeholder,
+.text-label textarea::placeholder {
+	font-size: 1.6rem;
+	font-style: italic;
+}
+
+.radio-label {
+	background-color: rgb(236, 236, 236);
+	border-radius: 0.3rem;
+	padding: 2rem;
+	font-size: 1.8rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	cursor: pointer;
+}
+
+input[type='radio'] {
+	transform: scale(1.8);
+	cursor: pointer;
+	accent-color: #59390b;
+}
+
+.customer-info__notice {
+	font-style: italic;
+	margin-bottom: 1rem;
+	font-size: 1.5rem;
+}
+
+.confirm-article__heading {
+	margin-bottom: 1rem;
+	font-size: 2rem;
+}
+
+.confirm-article__sub-heading {
+	margin: 0.8rem 0rem 0.8rem 0rem;
+}
+
+.confirm-article__pay-btn {
+	border-radius: 0.5rem;
+	font-size: 1.5rem;
+	border-style: none;
+	background-color: #69491a;
+	padding: 0.8rem 3rem;
+	height: 4rem;
+	width: 15rem;
+	cursor: pointer;
+	color: rgb(241, 241, 241);
+	position: absolute;
+	bottom: 2rem;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+/* Författare: Helene */
+/* CSS för betalningssida/min bästllning */
+
+/* Changes made by: */
+/* Changes that were made: */
