@@ -7,7 +7,10 @@ const {
 } = require('@aws-sdk/lib-dynamodb');
 const { hash } = require('../utils/password');
 const { generateToken } = require('../utils/auth');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
+
+// Generate UUID using native crypto
+const generateUUID = () => crypto.randomUUID();
 
 // Setup DynamoDB client
 const client = new DynamoDBClient({});
@@ -15,6 +18,7 @@ const dynamodb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = process.env.TABLE_NAME;
 
 exports.handler = async (event) => {
+	console.log('handleRegister invoked');
 	try {
 		// parsa input från event body
 		const body = JSON.parse(event.body);
@@ -82,7 +86,7 @@ exports.handler = async (event) => {
 		}
 
 		// generera userId (8 tecken hex)
-		const userId = uuidv4().replace(/-/g, '').slice(0, 8);
+		const userId = generateUUID().replace(/-/g, '').slice(0, 8);
 
 		// hasha lösenordet
 		const passwordHash = await hash(password);

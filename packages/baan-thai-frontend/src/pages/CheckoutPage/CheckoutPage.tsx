@@ -5,8 +5,10 @@ import Pay from '../../assets/pay.png';
 import Edit from '../../assets/edit.png';
 import Clock from '../../assets/clock.png';
 import Hero from '../../assets/hero-img.png';
+import { MenuPageProps } from '../../interfaces/menuProps';
+import Cart from '../../components/Cart/Cart';
 
-function CheckoutPage() {
+function CheckoutPage({ cartItems, setCartItems, currentUser }: MenuPageProps) {
 	return (
 		<>
 			<section className="checkout-wrapper">
@@ -163,61 +165,16 @@ function CheckoutPage() {
 					</section>
 
 					{/* CONFIRM ORDER SECTION */}
-					<section className="confirm-order__section">
-						<article className="confirm-article">
-							<h2 className="confirm-article__heading">
-								Du är nästan klar!
-							</h2>
-							{/* SUMMERING mini-section*/}
-							<section className="confirm-group1">
-								<hr className="divider" />
-								<h3 className="confirm-article__sub-heading">
-									Summering
-								</h3>
-								<hr className="divider" />
-								{/* dynamic txt here */}
-								<p className="PLACEHOLDER-TXT-FOR-SPACING">
-									HALLO DETTE ER LITT SPACE
-								</p>
-							</section>
-
-							{/*  TYPE + DATE mini-section */}
-							<section className="confirm-group2">
-								<hr className="divider" />
-								<p className="confirm-article__type">Type</p>
-								{/* dynamic type here */}
-								<p className="confirm-article__date">Datum</p>
-								{/* dynamic date here */}
-								<hr className="divider" />
-							</section>
-
-							{/*  CAMPAIGN CODE INPUT mini-section */}
-							<section className="confirm-group3">
-								<p className="confirm-article__code">
-									Kampanjkod
-								</p>
-								<label className="form-label confirm-article__field-container">
-									<input
-										className="confirm-article__field"
-										type="text"
-									/>
-								</label>
-							</section>
-							<hr className="divider" />
-
-							{/*  TOTAL PRICE mini-section */}
-							<section className="confirm-group4">
-								<p className="confirm-article__total">
-									Total inkl. moms
-								</p>
-								{/* dynamic total price here */}
-							</section>
-
-							<button className="confirm-article__pay-btn">
-								BETALA
-							</button>
-						</article>
-					</section>
+					<div className="checkout-cart-container">
+						<Cart
+							cartItems={cartItems}
+							setCartItems={setCartItems}
+							onClose={() => {}}
+							user={currentUser}
+							mode="inline"
+							isCheckoutPage={true}
+						/>
+					</div>
 				</section>
 			</section>
 		</>

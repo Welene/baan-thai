@@ -1,11 +1,9 @@
 import './Cart.css';
-import { useState } from 'react';
-import { CartItem } from '../../interfaces/cart';
 import { CartProps } from '../../interfaces/props';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../interfaces/user';
 import { useCallback } from 'react';
-import { ButtonProps } from '../../interfaces/button';
+import { CartPropsExtra } from '../../interfaces/props';
 
 function Cart({
 	cartItems,
@@ -13,7 +11,8 @@ function Cart({
 	onClose,
 	user,
 	mode = 'popup', // it is popup menu in header
-}: CartProps & { user: User | null }) {
+	isCheckoutPage = false, // since cart is REUSED on checkoutpage, and I changed the BETALA btn (that normally navs to reg/checkout), when you ARE in checkout, the btn changes with the help of this prop, so the btn's function can change into navigate to payment page instead of the old register/checkout navigation
+}: CartPropsExtra & { user: User | null }) {
 	// cart gets user so it can check if logged in or not
 	const navigate = useNavigate();
 
@@ -38,14 +37,16 @@ function Cart({
 	const handleCheckout = useCallback(() => {
 		// useCallBack only rerenders/changes the handleCheckout --> inside checkout button
 
-		if (!user) {
+		if (!user || !user.userId) {
 			// so if the user is not logged in:
 			navigate('/register'); // useCallBack changes the checkout button to know that and send them to login
+		} else if (isCheckoutPage) {
+			navigate('/payment'); // when on checkout page in cart, the cart btn navigates to payment page instead
 		} else {
 			// or if logged in:
 			navigate('/checkout'); // updates it to /checkout
 		}
-	}, [user, navigate]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
+	}, [user, navigate, isCheckoutPage]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
 
 	return (
 		<>
@@ -121,7 +122,9 @@ function Cart({
 
 				<footer className="cart__footer">
 					<button className="cart__checkout" onClick={handleCheckout}>
-						TILL KASSAN: -{total} kr
+						{isCheckoutPage
+							? `TILL BETALING: ${total} kr`
+							: `TILL KASSAN: ${total} kr`}
 					</button>
 				</footer>
 			</aside>

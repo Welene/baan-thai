@@ -39,7 +39,7 @@ export default function ThaiMenuPage({
 	useEffect(() => {
 		console.log('ThaiMenuPage! Fetching from AWS...');
 		fetch(
-			'https://6kpqtftjk5.execute-api.eu-north-1.amazonaws.com/api/menu',
+			'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',
 			{
 				method: 'GET',
 				headers: {
