@@ -1,19 +1,24 @@
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { User } from '../../interfaces/user'; // loginpage needs to update currentuser when logged in so the btn in cart will lead to checkoutpage, without it it goes to null===not logged in and keeps going to registerpage even if you just registered
+import { LoginPageProps } from '../../interfaces/login';
 
 interface LoginFormData {
 	Email: string;
 	password: string;
 }
 
-function LoginPage() {
+function LoginPage({ setCurrentUser }: LoginPageProps) {
 	const navigate = useNavigate();
 	const [formData, setFormData] = useState<LoginFormData>({
 		Email: '',
 		password: '',
 	});
-	const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+	const [message, setMessage] = useState<{
+		text: string;
+		type: 'success' | 'error';
+	} | null>(null);
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
 		const { name, value } = e.target;
@@ -27,14 +32,17 @@ function LoginPage() {
 		e.preventDefault();
 
 		try {
-			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/login', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					email: formData.Email,
-					password: formData.password,
-				}),
-			});
+			const response = await fetch(
+				'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/login',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify({
+						email: formData.Email,
+						password: formData.password,
+					}),
+				}
+			);
 
 			const data = await response.json();
 
@@ -43,13 +51,29 @@ function LoginPage() {
 			}
 
 			localStorage.setItem('token', data.token);
-			setMessage({ text: 'Inloggning lyckades! Välkommen...', type: 'success' });
+
+			setCurrentUser({
+				// UPDATES LS WITH CURRENT USER, so cart can navigate to checkout page and not register again
+				userId: data.user.userId,
+				name: data.user.name,
+				email: data.user.email,
+				username: data.user.username,
+				role: data.user.role,
+			});
+
+			setMessage({
+				text: 'Inloggning lyckades! Välkommen...',
+				type: 'success',
+			});
 			setTimeout(() => {
 				navigate('/landing');
 			}, 1500);
 		} catch (error) {
 			console.error('Login failed:', error);
-			setMessage({ text: 'Kunde inte logga in. Kontrollera dina uppgifter.', type: 'error' });
+			setMessage({
+				text: 'Kunde inte logga in. Kontrollera dina uppgifter.',
+				type: 'error',
+			});
 		}
 	};
 
@@ -62,7 +86,8 @@ function LoginPage() {
 			<article className="login__card">
 				<h3 className="login__heading">LOGGA IN</h3>
 				{message && (
-					<div className={`login__message login__message--${message.type}`}>
+					<div
+						className={`login__message login__message--${message.type}`}>
 						{message.text}
 					</div>
 				)}
@@ -78,7 +103,7 @@ function LoginPage() {
 							placeholder="Email"
 							value={formData.Email}
 							onChange={handleChange}
-												className="login__input"
+							className="login__input"
 							required
 						/>
 					</div>
@@ -93,7 +118,7 @@ function LoginPage() {
 							placeholder="Lösenord"
 							value={formData.password}
 							onChange={handleChange}
-												className="login__input"
+							className="login__input"
 							required
 						/>
 					</div>

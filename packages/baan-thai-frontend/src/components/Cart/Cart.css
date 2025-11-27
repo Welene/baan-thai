@@ -130,4 +130,21 @@
 	justify-content: center;
 }
 
+/* SUSHI / THAI MENU PAGES CART CSS */
+.cart--inline {
+	position: relative;
+	top: 7.9%;
+	right: auto;
+	max-width: 30rem;
+	max-height: none;
+
+	background-color: #492f07;
+	border-radius: 0.5rem;
+	padding: 1.5rem;
+}
+
+.cart--inline .cart__header-close {
+	display: none;
+}
+
 /* // Helene */

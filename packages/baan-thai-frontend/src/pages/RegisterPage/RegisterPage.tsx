@@ -14,7 +14,10 @@ function RegisterPage() {
 		phoneNumber: '',
 		address: '',
 	});
-	const [message, setMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
+	const [message, setMessage] = useState<{
+		text: string;
+		type: 'success' | 'error';
+	} | null>(null);
 	// makes sure to use the interface, so correct datatype is used in each inputfield
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -35,11 +38,14 @@ function RegisterPage() {
 		console.log('Försöker registrera med data:', formData);
 
 		try {
-			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/register', {
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(formData),
-			});
+			const response = await fetch(
+				'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/register',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(formData),
+				}
+			);
 
 			console.log('Response status:', response.status);
 			const data = await response.json();
@@ -49,13 +55,19 @@ function RegisterPage() {
 				throw new Error(data.error || 'Could not register user');
 			}
 
-			setMessage({ text: 'Registrering lyckades! Du skickas nu till inloggningen...', type: 'success' });
+			setMessage({
+				text: 'Registrering lyckades! Du skickas nu till inloggningen...',
+				type: 'success',
+			});
 			setTimeout(() => {
 				navigate('/login');
 			}, 2000);
 		} catch (error) {
 			console.error('Registration failed:', error);
-			setMessage({ text: 'Registrering misslyckades. Försök igen.', type: 'error' });
+			setMessage({
+				text: 'Registrering misslyckades. Försök igen.',
+				type: 'error',
+			});
 		}
 	};
 
@@ -68,7 +80,8 @@ function RegisterPage() {
 			<article className="register__card">
 				<h3 className="register__heading">SKAPA KONTO</h3>
 				{message && (
-					<div className={`register__message register__message--${message.type}`}>
+					<div
+						className={`register__message register__message--${message.type}`}>
 						{message.text}
 					</div>
 				)}
