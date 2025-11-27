@@ -3,7 +3,9 @@ import { MenuCard } from '../../components/MenuCard/MenuCard';
 import { CategoryNav } from '../../components/CategoryNav/CategoryNav';
 import './SushiMenuPage.css';
 import sushiHero from '../../assets/sushi-tåg 1.png';
-import { MenuItem } from '../../interfaces/menu';
+// import { MenuItem } from '../../interfaces/menu';
+import Cart from '../../components/Cart/Cart';
+import { MenuPageProps } from '../../interfaces/menuProps';
 
 // Sushi-kategorier
 const SUSHI_CATEGORIES = [
@@ -27,9 +29,10 @@ const SUSHI_CATEGORIES = [
 
 export default function SushiMenuPage({
 	onAddToCart,
-}: {
-	onAddToCart: (item: MenuItem) => void;
-}) {
+	cartItems,
+	setCartItems,
+	currentUser,
+}: MenuPageProps) {
 	const [items, setItems] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
@@ -237,9 +240,18 @@ export default function SushiMenuPage({
 							</div>
 						</section>
 					))}
+				<section className="cart-section">
+					<Cart
+						cartItems={cartItems}
+						setCartItems={setCartItems}
+						onClose={() => {}}
+						user={currentUser}
+						mode="inline" // cart is inline/static on menu pages
+					/>
+				</section>
 			</div>
 		</>
 	);
 }
 
-// added onAddToCart and MenuItem type here. Removed mockup alert. - Helene
+// added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/comp.- Helene

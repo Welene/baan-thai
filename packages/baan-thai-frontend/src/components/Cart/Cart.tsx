@@ -12,6 +12,7 @@ function Cart({
 	setCartItems,
 	onClose,
 	user,
+	mode = 'popup', // it is popup menu in header
 }: CartProps & { user: User | null }) {
 	// cart gets user so it can check if logged in or not
 	const navigate = useNavigate();
@@ -48,9 +49,14 @@ function Cart({
 
 	return (
 		<>
-			<section className="overlay" onClick={onClose}></section>
+			{mode === 'popup' && (
+				<section className="overlay" onClick={onClose}></section>
+			)}
 
-			<aside className="cart">
+			<aside
+				className={`cart ${
+					mode === 'inline' ? 'cart--inline' : 'cart--popup'
+				}`}>
 				<header className="cart__header">
 					<section className="cart__header-text">
 						<h3 className="cart__header-title">Avämtning</h3>
@@ -58,9 +64,13 @@ function Cart({
 							Direkt (~20 min)
 						</p>
 					</section>
-					<button className="cart__header-close" onClick={onClose}>
-						×
-					</button>
+					{mode === 'popup' && (
+						<button
+							className="cart__header-close"
+							onClick={onClose}>
+							×
+						</button>
+					)}
 				</header>
 
 				<hr className="cart__divider" />

@@ -54,6 +54,7 @@ export default function AppRouter() {
 					setCartItems={setCartItems}
 					onClose={() => setCartOpen(false)}
 					user={currentUser} // gives currently logged in user to the cart component
+					mode="popup"
 				/>
 			)}
 			<Routes>
@@ -70,15 +71,31 @@ export default function AppRouter() {
 					/>
 					<Route path="/landing" element={<LandingPage />} />
 					<Route
-						path="/menu/thai"
-						element={<ThaiMenuPage onAddToCart={addItemToCart} />}
+						path="/menu/sushi"
+						element={
+							<SushiMenuPage
+								onAddToCart={addItemToCart}
+								cartItems={cartItems}
+								setCartItems={setCartItems}
+								currentUser={currentUser}
+							/>
+						}
 					/>
 					<Route
-						path="/menu/sushi"
-						element={<SushiMenuPage onAddToCart={addItemToCart} />}
+						path="/menu/thai"
+						element={
+							<ThaiMenuPage
+								onAddToCart={addItemToCart}
+								cartItems={cartItems}
+								setCartItems={setCartItems}
+								currentUser={currentUser}
+							/>
+						}
 					/>
 					<Route path="/about" element={<AboutUsPage />} />
 					<Route path="/register" element={<RegisterPage />} />
+					{/* <Route path="/login" element={<LoginPage />} /> */}
+					<Route path="/checkout" element={<CheckoutPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
