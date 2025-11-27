@@ -111,7 +111,7 @@ function Cart({
 
 				<footer className="cart__footer">
 					<button className="cart__checkout" onClick={handleCheckout}>
-						TILL KASSAN: -{total} kr
+						TILL KASSAN: {total} kr
 					</button>
 				</footer>
 			</aside>

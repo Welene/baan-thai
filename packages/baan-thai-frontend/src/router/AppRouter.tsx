@@ -14,6 +14,7 @@ import { User } from '../interfaces/user';
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';
+import LoginPage from '../pages/LoginPage/LoginPage';
 
 export default function AppRouter() {
 	// MOVE THIS TO ANOTHER FOLDER LATER AND IMPORT HERE, for now this is here
@@ -79,6 +80,8 @@ export default function AppRouter() {
 					/>
 					<Route path="/about" element={<AboutUsPage />} />
 					<Route path="/register" element={<RegisterPage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/checkout" element={<CheckoutPage />} />
 				</Route>
 			</Routes>
 		</BrowserRouter>
