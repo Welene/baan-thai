@@ -1,207 +1,365 @@
+/* Författare: Helene */
+/* CSS för betalningssida/min beställning */
+
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
 
 * {
-	box-sizing: border-box;
-	margin: 0;
-	padding: 0;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
 .checkout-wrapper {
-	width: 100%;
-	min-height: 100vh;
-	background-color: #e4dace;
-	font-family: 'Quicksand', sans-serif;
-	padding-bottom: 15rem;
+    width: 100%;
+    min-height: 100vh;
+    background-color: #e4dace;
+    font-family: 'Quicksand', sans-serif;
+    padding-bottom: 15rem;
 }
 
 .checkout-wrapper__heading {
-	font-size: 2.5rem;
-	margin: 0.5rem 0rem 0.5rem 0rem;
-	color: rgb(51, 51, 51);
+    font-size: 2.5rem;
+    margin: 0.5rem 0rem 0.5rem 0rem;
+    color: rgb(51, 51, 51);
+    text-align: center;
 }
 
 .divider--h1 {
-	width: 96%;
-	margin: 0 auto;
-	border-radius: 2px;
-	border: none;
-	height: 2px;
-	background-color: #676464;
+    width: 96%;
+    margin: 0 auto;
+    border-radius: 2px;
+    border: none;
+    height: 2px;
+    background-color: #676464;
 }
 
 .hero-section {
-	width: 100%;
-	/* max-width: 1200px; */
-	background-position: center;
-	background-repeat: no-repeat;
-	background-size: cover;
-	min-height: 60rem;
-	min-width: 100%;
-	margin-bottom: 3rem;
-	filter: drop-shadow(#3023168e 0px 10px 6px);
+    width: 100%;
+    background-image: url('../../assets/hero-img.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 60rem;
+    min-width: 100%;
+    margin-bottom: 3rem;
+    filter: drop-shadow(#3023168e 0px 10px 6px);
 }
 
 /* MAIN CHECKOUT CONTENT HERE */
 .checkout-section {
-	width: 100%;
-	max-width: 1200px;
-	display: flex;
-	justify-content: center;
-	min-width: 100%;
+    width: 100%;
+    max-width: 1200px;
+    display: flex;
+    justify-content: center;
+    min-width: 100%;
 }
 
 .order-section {
-	max-width: 1200px;
-	display: flex;
-	flex-direction: column;
-	padding: 2rem;
+    max-width: 1200px;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
 }
 
 .order-section__heading {
-	color: rgb(59, 59, 59);
+    color: rgb(59, 59, 59);
 }
 
 .text-label {
-	font-weight: 500;
-	font-size: 1.7rem;
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 2rem;
-	gap: 0.5rem;
+    font-weight: 500;
+    font-size: 1.7rem;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    gap: 0.5rem;
 }
 
 .icontxt-container {
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	margin-bottom: 1rem;
-	margin-top: 4rem;
-	font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    margin-top: 4rem;
+    font-size: 1.3rem;
 }
 
 .order-section__img {
-	height: 35px;
-	width: 35px;
+    height: 35px;
+    width: 35px;
 }
 
 /* ORDER-SECTION ARTICLES  */
 .order-section article {
-	width: 48rem; /* was 40rem */
-	background: rgb(233, 233, 233);
-	color: rgb(49, 49, 49);
-	padding: 2rem;
-	border-radius: 0.5rem;
-	display: flex;
-	flex-direction: column;
-	gap: 2rem;
-	background-color: #a88661;
-	filter: drop-shadow(#3023168e 0px 5px 10px);
-}
-
-.checkout-wrapper__heading {
-	text-align: center;
-	color: rgb(26, 26, 26);
+    width: 48rem;
+    background: rgb(233, 233, 233);
+    color: rgb(49, 49, 49);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    background-color: #a88661;
+    filter: drop-shadow(#3023168e 0px 5px 10px);
 }
 
 /* CONFIRM ORDER SECTION */
 .confirm-order__section {
-	margin-left: 2rem;
-	background-color: #59390b;
-	border-radius: 0.5rem;
-	max-height: 40rem;
-	padding: 1.8rem;
-	margin: 1rem;
-	margin-top: 9.9rem;
-	/* change to a better way than 9.9 rem here ^ */
-	min-width: 35rem;
-	filter: drop-shadow(#3023168e 0px 5px 10px);
-	color: rgb(241, 241, 241);
-	position: relative;
+    margin-left: 2rem;
+    background-color: #59390b;
+    border-radius: 0.5rem;
+    max-height: 40rem;
+    padding: 1.8rem;
+    margin: 1rem;
+    margin-top: 9.9rem;
+    min-width: 35rem;
+    filter: drop-shadow(#3023168e 0px 5px 10px);
+    color: rgb(241, 241, 241);
+    position: relative;
 }
 
 .confirm-order__section p {
-	margin: 1rem 0rem 1rem 0rem;
-	font-size: 1.5rem;
+    margin: 1rem 0rem 1rem 0rem;
+    color: rgb(241, 241, 241);
+    font-size: 1.5rem;
 }
 
 .confirm-group3 {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .confirm-article__field {
-	padding: 1rem;
+    padding: 1rem;
 }
 
 .PLACEHOLDER-TXT-FOR-SPACING {
-	margin: 3rem 0rem 3rem 0rem;
+    margin: 3rem 0rem 3rem 0rem;
 }
 
 input {
-	background-color: rgb(236, 236, 236);
-	border-style: none;
-	border-radius: 0.3rem;
-	padding: 2rem;
-	cursor: pointer;
+    background-color: rgb(236, 236, 236);
+    border-style: none;
+    border-radius: 0.3rem;
+    padding: 2rem;
+    cursor: pointer;
 }
 
 .text-label input::placeholder,
 .text-label textarea::placeholder {
-	font-size: 1.6rem;
-	font-style: italic;
+    font-size: 1.6rem;
+    font-style: italic;
 }
 
 .radio-label {
-	background-color: rgb(236, 236, 236);
-	border-radius: 0.3rem;
-	padding: 2rem;
-	font-size: 1.8rem;
-	display: flex;
-	align-items: center;
-	gap: 1rem;
-	cursor: pointer;
+    background-color: rgb(236, 236, 236);
+    border-radius: 0.3rem;
+    padding: 2rem;
+    font-size: 1.8rem;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    cursor: pointer;
 }
 
 input[type='radio'] {
-	transform: scale(1.8);
-	cursor: pointer;
-	accent-color: #59390b;
+    transform: scale(1.8);
+    cursor: pointer;
+    accent-color: #59390b;
 }
 
 .customer-info__notice {
-	font-style: italic;
-	margin-bottom: 1rem;
-	font-size: 1.5rem;
+    font-style: italic;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
 }
 
 .confirm-article__heading {
-	margin-bottom: 1rem;
-	font-size: 2rem;
+    margin-bottom: 1rem;
+    color: rgb(241, 241, 241);
+    font-size: 2rem;
 }
 
 .confirm-article__sub-heading {
-	margin: 0.8rem 0rem 0.8rem 0rem;
+    margin: 0.8rem 0rem 0.8rem 0rem;
+    color: rgb(241, 241, 241);
 }
 
 .confirm-article__pay-btn {
-	border-radius: 0.5rem;
-	font-size: 1.5rem;
-	border-style: none;
-	background-color: #69491a;
-	padding: 0.8rem 3rem;
-	height: 4rem;
-	width: 15rem;
-	cursor: pointer;
-	color: rgb(241, 241, 241);
-	position: absolute;
-	bottom: 2rem;
-	left: 50%;
-	transform: translateX(-50%);
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    border-style: none;
+    background-color: #69491a;
+    padding: 0.8rem 3rem;
+    height: 4rem;
+    width: 15rem;
+    cursor: pointer;
+    color: rgb(241, 241, 241);
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
 }
 
-/* Författare: Helene */
-/* CSS för betalningssida/min bästllning */
+/* Card Payment Modal Styles */
+.payment-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
-/* Changes made by: */
-/* Changes that were made: */
+.payment-modal {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.payment-modal h2 {
+    margin-bottom: 20px;
+    color: #2c2416;
+}
+
+.payment-modal__field {
+    margin-bottom: 15px;
+}
+
+.payment-modal__field label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #2c2416;
+}
+
+.payment-modal__field input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #e0ddd7;
+    border-radius: 5px;
+    font-size: 16px;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.payment-modal__field input:focus {
+    outline: none;
+    border-color: #8b6f47;
+}
+
+.payment-modal__row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.payment-modal__row > div {
+    flex: 1;
+}
+
+.payment-modal__error {
+    color: red;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.payment-modal__buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.payment-modal__button {
+    flex: 1;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: 'Quicksand', sans-serif;
+    transition: opacity 0.2s;
+}
+
+.payment-modal__button:hover {
+    opacity: 0.9;
+}
+
+.payment-modal__button--cancel {
+    background-color: #ccc;
+    color: #333;
+}
+
+.payment-modal__button--submit {
+    background-color: #8b6f47;
+    color: white;
+}
+
+.payment-modal__button--submit:disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+}
+
+.cart-item-text {
+    margin: 5px 0;
+}
+
+/* Order Confirmation Modal */
+.confirmation-modal {
+    text-align: center;
+    max-width: 500px;
+}
+
+.confirmation-icon {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    font-weight: bold;
+    margin: 0 auto 20px;
+}
+
+.confirmation-icon--success {
+    background-color: #4caf50;
+    color: white;
+}
+
+.confirmation-icon--error {
+    background-color: #f44336;
+    color: white;
+}
+
+.confirmation-message {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.confirmation-details {
+    background-color: #f5f5f5;
+    padding: 15px;
+    border-radius: 8px;
+    margin: 20px 0;
+    text-align: left;
+}
+
+.confirmation-details p {
+    margin: 8px 0;
+    font-size: 15px;
+}
+
+.confirmation-note {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 20px;
+    font-style: italic;
+}

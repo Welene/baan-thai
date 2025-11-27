@@ -6,7 +6,7 @@
     padding: 0;
 }
 .aboutUs-page {
-    background-color: #A88661;
+    background-color: #e4dace;;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -21,7 +21,7 @@
     font-family: Georgia, 'Times New Roman', Times, serif;
     color: #59390B;
 }
-.hero-section {
+.aboutUs-section {
     width: 80%;
     margin: auto;
     display: flex;

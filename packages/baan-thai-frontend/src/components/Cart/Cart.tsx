@@ -1,5 +1,5 @@
 import './Cart.css';
-import { CartProps } from '../../interfaces/props';
+//import { CartProps } from '../../interfaces/props';
 import { useNavigate } from 'react-router-dom';
 import { User } from '../../interfaces/user';
 import { useCallback } from 'react';

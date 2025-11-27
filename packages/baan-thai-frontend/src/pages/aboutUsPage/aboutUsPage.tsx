@@ -33,7 +33,7 @@ export const AboutUsPage: React.FC = () => {
 
     return (
         <div className="aboutUs-page">
-            <section className="hero-section">
+            <section className="aboutUs-section">
                 <h1 className="page-title__big">OM OSS</h1>
                 <figure className="page__images-grid">
                     <img src={omOssBig} alt="Thaikök restaurant" />
