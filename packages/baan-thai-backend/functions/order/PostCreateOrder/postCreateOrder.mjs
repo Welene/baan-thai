@@ -4,9 +4,36 @@ import { sendResponse } from '../../../responses/response.mjs'
 import { errorHandler } from '../../../middlewares/errorHandler.mjs'
 import { validateOrder } from '../../../middlewares/validateOrder.mjs'
 import { addOrder } from '../../../services/orders.mjs'
+import { queryMenuItem } from '../../getProduct.mjs'
 
 export const handler = middy(async (event) => {
-  const order = await addOrder(event.body);
+  const body = event.body;
+
+  // Hämta pris för varje item
+  const populatedOrder = [];
+
+  for (const item of body.order) {
+    const product = await queryMenuItem(item.productId);
+
+    if (!product) {
+      return sendResponse(404, {
+        success: false,
+        message: `Product ${item.productId} not found`
+      });
+    }
+
+    populatedOrder.push({
+      ...item,
+      price: product.price
+    });
+  }
+
+  // Skicka in fullständig order till addOrder()
+  const order = await addOrder({
+    userId: body.userId,
+    order: populatedOrder
+  });
+
   if (order.success) {
     return sendResponse(201, {
       success: true,

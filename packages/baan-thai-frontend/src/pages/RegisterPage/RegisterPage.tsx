@@ -1,7 +1,7 @@
 import './RegisterPage.css';
 import { RegisterUser } from '../../interfaces/register';
 import { useNavigate } from 'react-router-dom';
-import React, { useState, FormEvent, ChangeEvent } from 'react';
+import { useState, FormEvent, ChangeEvent } from 'react';
 
 function RegisterPage() {
 	const navigate = useNavigate();
@@ -14,6 +14,10 @@ function RegisterPage() {
 		phoneNumber: '',
 		address: '',
 	});
+	const [message, setMessage] = useState<{
+		text: string;
+		type: 'success' | 'error';
+	} | null>(null);
 	// makes sure to use the interface, so correct datatype is used in each inputfield
 
 	const handleChange = (e: ChangeEvent<HTMLInputElement>): void => {
@@ -31,40 +35,56 @@ function RegisterPage() {
 	const handleRegister = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
 
-		try {
-			const response = await fetch('http://localhost:3000/api/register', {
-				// swap out to your url when testing, this is mine, from offline serverless
-				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify(formData),
-			});
+		console.log('Försöker registrera med data:', formData);
 
+		try {
+			const response = await fetch(
+				'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/register',
+				{
+					method: 'POST',
+					headers: { 'Content-Type': 'application/json' },
+					body: JSON.stringify(formData),
+				}
+			);
+
+			console.log('Response status:', response.status);
 			const data = await response.json();
+			console.log('Response data:', data);
 
 			if (!response.ok) {
 				throw new Error(data.error || 'Could not register user');
-				return;
 			}
 
-			localStorage.setItem('token', data.token);
-			navigate('/landing');
+			setMessage({
+				text: 'Registrering lyckades! Du skickas nu till inloggningen...',
+				type: 'success',
+			});
+			setTimeout(() => {
+				navigate('/login');
+			}, 2000);
 		} catch (error) {
 			console.error('Registration failed:', error);
-			throw new Error('Could not register user');
+			setMessage({
+				text: 'Registrering misslyckades. Försök igen.',
+				type: 'error',
+			});
 		}
 	};
 
 	const handleLogin = (): void => {
-		const navigate = useNavigate();
 		navigate('/login');
-		// MAKE SURE PATH IS CORRECT HERE LATER
-		// nav to login-page if user already has user and chooses to click the login button instead of registering
 	};
 
 	return (
 		<section className="register-section">
 			<article className="register__card">
 				<h3 className="register__heading">SKAPA KONTO</h3>
+				{message && (
+					<div
+						className={`register__message register__message--${message.type}`}>
+						{message.text}
+					</div>
+				)}
 				<form className="register__form" onSubmit={handleRegister}>
 					{/* connected to the register button with "type = submit" // formData has all data noe, when the form is submitted the handleRegister function runs */}
 					{/* async backend function needs to wait for this data from the inputfields before posting new user */}
@@ -191,5 +211,5 @@ export default RegisterPage;
 // Författare: Helene
 // Register page
 
-// Eventuell buggfix av: *namn-här:
-// Vad blev fixad: *skriv vad som (evt) fixades*
+// Eventuell buggfix av:Tim
+// Vad blev fixad: *skriv vad som (evt) fixades* la till rätt api-url, fixade react-import,tog bort dubbel navigate.

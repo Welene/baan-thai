@@ -1,6 +1,7 @@
 import { docClient } from "./clients.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { generateId } from "../utils/uuid.mjs";
+import { queryMenuItem } from "../functions/getProduct.mjs";
 
 // GET alla orders
 export const getAllOrders = async () => {
@@ -26,23 +27,37 @@ export const getAllOrders = async () => {
 
 // POST skapa order
 export const addOrder = async ({ userId, order, orderId = null }) => {
+  // Skapa orderId om det saknas
   if (!orderId) {
     orderId = generateId(8);
   }
 
-  const totalPrice = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
+  // Säkerhetscheck (ifall någon item saknar price eller quantity)
+  for (const item of order) {
+    if (typeof item.price !== "number" || typeof item.quantity !== "number") {
+      throw new Error(`Invalid order item. price and quantity must be numbers. Got price=${item.price}, quantity=${item.quantity}`);
+    }
+  }
 
+  // Beräkna totalpris
+  const totalPrice = order.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
+  // Skapa nytt orderobjekt
   const newOrder = {
     PK: `ORDER#${orderId}`,
     SK: "ORDER",
     type: "Order",
     userId,
-    order,
+    order,            // <-- kommer nu innehålla productId, quantity & price
     totalPrice,
     status: "pending",
     createdAt: new Date().toISOString(),
   };
 
+  // Spara i DB
   const command = new PutCommand({
     TableName: "RestaurantTable",
     Item: newOrder,
@@ -55,7 +70,9 @@ export const addOrder = async ({ userId, order, orderId = null }) => {
       orderId,
       userId,
       order,
-      totalPrice
+      totalPrice,
+      createdAt: newOrder.createdAt,
+      status: newOrder.status,
     };
   } catch (error) {
     console.error("Error saving order:", error.message);
@@ -90,12 +107,28 @@ export const editOrder = async (orderId, updateData) => {
     return { success: false, message: `Order with id ${orderId} not found` };
   }
 
+  let updatedOrder = existingOrder.order;
+
   if (updateData.order) {
-    existingOrder.order = [...updateData.order];
+    // Populera price för varje item
+    updatedOrder = [];
+    for (const item of updateData.order) {
+      const product = await queryMenuItem(item.productId);
+      if (!product) {
+        return { success: false, message: `Product ${item.productId} not found` };
+      }
+
+      updatedOrder.push({
+        productId: item.productId,
+        quantity: item.quantity,
+        price: product.price,
+        name: product.name
+      });
+    }
   }
 
-  existingOrder.totalPrice = existingOrder.order.reduce(
-    (total, item) => total + item.price * item.quantity,
+  const totalPrice = updatedOrder.reduce(
+    (sum, item) => sum + item.price * item.quantity,
     0
   );
 
@@ -103,14 +136,9 @@ export const editOrder = async (orderId, updateData) => {
     TableName: "RestaurantTable",
     Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
     UpdateExpression: "SET #order = :order, totalPrice = :totalPrice",
-    ExpressionAttributeNames: {
-      "#order": "order",
-    },
-    ExpressionAttributeValues: {
-      ":order": existingOrder.order,
-      ":totalPrice": existingOrder.totalPrice,
-    },
-    ReturnValues: "ALL_NEW",
+    ExpressionAttributeNames: { "#order": "order" },
+    ExpressionAttributeValues: { ":order": updatedOrder, ":totalPrice": totalPrice },
+    ReturnValues: "ALL_NEW"
   });
 
   try {

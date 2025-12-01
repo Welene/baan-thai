@@ -8,17 +8,29 @@ import { orderSchema } from "../../../models/orderSchema.mjs";
 export const handler = middy(async (event) => {
   const { error } = orderSchema.validate(event.body);
   if (error) {
-    return sendResponse(400, { message: error.details[0].message });
+    return sendResponse(400, {
+      success: false,
+      message: error.details[0].message
+    });
   }
+  
+  const { orderId } = event.pathParameters;
+  const updateData = event.body;
 
-  const orderId = event.pathParameters.id;
-  const result = await editOrder(orderId, event.body); 
+  const result = await editOrder(orderId, updateData);
 
-  if (!result) {
-    return sendResponse(500, { message: "Failed to update order" });
+  if (result.success) {
+    return sendResponse(200, {
+      success: true,
+      message: "Order updated successfully!",
+      booking: result
+    });
+  } else {
+    return sendResponse(400, {
+      success: false,
+      message: result.message
+    });
   }
-
-  return sendResponse(200, { message: "Order updated successfully!", booking: result });
 })
   .use(httpJsonBodyParser())
   .use(errorHandler());
