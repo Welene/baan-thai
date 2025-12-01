@@ -1,7 +1,7 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
 const { DynamoDBDocumentClient, QueryCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
 const { compare } = require('../utils/password');
-const { generateToken } = require('../utils/auth');
+const { createToken } = require('../utils/auth');
 
 // Setup DynamoDB client
 const client = new DynamoDBClient({});
@@ -75,7 +75,7 @@ exports.handler = async (event) => {
     }
 
     // Generera JWT token
-    const token = generateToken({
+    const token = createToken({
       userId: user.userId,
       email: user.email,
       role: user.role

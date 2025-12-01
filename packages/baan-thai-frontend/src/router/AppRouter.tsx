@@ -9,7 +9,6 @@ import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { User } from '../interfaces/user';
 
-/* Importera era sidor här som jag gjort med MenuPage */
 
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
@@ -99,15 +98,16 @@ export default function AppRouter() {
 						path="/login"
 						element={<LoginPage setCurrentUser={setCurrentUser} />}
 					/>
+
 					<Route
-						path="/checkout"
-						element={
-							<CheckoutPage
-								cartItems={cartItems}
-							/>
-						}
-					/>
-				</Route>
+                        path="/checkout"
+                        element={
+                            <CheckoutPage
+                                cartItems={cartItems}
+                            />
+                        }
+                    />
+                </Route>
 			</Routes>
 		</BrowserRouter>
 	);

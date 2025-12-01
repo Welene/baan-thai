@@ -6,7 +6,7 @@ const {
 	ScanCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const { hash } = require('../utils/password');
-const { generateToken } = require('../utils/auth');
+const { createToken } = require('../utils/auth');
 const crypto = require('crypto');
 
 // Generate UUID using native crypto
@@ -118,7 +118,7 @@ exports.handler = async (event) => {
 		);
 
 		// Generera JWT token för den nya användaren
-		const token = generateToken({
+		const token = createToken({
 			userId: userId,
 			email: email,
 			role: role,
