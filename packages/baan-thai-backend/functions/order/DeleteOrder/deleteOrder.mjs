@@ -5,14 +5,18 @@ import { deleteOrder } from "../../../services/orders.mjs";
 import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 
 export const handler = middy(async (event) => {
-  const orderId = event.pathParameters.id;
-  const deletedOrder = await deleteOrder(orderId);
+  const { orderId } = event.pathParameters;
 
-  if (!deletedOrder) {
-    return sendResponse(404, { message: "Order not found" });
+  if (!orderId) {
+    return sendResponse(400, { success: false, message: "Missing orderId" });
   }
 
-  return sendResponse(200, { message: "Order deleted successfully", order: deletedOrder });
+  const result = await deleteOrder(orderId);
+
+  if (result.success) {
+    return sendResponse(200, { success: true, deletedOrder: result.deletedOrder });
+  } else {
+    return sendResponse(404, { success: false, message: result.message });
+  }
 })
-  .use(httpJsonBodyParser())
   .use(errorHandler());

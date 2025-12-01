@@ -24,6 +24,7 @@ export const handler = middy(async (event) => {
 
     populatedOrder.push({
       ...item,
+      name: product.name,
       price: product.price
     });
   }

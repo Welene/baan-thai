@@ -50,8 +50,9 @@ export const addOrder = async ({ userId, order, orderId = null }) => {
     PK: `ORDER#${orderId}`,
     SK: "ORDER",
     type: "Order",
+    orderId,
     userId,
-    order,            // <-- kommer nu innehålla productId, quantity & price
+    order,
     totalPrice,
     status: "pending",
     createdAt: new Date().toISOString(),
@@ -179,11 +180,13 @@ export const updateOrderStatus = async (orderId, status) => {
 export const getOrdersByStatus = async (status) => {
   const command = new ScanCommand({
     TableName: "RestaurantTable",
-    FilterExpression: "#status = :status",
+    FilterExpression: "#type = :type AND #status = :status",
     ExpressionAttributeNames: {
+      "#type": "type",
       "#status": "status",
     },
     ExpressionAttributeValues: {
+      ":type": "Order",
       ":status": status,
     },
   });
@@ -192,7 +195,7 @@ export const getOrdersByStatus = async (status) => {
     const result = await docClient.send(command);
     return result.Items || [];
   } catch (error) {
-    console.error("Error scanning orders:", error.message);
+    console.error(`Error scanning orders by status "${status}":`, error.message);
     return [];
   }
 };
@@ -201,12 +204,14 @@ export const getOrdersByStatus = async (status) => {
 export const getOrdersByUserId = async (userId) => {
   const command = new ScanCommand({
     TableName: "RestaurantTable",
-    FilterExpression: "#userId = :userId",
+    FilterExpression: "#userId = :userId AND #type = :type",
     ExpressionAttributeNames: {
       "#userId": "userId",
+      "#type": "type",
     },
     ExpressionAttributeValues: {
       ":userId": userId,
+      ":type": "Order", // bara orders
     },
   });
 
@@ -232,7 +237,12 @@ export const deleteOrder = async (orderId) => {
 
   try {
     const result = await docClient.send(command);
-    return result.Attributes;
+
+    if (!result.Attributes) {
+      return { success: false, message: `Order with id ${orderId} not found` };
+    }
+
+    return { success: true, deletedOrder: result.Attributes };
   } catch (error) {
     console.error(`Error deleting order with id ${orderId}:`, error.message);
     return { success: false, message: `Error deleting order: ${error.message}` };
