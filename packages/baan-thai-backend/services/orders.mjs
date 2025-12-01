@@ -1,14 +1,17 @@
-import { docClient } from "./client.mjs";
-import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand } from "@aws-sdk/lib-dynamodb";
+import { docClient } from "./clients.mjs";
+import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { generateId } from "../utils/uuid.mjs";
 
 // GET alla orders
 export const getAllOrders = async () => {
-  const command = new QueryCommand({
+  const command = new ScanCommand({
     TableName: "RestaurantTable",
-    KeyConditionExpression: "PK = :PK",
+    FilterExpression: "#type = :type",
+    ExpressionAttributeNames: {
+      "#type": "type",
+    },
     ExpressionAttributeValues: {
-      ":PK": "ORDER",
+      ":type": "Order",
     },
   });
 
@@ -27,10 +30,7 @@ export const addOrder = async ({ userId, order, orderId = null }) => {
     orderId = generateId(8);
   }
 
-  const totalPrice = order.reduce(
-    (sum, item) => sum + item.price * item.amount,
-    0
-  );
+  const totalPrice = order.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const newOrder = {
     PK: `ORDER#${orderId}`,
@@ -95,7 +95,7 @@ export const editOrder = async (orderId, updateData) => {
   }
 
   existingOrder.totalPrice = existingOrder.order.reduce(
-    (total, item) => total + item.price * item.amount,
+    (total, item) => total + item.price * item.quantity,
     0
   );
 

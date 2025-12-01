@@ -1,8 +1,8 @@
-import { oredrSchema } from "../models/oredrSchema.mjs";
+import { orderSchema } from "../models/orderSchema.mjs";
 
 export const validateOrder = () => ({
   before: (handler) => {
-    const { error, value } = oredrSchema.validate(handler.event.body);
+    const { error, value } = orderSchema.validate(handler.event.body);
     console.log("Error i middleware:", error);
     console.log("Error i middleware:", value);
     if (error) {

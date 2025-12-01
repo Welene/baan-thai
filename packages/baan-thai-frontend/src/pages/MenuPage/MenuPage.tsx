@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { MenuCard } from "../../components/MenuCard"; 
+import { MenuCard } from "../../components/MenuCard/MenuCard"; 
 import "./MenuPage.css";
 
 export default function MenuPage() {

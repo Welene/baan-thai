@@ -8,6 +8,10 @@
 	padding: 0;
 }
 
+main {
+	background-color: #E4DACE;
+}
+
 .header {
 	display: flex;
 	flex-direction: row;

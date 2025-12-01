@@ -15,9 +15,12 @@
   "dependencies": {
     "@aws-sdk/client-dynamodb": "^3.936.0",
     "@aws-sdk/lib-dynamodb": "^3.936.0",
+    "@middy/core": "^6.4.5",
+    "@middy/http-json-body-parser": "^6.4.5",
     "aws-sdk": "^2.1692.0",
     "bcryptjs": "^3.0.3",
     "dotenv": "^17.2.3",
+    "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.2",
     "uuid": "^13.0.0"
   },

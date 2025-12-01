@@ -1,16 +1,12 @@
 import Joi from "joi";
 
 export const orderSchema = Joi.object({
-  orderId: Joi.forbidden(),
-  order: Joi.array()
+  order : Joi.array()
     .items(
       Joi.object({
-        productId: Joi.number().min(1).required(),
-        amout: Joi.number().min(1).required()
+        productId : Joi.number().min(1).required(),
+        quantity : Joi.number().min(1).required(),
+        price : Joi.number().min(0).required(),
       })
-    )
-    .min(1)
-    .required(),
-  status: Joi.string().valid("pending", "confirmed", "locked", "cancelled").required(),
-  totalPrice: Joi.forbidden(),
+    ).min(1).required(),
 });

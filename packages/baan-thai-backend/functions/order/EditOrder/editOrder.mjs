@@ -1,12 +1,12 @@
 import middy from "@middy/core";
 import httpJsonBodyParser from "@middy/http-json-body-parser";
-import { sendResponse } from "../../responses/response.mjs";
-import { editOrder } from "../../services/orders.mjs";
-import { errorHandler } from "../../middlewares/errorHandler.mjs";
-import { updateOrderSchema } from "../../models/updateOrderSchema.mjs";
+import { sendResponse } from "../../../responses/response.mjs";
+import { editOrder } from "../../../services/orders.mjs";
+import { errorHandler } from "../../../middlewares/errorHandler.mjs";
+import { orderSchema } from "../../../models/orderSchema.mjs";
 
 export const handler = middy(async (event) => {
-  const { error } = updateOrderSchema.validate(event.body);
+  const { error } = orderSchema.validate(event.body);
   if (error) {
     return sendResponse(400, { message: error.details[0].message });
   }

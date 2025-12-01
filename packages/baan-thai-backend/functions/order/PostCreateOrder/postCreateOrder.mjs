@@ -1,9 +1,9 @@
 import middy from '@middy/core'
 import httpJsonBodyParser from '@middy/http-json-body-parser'
-import { sendResponse } from '../../responeses/response.js'
-import { errorHandler } from '../../middlewares/errorHandler.mjs'
-import { validateOrder } from '../../middlewares/validateOrder.mjs'
-import { addOrder } from '../../services/orders.mjs'
+import { sendResponse } from '../../../responses/response.mjs'
+import { errorHandler } from '../../../middlewares/errorHandler.mjs'
+import { validateOrder } from '../../../middlewares/validateOrder.mjs'
+import { addOrder } from '../../../services/orders.mjs'
 
 export const handler = middy(async (event) => {
   const order = await addOrder(event.body);

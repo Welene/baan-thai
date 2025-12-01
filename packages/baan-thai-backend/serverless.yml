@@ -1,14 +1,27 @@
 service: baan-thai-backend
 
+plugins:
+  - serverless-dotenv-plugin
+
+build:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    target: node20
+    exclude: []
+
 provider:
   name: aws
-  runtime: nodejs22.x
+  runtime: nodejs20.x
   region: eu-north-1
+
   iam:
     role: ${env:IAM_ROLE_ARN}
 
   environment:
     TABLE_NAME: RestaurantTable
+    JWT_SECRET: ${env:JWT_SECRET}
 
   httpApi:
     cors:
@@ -22,8 +35,6 @@ provider:
         - POST
         - PUT
         - DELETE
-
-# as we create functions --> we need to add api endpoints to those functions
 
 functions:
   #  -------------------USER---------------------
@@ -86,63 +97,63 @@ functions:
 
   #  -------------------ORDERS---------------------
   createOrder: # creates an order
-    handler: functions/createOrder.handler
+    handler: functions/order/PostCreateOrder/postCreateOrder.handler
     events:
       - httpApi:
           path: /api/orders
           method: POST
 
   getAllOrders: # gets all orders
-    handler: functions/getAllOrders.handler
+    handler: functions/order/GetAllOrders/getAllOrders.handler
     events:
       - httpApi:
           path: /api/orders
           method: GET
 
   getOrderbyUserId: # gets all orders by userId
-    handler: functions/getOrdersByUserId.handler
+    handler: functions/order/GetOrdersByUserId/getOrdersByUserId.handler
     events:
       - httpApi:
           path: /api/orders/{userId}
           method: GET
 
   getOrdersByStatus: # gets all orders by status (pending, locked, completed)
-    handler: functions/getOrdersByStatus.handler
+    handler: functions/order/GetOrdersByStatus/getOrdersByStatus.handler
     events:
       - httpApi:
           path: /api/orders/status/{status}
           method: GET
 
   updateOrderStatus: # change order status (pending, locked, complete)
-    handler: functions/updateOrderStatus.handler
+    handler: functions/order/UpdateOrderStatus/updateOrderStatus.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}/status
           method: PUT
 
-  cancelOrder: # userId cancels order
-    handler: functions/cancelOrder.handler
-    events:
-      - httpApi:
-          path: /api/orders/{orderId}/cancel
-          method: PUT
+  # cancelOrder: # userId cancels order
+  #   handler: functions/order/cancelOrder.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/cancel
+  #         method: PUT
 
-  lockOrder: # admin locks order (no more edits by user can be done)
-    handler: functions/lockOrder.handler
-    events:
-      - httpApi:
-          path: /api/orders/{orderId}/lock
-          method: PUT
+  # lockOrder: # admin locks order (no more edits by user can be done)
+  #   handler: functions/order/lockOrder.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/lock
+  #         method: PUT
 
   deleteOrder: # removes an order
-    handler: functions/deleteOrder.handler
+    handler: functions/order/DeleteOrder/deleteOrder.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}
           method: DELETE
 
   editOrder: # changes an order in case user did something wrong/forgot to add something
-    handler: functions/editOrder.handler
+    handler: functions/order/EditOrder/editOrder.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}
@@ -213,7 +224,3 @@ functions:
 #             Projection:
 #               ProjectionType: ALL
 #         BillingMode: PAY_PER_REQUEST
-
-plugins:
-  - serverless-dotenv-plugin
-  - serverless-offline

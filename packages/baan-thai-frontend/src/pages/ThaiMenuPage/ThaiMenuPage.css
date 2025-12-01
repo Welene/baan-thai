@@ -1,0 +1,70 @@
+.menu-page.thai-menu {
+  background-color: #E4DACE;
+}
+
+.thai-menu {
+  padding: 2rem;
+}
+
+/* Hero Image - Full bredd */
+.hero-image {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+}
+
+.hero-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: cover;
+}
+
+.thai-hero .hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 100%;
+}
+
+.thai-hero .hero-text h1 {
+  font-family: var(--font);
+  color: var(--color-brown);
+  font-size: 2.5rem;
+  text-align: center;
+  background-color: rgba(228, 218, 206, 0.6);
+  padding: 3rem;
+  height: auto;
+  width: 100%;
+}
+
+.thai-menu .error {
+  color: red;
+  text-align: center;
+  padding: 1rem;
+  background: #fee;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+.thai-menu .category-section {
+  margin-bottom: 3rem;
+}
+
+.thai-menu .category-title {
+  font-size: 1.8rem;
+  color: #8B4513;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #D2691E;
+}
+
+.thai-menu .grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+}

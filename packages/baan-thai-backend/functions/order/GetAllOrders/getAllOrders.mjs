@@ -1,7 +1,7 @@
 import middy from "@middy/core";
-import { sendResponse } from "../../responses/index.mjs";
-import { getAllOrders } from "../../services/orders.mjs";
-import { errorHandler } from "../../middlewares/errorHandler.mjs";
+import { sendResponse } from "../../../responses/response.mjs";
+import { getAllOrders } from "../../../services/orders.mjs";
+import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 
 export const handler = middy(async () => {
   const orders = await getAllOrders();
