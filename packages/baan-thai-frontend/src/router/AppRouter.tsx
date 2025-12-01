@@ -9,11 +9,11 @@ import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { User } from '../interfaces/user';
 
-
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';
 import LoginPage from '../pages/LoginPage/LoginPage';
+import AdminPage from '../pages/AdminPage/AdminPage';
 
 export default function AppRouter() {
 	// MOVE THIS TO ANOTHER FOLDER LATER AND IMPORT HERE, for now this is here
@@ -100,14 +100,11 @@ export default function AppRouter() {
 					/>
 
 					<Route
-                        path="/checkout"
-                        element={
-                            <CheckoutPage
-                                cartItems={cartItems}
-                            />
-                        }
-                    />
-                </Route>
+						path="/checkout"
+						element={<CheckoutPage cartItems={cartItems} />}
+					/>
+				</Route>
+				<Route path="/admin" element={<AdminPage />} />
 			</Routes>
 		</BrowserRouter>
 	);
