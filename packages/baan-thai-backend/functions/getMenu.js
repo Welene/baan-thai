@@ -20,7 +20,7 @@ exports.handler = async (event) => {
 
     const result = await dynamoDb.send(new ScanCommand(params));
     
-    console.log("RAW DynamoDB item (all fields):", JSON.stringify(result.Items[0], null, 2));
+    console.log("DynamoDB item (all fields):", JSON.stringify(result.Items[0], null, 2));
     console.log("Item keys:", Object.keys(result.Items[0] || {}));
     
     // Mappa DynamoDB-struktur till frontend-format

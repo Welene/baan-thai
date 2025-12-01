@@ -3,12 +3,15 @@
  OBS: om detta skulle användas kan det vara bra att hitta ett redan fungerande bibliotek */
 const crypto = require('crypto');
 
-const SECRET = process.env.JWT_SECRET;
-if (!SECRET) throw new Error('Missing JWT_SECRET');
+// behövs för offline-testning
+function getSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('Missing JWT_SECRET');
+  return secret;
+}
 
 
    /* JWT använder base64url (samma som base64 men URL-safe) */
- 
 function toBase64Url(input) {
   // Acceptera både buffer och string/objekt
   const buf = Buffer.isBuffer(input) ? input : Buffer.from(String(input), 'utf8');
@@ -19,7 +22,7 @@ function toBase64Url(input) {
 function fromBase64Url(base64url) {
   // Återställ URL-safe tecken till standard base64-tecken
   let base64 = base64url.replace(/-/g, '+').replace(/_/g, '/');
-  // Lägg på padding om det behövs för att kunna decoda
+  // Lägg på space om det behövs för att kunna decoda
   while (base64.length % 4) base64 += '=';
   return Buffer.from(base64, 'base64').toString('utf8');
 }
@@ -27,10 +30,9 @@ function fromBase64Url(base64url) {
 
    /* Signeringsfunktion (HMAC-SHA256)
    Tar emot en sträng (header.payload) och returnerar base64url-signaturen */
-   
 function sign(data) {
   return crypto
-    .createHmac('sha256', SECRET)
+    .createHmac('sha256', getSecret())
     .update(data)
     .digest('base64')
     .replace(/\+/g, '-')
@@ -40,10 +42,9 @@ function sign(data) {
 
 
    /* Skapa en JWT-token
-    payload: objekt med användardata (t.ex. { userId, email })
-    seconds: giltighetstid i sekunder (standard 3600s = 1h)
+    payload: objekt med användardata (userId, email )
+    seconds: giltighetstid i sekunder
    Funktionen lägger automatiskt till `iat` och `exp` i payload. */
-   
 function createToken(payload, seconds = 3600) {
   const header = { alg: 'HS256', typ: 'JWT' };
   const now = Math.floor(Date.now() / 1000);
@@ -64,7 +65,6 @@ function createToken(payload, seconds = 3600) {
    /* Verifiera en JWT-token
    kontrollerar format, alg i header, signatur och expiration
    returnerar payload om allt är OK */
-   
 function verifyToken(token) {
   const parts = token.split('.');
   if (parts.length !== 3) throw new Error('Token format is invalid');
