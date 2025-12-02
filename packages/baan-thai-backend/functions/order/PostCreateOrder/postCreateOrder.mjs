@@ -32,6 +32,13 @@ export const handler = middy(async (event) => {
   // Skicka in fullständig order till addOrder()
   const order = await addOrder({
     userId: body.userId,
+    firstName: body.firstName,
+    lastName: body.lastName,
+    email: body.email,
+    phoneNumber: body.phoneNumber,
+    message: body.message,
+    payment: body.payment,
+    paymentStatus: body.paymentStatus,
     order: populatedOrder
   });
 

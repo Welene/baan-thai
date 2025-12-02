@@ -6,6 +6,7 @@ import thaiHero from '../../assets/Tom-yam-Goong 1.png';
 // import { MenuItem } from '../../interfaces/menu';
 import Cart from '../../components/Cart/Cart';
 import { MenuPageProps } from '../../interfaces/menuProps';
+import { API_BASE_URL } from '../../config/api';
 
 // Thailändska kategorier (inkluderar alla som ska visas)
 const THAI_CATEGORIES = [
@@ -37,9 +38,9 @@ export default function ThaiMenuPage({
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		console.log('ThaiMenuPage! Fetching from AWS...');
+		console.log('ThaiMenuPage! Fetching menu...');
 		fetch(
-			'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',
+			`${API_BASE_URL}/api/menu`,
 			{
 				method: 'GET',
 				headers: {
