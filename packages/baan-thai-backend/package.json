@@ -22,7 +22,8 @@
     "dotenv": "^17.2.3",
     "joi": "^18.0.2",
     "jsonwebtoken": "^9.0.2",
-    "uuid": "^13.0.0"
+    "uuid": "^13.0.0",
+    "@node-rs/bcrypt": "^1.10.7"
   },
   "devDependencies": {
     "serverless-dotenv-plugin": "^6.0.0",
