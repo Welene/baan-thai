@@ -2,7 +2,7 @@ require('dotenv').config();
 const AWS = require('aws-sdk');
 const fs = require('fs');
 const path = require('path');
-const { v4: uuidv4 } = require('uuid');
+const crypto = require('crypto');
 
 const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 const REGION = process.env.AWS_REGION || 'eu-north-1';
@@ -16,8 +16,8 @@ AWS.config.update({ region: REGION });
 const doc = new AWS.DynamoDB.DocumentClient();
 
 function shortId() {
-  // Enkel 8-teckens id från uuid
-  return uuidv4().replace(/-/g, '').slice(0, 8);
+  // Enkel 8-teckens id via native crypto
+  return crypto.randomUUID().replace(/-/g, '').slice(0, 8);
 }
 
 function splitIntoBatches(items, size) {
