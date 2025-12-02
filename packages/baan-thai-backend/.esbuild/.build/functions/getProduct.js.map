@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../functions/getProduct.mjs", "../../../services/clients.mjs"],
-  "sourcesContent": ["import { docClient } from \"../services/clients.mjs\";\nimport { GetCommand } from \"@aws-sdk/lib-dynamodb\";\n\nexport const queryMenuItem = async (productId) => {\n  const command = new GetCommand({\n    TableName: \"RestaurantTable\",\n    Key: {\n      PK: `PRODUCT#${productId}`,\n      SK: \"DETAILS\"\n    }\n  });\n\n  const result = await docClient.send(command);\n  return result.Item || null;\n};\n", "import { DynamoDBClient } from \"@aws-sdk/client-dynamodb\";\nimport { DynamoDBDocumentClient } from \"@aws-sdk/lib-dynamodb\";\n\nexport const client = new DynamoDBClient({ region: \"eu-north-1\" });\n\nexport const docClient = DynamoDBDocumentClient.from(client);\n"],
-  "mappings": ";;;;;;;;;;;;;;;;;;;AAAA;AAAA;AAAA;AAAA;AAAA;;;ACAA,6BAA+B;AAC/B,0BAAuC;AAEhC,IAAM,SAAS,IAAI,sCAAe,EAAE,QAAQ,aAAa,CAAC;AAE1D,IAAM,YAAY,2CAAuB,KAAK,MAAM;;;ADJ3D,IAAAA,uBAA2B;AAEpB,IAAM,gBAAgB,OAAO,cAAc;AAChD,QAAM,UAAU,IAAI,gCAAW;AAAA,IAC7B,WAAW;AAAA,IACX,KAAK;AAAA,MACH,IAAI,WAAW,SAAS;AAAA,MACxB,IAAI;AAAA,IACN;AAAA,EACF,CAAC;AAED,QAAM,SAAS,MAAM,UAAU,KAAK,OAAO;AAC3C,SAAO,OAAO,QAAQ;AACxB;",
-  "names": ["import_lib_dynamodb"]
-}
