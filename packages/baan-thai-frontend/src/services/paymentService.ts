@@ -1,19 +1,19 @@
+import { API_BASE_URL } from '../config/api';
+
 interface OrderData {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    phoneNumber: number;
+    userId: string;
+    firstName?: string;
+    lastName?: string;
+    email?: string;
+    phoneNumber?: number;
+    message?: string;
+    totalPrice?: number;
+    payment?: Array<{ paymentType: string }>;
+    paymentStatus?: string;
     order: Array<{
         productId: number;
-        amount: number;
-        price: number;
-        name: string;
+        quantity: number;
     }>;
-    totalPrice: number;
-    message: string;
-    payment: Array<{ paymentType: string }>;
-    paymentStatus: string;
 }
 
 interface OrderResponse {
@@ -25,7 +25,7 @@ interface OrderResponse {
 }
 
 export async function createOrder(orderData: OrderData): Promise<OrderResponse> {
-    const response = await fetch('http://localhost:3000/api/orders', {
+    const response = await fetch(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',

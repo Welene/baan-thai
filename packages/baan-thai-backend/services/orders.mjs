@@ -26,7 +26,7 @@ export const getAllOrders = async () => {
 };
 
 // POST skapa order
-export const addOrder = async ({ userId, order, orderId = null }) => {
+export const addOrder = async ({ userId, order, orderId = null, firstName, lastName, email, phoneNumber, message, payment, paymentStatus }) => {
   // Skapa orderId om det saknas
   if (!orderId) {
     orderId = generateId(8);
@@ -52,6 +52,13 @@ export const addOrder = async ({ userId, order, orderId = null }) => {
     type: "Order",
     orderId,
     userId,
+    firstName,
+    lastName,
+    email,
+    phoneNumber,
+    message,
+    payment,
+    paymentStatus,
     order,
     totalPrice,
     status: "pending",
