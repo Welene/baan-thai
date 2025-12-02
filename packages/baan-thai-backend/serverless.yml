@@ -160,42 +160,63 @@ functions:
             method: PUT
 
 #  -------------------MESSAGES---------------------
-    addOrderMessage: # add message to order (customer or staff)
-        handler: functions/addOrderMessage.handler
-        events:
-        - httpApi:
-            path: /api/orders/{orderId}/messages
-            method: POST
+  addOrderMessage: # add message to order (customer or staff)
+    handler: functions/addOrderMessage.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/messages
+          method: POST
 
-#  -------------------PAYMENTS---------------------
-    createPayment: # create payment for order
-        handler: functions/createPayment.handler
-        events:
-        - httpApi:
-            path: /api/orders/{orderId}/payment
-            method: POST
+  getOrderMessages: # get all messages for an order
+    handler: functions/getOrderMessages.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/messages
+          method: GET
 
-#  -------------------CART---------------------
-    getCart: # gets the userId's cart
-        handler: functions/getCart.handler
-        events:
-        - httpApi:
-            path: /api/cart/{userId}
-            method: GET
+  #  -------------------PAYMENTS---------------------
+  createPayment: # create payment for order
+    handler: functions/createPayment.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/payment
+          method: POST
 
-    updateCart: # updates the userId's cart
-        handler: functions/updateCart.handler
-        events:
-        - httpApi:
-            path: /api/cart/{userId}
-            method: PUT
+  getPayment: # get payment status
+    handler: functions/getPayment.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/payment
+          method: GET
 
-    clearCart: # empties the userId's cart
-        handler: functions/clearCart.handler
-        events:
-        - httpApi:
-            path: /api/cart/{userId}
-            method: DELETE
+  updatePaymentStatus: # update payment status (webhook from provider)
+    handler: functions/updatePaymentStatus.handler
+    events:
+      - httpApi:
+          path: /api/payments/{paymentId}/status
+          method: PUT
+
+  #  -------------------CART---------------------
+  getCart: # gets the userId's cart
+    handler: functions/getCart.handler
+    events:
+      - httpApi:
+          path: /api/cart/{userId}
+          method: GET
+
+  updateCart: # updates the userId's cart
+    handler: functions/updateCart.handler
+    events:
+      - httpApi:
+          path: /api/cart/{userId}
+          method: PUT
+
+  clearCart: # empties the userId's cart
+    handler: functions/clearCart.handler
+    events:
+      - httpApi:
+          path: /api/cart/{userId}
+          method: DELETE
 
 # # resources:
   #   Resources:
