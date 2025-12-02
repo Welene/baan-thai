@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { User } from '../../interfaces/user'; // loginpage needs to update currentuser when logged in so the btn in cart will lead to checkoutpage, without it it goes to null===not logged in and keeps going to registerpage even if you just registered
 import { LoginPageProps } from '../../interfaces/login';
+import { API_BASE_URL } from '../../config/api';
 
 interface LoginFormData {
 	Email: string;
@@ -33,7 +34,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 
 		try {
 			const response = await fetch(
-				'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/login',
+				`${API_BASE_URL}/api/login`,
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -52,14 +53,17 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 
 			localStorage.setItem('token', data.token);
 
-			setCurrentUser({
-				// UPDATES LS WITH CURRENT USER, so cart can navigate to checkout page and not register again
+			// Spara användaren till localStorage för profilesidan
+			const userToStore = {
 				userId: data.user.userId,
 				name: data.user.name,
 				email: data.user.email,
 				username: data.user.username,
 				role: data.user.role,
-			});
+			};
+			localStorage.setItem('currentUser', JSON.stringify(userToStore));
+
+			setCurrentUser(userToStore);
 
 			setMessage({
 				text: 'Inloggning lyckades! Välkommen...',

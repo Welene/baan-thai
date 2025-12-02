@@ -6,6 +6,7 @@ import sushiHero from '../../assets/sushi-tåg 1.png';
 // import { MenuItem } from '../../interfaces/menu';
 import Cart from '../../components/Cart/Cart';
 import { MenuPageProps } from '../../interfaces/menuProps';
+import { API_BASE_URL } from '../../config/api';
 
 // Sushi-kategorier
 const SUSHI_CATEGORIES = [
@@ -38,9 +39,9 @@ export default function SushiMenuPage({
 	const [error, setError] = useState<string | null>(null);
 
 	useEffect(() => {
-		console.log('SushiMenuPage! Fetching from AWS...');
+		console.log('SushiMenuPage! Fetching menu...');
 		fetch(
-			'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',
+			`${API_BASE_URL}/api/menu`,
 			{
 				method: 'GET',
 				headers: {

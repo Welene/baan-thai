@@ -3,246 +3,246 @@ service: baan-thai-backend
 useDotenv: true
 
 plugins:
+  - serverless-esbuild
   - serverless-dotenv-plugin
   - serverless-offline
 
-build:
+custom:
   esbuild:
     bundle: true
     minify: false
     sourcemap: true
+    target: node20
+    platform: node
+    resolveExtensions:
+      - .mjs
+      - .js
+      - .ts
+    external:
+      - "@aws-sdk/client-dynamodb"
+      - "@aws-sdk/lib-dynamodb"
 
 provider:
-    name: aws
-    runtime: nodejs20.x
-    region: eu-north-1
-    iam:
-        role: ${env:IAM_ROLE_ARN}
+  name: aws
+  runtime: nodejs20.x
+  region: eu-north-1
+  iam:
+    role: ${env:IAM_ROLE_ARN}
 
-    environment:
-        TABLE_NAME: RestaurantTable
-        JWT_SECRET: ${env:JWT_SECRET}
+  environment:
+    TABLE_NAME: RestaurantTable
+    JWT_SECRET: ${env:JWT_SECRET}
 
-    httpApi:
-        cors:
-        allowedOrigins:
-            - "*"
-        allowedHeaders:
-            - Content-Type
-            - Authorization
-        allowedMethods:
-            - GET
-            - POST
-            - PUT
-            - DELETE
+  httpApi:
+    cors:
+      allowedOrigins:
+        - "*"
+      allowedHeaders:
+        - Content-Type
+        - Authorization
+      allowedMethods:
+        - GET
+        - POST
+        - PUT
+        - DELETE
 
 functions:
-#  -------------------USER---------------------
-    handleRegister: # register as user or admin
-        handler: functions/handleRegister.handler
-        events:
-        - httpApi:
-            path: /api/register
-            method: POST
-
-    handleLogin: # logs in user or admin
-        handler: functions/handleLogin.handler
-        events:
-        - httpApi:
-            path: /api/login
-            method: POST
-
-    getUserProfile: # gets the userId's profile
-        handler: functions/getUserProfile.handler
-        events:
-        - httpApi:
-            path: /api/profile/{userId}
-            method: GET
-
-#  -------------------MENU---------------------
-    getMenu: # get all meals from the menu
-        handler: functions/getMenu.handler
-        events:
-        - httpApi:
-            path: /api/menu
-            method: GET
-
-    getProduct: # gets a single menu item
-        handler: functions/getProduct.handler
-        events:
-        - httpApi:
-            path: /api/menu/{prodId}
-            method: GET
-
-    createMenuItem: # add a new meal to menu
-        handler: functions/createMenuItem.handler
-        events:
-        - httpApi:
-            path: /api/menu
-            method: POST
-
-    updateMenuItem: # change a meal in menu
-        handler: functions/updateMenuItem.handler
-        events:
-        - httpApi:
-            path: /api/menu/{prodId}
-            method: PUT
-
-    deleteMenuItem: # removes menu product (menu item === a meal)
-        handler: functions/deleteMenuItem.handler
-        events:
-        - httpApi:
-            path: /api/menu/{prodId}
-            method: DELETE
-
-#  -------------------ORDERS---------------------
-    createOrder: # creates an order
-        handler: functions/createOrder.handler
-        events:
-        - httpApi:
-            path: /api/orders
-            method: POST
-
-    getAllOrders: # gets all orders
-        handler: functions/getAllOrders.handler
-        events:
-        - httpApi:
-            path: /api/orders
-            method: GET
-
-    getOrderbyUserId: # gets all orders by userId
-        handler: functions/getOrdersByUserId.handler
-        events:
-        - httpApi:
-            path: /api/orders/{userId}
-            method: GET
-
-    getOrdersByStatus: # gets all orders by status (pending, locked, completed)
-        handler: functions/getOrdersByStatus.handler
-        events:
-        - httpApi:
-            path: /api/orders/status/{status}
-            method: GET
-
-    updateOrderStatus: # change order status (pending, locked, complete)
-        handler: functions/updateOrderStatus.handler
-        events:
-        - httpApi:
-            path: /api/orders/{orderId}/status
-            method: PUT
-
-    cancelOrder: # userId cancels order
-        handler: functions/cancelOrder.handler
-        events:
-        - httpApi:
-            path: /api/orders/{orderId}/cancel
-            method: PUT
-
-    # lockOrder: # admin locks order (no more edits by user can be done)
-    #   handler: functions/lockOrder.handler
-    #   events:
-    #     - httpApi:
-    #         path: /api/orders/{orderId}/lock
-    #         method: PUT
-
-    # deleteOrder: # removes an order
-    #   handler: functions/deleteOrder.handler
-    #   events:
-    #     - httpApi:
-    #         path: /api/orders/{orderId}
-    #         method: DELETE
-
-    editOrder: # changes an order in case user did something wrong/forgot to add something
-        handler: functions/editOrder.handler
-        events:
-        - httpApi:
-            path: /api/orders/{orderId}
-            method: PUT
-
-#  -------------------MESSAGES---------------------
-  addOrderMessage: # add message to order (customer or staff)
-    handler: functions/addOrderMessage.handler
+  #  -------------------USER---------------------
+  handleRegister: # register as user or admin
+    handler: functions/auth/RegisterUser/handleRegister.handler
     events:
       - httpApi:
-          path: /api/orders/{orderId}/messages
+          path: /api/register
           method: POST
 
-  getOrderMessages: # get all messages for an order
-    handler: functions/getOrderMessages.handler
+  handleLogin: # logs in user or admin
+    handler: functions/auth/LoginUser/handleLogin.handler
     events:
       - httpApi:
-          path: /api/orders/{orderId}/messages
-          method: GET
-
-  #  -------------------PAYMENTS---------------------
-  createPayment: # create payment for order
-    handler: functions/createPayment.handler
-    events:
-      - httpApi:
-          path: /api/orders/{orderId}/payment
+          path: /api/login
           method: POST
 
-  getPayment: # get payment status
-    handler: functions/getPayment.handler
+  getUserProfile: # gets the userId's profile
+    handler: functions/auth/GetUserProfile/getUserProfile.handler
     events:
       - httpApi:
-          path: /api/orders/{orderId}/payment
+          path: /api/profile/{userId}
           method: GET
 
-  updatePaymentStatus: # update payment status (webhook from provider)
-    handler: functions/updatePaymentStatus.handler
+  #  -------------------MENU---------------------
+  getMenu: # get all meals from the menu
+    handler: functions/getMenu.handler
     events:
       - httpApi:
-          path: /api/payments/{paymentId}/status
-          method: PUT
-
-  #  -------------------CART---------------------
-  getCart: # gets the userId's cart
-    handler: functions/getCart.handler
-    events:
-      - httpApi:
-          path: /api/cart/{userId}
+          path: /api/menu
           method: GET
 
-  updateCart: # updates the userId's cart
-    handler: functions/updateCart.handler
+  getProduct: # gets a single menu item
+    handler: functions/getProduct.handler
     events:
       - httpApi:
-          path: /api/cart/{userId}
+          path: /api/menu/{prodId}
+          method: GET
+
+  # TODO: Skapa dessa handler-filer
+  # createMenuItem: # add a new meal to menu
+  #   handler: functions/createMenuItem.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/menu
+  #         method: POST
+
+  # updateMenuItem: # change a meal in menu
+  #   handler: functions/updateMenuItem.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/menu/{prodId}
+  #         method: PUT
+
+  # deleteMenuItem: # removes menu product (menu item === a meal)
+  #   handler: functions/deleteMenuItem.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/menu/{prodId}
+  #         method: DELETE
+
+  #  -------------------ORDERS---------------------
+  createOrder: # creates an order
+    handler: functions/order/PostCreateOrder/postCreateOrder.handler
+    events:
+      - httpApi:
+          path: /api/orders
+          method: POST
+
+  getAllOrders: # gets all orders
+    handler: functions/order/GetAllOrders/getAllOrders.handler
+    events:
+      - httpApi:
+          path: /api/orders
+          method: GET
+
+  getOrderbyUserId: # gets all orders by userId
+    handler: functions/order/GetOrdersByUserId/getOrdersByUserId.handler
+    events:
+      - httpApi:
+          path: /api/orders/{userId}
+          method: GET
+
+  getOrdersByStatus: # gets all orders by status (pending, locked, completed)
+    handler: functions/order/GetOrdersByStatus/getOrdersByStatus.handler
+    events:
+      - httpApi:
+          path: /api/orders/status/{status}
+          method: GET
+
+  updateOrderStatus: # change order status (pending, locked, complete)
+    handler: functions/order/UpdateOrderStatus/updateOrderStatus.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/status
           method: PUT
 
-  clearCart: # empties the userId's cart
-    handler: functions/clearCart.handler
+  # TODO: Skapa cancelOrder handler
+  # cancelOrder: # userId cancels order
+  #   handler: functions/cancelOrder.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/cancel
+  #         method: PUT
+
+  editOrder: # changes an order in case user did something wrong/forgot to add something
+    handler: functions/order/EditOrder/editOrder.handler
     events:
       - httpApi:
-          path: /api/cart/{userId}
-          method: DELETE
+          path: /api/orders/{orderId}
+          method: PUT
 
-# # resources:
-  #   Resources:
-  #     CloudDbTable:
-  #       Type: AWS::DynamoDB::Table
-  #       Properties:
-  #         TableName: RestaurantTable
-  #         AttributeDefinitions:
-  #           - AttributeName: PK
-  #             AttributeType: S
-  #           - AttributeName: SK
-  #             AttributeType: S
-  #           - AttributeName: categoryKey
-  #             AttributeType: S
-  #         KeySchema:
-  #           - AttributeName: PK
-  #             KeyType: HASH
-  #           - AttributeName: SK
-  #             KeyType: RANGE
-  #         GlobalSecondaryIndexes:
-  #           - IndexName: CategoryIndex
-  #             KeySchema:
-  #               - AttributeName: categoryKey
-  #                 KeyType: HASH
-  #               - AttributeName: SK
-  #                 KeyType: RANGE
-  #             Projection:
-  #               ProjectionType: ALL
-  #         BillingMode: PAY_PER_REQUEST
+  # TODO: Skapa message handlers
+  # #  -------------------MESSAGES---------------------
+  # addOrderMessage: # add message to order (customer or staff)
+  #   handler: functions/addOrderMessage.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/messages
+  #         method: POST
+
+  # getOrderMessages: # get all messages for an order
+  #   handler: functions/getOrderMessages.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/messages
+  #         method: GET
+
+  # TODO: Skapa payment handlers
+  # #  -------------------PAYMENTS---------------------
+  # createPayment: # create payment for order
+  #   handler: functions/createPayment.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/payment
+  #         method: POST
+
+  # getPayment: # get payment status
+  #   handler: functions/getPayment.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/orders/{orderId}/payment
+  #         method: GET
+
+  # updatePaymentStatus: # update payment status (webhook from provider)
+  #   handler: functions/updatePaymentStatus.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/payments/{paymentId}/status
+  #         method: PUT
+
+  # TODO: Skapa cart handlers
+  # #  -------------------CART---------------------
+  # getCart: # gets the userId's cart
+  #   handler: functions/getCart.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/cart/{userId}
+  #         method: GET
+
+  # updateCart: # updates the userId's cart
+  #   handler: functions/updateCart.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/cart/{userId}
+  #         method: PUT
+
+  # clearCart: # empties the userId's cart
+  #   handler: functions/clearCart.handler
+  #   events:
+  #     - httpApi:
+  #         path: /api/cart/{userId}
+  #         method: DELETE
+# resources:
+#   Resources:
+#     CloudDbTable:
+#       Type: AWS::DynamoDB::Table
+#       Properties:
+#         TableName: RestaurantTable
+#         AttributeDefinitions:
+#           - AttributeName: PK
+#             AttributeType: S
+#           - AttributeName: SK
+#             AttributeType: S
+#           - AttributeName: categoryKey
+#             AttributeType: S
+#         KeySchema:
+#           - AttributeName: PK
+#             KeyType: HASH
+#           - AttributeName: SK
+#             KeyType: RANGE
+#         GlobalSecondaryIndexes:
+#           - IndexName: CategoryIndex
+#             KeySchema:
+#               - AttributeName: categoryKey
+#                 KeyType: HASH
+#               - AttributeName: SK
+#                 KeyType: RANGE
+#             Projection:
+#               ProjectionType: ALL
+#         BillingMode: PAY_PER_REQUEST

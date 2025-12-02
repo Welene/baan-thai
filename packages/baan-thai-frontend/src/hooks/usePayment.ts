@@ -33,23 +33,25 @@ export function usePayment() {
         setError('');
 
         try {
+            // Hämta inloggad användare från localStorage
+            const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+            const userId = currentUser?.userId || 'guest';
+
             // Skapa order data för backend
             const orderData = {
-                id: `ORDER-${Date.now()}`,
+                userId: userId,
                 firstName: data.name.split(' ')[0],
                 lastName: data.name.split(' ').slice(1).join(' ') || data.name,
                 email: data.email,
                 phoneNumber: parseInt(data.phone.replace(/\D/g, '')) || 0,
+                message: `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'}`,
+                totalPrice: data.totalPrice,
+                payment: [{ paymentType: data.paymentMethod }],
+                paymentStatus: 'paid',
                 order: data.cartItems.map(item => ({
                     productId: item.id,
-                    amount: item.quantity,
-                    price: item.price,
-                    name: item.name
-                })),
-                totalPrice: data.totalPrice,
-                message: `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'}`,
-                payment: [{ paymentType: data.paymentMethod }],
-                paymentStatus: 'paid' // Mock: betalning godkänd direkt
+                    quantity: item.quantity
+                }))
             };
 
             // Skicka till backend

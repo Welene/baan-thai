@@ -2,6 +2,7 @@ import './RegisterPage.css';
 import { RegisterUser } from '../../interfaces/register';
 import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
+import { API_BASE_URL } from '../../config/api';
 
 function RegisterPage() {
 	const navigate = useNavigate();
@@ -39,7 +40,7 @@ function RegisterPage() {
 
 		try {
 			const response = await fetch(
-				'https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/register',
+				`${API_BASE_URL}/api/register`,
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
