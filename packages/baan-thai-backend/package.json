@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "esbuild": "^0.25.12",
+    "serverless": "^3.x",
     "serverless-dotenv-plugin": "^6.0.0",
     "serverless-esbuild": "^1.56.1",
     "serverless-offline": "^14.4.0"

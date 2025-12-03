@@ -8,7 +8,7 @@ import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { User } from '../interfaces/user';
-
+import ProfilePage from '../pages/ProfilePage/ProfilePage';
 
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
@@ -98,6 +98,7 @@ export default function AppRouter() {
 						path="/login"
 						element={<LoginPage setCurrentUser={setCurrentUser} />}
 					/>
+					<Route path="/profile" element={<ProfilePage />} />
 
 					<Route
                         path="/checkout"
