@@ -1,0 +1,170 @@
+.edit-menu-page {
+	min-height: 100vh;
+	background-color: #f5f5f5;
+}
+
+.admin-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 2rem;
+}
+
+.admin-content h1 {
+	color: #333;
+	margin-bottom: 2rem;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.search-section {
+	display: flex;
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.search-input {
+	flex: 1;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.search-btn {
+	padding: 0.75rem 2rem;
+	background-color: #d4af37;
+	color: white;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: 'Quicksand', sans-serif;
+	transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+	background-color: #b8941f;
+}
+
+.menu-items-list {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+	gap: 1rem;
+	margin-bottom: 2rem;
+}
+
+.menu-item-card {
+	background: white;
+	padding: 1rem;
+	border-radius: 8px;
+	cursor: pointer;
+	transition: all 0.3s;
+	border: 2px solid transparent;
+}
+
+.menu-item-card:hover {
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	transform: translateY(-2px);
+}
+
+.menu-item-card.selected {
+	border-color: #d4af37;
+	background-color: #fffef8;
+}
+
+.menu-item-card h3 {
+	margin: 0 0 0.5rem 0;
+	color: #333;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.menu-item-card p {
+	margin: 0.25rem 0;
+	color: #666;
+	font-size: 0.9rem;
+}
+
+.edit-form {
+	background: white;
+	padding: 2rem;
+	border-radius: 8px;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.edit-form h2 {
+	color: #333;
+	margin-bottom: 1.5rem;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.form-group {
+	margin-bottom: 1.5rem;
+}
+
+.form-group label {
+	display: block;
+	margin-bottom: 0.5rem;
+	color: #333;
+	font-weight: 500;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+	width: 100%;
+	padding: 0.75rem;
+	border: 1px solid #ddd;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-family: 'Quicksand', sans-serif;
+}
+
+.form-group input:disabled {
+	background-color: #f5f5f5;
+	cursor: not-allowed;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+	outline: none;
+	border-color: #d4af37;
+}
+
+.form-actions {
+	display: flex;
+	gap: 1rem;
+}
+
+.submit-btn,
+.delete-btn {
+	flex: 1;
+	padding: 1rem;
+	border: none;
+	border-radius: 4px;
+	font-size: 1rem;
+	font-weight: 600;
+	cursor: pointer;
+	font-family: 'Quicksand', sans-serif;
+	transition: background-color 0.3s;
+}
+
+.submit-btn {
+	background-color: #d4af37;
+	color: white;
+}
+
+.submit-btn:hover {
+	background-color: #b8941f;
+}
+
+.delete-btn {
+	background-color: #dc3545;
+	color: white;
+}
+
+.delete-btn:hover {
+	background-color: #c82333;
+}

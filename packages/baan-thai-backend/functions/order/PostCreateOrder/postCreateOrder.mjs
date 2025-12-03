@@ -4,7 +4,7 @@ import { sendResponse } from '../../../responses/response.mjs'
 import { errorHandler } from '../../../middlewares/errorHandler.mjs'
 import { validateOrder } from '../../../middlewares/validateOrder.mjs'
 import { addOrder } from '../../../services/orders.mjs'
-import { queryMenuItem } from '../../getProduct.mjs'
+import { queryMenuItem } from '../../queryMenuItem.mjs'
 
 export const handler = middy(async (event) => {
   const body = event.body;

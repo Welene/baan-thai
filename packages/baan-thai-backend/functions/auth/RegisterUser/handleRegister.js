@@ -22,6 +22,15 @@ exports.handler = async (event) => {
 		const name = body.name;
 		const username = body.username;
 		const role = body.role || 'customer'; // default role är customer
+
+		// Skydda så inte vem som helst kan bli admin
+		const ADMIN_SECRET = process.env.ADMIN_SECRET || 'dev-secret-123';
+		if (role === 'admin' && body.adminSecret !== ADMIN_SECRET) {
+			return {
+				statusCode: 403,
+				body: JSON.stringify({ error: 'Obehörig admin-registrering' })
+			};
+		}
 		const address = body.address || null;
 		const phoneNumber = body.phoneNumber || null;
 

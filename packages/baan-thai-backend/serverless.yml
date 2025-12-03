@@ -2,6 +2,9 @@ service: baan-thai-backend
 
 useDotenv: true
 
+build:
+  esbuild: false
+
 plugins:
   - serverless-esbuild
   - serverless-dotenv-plugin
@@ -83,7 +86,7 @@ functions:
       - httpApi:
           path: /api/menu/{prodId}
           method: GET
-
+          
   createMenuItem: # add a new meal to menu
     handler: functions/createMenuItem.handler
     events:
@@ -154,28 +157,6 @@ functions:
     events:
       - httpApi:
           path: /api/orders/{orderId}
-          method: PUT
-
-  #  -------------------NOTIFICATIONS---------------------
-  getNotifications: # gets all notifications for a user
-    handler: functions/notifications/GetNotifications/getNotifications.handler
-    events:
-      - httpApi:
-          path: /api/notifications/{userId}
-          method: GET
-
-  markNotificationAsRead: # marks a single notification as read
-    handler: functions/notifications/MarkAsRead/markAsRead.handler
-    events:
-      - httpApi:
-          path: /api/notifications/{notificationId}/read
-          method: PUT
-
-  markAllNotificationsAsRead: # marks all notifications as read for a user
-    handler: functions/notifications/MarkAllAsRead/markAllAsRead.handler
-    events:
-      - httpApi:
-          path: /api/notifications/{userId}/read-all
           method: PUT
 
   # TODO: Skapa message handlers
