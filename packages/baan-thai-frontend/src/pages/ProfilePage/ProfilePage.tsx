@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config/api';
+import { cancelOrder } from '../../services/paymentService';
 import './ProfilePage.css';
 
 interface Order {
@@ -28,6 +29,7 @@ function ProfilePage() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
+  const [cancellingOrderId, setCancellingOrderId] = useState<string | null>(null);
 
   // Hämta användare från localStorage (satt vid inloggning)
   const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
@@ -102,6 +104,35 @@ function ProfilePage() {
     });
   };
 
+  const handleCancelOrder = async (orderId: string) => {
+    if (!userId) return;
+
+    const confirmed = window.confirm('Är du säker på att du vill avbryta denna beställning?');
+    if (!confirmed) return;
+
+    try {
+      setCancellingOrderId(orderId);
+      await cancelOrder(orderId, userId);
+      
+      // Uppdatera order-listan lokalt
+      setOrders(prevOrders => 
+        prevOrders.map(order => 
+          order.orderId === orderId 
+            ? { ...order, status: 'cancelled' }
+            : order
+        )
+      );
+
+      alert('Beställningen har avbrutits');
+    } catch (error) {
+      console.error('Failed to cancel order:', error);
+      const errorMessage = error instanceof Error ? error.message : 'Kunde inte avbryta beställningen';
+      alert(errorMessage);
+    } finally {
+      setCancellingOrderId(null);
+    }
+  };
+
   if (loading) {
     return (
       <div className="profile-page">
@@ -161,6 +192,17 @@ function ProfilePage() {
                       <span className="order-date">{formatDate(order.createdAt)}</span>
                     </div>
                   </div>
+                  {order.status === 'pending' && (
+                    <div className="order-actions">
+                      <button
+                        className="cancel-order-btn"
+                        onClick={() => handleCancelOrder(order.orderId)}
+                        disabled={cancellingOrderId === order.orderId}
+                      >
+                        {cancellingOrderId === order.orderId ? 'Avbryter...' : 'Ångra beställning'}
+                      </button>
+                    </div>
+                  )}
                 </li>
               ))}
             </ul>

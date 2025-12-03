@@ -255,3 +255,62 @@ export const deleteOrder = async (orderId) => {
     return { success: false, message: `Error deleting order: ${error.message}` };
   }
 };
+
+// CANCEL avbryt order (endast pending)
+export const cancelOrder = async (orderId, userId) => {
+  // Hämta ordern först för att verifiera
+  const order = await queryOrder(orderId);
+
+  if (!order) {
+    return { 
+      success: false, 
+      statusCode: 404,
+      message: `Order with id ${orderId} not found` 
+    };
+  }
+
+  // Verifiera att användaren äger ordern
+  if (order.userId !== userId) {
+    return { 
+      success: false, 
+      statusCode: 403,
+      message: "Unauthorized to cancel this order" 
+    };
+  }
+
+  // Endast pending-ordrar kan avbrytas
+  if (order.status !== "pending") {
+    return { 
+      success: false, 
+      statusCode: 400,
+      message: `Cannot cancel order with status: ${order.status}. Only pending orders can be cancelled.` 
+    };
+  }
+
+  // Uppdatera orderstatus till cancelled
+  const command = new UpdateCommand({
+    TableName: "RestaurantTable",
+    Key: {
+      PK: `ORDER#${orderId}`,
+      SK: "ORDER",
+    },
+    UpdateExpression: "SET #status = :status, cancelledAt = :cancelledAt, cancelledBy = :cancelledBy",
+    ExpressionAttributeNames: {
+      "#status": "status",
+    },
+    ExpressionAttributeValues: {
+      ":status": "cancelled",
+      ":cancelledAt": new Date().toISOString(),
+      ":cancelledBy": userId,
+    },
+    ReturnValues: "ALL_NEW",
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return { success: true, cancelledOrder: result.Attributes };
+  } catch (error) {
+    console.error(`Error cancelling order ${orderId}:`, error.message);
+    return { success: false, message: `Error cancelling order: ${error.message}` };
+  }
+};

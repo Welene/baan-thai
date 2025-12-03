@@ -157,6 +157,39 @@
   font-size: 0.8rem;
 }
 
+/* Order Actions */
+.order-actions {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid rgba(89, 57, 11, 0.15);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cancel-order-btn {
+  background-color: #d9534f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0.5rem 1.25rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.cancel-order-btn:hover:not(:disabled) {
+  background-color: #c9302c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(217, 83, 79, 0.3);
+}
+
+.cancel-order-btn:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
 /* Responsive */
 @media (max-width: 600px) {
   .profile-header {
