@@ -2,6 +2,7 @@ import { docClient } from "./clients.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { generateId } from "../utils/uuid.mjs";
 import { queryMenuItem } from "../functions/getProduct.mjs";
+import { createOrderNotification } from "./notifications.mjs";
 
 // GET alla orders
 export const getAllOrders = async () => {
@@ -73,6 +74,10 @@ export const addOrder = async ({ userId, order, orderId = null, firstName, lastN
 
   try {
     await docClient.send(command);
+    
+    // Skapa notifikation för användaren om ny order
+    await createOrderNotification(userId, orderId, "pending");
+    
     return {
       success: true,
       orderId,
@@ -177,6 +182,16 @@ export const updateOrderStatus = async (orderId, status) => {
 
   try {
     const result = await docClient.send(command);
+    
+    // Skapa notifikation för användaren om orderstatusändring
+    if (result.Attributes && result.Attributes.userId) {
+      await createOrderNotification(
+        result.Attributes.userId,
+        orderId,
+        status
+      );
+    }
+    
     return { success: true, updatedOrder: result.Attributes };
   } catch (error) {
     return { success: false, message: `Error updating order status: ${error.message}` };
