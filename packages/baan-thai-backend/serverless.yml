@@ -1,13 +1,7 @@
 service: baan-thai-backend
 
-build:
-  esbuild: false
-  # måste ha false för att serverless offline ska funka för mig, då esbuild och serverless 4 krockar
 
 useDotenv: true
-
-build:
-  esbuild: false
 
 plugins:
   - serverless-esbuild
@@ -90,7 +84,7 @@ functions:
       - httpApi:
           path: /api/menu/{prodId}
           method: GET
-          
+
   createMenuItem: # add a new meal to menu
     handler: functions/createMenuItem.handler
     events:
@@ -148,19 +142,40 @@ functions:
           path: /api/orders/{orderId}/status
           method: PUT
 
-  # TODO: Skapa cancelOrder handler
-  # cancelOrder: # userId cancels order
-  #   handler: functions/cancelOrder.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/orders/{orderId}/cancel
-  #         method: PUT
+  cancelOrder: # userId cancels order (only pending orders)
+    handler: functions/order/CancelOrder/cancelOrder.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/cancel
+          method: PUT
 
   editOrder: # changes an order in case user did something wrong/forgot to add something
     handler: functions/order/EditOrder/editOrder.handler
     events:
       - httpApi:
           path: /api/orders/{orderId}
+          method: PUT
+
+  #  -------------------NOTIFICATIONS---------------------
+  getNotifications: # gets all notifications for a user
+    handler: functions/notifications/GetNotifications/getNotifications.handler
+    events:
+      - httpApi:
+          path: /api/notifications/{userId}
+          method: GET
+
+  markNotificationAsRead: # marks a single notification as read
+    handler: functions/notifications/MarkAsRead/markAsRead.handler
+    events:
+      - httpApi:
+          path: /api/notifications/{notificationId}/read
+          method: PUT
+
+  markAllNotificationsAsRead: # marks all notifications as read for a user
+    handler: functions/notifications/MarkAllAsRead/markAllAsRead.handler
+    events:
+      - httpApi:
+          path: /api/notifications/{userId}/read-all
           method: PUT
 
   # TODO: Skapa message handlers

@@ -7,6 +7,7 @@ import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
+import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { User } from '../interfaces/user';
 import { AdminMenuPage } from '../pages/AdminPage/CreateNewMenu/AdminMenuPage';
 import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
@@ -99,8 +100,9 @@ export default function AppRouter() {
 					<Route path="/register" element={<RegisterPage />} />
 					<Route
 						path="/login"
-					element={<LoginPage setCurrentUser={setCurrentUser} />}
-				/>
+						element={<LoginPage setCurrentUser={setCurrentUser} />}
+					/>
+					<Route path="/profile" element={<ProfilePage />} />
 
 				<Route 
 					path="/admin/menu" 
