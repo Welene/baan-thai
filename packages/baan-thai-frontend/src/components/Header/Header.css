@@ -42,6 +42,14 @@ main {
 	cursor: pointer;
 }
 
+.header__icon {
+	position: relative;
+}
+
+.header__icon--notification {
+	position: relative;
+}
+
 .header__nav-list {
 	display: flex;
 	flex-direction: row;

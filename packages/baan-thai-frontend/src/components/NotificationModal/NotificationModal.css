@@ -1,0 +1,153 @@
+.notification-modal-overlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.5);
+	display: flex;
+	justify-content: center;
+	align-items: flex-start;
+	padding-top: 80px;
+	z-index: 1000;
+}
+
+.notification-modal {
+	background-color: #fff;
+	border-radius: 12px;
+	width: 90%;
+	max-width: 500px;
+	max-height: 80vh;
+	display: flex;
+	flex-direction: column;
+	box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+	animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+	from {
+		opacity: 0;
+		transform: translateY(-20px);
+	}
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+.notification-modal__header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 1.5rem;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.notification-modal__header h2 {
+	font-family: 'Radley', serif;
+	font-size: 1.5rem;
+	color: #59390b;
+	margin: 0;
+}
+
+.notification-modal__close {
+	background: none;
+	border: none;
+	font-size: 2rem;
+	color: #59390b;
+	cursor: pointer;
+	padding: 0;
+	width: 30px;
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: color 0.2s;
+}
+
+.notification-modal__close:hover {
+	color: #d32f2f;
+}
+
+.notification-modal__content {
+	overflow-y: auto;
+	flex: 1;
+}
+
+.notification-modal__empty {
+	padding: 3rem 1.5rem;
+	text-align: center;
+	color: #999;
+}
+
+.notification-modal__list {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.notification-modal__item {
+	display: flex;
+	align-items: flex-start;
+	padding: 1rem 1.5rem;
+	border-bottom: 1px solid #f0f0f0;
+	cursor: pointer;
+	transition: background-color 0.2s;
+	position: relative;
+}
+
+.notification-modal__item:hover {
+	background-color: #f9f9f9;
+}
+
+.notification-modal__item--read {
+	opacity: 0.6;
+}
+
+.notification-modal__icon {
+	font-size: 1.5rem;
+	margin-right: 1rem;
+	flex-shrink: 0;
+}
+
+.notification-modal__body {
+	flex: 1;
+}
+
+.notification-modal__message {
+	margin: 0 0 0.5rem 0;
+	color: #333;
+	font-size: 0.95rem;
+	line-height: 1.4;
+}
+
+.notification-modal__time {
+	font-size: 0.8rem;
+	color: #999;
+}
+
+.notification-modal__unread-indicator {
+	width: 8px;
+	height: 8px;
+	background-color: #d32f2f;
+	border-radius: 50%;
+	flex-shrink: 0;
+	margin-left: 0.5rem;
+	margin-top: 0.5rem;
+}
+
+/* Responsiv design */
+@media (max-width: 600px) {
+	.notification-modal {
+		width: 95%;
+		max-height: 85vh;
+	}
+
+	.notification-modal__header h2 {
+		font-size: 1.25rem;
+	}
+
+	.notification-modal__item {
+		padding: 0.875rem 1rem;
+	}
+}
