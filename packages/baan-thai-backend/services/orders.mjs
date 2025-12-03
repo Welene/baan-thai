@@ -157,21 +157,24 @@ export const editOrder = async (orderId, updateData) => {
   }
 };
 
-// PUT status uppdatering
+// PUT status uppdatering med confirmedAt, bara för ADMINS på köksvy sidan
 export const updateOrderStatus = async (orderId, status) => {
+  const expressionNames = { "#status": "status" };
+  const expressionValues = { ":status": status };
+  let updateExpression = "SET #status = :status";
+
+  if (status === "confirmed") {
+    // Legger til confirmedAt når admin bekrefter orderen
+    updateExpression += ", confirmedAt = :confirmedAt";
+    expressionValues[":confirmedAt"] = new Date().toISOString();
+  }
+
   const command = new UpdateCommand({
     TableName: "RestaurantTable",
-    Key: {
-      PK: `ORDER#${orderId}`,
-      SK: "ORDER",
-    },
-    UpdateExpression: "SET #status = :status",
-    ExpressionAttributeNames: {
-      "#status": "status",
-    },
-    ExpressionAttributeValues: {
-      ":status": status,
-    },
+    Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
+    UpdateExpression: updateExpression,
+    ExpressionAttributeNames: expressionNames,
+    ExpressionAttributeValues: expressionValues,
     ReturnValues: "ALL_NEW",
   });
 
@@ -182,6 +185,7 @@ export const updateOrderStatus = async (orderId, status) => {
     return { success: false, message: `Error updating order status: ${error.message}` };
   }
 };
+
 
 // GET oredr by status
 export const getOrdersByStatus = async (status) => {
@@ -255,3 +259,6 @@ export const deleteOrder = async (orderId) => {
     return { success: false, message: `Error deleting order: ${error.message}` };
   }
 };
+
+
+// edit: added "confirmedAt" in "updateOrderStatus" for admins on köksvy page, so orders change color and timer starts as admin clicks confirm - Helene

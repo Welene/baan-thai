@@ -1,0 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
+
+p {
+		font-size: 1.2rem;
+		font-family: 'Railway', sans-serif;
+}
+
+.admin-page__heading {
+	font-family: 'Raleway', sans-serif;
+	font-size: 2rem;
+	text-align: center;
+	font-weight: 600;
+	margin: 2rem 0rem 4rem 0rem;
+}
+
+.order {
+	padding: 1.5rem;
+	border: 2.5px solid #ccc;
+	border-radius: 1rem;
+	margin-bottom: 1rem;
+	width: 15rem;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 1rem;
+}
+
+.order.pending {
+	background-color: white;
+	border-color: #ccc;
+}
+.order.confirmed.new {
+	background-color: #e8f5e9;
+	border-color: green;
+}
+
+.order.confirmed.waiting {
+	background-color: #fff3e0;
+	border-color: orange;
+}
+
+.order.confirmed.overdue {
+	background-color: #ffebee;
+	border-color: red;
+}
+
+/* Status: Done */
+.order.done {
+	background-color: #f0f0f0;
+	border-color: #aaa;
+	color: #666;
+}
+
+.orders-container {
+	display: flex;
+	flex-direction: row;
+	gap: 2rem;
+	max-width: 1200px;
+	margin: 0 auto; 
+	flex-wrap: wrap;
+}
+
+.order-seperator{
+	margin-top: 1rem;
+	margin-bottom: 1rem;
+	border-top: 1.6px solid rgb(52, 52, 52);
+	min-width: 12rem;
+}
+
+.order-confirm {
+	margin-top: 1rem;
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #4CAF50;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+
+.order-confirm:hover {
+	margin-top: 1rem;
+	padding: 0.5rem 1rem;
+	background-color: #38963c;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+/* Helene */
+
