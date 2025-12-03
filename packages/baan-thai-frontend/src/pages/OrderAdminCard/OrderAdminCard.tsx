@@ -1,53 +1,48 @@
-import React from 'react';
-import './OrderAdminCard.css';
+import React from "react";
+import "./OrderAdminCard.css";
 
 type OrderItem = {
-	id: number;
-	name: string;
-	quantity: number;
-}; // HARDCODED NOW, get from order later when it is pushed up
-
-type OrderCardProps = {
-	// what frontend is gonna render
-	orderId: number;
-	status: 'pending' | 'confirmed' | 'done';
-	done?: boolean;
-	waitStatus?: 'new' | 'waiting' | 'overdue';
-	items?: OrderItem[]; // for ahrdcoded items so I can style
+  name: string;
+  quantity: number;  
+  code: string;
+  price: number;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({
-	orderId,
-	status,
-	waitStatus,
-	done,
-	items,
-}) => {
-	let className = 'order';
+type OrderCardProps = {
+  orderId: string;
+  status: "pending" | "confirmed" | "done";
+  waitStatus?: "new" | "waiting" | "overdue";
+  items: OrderItem[];
+  onConfirm?: (orderId: string) => void;  
+};
 
-	if (status === 'pending') className += ' pending';
-	else if (status === 'confirmed') className += ` confirmed ${waitStatus}`;
-	else if (status === 'done') className += ' done';
+const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm }) => {
+  // base className + status + waitstatus
+  let className = "order";
 
-	let waitText = '';
-	if (status === 'confirmed') {
-		if (waitStatus === 'new') waitText = '(0 < 5 min)';
-		else if (waitStatus === 'waiting') waitText = '(5 < 10 min)';
-		else if (waitStatus === 'overdue') waitText = '(15 min >)';
-	}
+  if (status === "pending") className += " pending";
+  else if (status === "confirmed") className += ` confirmed ${waitStatus || "new"}`; 
+  else if (status === "done") className += " done";
 
-	return (
+  return (
+	<>
 		<article className={className}>
-			OrderNr: {orderId} {status === 'confirmed' && !done && waitText}
+			<p className="order-num"><strong>Ordernr:</strong> {orderId}</p>
+
 			<hr className="order-seperator" />
-			{/* Render each item in its own <p> */}
-			{items?.map((item) => (
-				<p key={item.id}>
-					{item.quantity} x {item.name}
-				</p>
-			))}
+
+		{items?.map((item, index) => (
+			<p className="order-items" key={item.code || index}>
+				{item.quantity} x {item.name} ({item.code})
+			</p>
+		))}
+
+		{status === "pending" && onConfirm && (
+			<button className="order-confirm" onClick={() => onConfirm(orderId)}>Bekräfta</button> 
+		)}
 		</article>
-	);
+	</>
+  );
 };
 
 export default OrderCard;

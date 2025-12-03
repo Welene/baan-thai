@@ -1,5 +1,9 @@
 service: baan-thai-backend
 
+build:
+  esbuild: false
+  # måste ha false för att serverless offline ska funka för mig, då esbuild och serverless 4 krockar
+
 useDotenv: true
 
 plugins:

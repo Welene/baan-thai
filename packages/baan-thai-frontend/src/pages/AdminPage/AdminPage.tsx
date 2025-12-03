@@ -1,86 +1,96 @@
-import React from 'react';
-import OrderCard from '../OrderAdminCard/OrderAdminCard';
+import React, { useEffect, useState } from "react";
+import OrderCard from "../OrderAdminCard/OrderAdminCard";
+
 
 type OrderItem = {
-	id: number;
-	name: string;
-	quantity: number;
-}; // HARDCODED NOW, get from order later when it is pushed up
-
-type Order = {
-	// what frontend expects from backend - look at backend when it is pushed up
-	orderId: number;
-	status: 'pending' | 'confirmed'; // admin can confirm order
-	done?: boolean; // done is true or false
-	waitStatus?: 'new' | 'waiting' | 'overdue'; // green, orange or red depending
-	items?: OrderItem[]; // HARDCODED ITEMS IN ORDER FOR NOW
+  name: string;
+  quantity: number;
+  code: string;
+  price: number;
 };
 
-const orders: Order[] = [
-	// HARDCODED for now...
-	{
-		orderId: 1,
-		status: 'pending',
-		items: [
-			{ id: 1, name: 'Burger', quantity: 2 },
-			{ id: 2, name: 'Fries', quantity: 1 },
-		],
-	}, // pending is in the grey container AKA not confirmed by admin yet
-	{
-		orderId: 2,
-		status: 'confirmed',
-		waitStatus: 'new',
-		items: [
-			{ id: 1, name: 'Burger', quantity: 2 },
-			{ id: 2, name: 'Fries', quantity: 1 },
-		],
-	}, // after it has been confirmed by admin: it will be green,
-	{
-		orderId: 3,
-		status: 'confirmed',
-		waitStatus: 'waiting',
-		items: [
-			{ id: 1, name: 'Burger', quantity: 2 },
-			{ id: 2, name: 'Fries', quantity: 1 },
-		],
-	}, // orange or
-	{
-		orderId: 4,
-		status: 'confirmed',
-		waitStatus: 'overdue',
-		items: [
-			{ id: 1, name: 'Burger', quantity: 2 },
-			{ id: 2, name: 'Fries', quantity: 1 },
-		],
-	}, // red -  & cooks can interract with the colored ones
-	{
-		orderId: 5,
-		status: 'confirmed',
-		done: true,
-		items: [
-			{ id: 1, name: 'Burger', quantity: 2 },
-			{ id: 2, name: 'Fries', quantity: 1 },
-		],
-	}, // food is done --> cook clicks DONE --> and it changes status to done
-];
+
+type Order = {
+  orderId: string;
+  status: "pending" | "confirmed" | "done";
+  confirmedAt?: string; // when admin confirms customers order
+  createdAt: string; // when customer makes order
+  order: OrderItem[];
+};
 
 const AdminPage: React.FC = () => {
-	return (
-		<section className="admin-page">
-			<h1 className="admin-page__title">Alla ordrer</h1>
-			<section className="orders-container">
-				{orders.map((order) => (
-					<OrderCard
-						key={order.orderId}
-						orderId={order.orderId}
-						status={order.status}
-						waitStatus={order.waitStatus}
-						items={order.items}
-					/>
-				))}
-			</section>
-		</section>
-	);
+  const [orders, setOrders] = useState<Order[]>([]); // LS state for all orders
+
+  // fetch all orders made, from the backend get all orders endpoint
+  useEffect(() => {
+    fetch("http://localhost:3000/api/orders") // later --> AWS URL
+      .then((res) => res.json())
+      .then((data) => {
+        console.log("Fetched orders:", data);
+        setOrders(data.orders || []);
+      })
+      .catch((err) => console.error("Failed to fetch orders", err));
+  }, []);
+
+
+  // calculates waitStatus (for colors) based on when confirmed btn was clicked
+  const calculateWaitStatus = (confirmedAt?: string) => {
+    if (!confirmedAt) return undefined; // går til pending (ingen waitStatus hvis ikke confirmed)
+    const diffMinutes = (Date.now() - new Date(confirmedAt).getTime()) / 1000 / 60;
+    if (diffMinutes < 5) return "new";
+    if (diffMinutes < 25) return "waiting";
+    return "overdue";
+  };
+
+  // vonfirms order with the help of the backend status changer
+  const handleConfirm = async (orderId: string) => {
+    await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+      method: "PUT",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ status: "confirmed" }),
+    });
+
+    // updates LS with confirmedAt when clicked by admin
+    setOrders((prevOrders) =>
+      prevOrders.map((o) =>
+        o.orderId === orderId ? { ...o, status: "confirmed", confirmedAt: new Date().toISOString() } : o
+      )
+    );
+  };
+
+  // waitStatus (colors) is updated by setInterval every min
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setOrders((prevOrders) =>
+        prevOrders.map((order) =>
+          order.status === "confirmed" && order.confirmedAt
+            ? { ...order } // triggers rerender, calculateWaitStatus is used on render
+            : order
+        )
+      );
+    }, 60000); // setInterval runs every minute
+
+    return () => clearInterval(interval); // cleanup when comp unmounts
+  }, []);
+
+  return (
+    <section className="admin-page">
+      <h1 className="admin-page__heading">Alla ordrer</h1>
+
+      <section className="orders-container">
+        {orders.map((order) => (
+          <OrderCard
+            key={order.orderId}
+            orderId={order.orderId}
+            status={order.status}
+            waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
+            items={order.order}
+            onConfirm={handleConfirm} // connect handleConfirm to confirm-btn on order item
+          />
+        ))}
+      </section>
+    </section>
+  );
 };
 
 export default AdminPage;
