@@ -1,6 +1,5 @@
 const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const {
-	DynamoDBDocumentClient, QueryCommand, PutCommand, ScanCommand, } = require('@aws-sdk/lib-dynamodb');
+const {	DynamoDBDocumentClient, QueryCommand, PutCommand, ScanCommand, } = require('@aws-sdk/lib-dynamodb');
 const { hash } = require('../../../utils/password');
 const { createToken } = require('../../../utils/auth');
 const crypto = require('crypto');

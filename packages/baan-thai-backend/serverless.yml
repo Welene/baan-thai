@@ -84,27 +84,26 @@ functions:
           path: /api/menu/{prodId}
           method: GET
 
-  # TODO: Skapa dessa handler-filer
-  # createMenuItem: # add a new meal to menu
-  #   handler: functions/createMenuItem.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/menu
-  #         method: POST
+  createMenuItem: # add a new meal to menu
+    handler: functions/createMenuItem.handler
+    events:
+      - httpApi:
+          path: /api/menu
+          method: POST
 
-  # updateMenuItem: # change a meal in menu
-  #   handler: functions/updateMenuItem.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/menu/{prodId}
-  #         method: PUT
+  updateMenuItem: # change a meal in menu
+    handler: functions/updateMenuItem.handler
+    events:
+      - httpApi:
+          path: /api/menu/{prodId}
+          method: PUT
 
-  # deleteMenuItem: # removes menu product (menu item === a meal)
-  #   handler: functions/deleteMenuItem.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/menu/{prodId}
-  #         method: DELETE
+  deleteMenuItem: # removes menu product (menu item === a meal)
+    handler: functions/deleteMenuItem.handler
+    events:
+      - httpApi:
+          path: /api/menu/{prodId}
+          method: DELETE
 
   #  -------------------ORDERS---------------------
   createOrder: # creates an order
