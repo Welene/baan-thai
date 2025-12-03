@@ -1,7 +1,6 @@
 import './LoginPage.css';
 import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
-import { User } from '../../interfaces/user'; // loginpage needs to update currentuser when logged in so the btn in cart will lead to checkoutpage, without it it goes to null===not logged in and keeps going to registerpage even if you just registered
 import { LoginPageProps } from '../../interfaces/login';
 import { API_BASE_URL } from '../../config/api';
 
@@ -69,8 +68,14 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 				text: 'Inloggning lyckades! Välkommen...',
 				type: 'success',
 			});
+			
+			// Redirect based on user role
 			setTimeout(() => {
-				navigate('/landing');
+				if (userToStore.role === 'admin') {
+					navigate('/admin/menu');
+				} else {
+					navigate('/landing');
+				}
 			}, 1500);
 		} catch (error) {
 			console.error('Login failed:', error);

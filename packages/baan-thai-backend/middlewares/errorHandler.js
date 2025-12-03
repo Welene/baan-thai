@@ -1,4 +1,4 @@
-import { sendResponse } from "../response/response";
+import { sendResponse } from "../responses/response.mjs";
 
 export const errorHandler = () => ({
     onError: (handler) => {

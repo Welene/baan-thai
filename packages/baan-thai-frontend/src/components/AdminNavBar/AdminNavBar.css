@@ -1,0 +1,37 @@
+.admin-navbar {
+	background-color: #333;
+	color: white;
+	padding: 1rem 2rem;
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.admin-nav-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.admin-nav-content h2 {
+	margin: 0;
+	font-family: 'Quicksand', sans-serif;
+	color: #d4af37;
+}
+
+.admin-nav-links {
+	display: flex;
+	gap: 2rem;
+}
+
+.admin-nav-links a {
+	color: white;
+	text-decoration: none;
+	font-family: 'Quicksand', sans-serif;
+	font-weight: 500;
+	transition: color 0.3s;
+}
+
+.admin-nav-links a:hover {
+	color: #d4af37;
+}

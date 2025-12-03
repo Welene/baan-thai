@@ -1,6 +1,6 @@
 import middy from '@middy/core';
 import httpJsonBodyPaser from '@middy/http-json-body-parser';
-import { sendResponse } from '../response/response';
+import { sendResponse } from '../responses/response.mjs';
 import { errorHandler } from '../middlewares/errorHandler';
 import { validatePayment } from '../middlewares/validatePayment';
 
