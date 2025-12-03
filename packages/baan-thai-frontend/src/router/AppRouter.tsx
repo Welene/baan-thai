@@ -8,6 +8,9 @@ import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
 import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import { User } from '../interfaces/user';
+import { AdminMenuPage } from '../pages/AdminPage/CreateNewMenu/AdminMenuPage';
+import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
+import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute';
 
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
@@ -96,15 +99,38 @@ export default function AppRouter() {
 					<Route path="/register" element={<RegisterPage />} />
 					<Route
 						path="/login"
-						element={<LoginPage setCurrentUser={setCurrentUser} />}
-					/>
+					element={<LoginPage setCurrentUser={setCurrentUser} />}
+				/>
 
-					<Route
-						path="/checkout"
-						element={<CheckoutPage cartItems={cartItems} />}
-					/>
-				</Route>
+				<Route 
+					path="/admin/menu" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<AdminMenuPage />
+						</ProtectedRoute>
+					} 
+				/>
+
+				<Route 
+					path="/admin/menu/edit" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<EditMenuPage />
+						</ProtectedRoute>
+					} 
+				/>
+
 				<Route path="/admin" element={<AdminPage />} />
+
+				<Route
+                        path="/checkout"
+                        element={
+                            <CheckoutPage
+                                cartItems={cartItems}
+                            />
+                        }
+                    />
+                </Route>
 			</Routes>
 		</BrowserRouter>
 	);

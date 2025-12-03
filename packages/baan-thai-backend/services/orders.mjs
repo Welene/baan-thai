@@ -1,7 +1,7 @@
 import { docClient } from "./clients.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { generateId } from "../utils/uuid.mjs";
-import { queryMenuItem } from "../functions/getProduct.mjs";
+import { queryMenuItem } from "../functions/queryMenuItem.mjs";
 
 // GET alla orders
 export const getAllOrders = async () => {
