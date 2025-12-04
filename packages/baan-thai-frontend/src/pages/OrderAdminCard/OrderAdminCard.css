@@ -55,10 +55,12 @@ p {
 .orders-container {
 	display: flex;
 	flex-direction: row;
+	justify-content: center;
 	gap: 2rem;
 	max-width: 1200px;
 	margin: 0 auto; 
 	flex-wrap: wrap;
+	padding-bottom: 4rem;
 }
 
 .order-seperator{
@@ -69,11 +71,22 @@ p {
 }
 
 .order-confirm {
-	margin-top: 1rem;
+	margin-top: 1.5rem;
 	width: 6rem;
 	height: 2.5rem;
 	padding: 0.5rem 1rem;
-	background-color: #4CAF50;
+	background-color: #438e45;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+}
+
+.order-remove {
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #722727;
 	color: white;
 	border: none;
 	border-radius: 0.5rem;
@@ -82,14 +95,14 @@ p {
 
 
 .order-confirm:hover {
-	margin-top: 1rem;
-	padding: 0.5rem 1rem;
-	background-color: #38963c;
-	color: white;
-	border: none;
-	border-radius: 0.5rem;
-	cursor: pointer;
+	background-color: #2f7a33;
 }
+
+.order-remove:hover {
+	background-color: #5b2121;
+}
+
+
 
 /* Helene */
 
