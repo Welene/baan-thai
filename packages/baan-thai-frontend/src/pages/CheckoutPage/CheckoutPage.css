@@ -363,3 +363,53 @@ input[type='radio'] {
     margin-bottom: 20px;
     font-style: italic;
 }
+
+/* Comment Section */
+.comment-section {
+    width: 48rem;
+    background: #a88661;
+    color: rgb(49, 49, 49);
+    padding: 2rem;
+    border-radius: 0.5rem;
+    margin-top: 2rem;
+}
+
+.comment-section__label {
+    font-weight: 500;
+    font-size: 1.7rem;
+    display: block;
+    color: rgb(59, 59, 59);
+    margin-bottom: 1rem;
+}
+
+.comment-section__textarea {
+    width: 100%;
+    padding: 2rem;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.6rem;
+    background-color: rgb(236, 236, 236);
+    border-style: none;
+    border-radius: 0.3rem;
+    resize: vertical;
+    min-height: 8rem;
+    cursor: pointer;
+}
+
+.comment-section__textarea:focus {
+    outline: none;
+    background-color: rgb(245, 245, 245);
+}
+
+.comment-section__textarea::placeholder {
+    font-size: 1.6rem;
+    font-style: italic;
+    color: #999;
+}
+
+.comment-section__counter {
+    display: block;
+    text-align: right;
+    font-size: 1.3rem;
+    color: rgb(100, 100, 100);
+    margin-top: 0.5rem;
+}
