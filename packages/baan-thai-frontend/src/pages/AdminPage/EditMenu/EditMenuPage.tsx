@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './EditMenuPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
 
@@ -26,20 +26,37 @@ export const EditMenuPage = () => {
 		imageUrl: ''
 	});
 
+	useEffect(() => {
+		console.log('selectedItem changed:', selectedItem);
+	}, [selectedItem]);
+
 	const handleSearch = async () => {
 		try {
 			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
 			const data = await response.json();
+			
+			console.log('Fetched data:', data);
+
+			// Transformera data för att matcha MenuItem interface
+			const transformedData = data.map((item: any) => ({
+				productId: String(item.productId || ''),
+				name: item.name || item.title || '',
+				type: item.categoryKey || item.category || '',
+				category: item.category || item.categoryKey || '',
+				description: item.description || '',
+				price: String(item.price || '0'),
+				imageUrl: item.imageUrl || ''
+			}));
 
 			if (searchTerm) {
-				const filtered = data.filter(
+				const filtered = transformedData.filter(
 					(item: MenuItem) =>
 						item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-						item.productId.toLowerCase().includes(searchTerm.toLowerCase())
+						String(item.productId).toLowerCase().includes(searchTerm.toLowerCase())
 				);
 				setMenuItems(filtered);
 			} else {
-				setMenuItems(data);
+				setMenuItems(transformedData);
 			}
 		} catch (error) {
 			console.error('Error searching menu items:', error);
@@ -48,8 +65,10 @@ export const EditMenuPage = () => {
 	};
 
 	const handleSelectItem = (item: MenuItem) => {
+		console.log('Selected item:', item);
 		setSelectedItem(item);
 		setFormData(item);
+		console.log('FormData set to:', item);
 	};
 
 	const handleInputChange = (
@@ -149,37 +168,57 @@ export const EditMenuPage = () => {
 			<div className="admin-content">
 				<h1>Redigera menyobjekt</h1>
 
-				<div className="search-section">
-					<input
-						type="text"
-						placeholder="Sök efter namn eller produkt-ID..."
-						value={searchTerm}
-						onChange={(e) => setSearchTerm(e.target.value)}
-						className="search-input"
-					/>
-					<button onClick={handleSearch} className="search-btn">
-						Sök
-					</button>
-				</div>
-
-				<div className="menu-items-list">
-					{menuItems.map((item) => (
-						<div
-							key={item.productId}
-							className={`menu-item-card ${selectedItem?.productId === item.productId ? 'selected' : ''}`}
-							onClick={() => handleSelectItem(item)}>
-							<h3>{item.name}</h3>
-							<p>ID: {item.productId}</p>
-							<p>Pris: {item.price} kr</p>
+				{!selectedItem && (
+					<>
+						<div className="search-section">
+							<input
+								type="text"
+								placeholder="Sök efter namn eller produkt-ID..."
+								value={searchTerm}
+								onChange={(e) => setSearchTerm(e.target.value)}
+								className="search-input"
+							/>
+							<button onClick={handleSearch} className="search-btn">
+								Sök
+							</button>
 						</div>
-					))}
-				</div>
+
+					<div className="menu-items-list">
+						{menuItems.map((item: MenuItem) => (
+							<div
+								key={item.productId}
+								className="menu-item-card"
+								onClick={() => handleSelectItem(item)}>
+								<h3>{item.name}</h3>
+								<p>ID: {item.productId}</p>
+								<p>Pris: {item.price} kr</p>
+							</div>
+						))}
+					</div>
+					</>
+				)}
 
 				{selectedItem && (
-					<form onSubmit={handleSubmit} className="edit-form">
-						<h2>Redigera: {selectedItem.name}</h2>
-
-						<div className="form-group">
+					<>
+						<button 
+							onClick={() => {
+								setSelectedItem(null);
+								setFormData({
+									productId: '',
+									name: '',
+									type: '',
+									category: '',
+									description: '',
+									price: '0',
+									imageUrl: ''
+								});
+							}}
+							className="back-btn"
+						>
+							← Tillbaka till listan
+						</button>
+						<form onSubmit={handleSubmit} className="edit-form">
+						<h2>Redigera: {selectedItem.name}</h2>						<div className="form-group">
 							<label htmlFor="productId">Produkt ID:</label>
 							<input
 								type="text"
@@ -274,10 +313,11 @@ export const EditMenuPage = () => {
 								type="button"
 								onClick={handleDelete}
 								className="delete-btn">
-								Ta bort
-							</button>
-						</div>
-					</form>
+							Ta bort
+						</button>
+					</div>
+				</form>
+					</>
 				)}
 			</div>
 		</div>
