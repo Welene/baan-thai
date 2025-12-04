@@ -6,6 +6,7 @@ export function useCheckoutForm() {
     const [email, setEmail] = useState('');
     const [pickupTime, setPickupTime] = useState('now');
     const [paymentMethod, setPaymentMethod] = useState<'swish' | 'card'>('swish');
+    const [comment, setComment] = useState('');
     
     // Card info state
     const [cardNumber, setCardNumber] = useState('');
@@ -27,6 +28,7 @@ export function useCheckoutForm() {
         setEmail('');
         setPickupTime('now');
         setPaymentMethod('swish');
+        setComment('');
         setCardNumber('');
         setCardName('');
         setExpiryDate('');
@@ -48,6 +50,10 @@ export function useCheckoutForm() {
         paymentMethod,
         setPaymentMethod,
         
+        // Comment
+        comment,
+        setComment,
+        
         // Card info
         cardNumber,
         setCardNumber,
@@ -64,3 +70,5 @@ export function useCheckoutForm() {
         resetForm
     };
 }
+/* Changes made by: Tim */
+/* customer comment added */

@@ -6,6 +6,7 @@ interface ConfirmationModalProps {
     paymentMethod: 'swish' | 'card';
     email: string;
     error: string;
+    comment?: string;
     onClose: () => void;
     onRetry: () => void;
 }
@@ -18,6 +19,7 @@ export function ConfirmationModal({
     paymentMethod,
     email,
     error,
+    comment,
     onClose,
     onRetry
 }: ConfirmationModalProps) {
@@ -37,16 +39,24 @@ export function ConfirmationModal({
                             <p><strong>Ordernummer:</strong> {orderId}</p>
                             <p><strong>Totalsumma:</strong> {totalPrice} kr</p>
                             <p><strong>Betalmetod:</strong> {paymentMethod === 'card' ? 'Kort' : 'Swish'}</p>
+                            <p><strong>Beställd:</strong> {new Date().toLocaleString('sv-SE', { 
+                                year: 'numeric', 
+                                month: 'short', 
+                                day: 'numeric',
+                                hour: '2-digit',
+                                minute: '2-digit'
+                            })}</p>
+                            {comment && <p><strong>Kommentar:</strong> {comment}</p>}
                         </div>
                         <p className="confirmation-note">
                             En bekräftelse har skickats till {email}
                         </p>
                         <button
                             className="payment-modal__button payment-modal__button--submit"
-                            onClick={() => window.location.href = '/menu'}
+                            onClick={() => window.location.href = '/profile'}
                             type="button"
                         >
-                            Tillbaka till Menyn
+                            Se Min Beställning
                         </button>
                     </>
                 ) : (

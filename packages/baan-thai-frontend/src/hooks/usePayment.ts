@@ -18,6 +18,7 @@ interface PaymentData {
     deliveryMethod: string;
     pickupTime: string;
     paymentMethod: 'swish' | 'card';
+    comment?: string;
 }
 
 export function usePayment() {
@@ -44,7 +45,9 @@ export function usePayment() {
                 lastName: data.name.split(' ').slice(1).join(' ') || data.name,
                 email: data.email,
                 phoneNumber: parseInt(data.phone.replace(/\D/g, '')) || 0,
-                message: `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'}`,
+                message: data.comment 
+                    ? `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'} | Kommentar: ${data.comment}`
+                    : `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'}`,
                 totalPrice: data.totalPrice,
                 payment: [{ paymentType: data.paymentMethod }],
                 paymentStatus: 'paid',
@@ -61,7 +64,8 @@ export function usePayment() {
                 throw new Error('Kunde inte skapa order');
             }
 
-            setOrderId(orderResult.order.id);
+            console.log('Order result:', orderResult);
+            setOrderId(orderResult.order.orderId || orderResult.orderId || 'N/A');
             
             // Simulera kort fördröjning för realistisk känsla
             await new Promise(resolve => setTimeout(resolve, 1000));
@@ -136,3 +140,7 @@ export function usePayment() {
         resetPaymentState
     };
 }
+
+
+/* Changes made by: Tim */
+/* customer comment added*/
