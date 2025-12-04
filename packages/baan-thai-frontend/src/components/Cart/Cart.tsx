@@ -37,17 +37,17 @@ function Cart({
 	const handleCheckout = useCallback(() => {
 		// useCallBack only rerenders/changes the handleCheckout --> inside checkout button
 		
-		// Kolla om användaren är inloggad via localStorage
+		// Check if user is logged in - localStorage
 		const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
 		const isLoggedIn = currentUser && currentUser.userId;
 
 		if (!isLoggedIn) {
-			// Om ej inloggad: gå till login
+			// if not logged in redirect to login page
 			navigate('/login');
 		} else if (isCheckoutPage) {
-			navigate('/payment'); // när på checkout page i cart, går cart btn till payment page istället
+			navigate('/payment'); // when on checkout page in cart, cart button - > goes to payment page
 		} else {
-			// Om inloggad: gå till checkout
+			// if logged in: go to checkout
 			navigate('/checkout');
 		}
 	}, [navigate, isCheckoutPage]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
