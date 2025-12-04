@@ -1,7 +1,7 @@
 // API Configuration
 // Ändra USE_LOCAL till false för att använda AWS, true för localhost
 
-const USE_LOCAL = false; // Sätt till true för localhost eller false för aws serverless dployment
+const USE_LOCAL = true; // Sätt till true för localhost eller false för aws serverless dployment
 
 const API_URLS = {
   local: 'http://localhost:3000',

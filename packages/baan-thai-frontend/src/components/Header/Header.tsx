@@ -9,11 +9,12 @@ import type { User } from '../../interfaces/user';
 import { HeaderProps } from '../../interfaces/props';
 import NotificationBadge from '../NotificationBadge/NotificationBadge';
 import NotificationModal from '../NotificationModal/NotificationModal';
-import { notificationService } from '../../services/notificationService';
 import type { Notification } from '../../interfaces/notification';
+import { API_BASE_URL } from '../../config/api';
 
 function Header({ cartItemCount, onCartClick }: HeaderProps) {
-	const userString = localStorage.getItem('user');
+	// Försök först med 'currentUser', sedan 'user' som fallback
+	const userString = localStorage.getItem('currentUser') || localStorage.getItem('user');
 	// gets the user from localstorage and saves it in userString
 
 	const user: User | null = userString ? JSON.parse(userString) : null;
@@ -28,28 +29,59 @@ function Header({ cartItemCount, onCartClick }: HeaderProps) {
 	const [notifications, setNotifications] = useState<Notification[]>([]);
 	const [unreadCount, setUnreadCount] = useState(0);
 	const [isNotificationModalOpen, setIsNotificationModalOpen] = useState(false);
+	const [dismissedNotifications, setDismissedNotifications] = useState<Set<string>>(new Set());
 
 	// Hämta notifikationer när komponenten laddas och användaren är inloggad
 	useEffect(() => {
 		if (userId) {
 			fetchNotifications();
-			// Uppdatera notifikationer var 30:e sekund
-			const interval = setInterval(fetchNotifications, 30000);
+			// Uppdatera notifikationer var 10:e sekund för att kolla orderstatus
+			const interval = setInterval(fetchNotifications, 10000);
 			return () => clearInterval(interval);
 		}
-	}, [userId]);
+	}, [userId, dismissedNotifications]);
 
 	const fetchNotifications = async () => {
 		if (!userId) return;
 		
 		try {
-			const response = await notificationService.getNotifications(userId);
-			if (response.success) {
-				setNotifications(response.notifications);
-				setUnreadCount(response.unreadCount || 0);
+			// Hämta användarens orders istället
+			const response = await fetch(`${API_BASE_URL}/api/orders/${userId}`);
+			
+			if (response.ok) {
+				const data = await response.json();
+				const orders = data.orders || [];
+				
+				// Skapa notifikationer baserat på orderstatus
+				const orderNotifications = orders
+					.filter((order: any) => order.status !== 'pending')
+					.filter((order: any) => !dismissedNotifications.has(order.orderId))
+					.map((order: any) => {
+						const statusMessages: Record<string, string> = {
+							confirmed: `Din beställning #${order.orderId} har bekräftats!`,
+							preparing: `Din beställning #${order.orderId} förbereds i köket`,
+							ready: `Din beställning #${order.orderId} är klar för upphämtning!`,
+							completed: `Din beställning #${order.orderId} är slutförd`,
+							cancelled: `Din beställning #${order.orderId} har avbrutits`
+						};
+						
+						return {
+							notificationId: order.orderId,
+							orderId: order.orderId,
+							message: statusMessages[order.status] || `Order #${order.orderId} - ${order.status}`,
+							type: 'order_update',
+							isRead: false,
+							createdAt: order.updatedAt || order.createdAt
+						};
+					})
+					.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
+					.slice(0, 10); // Visa max 10 senaste
+				
+				setNotifications(orderNotifications);
+				setUnreadCount(orderNotifications.length);
 			}
 		} catch (error) {
-			console.error('Failed to fetch notifications:', error);
+			console.error('Failed to fetch order notifications:', error);
 		}
 	};
 
@@ -62,20 +94,14 @@ function Header({ cartItemCount, onCartClick }: HeaderProps) {
 	};
 
 	const handleMarkAsRead = async (notificationId: string) => {
-		try {
-			await notificationService.markAsRead(notificationId, userId);
-			// Uppdatera lokalt state
-			setNotifications(prev => 
-				prev.map(notif => 
-					notif.notificationId === notificationId 
-						? { ...notif, isRead: true }
-						: notif
-				)
-			);
-			setUnreadCount(prev => Math.max(0, prev - 1));
-		} catch (error) {
-			console.error('Failed to mark notification as read:', error);
-		}
+		// Lägg till i dismissed-listan så den inte kommer tillbaka
+		setDismissedNotifications(prev => new Set(prev).add(notificationId));
+		
+		// Ta bort notifikationen från listan när den klickas
+		setNotifications(prev => 
+			prev.filter(notif => notif.notificationId !== notificationId)
+		);
+		setUnreadCount(prev => Math.max(0, prev - 1));
 	};
 
 	return (
@@ -96,9 +122,9 @@ function Header({ cartItemCount, onCartClick }: HeaderProps) {
 						<img
 							src={manIcon}
 							alt="Profil ikon"
-							onClick={() => navigate(`/profile/${userId}`)}
+							onClick={() => navigate('/profile')}
 						/>
-						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ PROFILPAGE */}
+						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAMN PÅ PROFILPAGE */}
 					</figure>
 
 					<figure className="header__icon">

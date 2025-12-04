@@ -73,6 +73,7 @@ export const addOrder = async ({ userId, order, orderId = null, firstName, lastN
 
   try {
     await docClient.send(command);
+    
     return {
       success: true,
       orderId,
@@ -180,6 +181,7 @@ export const updateOrderStatus = async (orderId, status) => {
 
   try {
     const result = await docClient.send(command);
+    
     return { success: true, updatedOrder: result.Attributes };
   } catch (error) {
     return { success: false, message: `Error updating order status: ${error.message}` };
@@ -312,6 +314,7 @@ export const cancelOrder = async (orderId, userId) => {
 
   try {
     const result = await docClient.send(command);
+    
     return { success: true, cancelledOrder: result.Attributes };
   } catch (error) {
     console.error(`Error cancelling order ${orderId}:`, error.message);
