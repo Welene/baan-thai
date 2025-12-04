@@ -24,6 +24,7 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
         email, setEmail,
         pickupTime, setPickupTime,
         paymentMethod, setPaymentMethod,
+        comment, setComment,
         cardNumber, setCardNumber,
         cardName, setCardName,
         expiryDate, setExpiryDate,
@@ -59,7 +60,8 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
                 totalPrice,
                 deliveryMethod,
                 pickupTime,
-                paymentMethod
+                paymentMethod,
+                comment
             },
             validateCustomerInfo
         );
@@ -75,7 +77,8 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
                 totalPrice,
                 deliveryMethod,
                 pickupTime,
-                paymentMethod
+                paymentMethod,
+                comment
             },
             validateCardInfo
         );
@@ -109,6 +112,7 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
                 paymentMethod={paymentMethod}
                 email={email}
                 error={error}
+                comment={comment}
                 onClose={() => setShowConfirmation(false)}
                 onRetry={() => {
                     setShowConfirmation(false);
@@ -197,6 +201,25 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
                             onEmailChange={setEmail}
                         />
 
+                        {/* COMMENT SECTION */}
+                        <div className="comment-section">
+                            <label htmlFor="order-comment" className="comment-section__label">
+                                Kommentar till beställningen (valfritt)
+                            </label>
+                            <textarea
+                                id="order-comment"
+                                className="comment-section__textarea"
+                                placeholder="T.ex. allergier, specialönskemål..."
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                rows={3}
+                                maxLength={500}
+                            />
+                            <span className="comment-section__counter">
+                                {comment.length}/500
+                            </span>
+                        </div>
+
                         {/* PAYMENT SECTION */}
                         <div className="icontxt-container">
                             <figure className="order-section__icon">
@@ -257,3 +280,6 @@ export default CheckoutPage;
 
 /* Changes made by: Sunsanee */
 /* Refactored with custom hooks and separate components */
+
+/* Changes made by: Tim */
+/* Added customer comment field */

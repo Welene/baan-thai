@@ -36,17 +36,21 @@ function Cart({
 
 	const handleCheckout = useCallback(() => {
 		// useCallBack only rerenders/changes the handleCheckout --> inside checkout button
+		
+		// Kolla om användaren är inloggad via localStorage
+		const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
+		const isLoggedIn = currentUser && currentUser.userId;
 
-		if (!user || !user.userId) {
-			// so if the user is not logged in:
-			navigate('/register'); // useCallBack changes the checkout button to know that and send them to login
+		if (!isLoggedIn) {
+			// Om ej inloggad: gå till login
+			navigate('/login');
 		} else if (isCheckoutPage) {
-			navigate('/payment'); // when on checkout page in cart, the cart btn navigates to payment page instead
+			navigate('/payment'); // när på checkout page i cart, går cart btn till payment page istället
 		} else {
-			// or if logged in:
-			navigate('/checkout'); // updates it to /checkout
+			// Om inloggad: gå till checkout
+			navigate('/checkout');
 		}
-	}, [user, navigate, isCheckoutPage]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
+	}, [navigate, isCheckoutPage]); // [] DEPENDENCIES: useCallback then has to be dependent on the user (logged in or not) & on the navigation because nav changes
 
 	return (
 		<>
@@ -135,3 +139,7 @@ function Cart({
 export default Cart;
 
 // Helene
+
+
+/* Changes by: Tim */
+/* if logged in redirect to orderpage if not redirect to loginpage */
