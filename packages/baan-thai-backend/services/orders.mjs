@@ -1,6 +1,6 @@
 import { docClient } from "./clients.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
-import { generateId } from "../utils/uuid.mjs";
+import { generateOrderId } from "../utils/orderIdGenerator.mjs";
 import { queryMenuItem } from "../functions/queryMenuItem.mjs";
 
 // GET alla orders
@@ -29,7 +29,7 @@ export const getAllOrders = async () => {
 export const addOrder = async ({ userId, order, orderId = null, firstName, lastName, email, phoneNumber, message, payment, paymentStatus }) => {
   // Skapa orderId om det saknas
   if (!orderId) {
-    orderId = generateId(8);
+    orderId = await generateOrderId();
   }
 
   // Säkerhetscheck (ifall någon item saknar price eller quantity)

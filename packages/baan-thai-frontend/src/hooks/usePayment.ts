@@ -61,7 +61,7 @@ export function usePayment() {
                 throw new Error('Kunde inte skapa order');
             }
 
-            setOrderId(orderResult.order.id);
+            setOrderId(orderResult.order.orderId || orderResult.orderId || 'N/A');
             
             // Simulera kort fördröjning för realistisk känsla
             await new Promise(resolve => setTimeout(resolve, 1000));
