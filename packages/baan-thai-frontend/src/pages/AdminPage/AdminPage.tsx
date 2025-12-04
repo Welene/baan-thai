@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import OrderCard from "../OrderAdminCard/OrderAdminCard";
-
+import { AdminNavBar } from "../../components/AdminNavBar/AdminNavBar";
 
 type OrderItem = {
   name: string;
@@ -23,7 +23,7 @@ const AdminPage: React.FC = () => {
 
   // fetch all orders made, from the backend get all orders endpoint
   useEffect(() => {
-    fetch("http://localhost:3000/api/orders") // later --> AWS URL
+    fetch("https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders") // later --> AWS URL
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched orders:", data);
@@ -42,9 +42,9 @@ const AdminPage: React.FC = () => {
     return "overdue";
   };
 
-  // vonfirms order with the help of the backend status changer
+  // confirms order with the help of the backend status changer
   const handleConfirm = async (orderId: string) => {
-    await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+    await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirmed" }),
@@ -75,6 +75,7 @@ const AdminPage: React.FC = () => {
 
   return (
     <section className="admin-page">
+      <AdminNavBar />
       <h1 className="admin-page__heading">Alla ordrer</h1>
 
       <section className="orders-container">

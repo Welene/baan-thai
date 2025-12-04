@@ -5,19 +5,20 @@ import Layout from '../components/Layout/Layout';
 import LandingPage from '../pages/landingPage/landingPage';
 import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
-import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
+import { AboutUsPage } from '../pages/AboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { User } from '../interfaces/user';
+import AdminPage from '../pages/AdminPage/AdminPage';
 import { AdminMenuPage } from '../pages/AdminPage/CreateNewMenu/AdminMenuPage';
 import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute';
+
 
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';
 import LoginPage from '../pages/LoginPage/LoginPage';
-import AdminPage from '../pages/AdminPage/AdminPage';
 
 export default function AppRouter() {
 	// MOVE THIS TO ANOTHER FOLDER LATER AND IMPORT HERE, for now this is here
@@ -104,35 +105,42 @@ export default function AppRouter() {
 					/>
 					<Route path="/profile" element={<ProfilePage />} />
 
-				<Route 
-					path="/admin/menu" 
-					element={
-						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-							<AdminMenuPage />
-						</ProtectedRoute>
-					} 
-				/>
+					<Route 
+						path="/admin" 
+						element={
+							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+								<AdminPage />
+							</ProtectedRoute>
+						} 
+					/>
 
-				<Route 
-					path="/admin/menu/edit" 
-					element={
-						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-							<EditMenuPage />
-						</ProtectedRoute>
-					} 
-				/>
+					<Route 
+						path="/admin/menu" 
+						element={
+							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+								<AdminMenuPage />
+							</ProtectedRoute>
+						} 
+					/>
 
-				<Route path="/admin" element={<AdminPage />} />
+					<Route 
+						path="/admin/menu/edit" 
+						element={
+							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+								<EditMenuPage />
+							</ProtectedRoute>
+						} 
+					/>
 
-				<Route
-                        path="/checkout"
-                        element={
-                            <CheckoutPage
-                                cartItems={cartItems}
-                            />
-                        }
-                    />
-                </Route>
+					<Route
+						path="/checkout"
+						element={
+							<CheckoutPage
+								cartItems={cartItems}
+							/>
+						}
+					/>
+				</Route>
 			</Routes>
 		</BrowserRouter>
 	);

@@ -37,7 +37,7 @@ export const AdminMenuPage = () => {
 		};
 
 		try {
-			const response = await fetch('http://localhost:3000/api/menu', {
+			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu', {
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
