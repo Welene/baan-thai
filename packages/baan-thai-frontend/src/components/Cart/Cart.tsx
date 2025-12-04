@@ -9,7 +9,6 @@ function Cart({
 	cartItems,
 	setCartItems,
 	onClose,
-	user,
 	mode = 'popup', // it is popup menu in header
 	isCheckoutPage = false, // since cart is REUSED on checkoutpage, and I changed the BETALA btn (that normally navs to reg/checkout), when you ARE in checkout, the btn changes with the help of this prop, so the btn's function can change into navigate to payment page instead of the old register/checkout navigation
 }: CartPropsExtra & { user: User | null }) {

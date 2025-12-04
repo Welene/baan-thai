@@ -76,7 +76,7 @@ const AdminPage: React.FC = () => {
   return (
     <section className="admin-page">
       <AdminNavBar />
-      <h1 className="admin-page__heading">Alla ordrer</h1>
+      <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
         {orders.map((order) => (
