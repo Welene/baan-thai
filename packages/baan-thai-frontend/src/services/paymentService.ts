@@ -18,8 +18,10 @@ interface OrderData {
 
 interface OrderResponse {
     success: boolean;
+    orderId?: string;
     order: {
-        id: string;
+        orderId?: string;
+        id?: string;
         [key: string]: any;
     };
 }
