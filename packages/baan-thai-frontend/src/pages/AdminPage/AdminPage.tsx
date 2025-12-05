@@ -7,6 +7,7 @@ type OrderItem = {
   quantity: number;
   code: string;
   price: number;
+  productId: string;
 };
 
 
@@ -58,6 +59,18 @@ const AdminPage: React.FC = () => {
     );
   };
 
+const handleRemoveOrder = async (orderId: string) => {
+  await fetch(`/api/orders/${orderId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status: "done" }),
+    headers: { "Content-Type": "application/json" },
+  });
+
+
+  setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
+};
+
+
   // waitStatus (colors) is updated by setInterval every min
   useEffect(() => {
     const interval = setInterval(() => {
@@ -76,6 +89,7 @@ const AdminPage: React.FC = () => {
   return (
     <section className="admin-page">
       <AdminNavBar />
+      
       <h1 className="admin-page__heading">Alla ordrer</h1>
 
       <section className="orders-container">
@@ -87,6 +101,7 @@ const AdminPage: React.FC = () => {
             waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
             items={order.order}
             onConfirm={handleConfirm} // connect handleConfirm to confirm-btn on order item
+            onRemove={handleRemoveOrder}
           />
         ))}
       </section>
