@@ -6,6 +6,7 @@ type OrderItem = {
   quantity: number;  
   code: string;
   price: number;
+  productId: string;
 };
 
 type OrderCardProps = {
@@ -13,10 +14,11 @@ type OrderCardProps = {
   status: "pending" | "confirmed" | "done";
   waitStatus?: "new" | "waiting" | "overdue";
   items: OrderItem[];
-  onConfirm?: (orderId: string) => void;  
+  onConfirm?: (orderId: string) => void;
+  onRemove?: (orderId: string) => void;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm }) => {
+const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove }) => {
   // base className + status + waitstatus
   let className = "order";
 
