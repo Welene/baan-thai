@@ -60,20 +60,11 @@ const AdminPage: React.FC = () => {
   };
 
 const handleRemoveOrder = async (orderId: string) => {
-
   await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
     method: "PUT",
-
-  await fetch(`/api/orders/${orderId}`, {
-    method: "PATCH",
-
     body: JSON.stringify({ status: "done" }),
     headers: { "Content-Type": "application/json" },
   });
-
-
-
-
 
   setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
 };
