@@ -47,3 +47,6 @@ export const generateOrderId = async () => {
     return `${Date.now()}-${Math.floor(Math.random() * 1000)}`;
   }
 };
+
+/* Författare: Tim */
+/* Genererar ordernummer för ordrar, börjar på 1001 */

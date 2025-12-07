@@ -1,8 +1,8 @@
 import middy from '@middy/core';
 import httpJsonBodyPaser from '@middy/http-json-body-parser';
-import { sendResponse } from '../responses/response.mjs';
-import { errorHandler } from '../middlewares/errorHandler';
-import { validatePayment } from '../middlewares/validatePayment';
+import { sendResponse } from '../../responses/response.mjs';
+import { errorHandler } from '../../middlewares/errorHandler.mjs';
+import { validatePayment } from '../../middlewares/payment/validatePayment.js';
 
 const processPaymentHandler = async (event) => {
     const { orderId, paymentMethod } = event.body;
