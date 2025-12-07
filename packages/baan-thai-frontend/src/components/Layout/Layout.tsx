@@ -1,12 +1,11 @@
 import { Outlet } from 'react-router-dom';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import { HeaderProps } from '../../interfaces/props';
 
-export default function Layout({ cartItemCount, onCartClick }: HeaderProps) {
+export default function Layout() {
 	return (
 		<>
-			<Header cartItemCount={cartItemCount} onCartClick={onCartClick} />
+			<Header />
 			<main>
 				<Outlet />
 			</main>
