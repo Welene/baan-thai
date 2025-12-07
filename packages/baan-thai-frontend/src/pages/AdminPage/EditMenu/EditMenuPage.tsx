@@ -166,7 +166,7 @@ export const EditMenuPage = () => {
 		<div className="edit-menu-page">
 			<AdminNavBar />
 			<div className="admin-content">
-				<h1>Redigera menyobjekt</h1>
+				<h1>Redigera meny</h1>
 
 				{!selectedItem && (
 					<>

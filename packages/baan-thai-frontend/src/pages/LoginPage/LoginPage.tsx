@@ -72,7 +72,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 			// Redirect based on user role
 			setTimeout(() => {
 				if (userToStore.role === 'admin') {
-					navigate('/admin/menu');
+					navigate('/admin');
 				} else {
 					navigate('/landing');
 				}

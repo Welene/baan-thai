@@ -73,3 +73,6 @@ export const handler = middy(async (event) => {
     });
   }
 }).use(errorHandler());
+
+// Författare: Tim
+// Markerar alla notifikationer som lästa för en användare

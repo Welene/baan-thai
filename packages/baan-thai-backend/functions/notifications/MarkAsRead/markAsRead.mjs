@@ -49,3 +49,7 @@ export const handler = middy(async (event) => {
 })
   .use(httpJsonBodyParser())
   .use(errorHandler());
+
+
+  // Författare: Tim
+  // Markerar en notifikation som läst för en användare

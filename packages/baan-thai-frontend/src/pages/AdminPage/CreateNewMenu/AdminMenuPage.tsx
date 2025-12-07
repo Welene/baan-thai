@@ -70,7 +70,7 @@ export const AdminMenuPage = () => {
 		<div className="admin-menu-page">
 			<AdminNavBar />
 			<div className="admin-content">
-				<h1>Skapa ny menyobjekt</h1>
+				<h1>Skapa ny meny</h1>
 				<form onSubmit={handleSubmit} className="menu-form">
 					<div className="form-group">
 						<label htmlFor="productId">Produkt ID:</label>

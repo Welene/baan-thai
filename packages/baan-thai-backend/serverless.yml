@@ -45,35 +45,35 @@ functions:
 
   #  -------------------MENU---------------------
   getMenu: # get all meals from the menu
-    handler: functions/getMenu.handler
+    handler: functions/menu/getMenu.handler
     events:
       - httpApi:
           path: /api/menu
           method: GET
 
   getProduct: # gets a single menu item
-    handler: functions/getProduct.handler
+    handler: functions/menu/getProduct.handler
     events:
       - httpApi:
           path: /api/menu/{prodId}
           method: GET
 
   createMenuItem: # add a new meal to menu
-    handler: functions/createMenuItem.handler
+    handler: functions/menu/createMenuItem.handler
     events:
       - httpApi:
           path: /api/menu
           method: POST
 
   updateMenuItem: # change a meal in menu
-    handler: functions/updateMenuItem.handler
+    handler: functions/menu/updateMenuItem.handler
     events:
       - httpApi:
           path: /api/menu/{prodId}
           method: PUT
 
   deleteMenuItem: # removes menu product (menu item === a meal)
-    handler: functions/deleteMenuItem.handler
+    handler: functions/menu/deleteMenuItem.handler
     events:
       - httpApi:
           path: /api/menu/{prodId}

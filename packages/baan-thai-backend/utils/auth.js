@@ -15,3 +15,6 @@ function verifyToken(token) {
 }
 
 module.exports = { createToken, verifyToken };
+
+/* Författare: Tim */
+/* Hanterar skapande och verifiering av JWT-tokens */
