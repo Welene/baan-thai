@@ -2,18 +2,16 @@ import { API_BASE_URL } from '../config/api';
 
 interface OrderData {
     userId: string;
+    order: Array<{
+        productId: number;
+        quantity: number;
+    }>;
     firstName?: string;
     lastName?: string;
     email?: string;
     phoneNumber?: number;
     message?: string;
-    totalPrice?: number;
-    payment?: Array<{ paymentType: string }>;
-    paymentStatus?: string;
-    order: Array<{
-        productId: number;
-        quantity: number;
-    }>;
+    paymentStatus?: 'pending' | 'paid' | 'failed';
 }
 
 interface OrderResponse {

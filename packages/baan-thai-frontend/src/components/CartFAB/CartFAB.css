@@ -1,0 +1,86 @@
+.cart-fab {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    border: none;
+    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4),
+                0 8px 24px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cart-fab:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(139, 69, 19, 0.5),
+                0 12px 32px rgba(0, 0, 0, 0.3);
+}
+
+.cart-fab:active {
+    transform: scale(0.95);
+}
+
+.cart-fab__icon {
+    width: 32px;
+    height: 32px;
+    filter: brightness(0) invert(1);
+    /* makes icon white */
+}
+
+.cart-fab__badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    background: #DC143C;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    min-width: 20px;
+    height: 20px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 6px;
+    box-shadow: 0 2px 8px rgba(220, 20, 60, 0.4);
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+    .cart-fab {
+        width: 56px;
+        height: 56px;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .cart-fab__icon {
+        width: 28px;
+        height: 28px;
+    }
+
+    .cart-fab__badge {
+        font-size: 11px;
+        min-width: 18px;
+        height: 18px;
+    }
+}
+
+/* Create by: Sunsanee */

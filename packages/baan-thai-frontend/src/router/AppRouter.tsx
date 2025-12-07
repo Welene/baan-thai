@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import CheckoutPage from '../pages/CheckoutPage/CheckoutPage';
 import Cart from '../components/Cart/Cart';
+import CartFAB from '../components/CartFAB/CartFAB';
 import Layout from '../components/Layout/Layout';
 import LandingPage from '../pages/landingPage/landingPage';
 import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
@@ -62,14 +63,16 @@ export default function AppRouter() {
 					mode="popup"
 				/>
 			)}
+			
+			{/* Floating Action Button - alltid synlig */}
+			<CartFAB 
+				itemCount={cartItems.length}
+				onClick={() => setCartOpen(!cartOpen)}
+			/>
+			
 			<Routes>
 				<Route
-					element={
-						<Layout
-							cartItemCount={cartItems.length}
-							onCartClick={() => setCartOpen(!cartOpen)}
-						/>
-					}>
+					element={<Layout />}>
 					<Route
 						path="/"
 						element={<Navigate to="/landing" replace />}

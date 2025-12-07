@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import manIcon from '../../assets/man.png';
-import basketIcon from '../../assets/basket.png';
 import bellIcon from '../../assets/bell.png';
 import { useNavigate } from 'react-router-dom';
 import type { User } from '../../interfaces/user';
-import { HeaderProps } from '../../interfaces/props';
 import NotificationBadge from '../NotificationBadge/NotificationBadge';
 import NotificationModal from '../NotificationModal/NotificationModal';
 import type { Notification } from '../../interfaces/notification';
 import { API_BASE_URL } from '../../config/api';
 
-function Header({ cartItemCount, onCartClick }: HeaderProps) {
+function Header() {
 	// Försök först med 'currentUser', sedan 'user' som fallback
 	const userString = localStorage.getItem('currentUser') || localStorage.getItem('user');
 	// gets the user from localstorage and saves it in userString
@@ -126,16 +124,6 @@ function Header({ cartItemCount, onCartClick }: HeaderProps) {
 						/>
 						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAMN PÅ PROFILPAGE */}
 					</figure>
-
-					<figure className="header__icon">
-						<img
-							src={basketIcon}
-							alt="Handlekurv ikon"
-							onClick={onCartClick}
-						/>
-						{/* /cart = PATH TIL CARTPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ PARTPAGE */}
-					</figure>
-
 					<figure className="header__icon header__icon--notification">
 						<img
 							src={bellIcon}

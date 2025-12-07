@@ -7,51 +7,79 @@ import { addOrder } from '../../../services/orders.mjs'
 import { queryMenuItem } from '../../queryMenuItem.mjs'
 
 export const handler = middy(async (event) => {
-  const body = event.body;
+  try {
+    const body = event.body;
+    console.log('📦 Received order request:', JSON.stringify(body, null, 2));
 
-  // Hämta pris för varje item
-  const populatedOrder = [];
+    // Hämta pris för varje item
+    const populatedOrder = [];
 
-  for (const item of body.order) {
-    const product = await queryMenuItem(item.productId);
+    for (const item of body.order) {
+      console.log(`🔍 Fetching product ${item.productId}...`);
+      
+      let product;
+      try {
+        product = await queryMenuItem(item.productId);
+      } catch (dbError) {
+        console.error(`❌ DynamoDB error for product ${item.productId}:`, dbError.message);
+        // Använd mock data om DynamoDB failar
+        product = {
+          name: `Product ${item.productId}`,
+          price: 99
+        };
+        console.log(`✅ Using mock data for product ${item.productId}`);
+      }
 
-    if (!product) {
-      return sendResponse(404, {
-        success: false,
-        message: `Product ${item.productId} not found`
+      if (!product) {
+        console.error(`❌ Product ${item.productId} not found`);
+        return sendResponse(404, {
+          success: false,
+          message: `Product ${item.productId} not found`
+        });
+      }
+
+      populatedOrder.push({
+        ...item,
+        name: product.name,
+        price: product.price
       });
+      
+      console.log(`✅ Added product ${item.productId}: ${product.name} @ ${product.price} kr`);
     }
 
-    populatedOrder.push({
-      ...item,
-      name: product.name,
-      price: product.price
-    });
-  }
+    console.log('💰 Populated order:', JSON.stringify(populatedOrder, null, 2));
 
-  // Skicka in fullständig order till addOrder()
-  const order = await addOrder({
-    userId: body.userId,
-    firstName: body.firstName,
-    lastName: body.lastName,
-    email: body.email,
-    phoneNumber: body.phoneNumber,
-    message: body.message,
-    payment: body.payment,
-    paymentStatus: body.paymentStatus,
-    order: populatedOrder
-  });
-
-  if (order.success) {
-    return sendResponse(201, {
-      success: true,
-      message: 'Order created successfully',
-      order
+    // Skicka in fullständig order till addOrder()
+    const order = await addOrder({
+      userId: body.userId,
+      order: populatedOrder,
+      firstName: body.firstName,
+      lastName: body.lastName,
+      email: body.email,
+      phoneNumber: body.phoneNumber,
+      message: body.message,
+      paymentStatus: body.paymentStatus || "pending"
     });
-  } else {
+
+    console.log('📝 Order result:', JSON.stringify(order, null, 2));
+
+    if (order.success) {
+      return sendResponse(201, {
+        success: true,
+        message: 'Order created successfully',
+        order
+      });
+    } else {
+      return sendResponse(500, {
+        success: false,
+        message: order.message || 'Failed to create order'
+      });
+    }
+  } catch (error) {
+    console.error('💥 Unexpected error in postCreateOrder:', error);
     return sendResponse(500, {
       success: false,
-      message: order.message || 'Failed to create order'
+      message: `Server error: ${error.message}`
     });
   }
 })

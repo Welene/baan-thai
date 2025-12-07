@@ -48,9 +48,7 @@ export function usePayment() {
                 message: data.comment 
                     ? `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'} | Kommentar: ${data.comment}`
                     : `${data.deliveryMethod === 'pickup' ? 'Avhämtning' : 'Leverans'} - ${data.pickupTime === 'now' ? 'Direkt' : 'Senare'}`,
-                totalPrice: data.totalPrice,
-                payment: [{ paymentType: data.paymentMethod }],
-                paymentStatus: 'paid',
+                paymentStatus: 'paid' as const,
                 order: data.cartItems.map(item => ({
                     productId: item.id,
                     quantity: item.quantity
@@ -141,6 +139,6 @@ export function usePayment() {
     };
 }
 
-
+/* Create by: Sunsanee */
 /* Changes made by: Tim */
 /* customer comment added*/
