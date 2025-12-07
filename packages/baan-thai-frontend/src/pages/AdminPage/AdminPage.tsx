@@ -60,11 +60,19 @@ const AdminPage: React.FC = () => {
   };
 
 const handleRemoveOrder = async (orderId: string) => {
+
+  await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
+    method: "PUT",
+
   await fetch(`/api/orders/${orderId}`, {
     method: "PATCH",
+
     body: JSON.stringify({ status: "done" }),
     headers: { "Content-Type": "application/json" },
   });
+
+
+
 
 
   setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
@@ -89,8 +97,7 @@ const handleRemoveOrder = async (orderId: string) => {
   return (
     <section className="admin-page">
       <AdminNavBar />
-      
-      <h1 className="admin-page__heading">Alla ordrer</h1>
+      <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
         {orders.map((order) => (
@@ -112,3 +119,5 @@ const handleRemoveOrder = async (orderId: string) => {
 export default AdminPage;
 
 // Helene
+
+//edit:Tim fixed wrong url for handelRomoveOrder

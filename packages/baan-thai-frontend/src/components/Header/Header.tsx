@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import manIcon from '../../assets/man.png';
@@ -12,7 +12,7 @@ import NotificationModal from '../NotificationModal/NotificationModal';
 import type { Notification } from '../../interfaces/notification';
 import { API_BASE_URL } from '../../config/api';
 
-function Header({ cartItemCount, onCartClick }: HeaderProps) {
+function Header({ cartItemCount: _cartItemCount, onCartClick }: HeaderProps) {
 	// Försök först med 'currentUser', sedan 'user' som fallback
 	const userString = localStorage.getItem('currentUser') || localStorage.getItem('user');
 	// gets the user from localstorage and saves it in userString
