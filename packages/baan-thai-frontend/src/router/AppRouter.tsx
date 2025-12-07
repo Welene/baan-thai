@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import CheckoutPage from '../pages/CheckoutPage/CheckoutPage';
 import Cart from '../components/Cart/Cart';
 import CartFAB from '../components/CartFAB/CartFAB';
@@ -20,6 +20,22 @@ import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';
 import LoginPage from '../pages/LoginPage/LoginPage';
+
+function CartFABWrapper({ cartItems, cartOpen, setCartOpen }: { cartItems: CartItem[], cartOpen: boolean, setCartOpen: (open: boolean) => void }) {
+	const location = useLocation();
+	const hideCartOnRoutes = ['/admin', '/admin/menu', '/admin/menu/edit'];
+	
+	if (hideCartOnRoutes.includes(location.pathname)) {
+		return null;
+	}
+	
+	return (
+		<CartFAB 
+			itemCount={cartItems.length}
+			onClick={() => setCartOpen(!cartOpen)}
+		/>
+	);
+}
 
 export default function AppRouter() {
 	// MOVE THIS TO ANOTHER FOLDER LATER AND IMPORT HERE, for now this is here
@@ -64,10 +80,11 @@ export default function AppRouter() {
 				/>
 			)}
 			
-			{/* Floating Action Button - alltid synlig */}
-			<CartFAB 
-				itemCount={cartItems.length}
-				onClick={() => setCartOpen(!cartOpen)}
+			{/* Floating Action Button - döljs på admin-sidor */}
+			<CartFABWrapper 
+				cartItems={cartItems}
+				cartOpen={cartOpen}
+				setCartOpen={setCartOpen}
 			/>
 			
 			<Routes>
