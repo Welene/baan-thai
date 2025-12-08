@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { API_BASE_URL } from '../../config/api';
 import { cancelOrder } from '../../services/paymentService';
+import { EditOrderModal } from './EditOrderModal';
 import './ProfilePage.css';
 
 interface Order {
@@ -30,6 +31,8 @@ function ProfilePage() {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState(true);
   const [cancellingOrderId, setCancellingOrderId] = useState<string | null>(null);
+  const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
+  const [editingOrderItems, setEditingOrderItems] = useState<any[]>([]);
 
   // Hämta användare från localStorage (satt vid inloggning)
   const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
@@ -52,6 +55,11 @@ function ProfilePage() {
     }
 
     fetchOrders();
+    
+    // Hämta ordrar varje 10 sekund för att se uppdateringar från köket
+    const interval = setInterval(fetchOrders, 10000);
+    
+    return () => clearInterval(interval);
   }, [userId, navigate]);
 
   const fetchOrders = async () => {
@@ -133,6 +141,21 @@ function ProfilePage() {
     }
   };
 
+  const handleEditOrder = (orderId: string, currentOrder: any) => {
+    setEditingOrderId(orderId);
+    setEditingOrderItems(currentOrder);
+  };
+
+  const handleEditOrderClose = () => {
+    setEditingOrderId(null);
+    setEditingOrderItems([]);
+  };
+
+  const handleEditOrderSuccess = () => {
+    // Uppdatera order-listan efter redigering
+    fetchOrders();
+  };
+
   if (loading) {
     return (
       <div className="profile-page">
@@ -195,6 +218,13 @@ function ProfilePage() {
                   {order.status === 'pending' && (
                     <div className="order-actions">
                       <button
+                        className="edit-order-btn"
+                        onClick={() => handleEditOrder(order.orderId, order.order)}
+                        disabled={editingOrderId === order.orderId}
+                      >
+                        {editingOrderId === order.orderId ? 'Redigerar...' : 'Ändra beställning'}
+                      </button>
+                      <button
                         className="cancel-order-btn"
                         onClick={() => handleCancelOrder(order.orderId)}
                         disabled={cancellingOrderId === order.orderId}
@@ -208,6 +238,17 @@ function ProfilePage() {
             </ul>
           )}
         </section>
+
+        {/* Edit Order Modal */}
+        {editingOrderId && (
+          <EditOrderModal
+            isOpen={!!editingOrderId}
+            orderId={editingOrderId}
+            currentItems={editingOrderItems}
+            onClose={handleEditOrderClose}
+            onSuccess={handleEditOrderSuccess}
+          />
+        )}
       </div>
     </div>
   );
@@ -216,4 +257,4 @@ function ProfilePage() {
 export default ProfilePage;
 
 /* Författare: Tim */
-/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders */
+/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras */
