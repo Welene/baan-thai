@@ -127,12 +127,19 @@ function Header() {
 			<section className="header__options-section">
 				<section className="header__icons">
 					<figure className="header__icon header__icon--profile">
-						{userId && (
+						{userId ? (
 							<button
 								className="header__logout-btn"
 								onClick={handleLogout}
 							>
 								Logga ut
+							</button>
+						) : (
+							<button
+								className="header__login-btn"
+								onClick={() => navigate('/login')}
+							>
+								Logga in
 							</button>
 						)}
 						<img
