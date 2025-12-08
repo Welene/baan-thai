@@ -67,11 +67,9 @@ const AdminPage: React.FC = () => {
 
 const handleRemoveOrder = async (orderId: string) => {
   await fetch(`/api/orders/${orderId}`, {
-    method: "PATCH",
-    body: JSON.stringify({ status: "done" }),
+    method: "DELETE",
     headers: { "Content-Type": "application/json" },
   });
-
 
   setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
 };
