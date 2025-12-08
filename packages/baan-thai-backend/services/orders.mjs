@@ -321,3 +321,6 @@ export const cancelOrder = async (orderId, userId) => {
     return { success: false, message: `Error cancelling order: ${error.message}` };
   }
 };
+
+/* Författare: Tim */
+/*Hanterar all order-logik: skapa, hämta, uppdatera, radera och avbryta orders */

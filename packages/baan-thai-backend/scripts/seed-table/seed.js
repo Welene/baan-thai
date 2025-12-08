@@ -76,3 +76,6 @@ run().catch(err => {
   console.error('Seed failed:', err.message || err);
   process.exit(1);
 });
+
+/* Författare: Tim */
+/* Seedar DynamoDB-tabellen med testdata från seed-data.json */

@@ -241,4 +241,8 @@ export default function ThaiMenuPage({
 	);
 }
 
+
+
+/* Författare: Tim */
+/*  visar thailändska menyn med kategorinavigering */
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/ comp. - Helene

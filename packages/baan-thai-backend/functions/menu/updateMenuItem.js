@@ -123,3 +123,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/* Författare: Tim */
+/* Uppdaterar menyprodukt i DynamoDB */

@@ -63,3 +63,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/* Författare: Tim */
+/* hämtar alla menyprodukter från DynamoDB */

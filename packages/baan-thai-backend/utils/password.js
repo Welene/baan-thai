@@ -11,3 +11,6 @@ async function compare(password, stored) {
 }
 
 module.exports = { hash, compare };
+
+/* Författare: Tim */
+/* hanterar lösenords-hashing och jämförelse med bcrypt */

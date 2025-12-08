@@ -17,3 +17,6 @@ function NotificationBadge({ count }: NotificationBadgeProps) {
 }
 
 export default NotificationBadge;
+
+/* Författare: Tim */
+/* Visar notifikations-badge med antal olästa notiser */

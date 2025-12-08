@@ -214,3 +214,6 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+/* Författare: Tim */
+/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders */
