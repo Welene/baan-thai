@@ -20,7 +20,6 @@ type Order = {
   order: OrderItem[];
   message?: string; // meddelanden från kund
   adminMessages?: string; // meddelanden från admin
-  userId: string;
 };
 
 const AdminPage: React.FC = () => {
@@ -66,15 +65,17 @@ const AdminPage: React.FC = () => {
     );
   };
 
-  const handleRemoveOrder = async (orderId: string) => {
-    await fetch(`/api/orders/${orderId}`, {
-      method: "PATCH",
-      body: JSON.stringify({ status: "done" }),
-      headers: { "Content-Type": "application/json" },
-    });
+const handleRemoveOrder = async (orderId: string) => {
+  await fetch(`/api/orders/${orderId}`, {
+    method: "PATCH",
+    body: JSON.stringify({ status: "done" }),
+    headers: { "Content-Type": "application/json" },
+  });
 
-    setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
-  };
+
+  setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
+};
+
 
   // waitStatus (colors) is updated by setInterval every min
   useEffect(() => {
@@ -104,50 +105,35 @@ const AdminPage: React.FC = () => {
   };
 
   const handleSendMessage = async (orderId: string) => {
-    if (!popupMessage.trim() || !selectedOrder) {
+    if (!popupMessage.trim()) {
       alert("Meddelande kan inte vara tomt");
       return;
     }
 
     try {
-      const response = await fetch(
-        `https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}`,
-        {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            adminMessages: popupMessage,  // skicka som sträng
-            userId: selectedOrder.userId,
-          }),
-        }
-      );
+      const response = await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ adminMessages: popupMessage }),
+      });
 
       if (response.ok) {
-        const data = await response.json();
-        console.log("Message sent successfully:", data);
-        alert("Meddelande skickat!");
+        // Ladda om alla orders från backend för att få uppdaterade meddelanden
+        const ordersResponse = await fetch("https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders");
+        const ordersData = await ordersResponse.json();
+        setOrders(ordersData.orders || []);
 
-        // Uppdatera selectedOrder lokalt
-        setSelectedOrder({ ...selectedOrder, adminMessages: popupMessage });
-
-        // Uppdatera orderlistan lokalt
-        setOrders((prevOrders) =>
-          prevOrders.map((o) =>
-            o.orderId === orderId ? { ...o, adminMessages: popupMessage } : o
-          )
-        );
-      } else {
-        let errorData;
-        try {
-          errorData = await response.json();
-        } catch {
-          errorData = { message: "Okänt fel" };
+        // Uppdatera selectedOrder med nya data och fyll textarea med sparat meddelande
+        const updatedOrder = ordersData.orders?.find((o: Order) => o.orderId === orderId);
+        if (updatedOrder) {
+          setSelectedOrder(updatedOrder);
+          setPopupMessage(updatedOrder.adminMessages ?? popupMessage);
         }
-        alert(`Fel: ${errorData.message}`);
+
       }
-    } catch (err) {
-      console.error("Failed to send message:", err);
-      alert("Nätverksfel, kunde inte skicka meddelande");
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      alert("Kunde inte skicka meddelande");
     }
   };
 
@@ -214,6 +200,8 @@ const AdminPage: React.FC = () => {
           </div>
         </div>
       )}
+
+
     </section>
   );
 };
