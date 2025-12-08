@@ -53,7 +53,9 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
   return (
 	<>
 		<article className={className} style={{ order: sortOrderValue, cursor: onClick ? 'pointer' : 'default' }} onClick={onClick}>
-			<p className="order-num"><strong>Ordernr:</strong> {orderId}</p>
+			<p className="order-num"><strong>Ordernr:</strong> {orderId}
+      <button className="order-remove" onClick={handleRemoveClick}>X</button>
+      </p>
 
 			<hr className="order-seperator" />
 
@@ -71,15 +73,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
           Bekräfta
         </button> 
       )}
-        <button
-          className="order-remove"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleRemoveClick();
-          }}
-        >
-          Radera
-        </button>
       {status === "confirmed" && onMarkReady && (
         <button className="order-ready"
           onClick={(e) => { e.stopPropagation(); onMarkReady(orderId); }}
