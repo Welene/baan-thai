@@ -58,3 +58,23 @@ export async function cancelOrder(orderId: string, userId: string): Promise<{ su
 
     return response.json();
 }
+
+export async function editOrder(orderId: string, orderData: { order: Array<{ productId: number; quantity: number }> }): Promise<{ success: boolean; message: string; booking?: any }> {
+    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
+        method: 'PUT',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(orderData)
+    });
+
+    if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || `HTTP error! status: ${response.status}`);
+    }
+
+    return response.json();
+}
+
+/* Author: Tim  
+Definierar TypeScript-interfaces för orderdata och tre API-funktioner: skapa, avbryta och redigera beställningar*/

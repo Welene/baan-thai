@@ -1,0 +1,245 @@
+/* Edit Order Modal Styles */
+.edit-order-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.edit-order-modal {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-order-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 2px solid #59390b;
+}
+
+.edit-order-modal-header h2 {
+  color: #59390b;
+  margin: 0;
+  font-size: 1.3rem;
+}
+
+.edit-order-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #59390b;
+  cursor: pointer;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.edit-order-modal-close:hover {
+  color: #c0392b;
+}
+
+.edit-order-modal-error {
+  background: #ffebee;
+  border-left: 4px solid #c0392b;
+  color: #b71c1c;
+  padding: 1rem;
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.edit-order-modal-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+}
+
+.edit-order-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.edit-order-table thead {
+  background: rgba(89, 57, 11, 0.08);
+}
+
+.edit-order-table th {
+  color: #59390b;
+  font-weight: 600;
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 2px solid rgba(89, 57, 11, 0.2);
+}
+
+.edit-order-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid rgba(89, 57, 11, 0.1);
+  color: #333;
+}
+
+.edit-order-item-name {
+  font-weight: 500;
+  color: #59390b;
+}
+
+.edit-order-item-price,
+.edit-order-item-total {
+  text-align: right;
+  font-weight: 500;
+}
+
+.edit-order-item-quantity {
+  text-align: center;
+}
+
+.edit-order-quantity-input {
+  width: 60px;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  text-align: center;
+  color: #59390b;
+  font-weight: 500;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.edit-order-quantity-input:focus {
+  outline: none;
+  border-color: #FBC206;
+  box-shadow: 0 0 0 2px rgba(251, 194, 6, 0.1);
+}
+
+.edit-order-quantity-input:disabled {
+  background: #f5f5f5;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.edit-order-remove-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+  transition: transform 0.2s;
+}
+
+.edit-order-remove-btn:hover:not(:disabled) {
+  transform: scale(1.2);
+}
+
+.edit-order-remove-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.edit-order-total-row {
+  background: rgba(89, 57, 11, 0.08);
+  font-weight: 600;
+}
+
+.edit-order-total-row td {
+  border-top: 2px solid rgba(89, 57, 11, 0.2);
+  color: #59390b;
+  padding: 1rem 0.75rem;
+}
+
+.edit-order-total-label {
+  text-align: right;
+}
+
+.edit-order-total-price {
+  text-align: right;
+  font-size: 1.1rem;
+}
+
+.edit-order-modal-footer {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 2px solid #59390b;
+  justify-content: flex-end;
+}
+
+.edit-order-modal-cancel-btn,
+.edit-order-modal-save-btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.edit-order-modal-cancel-btn {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.edit-order-modal-cancel-btn:hover:not(:disabled) {
+  background: #d0d0d0;
+}
+
+.edit-order-modal-save-btn {
+  background: #FBC206;
+  color: #59390b;
+}
+
+.edit-order-modal-save-btn:hover:not(:disabled) {
+  background: #e6a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(251, 194, 6, 0.3);
+}
+
+.edit-order-modal-cancel-btn:disabled,
+.edit-order-modal-save-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .edit-order-modal {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .edit-order-table {
+    font-size: 0.85rem;
+  }
+
+  .edit-order-table th,
+  .edit-order-table td {
+    padding: 0.5rem;
+  }
+
+  .edit-order-quantity-input {
+    width: 50px;
+    font-size: 0.9rem;
+  }
+
+  .edit-order-modal-footer {
+    flex-direction: column;
+  }
+
+  .edit-order-modal-cancel-btn,
+  .edit-order-modal-save-btn {
+    width: 100%;
+  }
+}

@@ -3,17 +3,34 @@ import httpJsonBodyParser from "@middy/http-json-body-parser";
 import { sendResponse } from "../../../responses/response.mjs";
 import { editOrder } from "../../../services/orders.mjs";
 import { errorHandler } from "../../../middlewares/errorHandler.mjs";
-import { orderSchema } from "../../../models/orderSchema.mjs";
 
 export const handler = middy(async (event) => {
   // Validera endast om order-array är med
   if (event.body.order) {
-    const { error } = orderSchema.validate(event.body);
-    if (error) {
+    const orderItems = event.body.order;
+    
+    // Validera att order-arrayen är korrekt
+    if (!Array.isArray(orderItems) || orderItems.length === 0) {
       return sendResponse(400, {
         success: false,
-        message: error.details[0].message
+        message: "Order must be a non-empty array"
       });
+    }
+
+    // Validera varje item
+    for (const item of orderItems) {
+      if (!Number.isInteger(item.productId) || item.productId < 1) {
+        return sendResponse(400, {
+          success: false,
+          message: "Each order item must have a valid productId "
+        });
+      }
+      if (!Number.isInteger(item.quantity) || item.quantity < 1) {
+        return sendResponse(400, {
+          success: false,
+          message: "Each order item must have a valid quantity "
+        });
+      }
     }
   }
   

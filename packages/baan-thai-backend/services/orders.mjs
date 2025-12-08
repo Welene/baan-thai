@@ -110,12 +110,17 @@ export const queryOrder = async (orderId) => {
   }
 };
 
-// PUT uppdatera order
+// PUT uppdatera order (endast för pending orders)
 export const editOrder = async (orderId, updateData) => {
   const existingOrder = await queryOrder(orderId);
 
   if (!existingOrder) {
     return { success: false, message: `Order with id ${orderId} not found` };
+  }
+
+  // Endast pending-ordrar kan ändras
+  if (existingOrder.status !== "pending") {
+    return { success: false, message: `Cannot edit order with status: ${existingOrder.status}. Only pending orders can be edited.` };
   }
 
   let updatedOrder = existingOrder.order;
@@ -143,7 +148,6 @@ export const editOrder = async (orderId, updateData) => {
     0
   );
 
-  // Förbered dynamiska delar till UpdateExpression
   let updateExp = "SET #order = :order, totalPrice = :totalPrice";
   let exprAttrNames = { "#order": "order" };
   let exprAttrValues = {
@@ -340,4 +344,7 @@ export const cancelOrder = async (orderId, userId) => {
 };
 
 /* Författare: Tim */
-/*Hanterar all order-logik: skapa, hämta, uppdatera, radera och avbryta orders */
+/*Hanterar all order-logik: skapa, hämta, uppdatera, radera, redigera och avbryta orders */
+
+/* Edit: Helene
+ admin confirm order med timestamp - confirmedAt och getOrdeByStatus */
