@@ -188,6 +188,7 @@ export const updateOrderStatus = async (orderId, status) => {
     expressionValues[":confirmedAt"] = new Date().toISOString();
   }
 
+
   const command = new UpdateCommand({
     TableName: "RestaurantTable",
     Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
@@ -341,3 +342,4 @@ export const cancelOrder = async (orderId, userId) => {
 
 /* Författare: Tim */
 /*Hanterar all order-logik: skapa, hämta, uppdatera, radera och avbryta orders */
+// Helene: added confirmedAt with time so order containers on admin page can change color

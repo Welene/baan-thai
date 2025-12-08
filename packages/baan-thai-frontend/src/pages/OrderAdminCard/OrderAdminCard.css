@@ -52,6 +52,11 @@ p {
 	color: #666;
 }
 
+.order.ready {
+  	background-color: #c7e2f5;
+	border-color: rgb(69, 200, 232);
+}
+
 .orders-container {
 	display: flex;
 	flex-direction: row;

@@ -11,19 +11,21 @@ type OrderItem = {
 
 type OrderCardProps = {
   orderId: string;
-  status: "pending" | "confirmed" | "done";
+  status: "pending" | "confirmed" | "ready" | "completed"; // removed done -- added ready + completed
   waitStatus?: "new" | "waiting" | "overdue";
   items: OrderItem[];
   onConfirm?: (orderId: string) => void;
   onRemove?: (orderId: string) => void;
   onClick?: () => void;
+  onMarkReady?: (orderId: string) => void;
+  onMarkCompleted?: (orderId: string) => void;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove, onClick }) => {
+const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove, onClick, onMarkReady, onMarkCompleted }) => {
   // base className + status + waitstatus
   let className = "order";
   let sortOrderValue = 0;
-    console.log("onRemove:", onRemove);
+    // console.log("onRemove:", onRemove);
 
   if (status === "pending") {
     className += " pending";
@@ -56,10 +58,35 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
       ))}
 
       {status === "pending" && onConfirm && (
-        <button className="order-confirm" onClick={() => onConfirm(orderId)}>Bekräfta</button> 
+        <button
+          className="order-confirm"
+          onClick={(e) => { e.stopPropagation(); onConfirm(orderId); }} //stopPropagation -- trigger ikke onCLick på artikkelen (popup), når man trykker på en knapp
+        >
+          Bekräfta
+        </button> 
       )}
-      {onRemove && (
-        <button className="order-remove" onClick={handleRemoveClick}>Radera</button> 
+        <button
+          className="order-remove"
+          onClick={(e) => {
+            e.stopPropagation();
+            handleRemoveClick();
+          }}
+        >
+          Radera
+        </button>
+      {status === "confirmed" && onMarkReady && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onMarkReady(orderId); }}
+        >
+          KLAR
+        </button>
+      )}
+      {status === "ready" && onMarkCompleted && (
+        <button
+          onClick={(e) => { e.stopPropagation(); onMarkCompleted(orderId); }}
+        >
+          HÄMTAD
+        </button>
       )}
 		</article>
 	</>
