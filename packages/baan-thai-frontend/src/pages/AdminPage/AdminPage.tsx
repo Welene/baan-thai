@@ -49,7 +49,7 @@ const AdminPage: React.FC = () => {
     return "overdue";
   };
 
-  // confirms order with the help of the backend status changer
+   // confirms order with the help of the backend status changer
   const handleConfirm = async (orderId: string) => {
     await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
       method: "PUT",
@@ -102,9 +102,9 @@ const handleRemoveOrder = async (orderId: string) => {
   }, []);
 
 
-  // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD)
+  // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD) -------------------------------------------------------------
   const handleMarkReady = async (orderId: string) => {
-  await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
+  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "ready" }),
@@ -118,7 +118,7 @@ const handleRemoveOrder = async (orderId: string) => {
 };
 
 const handleMarkCompleted = async (orderId: string) => {
-  await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
+  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "completed" }),
@@ -133,7 +133,7 @@ const handleMarkCompleted = async (orderId: string) => {
 
 
 
-  // EXTENDED/POPUP ORDER CONTAINER SECTION -- when order container is clicked on admin page
+  // EXTENDED/POPUP ORDER CONTAINER SECTION -- when order container is clicked on admin page ----------------------------------------------------------
    const openPopup = (order: Order) => {
     setSelectedOrder(order);
     setShowPopup(true);
