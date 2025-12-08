@@ -241,7 +241,7 @@ export default function SushiMenuPage({
 							</div>
 						</section>
 					))}
-				<section className="cart-section">
+				{/* <section className="cart-section">
 					<Cart
 						cartItems={cartItems}
 						setCartItems={setCartItems}
@@ -249,7 +249,7 @@ export default function SushiMenuPage({
 						user={currentUser}
 						mode="inline" // cart is inline/static on menu pages
 					/>
-				</section>
+				</section> */}
 			</div>
 		</>
 	);
@@ -260,3 +260,4 @@ export default function SushiMenuPage({
 /* Författare: Tim */
 /* Denna komponent visar sushi-menyn med kategorinavigering  */
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/comp.- Helene
+/* Tim: löste problem med notifications under Hero image och kommenterade ut static cart från botten */
