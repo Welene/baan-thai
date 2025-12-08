@@ -21,4 +21,10 @@ export const orderSchema = Joi.object({
         quantity: Joi.number().min(1).required(),
       })
     ).min(1).required(),
+  firstName: Joi.string().optional(),
+  lastName: Joi.string().optional(),
+  email: Joi.string().email().optional(),
+  phoneNumber: Joi.alternatives().try(Joi.string(), Joi.number()).optional(),
+  message: Joi.string().optional(),
+  paymentStatus: Joi.string().valid("pending", "paid", "failed").optional()
 });
