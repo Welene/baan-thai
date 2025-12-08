@@ -14,7 +14,7 @@ type OrderItem = {
 
 type Order = {
   orderId: string;
-  status: "pending" | "confirmed" | "done";
+  status: "pending" | "confirmed" | "ready" | "completed"; // removed done -- added ready + completed
   confirmedAt?: string; // when admin confirms customers order
   createdAt: string; // when customer makes order
   order: OrderItem[];
@@ -33,7 +33,7 @@ const AdminPage: React.FC = () => {
     fetch("http://localhost:3000/api/orders")
       .then((res) => res.json())
       .then((data) => {
-        console.log("Fetched orders:", data);
+        // console.log("Fetched orders:", data);
         setOrders(data.orders || []);
       })
       .catch((err) => console.error("Failed to fetch orders", err));
@@ -49,7 +49,7 @@ const AdminPage: React.FC = () => {
     return "overdue";
   };
 
-  // confirms order with the help of the backend status changer
+   // confirms order with the help of the backend status changer
   const handleConfirm = async (orderId: string) => {
     await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
       method: "PUT",
@@ -101,6 +101,39 @@ const handleRemoveOrder = async (orderId: string) => {
     return () => clearInterval(interval); // cleanup when comp unmounts
   }, []);
 
+
+  // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD) -------------------------------------------------------------
+  const handleMarkReady = async (orderId: string) => {
+  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: "ready" }),
+  });
+
+  setOrders(prev =>
+    prev.map(o =>
+      o.orderId === orderId ? { ...o, status: "ready" } : o
+    )
+  );
+};
+
+const handleMarkCompleted = async (orderId: string) => {
+  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+    method: "PUT",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ status: "completed" }),
+  });
+
+  setOrders(prev =>
+    prev.map(o =>
+      o.orderId === orderId ? { ...o, status: "completed" } : o
+    )
+  );
+};
+
+
+
+  // EXTENDED/POPUP ORDER CONTAINER SECTION -- when order container is clicked on admin page ----------------------------------------------------------
    const openPopup = (order: Order) => {
     setSelectedOrder(order);
     setShowPopup(true);
@@ -148,13 +181,15 @@ const handleRemoveOrder = async (orderId: string) => {
 
   const popupClass = selectedOrder ? (() => {
     if (selectedOrder.status === 'pending') return 'pending';
-    if (selectedOrder.status === 'done') return 'done';
+    if (selectedOrder.status === 'ready') return 'ready'; // CHANGED FROM DONE TO READY HERE
     if (selectedOrder.status === 'confirmed') {
       const w = calculateWaitStatus(selectedOrder.confirmedAt);
       return `confirmed ${w || 'new'}`;
     }
+    if (selectedOrder.status === 'completed') return 'completed';
     return '';
   })() : '';
+
 
   return (
     <section className="admin-page">
@@ -170,8 +205,10 @@ const handleRemoveOrder = async (orderId: string) => {
             status={order.status}
             waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
             items={order.order}
-            onConfirm={handleConfirm} // connect handleConfirm to confirm-btn on order item
+            onConfirm={handleConfirm}
             onRemove={handleRemoveOrder}
+            onMarkReady={handleMarkReady}
+            onMarkCompleted={handleMarkCompleted}
             onClick={() => openPopup(order)}
           />
         ))}
@@ -219,4 +256,4 @@ export default AdminPage;
 
 // Helene
 // Popup för att skicka meddelande till köken när admin klickar på en order //Felicia
-// Time fix wrong url
+// Tim: fix wrong url

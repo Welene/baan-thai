@@ -47,8 +47,19 @@ p {
 
 /* Status: Done */
 .order.done {
-	background-color: #f0f0f0;
-	border-color: #aaa;
+	background-color: #b3b3b3;
+	border-color: #6a6a6a;
+	color: #666;
+}
+
+.order.ready {
+	background-color: #c7e2f5;
+	border-color: rgb(69, 200, 232);
+}
+
+.order.completed {
+	background-color: #cbcbcb;
+	border-color: #6a6a6a;
 	color: #666;
 }
 
@@ -80,17 +91,47 @@ p {
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
+	margin-top: auto;
+	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
 }
 
 .order-remove {
+	background: none;     
+	border: none;
+	margin-left: 2rem;
+	font-size: 1.2rem;
+	color: rgb(36, 36, 36);
+	font-weight: bold;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+}
+
+.order-ready {
 	width: 6rem;
 	height: 2.5rem;
 	padding: 0.5rem 1rem;
-	background-color: #722727;
+	background-color: #438e45;
 	color: white;
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
+	margin-top: auto;
+	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+}
+
+.order-completed {
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #bebebe;
+	color: rgb(255, 255, 255);
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+	margin-top: auto;
 }
 
 

@@ -11,6 +11,9 @@ export const handler = middy(async (event) => {
     return sendResponse(400, { success: false, message: "Missing orderId in path parameters" });
   }
 
+  console.log("event.body:", event.body);
+  console.log("event.pathParameters:", event.pathParameters);
+
   const { status } = event.body;
 
   const { error } = updateOrderStatusSchema.validate({ status });
