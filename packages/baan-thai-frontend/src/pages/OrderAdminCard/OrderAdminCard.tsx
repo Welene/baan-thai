@@ -35,7 +35,13 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
     if (waitStatus === "overdue") sortOrderValue = 1;
     else if (waitStatus === "waiting") sortOrderValue = 2;
     else sortOrderValue = 3;
-  }
+  } else if (status === "ready") { // added ready status classname for styling here
+  className += " ready"; 
+  sortOrderValue = 4;
+  } else if (status === "completed") { // and completed classname for styling here
+    className += " completed";
+    sortOrderValue = 5;
+}
 
   const handleRemoveClick = () => {
     if (onRemove) {
@@ -75,14 +81,14 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
           Radera
         </button>
       {status === "confirmed" && onMarkReady && (
-        <button
+        <button className="order-ready"
           onClick={(e) => { e.stopPropagation(); onMarkReady(orderId); }}
         >
           KLAR
         </button>
       )}
       {status === "ready" && onMarkCompleted && (
-        <button
+        <button className="order-completed"
           onClick={(e) => { e.stopPropagation(); onMarkCompleted(orderId); }}
         >
           HÄMTAD

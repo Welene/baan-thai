@@ -47,14 +47,20 @@ p {
 
 /* Status: Done */
 .order.done {
-	background-color: #f0f0f0;
-	border-color: #aaa;
+	background-color: #b3b3b3;
+	border-color: #6a6a6a;
 	color: #666;
 }
 
 .order.ready {
   	background-color: #c7e2f5;
 	border-color: rgb(69, 200, 232);
+}
+
+.order.completed {
+	background-color: #cbcbcb;
+	border-color: #6a6a6a;
+	color: #666;
 }
 
 .orders-container {
@@ -85,6 +91,7 @@ p {
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
+	margin-top: auto;
 }
 
 .order-remove {
@@ -96,6 +103,31 @@ p {
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
+	margin-top: auto;
+}
+
+.order-ready {
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #438e45;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	margin-top: auto;
+}
+
+.order-completed {
+	width: 6rem;
+	height: 2.5rem;
+	padding: 0.5rem 1rem;
+	background-color: #d7d7d7;
+	color: white;
+	border: none;
+	border-radius: 0.5rem;
+	cursor: pointer;
+	margin-top: auto;
 }
 
 
