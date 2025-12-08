@@ -6,12 +6,15 @@ import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 import { orderSchema } from "../../../models/orderSchema.mjs";
 
 export const handler = middy(async (event) => {
-  const { error } = orderSchema.validate(event.body);
-  if (error) {
-    return sendResponse(400, {
-      success: false,
-      message: error.details[0].message
-    });
+  // Validera endast om order-array är med
+  if (event.body.order) {
+    const { error } = orderSchema.validate(event.body);
+    if (error) {
+      return sendResponse(400, {
+        success: false,
+        message: error.details[0].message
+      });
+    }
   }
   
   const { orderId } = event.pathParameters;

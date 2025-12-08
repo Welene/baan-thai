@@ -1,7 +1,7 @@
 import { docClient } from "./clients.mjs";
 import { GetCommand, PutCommand, QueryCommand, DeleteCommand, UpdateCommand, ScanCommand } from "@aws-sdk/lib-dynamodb";
 import { generateOrderId } from "../utils/orderIdGenerator.mjs";
-import { queryMenuItem } from "../functions/queryMenuItem.mjs";
+import { queryMenuItem } from "../functions/menu/queryMenuItem.mjs";
 
 // GET alla orders
 export const getAllOrders = async () => {
@@ -118,8 +118,8 @@ export const editOrder = async (orderId, updateData) => {
 
   let updatedOrder = existingOrder.order;
 
+  // Om order listan ska uppdateras
   if (updateData.order) {
-    // Populera price för varje item
     updatedOrder = [];
     for (const item of updateData.order) {
       const product = await queryMenuItem(item.productId);
@@ -141,12 +141,26 @@ export const editOrder = async (orderId, updateData) => {
     0
   );
 
+  // Förbered dynamiska delar till UpdateExpression
+  let updateExp = "SET #order = :order, totalPrice = :totalPrice";
+  let exprAttrNames = { "#order": "order" };
+  let exprAttrValues = {
+    ":order": updatedOrder,
+    ":totalPrice": totalPrice
+  };
+
+  // Om adminMessages ska uppdateras (ersätt helt, inte list_append)
+  if (updateData.adminMessages !== undefined) {
+    updateExp += ", adminMessages = :adminMessages";
+    exprAttrValues[":adminMessages"] = updateData.adminMessages;
+  }
+
   const command = new UpdateCommand({
     TableName: "RestaurantTable",
     Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
-    UpdateExpression: "SET #order = :order, totalPrice = :totalPrice",
-    ExpressionAttributeNames: { "#order": "order" },
-    ExpressionAttributeValues: { ":order": updatedOrder, ":totalPrice": totalPrice },
+    UpdateExpression: updateExp,
+    ExpressionAttributeNames: exprAttrNames,
+    ExpressionAttributeValues: exprAttrValues,
     ReturnValues: "ALL_NEW"
   });
 
@@ -157,6 +171,8 @@ export const editOrder = async (orderId, updateData) => {
     return { success: false, message: `Error updating order: ${error.message}` };
   }
 };
+
+
 
 // PUT status uppdatering med confirmedAt, bara för ADMINS på köksvy sidan
 export const updateOrderStatus = async (orderId, status) => {
@@ -187,7 +203,6 @@ export const updateOrderStatus = async (orderId, status) => {
     return { success: false, message: `Error updating order status: ${error.message}` };
   }
 };
-
 
 // GET oredr by status
 export const getOrdersByStatus = async (status) => {

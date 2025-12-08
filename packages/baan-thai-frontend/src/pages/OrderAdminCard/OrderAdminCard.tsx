@@ -16,9 +16,10 @@ type OrderCardProps = {
   items: OrderItem[];
   onConfirm?: (orderId: string) => void;
   onRemove?: (orderId: string) => void;
+  onClick?: () => void;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove }) => {
+const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove, onClick }) => {
   // base className + status + waitstatus
   let className = "order";
   let sortOrderValue = 0;
@@ -43,7 +44,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
 
   return (
 	<>
-		<article className={className} style={{ order: sortOrderValue }}>
+		<article className={className} style={{ order: sortOrderValue, cursor: onClick ? 'pointer' : 'default' }} onClick={onClick}>
 			<p className="order-num"><strong>Ordernr:</strong> {orderId}</p>
 
 			<hr className="order-seperator" />
