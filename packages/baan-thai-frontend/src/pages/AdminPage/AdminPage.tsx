@@ -30,7 +30,7 @@ const AdminPage: React.FC = () => {
 
   // fetch all orders made, from the backend get all orders endpoint
   useEffect(() => {
-    fetch("https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders") // later --> AWS URL
+    fetch("http://localhost:3000/api/orders")
       .then((res) => res.json())
       .then((data) => {
         console.log("Fetched orders:", data);

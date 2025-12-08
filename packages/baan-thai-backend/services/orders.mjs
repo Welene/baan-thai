@@ -18,9 +18,11 @@ export const getAllOrders = async () => {
 
   try {
     const result = await docClient.send(command);
+    console.log("Raw DynamoDB result:", JSON.stringify(result.Items, null, 2));
     return result.Items || [];
   } catch (error) {
-    console.error({ message: `${error.message} from getAllOrders` });
+    console.error("Error in getAllOrders:", error);
+    console.error("Full error details:", JSON.stringify(error, null, 2));
     throw new Error("Could not fetch orders");
   }
 };
