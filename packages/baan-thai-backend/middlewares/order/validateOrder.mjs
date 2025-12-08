@@ -1,4 +1,4 @@
-import { orderSchema } from "../models/orderSchema.mjs";
+import { orderSchema } from "../../models/orderSchema.mjs";
 
 export const validateOrder = () => ({
   before: (handler) => {
