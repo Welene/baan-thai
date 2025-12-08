@@ -149,7 +149,7 @@ const handleRemoveOrder = async (orderId: string) => {
     <section className="admin-page">
       <AdminNavBar />
       
-      <h1 className="admin-page__heading">Alla ordrer</h1>
+      <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
         {orders.map((order) => (
@@ -208,3 +208,4 @@ export default AdminPage;
 
 // Helene
 // Popup för att skicka meddelande till köken när admin klickar på en order //Felicia
+// Time fix wrong url
