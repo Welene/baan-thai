@@ -51,7 +51,7 @@ const AdminPage: React.FC = () => {
 
   // confirms order with the help of the backend status changer
   const handleConfirm = async (orderId: string) => {
-    await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}/status`, {
+    await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirmed" }),
@@ -66,12 +66,23 @@ const AdminPage: React.FC = () => {
   };
 
 const handleRemoveOrder = async (orderId: string) => {
-  await fetch(`/api/orders/${orderId}`, {
-    method: "DELETE",
-    headers: { "Content-Type": "application/json" },
-  });
+  try {
+    const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+      method: "DELETE",
+      headers: { "Content-Type": "application/json" },
+    });
 
-  setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
+    if (!response.ok) {
+      console.error("Failed to delete order:", response.status);
+      alert("Kunde inte radera beställningen");
+      return;
+    }
+
+    setOrders((prev) => prev.filter((order) => order.orderId !== orderId));
+  } catch (error) {
+    console.error("Error deleting order:", error);
+    alert("Kunde inte radera beställningen");
+  }
 };
 
 
@@ -109,7 +120,7 @@ const handleRemoveOrder = async (orderId: string) => {
     }
 
     try {
-      const response = await fetch(`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders/${orderId}`, {
+      const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ adminMessages: popupMessage }),
@@ -117,7 +128,7 @@ const handleRemoveOrder = async (orderId: string) => {
 
       if (response.ok) {
         // Ladda om alla orders från backend för att få uppdaterade meddelanden
-        const ordersResponse = await fetch("https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/orders");
+        const ordersResponse = await fetch("http://localhost:3000/api/orders");
         const ordersData = await ordersResponse.json();
         setOrders(ordersData.orders || []);
 
