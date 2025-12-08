@@ -73,3 +73,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/* Författare:Tim */
+/* Skapar ny menyprodukt i DynamoDB */

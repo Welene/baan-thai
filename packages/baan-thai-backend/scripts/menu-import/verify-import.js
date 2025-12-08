@@ -77,3 +77,6 @@ async function run() {
 }
 
 run();
+
+/* Författare: Tim */
+/* Detta script verifierar att menu-import lyckades genom att räkna och visa produkter i DynamoDB */

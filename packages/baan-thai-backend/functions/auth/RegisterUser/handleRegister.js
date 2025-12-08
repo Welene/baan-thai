@@ -158,3 +158,6 @@ exports.handler = async (event) => {
 
 // added phoneNumber & address edit: Helene
 // since we have that in our inputfields on the page
+
+/* Författare: Tim */
+/* Användarregistrering med email-validering och JWT-token */

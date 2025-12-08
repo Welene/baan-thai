@@ -54,3 +54,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/* Författare:Tim */
+/* Raderar menyprodukt från DynamoDB */

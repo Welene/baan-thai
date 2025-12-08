@@ -56,3 +56,6 @@ export const handler = middy(async (event) => {
     });
   }
 }).use(errorHandler());
+
+//Författare: Tim
+// Hämtar notifikationer för en användare

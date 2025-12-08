@@ -60,3 +60,6 @@ exports.handler = async (event) => {
     };
   }
 };
+
+/* Författare: Tim*/
+/* Hämtar en enskild produkt baserat på prodId */

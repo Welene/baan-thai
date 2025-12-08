@@ -255,4 +255,8 @@ export default function SushiMenuPage({
 	);
 }
 
+
+
+/* Författare: Tim */
+/* Denna komponent visar sushi-menyn med kategorinavigering  */
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/comp.- Helene
