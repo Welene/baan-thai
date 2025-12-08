@@ -61,8 +61,28 @@ main {
 	cursor: pointer;
 }
 
+.header__logout-btn {
+  background-color: #c0392b;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.2rem;
+  font-size: 1rem;
+  font-family: 'Radley', serif;
+  cursor: pointer;
+  margin-right:2rem;
+  transition: background 0.2s;
+}
+
+.header__logout-btn:hover {
+  background-color: #a93226;
+}
+
 /* Författare: Helene
 Header komponent
 
-Eventuell buggfix av: *namn-här:
+/*Edit: Tim
+La till logga ut knapp*/
+
+/*Eventuell buggfix av: *namn-här:
 Vad blev fixad: *skriv vad som (evt) fixades* */

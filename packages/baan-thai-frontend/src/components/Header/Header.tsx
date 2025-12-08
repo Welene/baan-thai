@@ -33,8 +33,8 @@ function Header() {
 	useEffect(() => {
 		if (userId) {
 			fetchNotifications();
-			// Uppdatera notifikationer var 10:e sekund för att kolla orderstatus
-			const interval = setInterval(fetchNotifications, 10000);
+			// Uppdatera notifikationer var 30:e sekund för att kolla orderstatus
+			const interval = setInterval(fetchNotifications, 30000);
 			return () => clearInterval(interval);
 		}
 	}, [userId, dismissedNotifications]);
@@ -102,6 +102,16 @@ function Header() {
 		setUnreadCount(prev => Math.max(0, prev - 1));
 	};
 
+	
+	// Logga ut-knapp visas om användaren är inloggad
+	const handleLogout = () => {
+		localStorage.removeItem('currentUser');
+		localStorage.removeItem('user');
+		window.location.reload();
+	};
+
+	// State för notifikationer
+
 	return (
 		<header className="header">
 			<section className="header__logo-section">
@@ -112,11 +122,19 @@ function Header() {
 					onClick={() => navigate('/')}
 					// / = PATH TIL LANDINGPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ LANDINGPAGE
 				/>
-			</section>
+				</section>
 
 			<section className="header__options-section">
 				<section className="header__icons">
-					<figure className="header__icon">
+					<figure className="header__icon" style={{ display: 'flex', alignItems: 'center' }}>
+						{userId && (
+							<button
+								className="header__logout-btn"
+								onClick={handleLogout}
+							>
+								Logga ut
+							</button>
+						)}
 						<img
 							src={manIcon}
 							alt="Profil ikon"
