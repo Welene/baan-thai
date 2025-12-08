@@ -126,7 +126,7 @@ function Header() {
 
 			<section className="header__options-section">
 				<section className="header__icons">
-					<figure className="header__icon" style={{ display: 'flex', alignItems: 'center' }}>
+					<figure className="header__icon header__icon--profile">
 						{userId && (
 							<button
 								className="header__logout-btn"

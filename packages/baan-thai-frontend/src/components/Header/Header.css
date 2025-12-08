@@ -50,6 +50,11 @@ main {
 	position: relative;
 }
 
+.header__icon--profile {
+	display: flex;
+	align-items: center;
+}
+
 .header__nav-list {
 	display: flex;
 	flex-direction: row;
@@ -70,7 +75,7 @@ main {
   font-size: 1rem;
   font-family: 'Radley', serif;
   cursor: pointer;
-  margin-right:2rem;
+  margin-right: 2rem;
   transition: background 0.2s;
 }
 
