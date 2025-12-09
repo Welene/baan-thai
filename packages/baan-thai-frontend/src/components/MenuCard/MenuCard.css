@@ -48,3 +48,28 @@
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(255, 152, 0, 0.4);
 }
+
+.menu-card .quantity-controls {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  border-radius: 0.5rem;
+}
+
+.menu-card .qty-button {
+  width: 35%;
+}
+
+.menu-card .qty {
+  text-align: center;
+  width: 30%;
+  background-color: #e9c896;
+}
+
+.menu-card .plus-button {
+  border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.menu-card .minus-button {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
