@@ -25,6 +25,7 @@
 .profile-header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 2rem;
   background: rgba(89, 57, 11, 0.1);
   border-radius: 16px;
@@ -44,6 +45,11 @@
   font-size: 2.5rem;
   font-weight: bold;
   color: #59390B;
+  flex-shrink: 0;
+}
+
+.profile-info {
+  flex: 1;
 }
 
 .profile-info h1 {
@@ -249,5 +255,185 @@
 
   .order-meta {
     text-align: left;
+  }
+}
+
+/* Edit Profile Button */
+.edit-profile-btn {
+  background-color: #FBC206;
+  color: #59390B;
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.edit-profile-btn:hover {
+  background-color: #e6a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(251, 194, 6, 0.3);
+}
+
+.edit-profile-btn:active {
+  transform: translateY(0);
+}
+
+/* Modal Styles */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content h2 {
+  color: #59390B;
+  margin: 0 0 1.5rem 0;
+  font-size: 1.5rem;
+}
+
+.message {
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  font-weight: 500;
+}
+
+.message--success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+.message--error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+/* Edit Profile Form */
+.edit-profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.form-group label {
+  color: #59390B;
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.form-group input {
+  padding: 0.75rem;
+  border: 2px solid #59390B;
+  border-radius: 8px;
+  font-size: 0.95rem;
+  color: #59390B;
+  font-family: inherit;
+  transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: #FBC206;
+  box-shadow: 0 0 0 3px rgba(251, 194, 6, 0.1);
+}
+
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-save,
+.btn-cancel {
+  border: none;
+  border-radius: 8px;
+  padding: 0.75rem 1.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.btn-save {
+  background-color: #FBC206;
+  color: #59390B;
+}
+
+.btn-save:hover:not(:disabled) {
+  background-color: #e6a800;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(251, 194, 6, 0.3);
+}
+
+.btn-cancel {
+  background-color: #59390B;
+  color: white;
+}
+
+.btn-cancel:hover:not(:disabled) {
+  background-color: #3d2608;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(89, 57, 11, 0.3);
+}
+
+.btn-save:disabled,
+.btn-cancel:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .profile-header {
+    flex-wrap: wrap;
+  }
+
+  .edit-profile-btn {
+    width: 100%;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .btn-save,
+  .btn-cancel {
+    width: 100%;
   }
 }
