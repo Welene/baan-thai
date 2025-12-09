@@ -428,4 +428,6 @@ function ProfilePage() {
 export default ProfilePage;
 
 /* Författare: Tim */
-/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras */
+/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras*/
+/* edit :tim 
+edit profile , telefonnummer adress och email */

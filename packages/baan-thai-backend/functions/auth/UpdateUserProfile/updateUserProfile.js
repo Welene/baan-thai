@@ -22,7 +22,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Validera inmatning
+    // Validera input
     if (!body.email && !body.phoneNumber && !body.address) {
       return {
         statusCode: 400,
@@ -34,7 +34,7 @@ exports.handler = async (event) => {
       };
     }
 
-    // Bygg update expression dynamiskt
+    // Bygg updateexpression dynamiskt
     const updateExpressionParts = [];
     const expressionAttributeValues = {};
 
@@ -53,7 +53,7 @@ exports.handler = async (event) => {
       expressionAttributeValues[':address'] = body.address;
     }
 
-    // Lägg till uppdaterad tidsstämpel
+    // Lägg till uppdaterad timestamp
     updateExpressionParts.push('updatedAt = :updatedAt');
     expressionAttributeValues[':updatedAt'] = new Date().toISOString();
 
