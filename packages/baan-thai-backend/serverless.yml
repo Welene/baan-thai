@@ -53,6 +53,13 @@ functions:
           path: /api/profile/{userId}
           method: GET
 
+  updateUserProfile: # updates user profile (email, phoneNumber, address)
+    handler: functions/auth/UpdateUserProfile/updateUserProfile.handler
+    events:
+      - httpApi:
+          path: /api/profile/{userId}
+          method: PUT
+
   #  -------------------MENU---------------------
   getMenu: # get all meals from the menu
     handler: functions/menu/getMenu.handler
@@ -229,7 +236,7 @@ functions:
   #   events:
   #     - httpApi:
   #         path: /api/cart/{userId}
-  #         method: DELETE
+  #         method: PUT
 # resources:
 #   Resources:
 #     CloudDbTable:
