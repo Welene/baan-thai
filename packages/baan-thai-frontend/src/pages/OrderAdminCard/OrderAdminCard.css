@@ -31,21 +31,20 @@ p {
 	border-color: #ccc;
 }
 .order.confirmed.new {
-	background-color: #e8f5e9;
-	border-color: green;
+	background-color: #d1ebd4;
+	border-color: rgb(16, 113, 16);
 }
 
 .order.confirmed.waiting {
-	background-color: #fff3e0;
-	border-color: orange;
+	background-color: #f0e1c8;
+	border-color: rgb(220, 144, 3);
 }
 
 .order.confirmed.overdue {
-	background-color: #ffebee;
-	border-color: red;
+	background-color: #ffdfdf;
+	border-color: rgb(224, 56, 56);
 }
 
-/* Status: Done */
 .order.done {
 	background-color: #b3b3b3;
 	border-color: #6a6a6a;
@@ -54,7 +53,7 @@ p {
 
 .order.ready {
 	background-color: #c7e2f5;
-	border-color: rgb(69, 200, 232);
+	border-color: rgb(9, 119, 147);
 }
 
 .order.completed {
@@ -74,11 +73,15 @@ p {
 	padding-bottom: 4rem;
 }
 
-.order-seperator{
+.order-seperator {
 	margin-top: 1rem;
 	margin-bottom: 1rem;
 	border-top: 1.6px solid rgb(52, 52, 52);
 	min-width: 12rem;
+	border: none;
+	height: 1.4px;      
+	background-color: rgb(60, 60, 60);
+
 }
 
 .order-confirm {
@@ -92,7 +95,8 @@ p {
 	border-radius: 0.5rem;
 	cursor: pointer;
 	margin-top: auto;
-	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.278);
+	transition: background-color 0.2s ease;
 }
 
 .order-remove {
@@ -100,47 +104,60 @@ p {
 	border: none;
 	margin-left: 2rem;
 	font-size: 1.2rem;
-	color: rgb(36, 36, 36);
+	color: rgb(76, 76, 76);
 	font-weight: bold;
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
-	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+	transition: background-color 0.2s ease;
 }
 
 .order-ready {
 	width: 6rem;
 	height: 2.5rem;
 	padding: 0.5rem 1rem;
-	background-color: #438e45;
+	background-color: #4c8c4e;
 	color: white;
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
 	margin-top: auto;
-	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.278);
+	transition: background-color 0.2s ease;
 }
 
 .order-completed {
 	width: 6rem;
 	height: 2.5rem;
 	padding: 0.5rem 1rem;
-	background-color: #bebebe;
+	background-color: #a2a2a2;
 	color: rgb(255, 255, 255);
 	border: none;
 	border-radius: 0.5rem;
 	cursor: pointer;
-	filter: drop-shadow(0px 4px 5px rgba(0, 0, 0, 0.36));
+	box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.278);
 	margin-top: auto;
+	transition: background-color 0.2s ease;
 }
 
+.order button {
+	font-weight: bold;
+}
 
 .order-confirm:hover {
-	background-color: #2f7a33;
+	background-color: #386a3b;
+}
+
+.order-ready:hover {
+	background-color: #386a3b;
+}
+
+.order-completed:hover {
+	background-color: #777777;
 }
 
 .order-remove:hover {
-	background-color: #5b2121;
+	color: #000000;
 }
 
 

@@ -212,5 +212,5 @@ export default RegisterPage;
 // Författare: Helene
 // Register page
 
-// Eventuell buggfix av:Tim
-// Vad blev fixad: *skriv vad som (evt) fixades* la till rätt api-url, fixade react-import,tog bort dubbel navigate.
+// buggfix av:Tim
+// La till rätt api-url, fixade react-import,tog bort dubbel navigate.
