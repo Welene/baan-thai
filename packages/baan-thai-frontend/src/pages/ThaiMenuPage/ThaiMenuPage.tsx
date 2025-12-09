@@ -165,11 +165,6 @@ export default function ThaiMenuPage({
 	// Sortera kategorier i rätt ordning
 	const sortedCategories = categoryOrder.filter((cat) => groupedItems[cat]);
 
-	// Hantera lägg till i varukorg (endast en mockup här)
-	// const handleAddToCart = (menuItem: any) => {
-	// 	console.log('Lägg till i varukorg:', menuItem);
-	// 	alert(`${menuItem.name} har lagts till i varukorgen!`);
-	// };
 
 	// Scrolla till kategori
 	const scrollToCategory = (categoryKey: string) => {
