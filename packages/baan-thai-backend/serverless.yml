@@ -53,6 +53,20 @@ functions:
           path: /api/profile/{userId}
           method: GET
 
+  getAllUsers: # gets all users, optional filter by role
+    handler: functions/auth/GetAllUsers/getAllUsers.handler
+    events:
+      - httpApi:
+          path: /api/users
+          method: GET
+
+  updateUser: # updates a specific user
+    handler: functions/auth/UpdateUser/updateUser.handler
+    events:
+      - httpApi:
+          path: /api/users/{userId}
+          method: PUT
+
   #  -------------------MENU---------------------
   getMenu: # get all meals from the menu
     handler: functions/menu/getMenu.handler
