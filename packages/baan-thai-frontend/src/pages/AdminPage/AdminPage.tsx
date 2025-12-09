@@ -124,12 +124,9 @@ const handleMarkCompleted = async (orderId: string) => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "completed" }),
   });
-
-  setOrders(prev =>
-    prev.map(o =>
-      o.orderId === orderId ? { ...o, status: "completed" } : o
-    )
-  );
+ // when clicking completed/hämtad button - it is removed from admin page only
+  setOrders(prev => prev.filter(o => o.orderId !== orderId));
+  // updates order state by removing that orderId  from the page (AKA orders that have been marked "hämtad", AKA clicked hämtad
 };
 
 
