@@ -17,7 +17,8 @@ interface CheckoutPageProps {
 }
 
 function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
-    const [deliveryMethod] = useState('pickup');
+    // const [deliveryMethod] = useState('pickup');
+    const [deliveryMethod, setDeliveryMethod] = useState('pickup'); // ny för default value, starts with pickup
     
     // Custom hooks
     const {
@@ -153,10 +154,13 @@ function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
                         </div>
                         <article className="delivery-method">
                             <label className="radio-label">
-                                <input
+                                <input // default value (avhämtning) is already checked
                                     className="delivery-method__pickup"
                                     type="radio"
                                     name="delivery"
+                                    value="pickup" // we give this input field the value PICKUP
+                                    checked={deliveryMethod === 'pickup'} // cheking if deliveryMethod is PICKUP
+                                    onChange={(e) => setDeliveryMethod(e.target.value)} // can still change delivery method -- if we add more buttons soon/later
                                 />
                                 Avhämtning
                             </label>
