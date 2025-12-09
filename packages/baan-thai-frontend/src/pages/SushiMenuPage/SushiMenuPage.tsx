@@ -236,6 +236,8 @@ export default function SushiMenuPage({
 										key={item.id}
 										menuItem={item}
 										onAddToCart={onAddToCart}
+    								cartItems={cartItems}
+										setCartItems={setCartItems}
 									/>
 								))}
 							</div>

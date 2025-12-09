@@ -222,6 +222,8 @@ export default function ThaiMenuPage({
 										key={item.id}
 										menuItem={item}
 										onAddToCart={onAddToCart}
+										cartItems={cartItems}
+										setCartItems={setCartItems}
 									/>
 								))}
 							</div>
