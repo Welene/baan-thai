@@ -53,7 +53,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
   return (
 	<>
 		<article className={className} style={{ order: sortOrderValue, cursor: onClick ? 'pointer' : 'default' }} onClick={onClick}>
-			<p className="order-num"><strong>Ordernr:</strong> {orderId}
+			<p className="order-num"><strong>Order:</strong> {orderId}
       <button className="order-remove" onClick={handleRemoveClick}>X</button>
       </p>
 
@@ -61,7 +61,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
 
       {items?.map((item, index) => (
         <p className="order-items" key={item.productId || index}>
-          {item.quantity} x {item.name}
+          {item.quantity}x {item.name}
         </p>
       ))}
 
@@ -70,7 +70,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
           className="order-confirm"
           onClick={(e) => { e.stopPropagation(); onConfirm(orderId); }} //stopPropagation -- trigger ikke onCLick på artikkelen (popup), når man trykker på en knapp
         >
-          Bekräfta
+          BEKRÄFTA
         </button> 
       )}
       {status === "confirmed" && onMarkReady && (
