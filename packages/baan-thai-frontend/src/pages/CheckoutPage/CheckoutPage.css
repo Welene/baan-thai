@@ -134,7 +134,7 @@
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.301);
     color: rgb(241, 241, 241);
     position: relative;
-    
+	overflow-y: auto;
 }
 
 .confirm-order__section p {
@@ -219,11 +219,10 @@ input[type='radio'] {
     width: 16rem;
     cursor: pointer;
     color: rgb(241, 241, 241);
-    position: absolute;
     bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
     font-weight: bold;
+    display: block;
+    margin: 1rem auto 0;
 }
 
 .confirm-article__pay-btn:hover {
