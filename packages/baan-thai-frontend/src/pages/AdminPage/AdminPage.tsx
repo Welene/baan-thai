@@ -2,6 +2,7 @@ import "./AdminPage.css";
 import React, { useEffect, useState } from "react";
 import OrderCard from "../OrderAdminCard/OrderAdminCard";
 import { AdminNavBar } from "../../components/AdminNavBar/AdminNavBar";
+import { API_BASE_URL } from "../../config/api";
 
 type OrderItem = {
   name: string;
@@ -30,7 +31,7 @@ const AdminPage: React.FC = () => {
 
   // fetch all orders made, from the backend get all orders endpoint
   useEffect(() => {
-    fetch("http://localhost:3000/api/orders")
+    fetch(`${API_BASE_URL}/api/orders`)
       .then((res) => res.json())
       .then((data) => {
         // console.log("Fetched orders:", data);
@@ -51,7 +52,7 @@ const AdminPage: React.FC = () => {
 
    // confirms order with the help of the backend status changer
   const handleConfirm = async (orderId: string) => {
-    await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+    await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirmed" }),
@@ -67,7 +68,7 @@ const AdminPage: React.FC = () => {
 
 const handleRemoveOrder = async (orderId: string) => {
   try {
-    const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -104,7 +105,7 @@ const handleRemoveOrder = async (orderId: string) => {
 
   // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD) -------------------------------------------------------------
   const handleMarkReady = async (orderId: string) => {
-  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+  await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "ready" }),
@@ -118,7 +119,7 @@ const handleRemoveOrder = async (orderId: string) => {
 };
 
 const handleMarkCompleted = async (orderId: string) => {
-  await fetch(`http://localhost:3000/api/orders/${orderId}/status`, {
+  await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "completed" }),
@@ -153,7 +154,7 @@ const handleMarkCompleted = async (orderId: string) => {
     }
 
     try {
-      const response = await fetch(`http://localhost:3000/api/orders/${orderId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ adminMessages: popupMessage }),
@@ -161,7 +162,7 @@ const handleMarkCompleted = async (orderId: string) => {
 
       if (response.ok) {
         // Ladda om alla orders från backend för att få uppdaterade meddelanden
-        const ordersResponse = await fetch("http://localhost:3000/api/orders");
+        const ordersResponse = await fetch(`${API_BASE_URL}/api/orders`);
         const ordersData = await ordersResponse.json();
         setOrders(ordersData.orders || []);
 
@@ -190,6 +191,22 @@ const handleMarkCompleted = async (orderId: string) => {
     return '';
   })() : '';
 
+  // SORT AFTER ORDERID SECTION --------------------------------------
+    const sortedOrders = [...orders].sort((a, b) => {
+    const statusOrder = {
+      pending: 0,
+      confirmed: 1,
+      ready: 2,
+      completed: 3,
+    };
+
+    const sA = statusOrder[a.status];
+    const sB = statusOrder[b.status];
+
+    if (sA !== sB) return sA - sB;
+
+    return Number(a.orderId) - Number(b.orderId);
+  });
 
   return (
     <section className="admin-page">
@@ -198,7 +215,7 @@ const handleMarkCompleted = async (orderId: string) => {
       <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
-        {orders.map((order) => (
+        {sortedOrders.map((order) => (
           <OrderCard
             key={order.orderId}
             orderId={order.orderId}
@@ -246,8 +263,6 @@ const handleMarkCompleted = async (orderId: string) => {
           </div>
         </div>
       )}
-
-
     </section>
   );
 };
