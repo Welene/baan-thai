@@ -108,3 +108,4 @@ exports.handler = async (event) => {
 
 /* Författare: Tim */
 /* Hämtar användarprofil med notiser och orderhistorik */
+
