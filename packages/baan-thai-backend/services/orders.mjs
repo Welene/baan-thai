@@ -345,7 +345,7 @@ export const cancelOrder = async (orderId, userId) => {
 };
 
 /* Författare: Tim */
+/*Hanterar all order-logik: skapa, hämta, uppdatera, radera, redigera och avbryta orders */
 
 // Helene: added confirmedAt with time so order containers on admin page can change color
-/*Hanterar all order-logik: skapa, hämta, uppdatera, radera, redigera och avbryta orders */
 //  admin confirm order med timestamp - confirmedAt och getOrdeByStatus

@@ -227,7 +227,7 @@ export default function ThaiMenuPage({
 							</div>
 						</section>
 					))}
-				<section className="cart-section">
+				{/* <section className="cart-section">
 					<Cart
 						cartItems={cartItems}
 						setCartItems={setCartItems}
@@ -235,7 +235,7 @@ export default function ThaiMenuPage({
 						user={currentUser}
 						mode="inline" // cart is inline/static on menu pages
 					/>
-				</section>
+				</section> */}
 			</div>
 		</>
 	);
@@ -246,3 +246,5 @@ export default function ThaiMenuPage({
 /* Författare: Tim */
 /*  visar thailändska menyn med kategorinavigering */
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/ comp. - Helene
+
+/* Tim: löste problem med notifications under Hero image och kommenterade ut static cart från botten */
