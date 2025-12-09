@@ -140,6 +140,7 @@ exports.handler = async (event) => {
 					name: name,
 					username: username,
 					role: role,
+					// phoneNumber: phoneNumber,
 				},
 			}),
 		};

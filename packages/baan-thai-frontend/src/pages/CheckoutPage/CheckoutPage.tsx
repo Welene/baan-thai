@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './CheckoutPage.css';
 import Delivery from '../../assets/delivery.png';
 import Pay from '../../assets/pay.png';
@@ -9,12 +9,14 @@ import { PaymentModal } from '../../components/PaymentModal/PaymentModal';
 import { ConfirmationModal } from '../../components/ConfirmationModal/ConfirmationModal';
 import { CustomerInfoForm } from '../../components/CustomerInfoForm/CustomerInfoForm';
 import { OrderSummary } from '../../components/OrderSummary/OrderSummary';
+import { User } from '../../interfaces/user';
 
 interface CheckoutPageProps {
     cartItems: Array<{ id: number; name: string; price: number; quantity: number; code: string }>;
+    currentUser: User | null;
 }
 
-function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
+function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
     const [deliveryMethod] = useState('pickup');
     
     // Custom hooks
@@ -83,6 +85,14 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
             validateCardInfo
         );
     };
+
+    useEffect(() => {
+    if (currentUser) {
+        if (currentUser.name) setName(currentUser.name);
+        if (currentUser.phoneNumber) setPhone(currentUser.phoneNumber);
+        if (currentUser.email) setEmail(currentUser.email);
+    }
+}, [currentUser]); 
 
     return (
         <>
