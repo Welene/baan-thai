@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './CheckoutPage.css';
 import Delivery from '../../assets/delivery.png';
 import Pay from '../../assets/pay.png';
@@ -9,13 +9,17 @@ import { PaymentModal } from '../../components/PaymentModal/PaymentModal';
 import { ConfirmationModal } from '../../components/ConfirmationModal/ConfirmationModal';
 import { CustomerInfoForm } from '../../components/CustomerInfoForm/CustomerInfoForm';
 import { OrderSummary } from '../../components/OrderSummary/OrderSummary';
+import { User } from '../../interfaces/user';
+import HeroImg from '../../assets/hero-img-blur.png';
 
 interface CheckoutPageProps {
     cartItems: Array<{ id: number; name: string; price: number; quantity: number; code: string }>;
+    currentUser: User | null;
 }
 
-function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
-    const [deliveryMethod] = useState('pickup');
+function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
+    // const [deliveryMethod] = useState('pickup');
+    const [deliveryMethod, setDeliveryMethod] = useState('pickup'); // ny för default value, starts with pickup
     
     // Custom hooks
     const {
@@ -84,6 +88,14 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
         );
     };
 
+    useEffect(() => {
+    if (currentUser) {
+        if (currentUser.name) setName(currentUser.name);
+        if (currentUser.phoneNumber) setPhone(currentUser.phoneNumber);
+        if (currentUser.email) setEmail(currentUser.email);
+    }
+}, [currentUser]); 
+
     return (
         <>
             {/* Card Payment Modal */}
@@ -121,10 +133,19 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
             />
 
             <section className="checkout-wrapper">
-                <section className="hero-section"></section>
-                <hr className="divider--h1" />
-                <h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
-                <hr className="divider--h1" />
+                <section
+                    className="hero-section"
+                    style={{ backgroundImage: `url(${HeroImg})` }}
+                >
+                    <div className="hero-section__heading">
+                        <h1 className="hero-section__txt">
+                            DIN BESTÄLLNING
+                        </h1>
+                    </div>
+                </section>
+                {/* <hr className="divider--h1" /> */}
+                {/* <h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
+                <hr className="divider--h1" /> */}
 
                 <section className="checkout-section">
                     <section className="order-section">
@@ -143,10 +164,13 @@ function CheckoutPage({ cartItems = [] }: CheckoutPageProps) {
                         </div>
                         <article className="delivery-method">
                             <label className="radio-label">
-                                <input
+                                <input // default value (avhämtning) is already checked
                                     className="delivery-method__pickup"
                                     type="radio"
                                     name="delivery"
+                                    value="pickup" // we give this input field the value PICKUP
+                                    checked={deliveryMethod === 'pickup'} // cheking if deliveryMethod is PICKUP
+                                    onChange={(e) => setDeliveryMethod(e.target.value)} // can still change delivery method -- if we add more buttons soon/later
                                 />
                                 Avhämtning
                             </label>

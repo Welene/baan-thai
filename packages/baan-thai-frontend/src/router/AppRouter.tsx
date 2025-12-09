@@ -157,6 +157,7 @@ export default function AppRouter() {
 						element={
 							<CheckoutPage
 								cartItems={cartItems}
+								currentUser={currentUser}
 							/>
 						}
 					/>
