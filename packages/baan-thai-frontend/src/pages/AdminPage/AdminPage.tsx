@@ -190,6 +190,22 @@ const handleMarkCompleted = async (orderId: string) => {
     return '';
   })() : '';
 
+  // SORT AFTER ORDERID SECTION --------------------------------------
+    const sortedOrders = [...orders].sort((a, b) => {
+    const statusOrder = {
+      pending: 0,
+      confirmed: 1,
+      ready: 2,
+      completed: 3,
+    };
+
+    const sA = statusOrder[a.status];
+    const sB = statusOrder[b.status];
+
+    if (sA !== sB) return sA - sB;
+
+    return Number(a.orderId) - Number(b.orderId);
+  });
 
   return (
     <section className="admin-page">
@@ -198,7 +214,7 @@ const handleMarkCompleted = async (orderId: string) => {
       <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
-        {orders.map((order) => (
+        {sortedOrders.map((order) => (
           <OrderCard
             key={order.orderId}
             orderId={order.orderId}
