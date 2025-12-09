@@ -61,8 +61,8 @@ function ProfilePage() {
 
     fetchOrders();
     
-    // Hämta ordrar varje 10 sekund för att se uppdateringar från köket
-    const interval = setInterval(fetchOrders, 10000);
+    // Hämta ordrar varje 30 sekund för att se uppdateringar från köket
+    const interval = setInterval(fetchOrders, 30000);
     
     return () => clearInterval(interval);
   }, [userId, navigate]);
