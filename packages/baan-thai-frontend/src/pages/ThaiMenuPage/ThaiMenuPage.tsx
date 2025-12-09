@@ -245,3 +245,4 @@ export default function ThaiMenuPage({
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/ comp. - Helene
 
 /* Tim: löste problem med notifications under Hero image och kommenterade ut static cart från botten */
+// Felicia: add cartitems och setcartitem för att kontrollera antal och koppla den med quanity button i menucard funktion
