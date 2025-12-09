@@ -10,6 +10,7 @@ import { ConfirmationModal } from '../../components/ConfirmationModal/Confirmati
 import { CustomerInfoForm } from '../../components/CustomerInfoForm/CustomerInfoForm';
 import { OrderSummary } from '../../components/OrderSummary/OrderSummary';
 import { User } from '../../interfaces/user';
+import HeroImg from '../../assets/hero-img-blur.png';
 
 interface CheckoutPageProps {
     cartItems: Array<{ id: number; name: string; price: number; quantity: number; code: string }>;
@@ -132,10 +133,19 @@ function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
             />
 
             <section className="checkout-wrapper">
-                <section className="hero-section"></section>
-                <hr className="divider--h1" />
-                <h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
-                <hr className="divider--h1" />
+                <section
+                    className="hero-section"
+                    style={{ backgroundImage: `url(${HeroImg})` }}
+                >
+                    <div className="hero-section__heading">
+                        <h1 className="hero-section__txt">
+                            DIN BESTÄLLNING
+                        </h1>
+                    </div>
+                </section>
+                {/* <hr className="divider--h1" /> */}
+                {/* <h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
+                <hr className="divider--h1" /> */}
 
                 <section className="checkout-section">
                     <section className="order-section">
