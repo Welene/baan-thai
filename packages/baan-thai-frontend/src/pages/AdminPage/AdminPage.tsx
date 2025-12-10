@@ -288,5 +288,6 @@ const handleMarkCompleted = async (orderId: string) => {
 export default AdminPage;
 
 // Helene
-// Popup för att skicka meddelande till köken när admin klickar på en order //Felicia
+// Felicia : Popup för att skicka meddelande till köken när admin klickar på en order
 // Tim: fix wrong url
+// Felicia : Lägg till meddelande från kund i orderkortet och i popupen
