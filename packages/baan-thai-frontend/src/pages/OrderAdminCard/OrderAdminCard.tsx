@@ -14,6 +14,7 @@ type OrderCardProps = {
   status: "pending" | "confirmed" | "ready" | "completed"; // removed done -- added ready + completed
   waitStatus?: "new" | "waiting" | "overdue";
   items: OrderItem[];
+  message?: string;
   onConfirm?: (orderId: string) => void;
   onRemove?: (orderId: string) => void;
   onClick?: () => void;
@@ -21,7 +22,7 @@ type OrderCardProps = {
   onMarkCompleted?: (orderId: string) => void;
 };
 
-const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, onConfirm, onRemove, onClick, onMarkReady, onMarkCompleted }) => {
+const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, items, message, onConfirm, onRemove, onClick, onMarkReady, onMarkCompleted }) => {
   // base className + status + waitstatus
   let className = "order";
   let sortOrderValue = 0;
@@ -65,6 +66,12 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
         </p>
       ))}
 
+      {message && (
+        <p className="order-message">
+          Meddelande: {message}
+        </p>
+      )}
+
       {status === "pending" && onConfirm && (
         <button
           className="order-confirm"
@@ -95,3 +102,4 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
 export default OrderCard;
 
 // Helene
+// Felicia : Lägg till meddelande i orderkortet, kotrollera om det finns meddelande eller inte innan det visas

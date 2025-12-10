@@ -214,20 +214,28 @@ const handleMarkCompleted = async (orderId: string) => {
       <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
-        {sortedOrders.map((order) => (
-          <OrderCard
-            key={order.orderId}
-            orderId={order.orderId}
-            status={order.status}
-            waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
-            items={order.order}
-            onConfirm={handleConfirm}
-            onRemove={handleRemoveOrder}
-            onMarkReady={handleMarkReady}
-            onMarkCompleted={handleMarkCompleted}
-            onClick={() => openPopup(order)}
-          />
-        ))}
+        {sortedOrders.map((order) => {
+          const cleanedMessage = order.message
+          ?.replace(/^Avhämtning\s*-\s*Direkt\s*\|\s*Kommentar:\s*/i, "")
+          ?.replace(/^Avhämtning\s*-\s*Direkt\s*\|?\s*/i, "")
+          .trim();
+
+          return (
+            <OrderCard
+              key={order.orderId}
+              orderId={order.orderId}
+              status={order.status}
+              waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
+              items={order.order}
+              message={cleanedMessage}
+              onConfirm={handleConfirm}
+              onRemove={handleRemoveOrder}
+              onMarkReady={handleMarkReady}
+              onMarkCompleted={handleMarkCompleted}
+              onClick={() => openPopup(order)}
+            />
+          );
+        })}
       </section>
       {showPopup && selectedOrder && (
         <div className="popup-backdrop" onClick={closePopup}>
