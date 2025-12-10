@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './EditUserPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
-import { API_BASE_URL } from '../../../config/api';
+import { getAllUsers, updateUser, deleteUser } from '../../../services/userService';
 
 interface User {
 	userId: string;
@@ -16,7 +16,6 @@ interface User {
 }
 
 export const EditUserPage = () => {
-	const [searchTerm, setSearchTerm] = useState('');
 	const [users, setUsers] = useState<User[]>([]);
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
 	const [formData, setFormData] = useState<User>({
@@ -30,44 +29,28 @@ export const EditUserPage = () => {
 	});
 	const [newPassword, setNewPassword] = useState('');
 
+	// Ladda alla användare när komponenten monteras
 	useEffect(() => {
-		console.log('selectedUser changed:', selectedUser);
-	}, [selectedUser]);
+		loadUsers();
+	}, []);
 
-	const handleSearch = async () => {
+	const loadUsers = async () => {
 		try {
-			// Hämta alla användare
-			const response = await fetch(`${API_BASE_URL}/api/users`);
-			const data = await response.json();
-			
-			console.log('Fetched users:', data);
-
+			const data = await getAllUsers();
 			const allUsers = data.users || [];
-
-			if (searchTerm) {
-				const filtered = allUsers.filter(
-					(user: User) =>
-						user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-						user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
-						user.username.toLowerCase().includes(searchTerm.toLowerCase()) ||
-						user.userId.toLowerCase().includes(searchTerm.toLowerCase())
-				);
-				setUsers(filtered);
-			} else {
-				setUsers(allUsers);
-			}
+			setUsers(allUsers);
 		} catch (error) {
-			console.error('Error searching users:', error);
+			console.error('Error loading users:', error);
 			alert('Kunde inte hämta användare');
 		}
 	};
 
 	const handleSelectUser = (user: User) => {
-		console.log('Selected user:', user);
+		console.log('handleSelectUser called with:', user);
 		setSelectedUser(user);
 		setFormData(user);
-		setNewPassword(''); // Reset password field
-		console.log('FormData set to:', user);
+		setNewPassword('');
+		console.log('selectedUser set to:', user);
 	};
 
 	const handleInputChange = (
@@ -86,7 +69,6 @@ export const EditUserPage = () => {
 		if (!selectedUser) return;
 
 		try {
-			// Bygg update object - skicka bara ifyllda fält
 			const updateData: any = {
 				name: formData.name,
 				username: formData.username,
@@ -96,58 +78,44 @@ export const EditUserPage = () => {
 				phoneNumber: formData.phoneNumber
 			};
 
-			// Lägg till password om det är satt
 			if (newPassword) {
 				updateData.password = newPassword;
 			}
 
-			const response = await fetch(
-				`${API_BASE_URL}/api/users/${selectedUser.userId}`,
-				{
-					method: 'PUT',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify(updateData)
-				}
-			);
-
-			if (response.ok) {
-				alert('Användare uppdaterad!');
-				handleSearch();
-				setSelectedUser(null);
-				setNewPassword('');
-				setFormData({
-					userId: '',
-					name: '',
-					username: '',
-					email: '',
-					role: 'customer',
-					address: '',
-					phoneNumber: ''
-				});
-			} else {
-				const error = await response.json();
-				alert(`Fel: ${error.error || 'Kunde inte uppdatera användare'}`);
-			}
-		} catch (error) {
+			await updateUser(selectedUser.userId, updateData);
+			alert('Användare uppdaterad!');
+			await loadUsers();
+			setSelectedUser(null);
+			setNewPassword('');
+		} catch (error: any) {
 			console.error('Error updating user:', error);
-			alert('Ett fel uppstod vid uppdatering av användare');
+			alert(`Fel: ${error.message || 'Kunde inte uppdatera användare'}`);
 		}
 	};
 
 	const handleCancel = () => {
 		setSelectedUser(null);
 		setNewPassword('');
-		setFormData({
-			userId: '',
-			name: '',
-			username: '',
-			email: '',
-			role: 'customer',
-			address: '',
-			phoneNumber: ''
-		});
+	};
+
+	const handleDelete = async () => {
+		if (!selectedUser) return;
+
+		const confirmDelete = window.confirm(
+			`Är du säker på att du vill ta bort användaren "${selectedUser.name}"? Detta går inte att ångra.`
+		);
+
+		if (!confirmDelete) return;
+
+		try {
+			await deleteUser(selectedUser.userId);
+			alert('Användare borttagen!');
+			await loadUsers();
+			setSelectedUser(null);
+		} catch (error: any) {
+			console.error('Error deleting user:', error);
+			alert(`Fel: ${error.message || 'Kunde inte ta bort användare'}`);
+		}
 	};
 
 	return (
@@ -155,174 +123,185 @@ export const EditUserPage = () => {
 			<AdminNavBar />
 			<div className="edit-user-page">
 				<div className="edit-user-container">
-					<h1>Redigera Användare</h1>
+					<h1>Admin-användare</h1>
 
-					{/* Söksektion */}
-					<div className="search-section">
-						<div className="search-bar">
-							<input
-								type="text"
-								placeholder="Sök efter namn, email, användarnamn eller ID..."
-								value={searchTerm}
-								onChange={(e) => setSearchTerm(e.target.value)}
-								onKeyPress={(e) => {
-									if (e.key === 'Enter') handleSearch();
-								}}
-							/>
-							<button onClick={handleSearch} className="search-button">
-								Sök
-							</button>
-						</div>
-
-						{/* Användarresultat */}
-						{users.length > 0 && (
-							<div className="user-results">
-								<h3>Sökresultat ({users.length})</h3>
-								<div className="user-list">
-									{users.map((user) => (
-										<div
-											key={user.userId}
-											className={`user-item ${
-												selectedUser?.userId === user.userId ? 'selected' : ''
-											}`}
-											onClick={() => handleSelectUser(user)}>
-											<div className="user-info">
-												<span className="user-name">{user.name}</span>
-												<span className="user-email">{user.email}</span>
-												<span className={`user-role ${user.role}`}>
-													{user.role === 'admin' ? 'Admin' : 'Kund'}
-												</span>
-											</div>
+					{/* Användarlista */}
+					<div className="user-results">
+						<div className="user-list">
+							{users.map((user) => (
+								<div
+									key={user.userId}
+									className={`user-card ${selectedUser?.userId === user.userId ? 'expanded' : ''}`}
+									onClick={() => !selectedUser && handleSelectUser(user)}>
+									
+									{/* Kort header - alltid synlig */}
+									<div className="user-card-header">
+										<div className="user-basic-info">
+											<span className="user-name">{user.name}</span>
+											<span className={`user-role ${user.role}`}>
+												{user.role === 'admin' ? 'Admin' : 'Kund'}
+											</span>
 										</div>
-									))}
-								</div>
-							</div>
-						)}
-					</div>
-
-					{/* Redigeringsformulär */}
-					{selectedUser && (
-						<div className="edit-form-section">
-							<h2>Redigera: {selectedUser.name}</h2>
-							<form onSubmit={handleSubmit} className="edit-form">
-								<div className="form-row">
-									<div className="form-group">
-										<label htmlFor="name">Namn *</label>
-										<input
-											type="text"
-											id="name"
-											name="name"
-											value={formData.name}
-											onChange={handleInputChange}
-											required
-										/>
+										<span className="user-username">@{user.username}</span>
+										<span className="user-email">{user.email}</span>
 									</div>
 
-									<div className="form-group">
-										<label htmlFor="username">Användarnamn *</label>
-										<input
-											type="text"
-											id="username"
-											name="username"
-											value={formData.username}
-											onChange={handleInputChange}
-											required
-										/>
-									</div>
-								</div>
+									{/* Expanderad sektion med redigeringsformulär */}
+									{selectedUser?.userId === user.userId && (
+										<div className="user-card-expanded" onClick={(e) => e.stopPropagation()}>
+											<div className="detaljer-section">
+												<h4>Detaljer</h4>
+												<div className="detail-item">
+													<span className="detail-label">User ID:</span>
+													<span className="detail-value">{user.userId}</span>
+												</div>
+												{user.phoneNumber && (
+													<div className="detail-item">
+														<span className="detail-label">Telefon:</span>
+														<span className="detail-value">{user.phoneNumber}</span>
+													</div>
+												)}
+												{user.address && (
+													<div className="detail-item">
+														<span className="detail-label">Adress:</span>
+														<span className="detail-value">{user.address}</span>
+													</div>
+												)}
+												<div className="detail-item">
+													<span className="detail-label">Skapad:</span>
+													<span className="detail-value">
+														{user.createdAt ? new Date(user.createdAt).toLocaleString('sv-SE', {
+															year: 'numeric',
+															month: 'short',
+															day: 'numeric',
+															hour: '2-digit',
+															minute: '2-digit'
+														}) : '-'}
+													</span>
+												</div>
+												<div className="detail-item">
+													<span className="detail-label">Uppdaterad:</span>
+													<span className="detail-value">
+														{user.updatedAt ? new Date(user.updatedAt).toLocaleString('sv-SE', {
+															year: 'numeric',
+															month: 'short',
+															day: 'numeric',
+															hour: '2-digit',
+															minute: '2-digit'
+														}) : '-'}
+													</span>
+												</div>
+											</div>
 
-								<div className="form-row">
-									<div className="form-group">
-										<label htmlFor="email">Email *</label>
-										<input
-											type="email"
-											id="email"
-											name="email"
-											value={formData.email}
-											onChange={handleInputChange}
-											required
-										/>
-									</div>
+											<form onSubmit={handleSubmit} className="edit-form">
+												<h4>Redigera användare</h4>
+												
+												<div className="form-grid">
+													<div className="form-group">
+														<label htmlFor="name">Namn *</label>
+														<input
+															type="text"
+															id="name"
+															name="name"
+															value={formData.name}
+															onChange={handleInputChange}
+															required
+														/>
+													</div>
 
-									<div className="form-group">
-										<label htmlFor="role">Roll *</label>
-										<select
-											id="role"
-											name="role"
-											value={formData.role}
-											onChange={handleInputChange}
-											required>
-											<option value="customer">Kund</option>
-											<option value="admin">Admin</option>
-										</select>
-									</div>
-								</div>
+													<div className="form-group">
+														<label htmlFor="username">Användarnamn *</label>
+														<input
+															type="text"
+															id="username"
+															name="username"
+															value={formData.username}
+															onChange={handleInputChange}
+															required
+														/>
+													</div>
 
-								<div className="form-row">
-									<div className="form-group">
-										<label htmlFor="phoneNumber">Telefonnummer</label>
-										<input
-											type="tel"
-											id="phoneNumber"
-											name="phoneNumber"
-											value={formData.phoneNumber || ''}
-											onChange={handleInputChange}
-										/>
-									</div>
+													<div className="form-group">
+														<label htmlFor="email">Email *</label>
+														<input
+															type="email"
+															id="email"
+															name="email"
+															value={formData.email}
+															onChange={handleInputChange}
+															required
+														/>
+													</div>
 
-									<div className="form-group">
-										<label htmlFor="address">Adress</label>
-										<input
-											type="text"
-											id="address"
-											name="address"
-											value={formData.address || ''}
-											onChange={handleInputChange}
-										/>
-									</div>
-								</div>
+													<div className="form-group">
+														<label htmlFor="role">Roll *</label>
+														<select
+															id="role"
+															name="role"
+															value={formData.role}
+															onChange={handleInputChange}
+															required>
+															<option value="customer">Kund</option>
+															<option value="admin">Admin</option>
+														</select>
+													</div>
 
-								<div className="form-group">
-									<label htmlFor="newPassword">
-										Nytt lösenord (lämna tomt för att behålla nuvarande)
-									</label>
-									<input
-										type="password"
-										id="newPassword"
-										value={newPassword}
-										onChange={(e) => setNewPassword(e.target.value)}
-										placeholder="Ange nytt lösenord om du vill ändra"
-									/>
-								</div>
+													<div className="form-group">
+														<label htmlFor="phoneNumber">Telefonnummer</label>
+														<input
+															type="tel"
+															id="phoneNumber"
+															name="phoneNumber"
+															value={formData.phoneNumber || ''}
+															onChange={handleInputChange}
+														/>
+													</div>
 
-								<div className="form-actions">
-									<button type="submit" className="submit-button">
-										Spara ändringar
-									</button>
-									<button
-										type="button"
-										onClick={handleCancel}
-										className="cancel-button">
-										Avbryt
-									</button>
-								</div>
+													<div className="form-group">
+														<label htmlFor="address">Adress</label>
+														<input
+															type="text"
+															id="address"
+															name="address"
+															value={formData.address || ''}
+															onChange={handleInputChange}
+														/>
+													</div>
 
-								<div className="user-meta">
-									<small>Användare-ID: {selectedUser.userId}</small>
-									{selectedUser.createdAt && (
-										<small>
-											Skapad: {new Date(selectedUser.createdAt).toLocaleDateString('sv-SE')}
-										</small>
+													<div className="form-group full-width">
+														<label htmlFor="newPassword">
+															Nytt lösenord (lämna tomt för att behålla nuvarande)
+														</label>
+														<input
+															type="password"
+															id="newPassword"
+															value={newPassword}
+															onChange={(e) => setNewPassword(e.target.value)}
+															placeholder="Ange nytt lösenord"
+														/>
+													</div>
+												</div>
+
+												<div className="form-actions">
+													<button type="button" onClick={handleDelete} className="btn-delete">
+														Ta bort användare
+													</button>
+													<div className="action-buttons-right">
+														<button type="button" onClick={handleCancel} className="btn-cancel">
+															Avbryt
+														</button>
+														<button type="submit" className="btn-submit">
+															Uppdatera
+														</button>
+													</div>
+												</div>
+											</form>
+										</div>
 									)}
-									{selectedUser.updatedAt && (
-										<small>
-											Uppdaterad: {new Date(selectedUser.updatedAt).toLocaleDateString('sv-SE')}
-										</small>
-									)}
 								</div>
-							</form>
+							))}
 						</div>
-					)}
+					</div>
 				</div>
 			</div>
 		</>

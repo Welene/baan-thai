@@ -6,7 +6,7 @@ const dynamodb = DynamoDBDocumentClient.from(client);
 const TABLE_NAME = process.env.TABLE_NAME;
 
 exports.handler = async (event) => {
-	console.log('getAllUsers invoked');
+	console.log('getAdminUsers invoked');
 	
 	try {
 		// Hämta role från query parameters (optional filter)
@@ -64,3 +64,5 @@ exports.handler = async (event) => {
 		};
 	}
 };
+
+// Create: Sunsanee

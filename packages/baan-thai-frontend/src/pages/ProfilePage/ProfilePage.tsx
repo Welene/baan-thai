@@ -29,17 +29,22 @@ interface Profile {
 function ProfilePage() {
   const navigate = useNavigate();
   const [orders, setOrders] = useState<Order[]>([]);
+  const [profileData, setProfileData] = useState<Profile | null>(null);
   const [loading, setLoading] = useState(true);
   const [cancellingOrderId, setCancellingOrderId] = useState<string | null>(null);
   const [editingOrderId, setEditingOrderId] = useState<string | null>(null);
   const [editingOrderItems, setEditingOrderItems] = useState<any[]>([]);
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [editFormData, setEditFormData] = useState<Partial<Profile>>({});
+  const [isSaving, setIsSaving] = useState(false);
+  const [profileMessage, setProfileMessage] = useState<{ text: string; type: 'success' | 'error' } | null>(null);
 
   // Hämta användare från localStorage (satt vid inloggning)
   const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
   const userId = currentUser?.userId;
 
-  // Använd localStorage-data för profilen (alltid tillgänglig)
-  const profile: Profile = {
+  // Använd profileData state om det finns, annars fallback till localStorage
+  const profile: Profile = profileData || {
     userId: currentUser?.userId || '',
     name: currentUser?.name || 'Användare',
     email: currentUser?.email || '',
@@ -56,8 +61,8 @@ function ProfilePage() {
 
     fetchOrders();
     
-    // Hämta ordrar varje 10 sekund för att se uppdateringar från köket
-    const interval = setInterval(fetchOrders, 10000);
+    // Hämta ordrar varje 30 sekund för att se uppdateringar från köket
+    const interval = setInterval(fetchOrders, 30000);
     
     return () => clearInterval(interval);
   }, [userId, navigate]);
@@ -70,6 +75,27 @@ function ProfilePage() {
       if (response.ok) {
         const data = await response.json();
         setOrders(data.orders || []);
+        
+        // Uppdatera profildata från backend
+        if (data.profile) {
+          setProfileData({
+            userId: data.profile.userId || userId,
+            name: data.profile.name || currentUser?.name || 'Användare',
+            email: data.profile.email || '',
+            username: data.profile.username || currentUser?.username || '',
+            phoneNumber: data.profile.phoneNumber,
+            address: data.profile.address
+          });
+          
+          // Uppdatera även localStorage
+          const updatedUser = {
+            ...currentUser,
+            email: data.profile.email,
+            phoneNumber: data.profile.phoneNumber,
+            address: data.profile.address
+          };
+          localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+        }
       }
     } catch (err) {
       console.error('Kunde inte hämta ordrar:', err);
@@ -156,6 +182,81 @@ function ProfilePage() {
     fetchOrders();
   };
 
+  const handleStartEditProfile = () => {
+    setEditFormData(profile);
+    setIsEditingProfile(true);
+    setProfileMessage(null);
+  };
+
+  const handleEditProfileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setEditFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSaveProfile = async () => {
+    if (!userId) return;
+
+    setIsSaving(true);
+    try {
+      const response = await fetch(`${API_BASE_URL}/api/profile/${userId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: editFormData.email,
+          phoneNumber: editFormData.phoneNumber,
+          address: editFormData.address
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Kunde inte uppdatera profil');
+      }
+
+      // Uppdatera profileData state med nya värdena
+      setProfileData(prev => prev ? {
+        ...prev,
+        email: editFormData.email || prev.email,
+        phoneNumber: editFormData.phoneNumber || prev.phoneNumber,
+        address: editFormData.address || prev.address
+      } : null);
+
+      // Uppdatera även localStorage
+      const updatedUser = {
+        ...currentUser,
+        email: editFormData.email,
+        phoneNumber: editFormData.phoneNumber,
+        address: editFormData.address
+      };
+      localStorage.setItem('currentUser', JSON.stringify(updatedUser));
+
+      setProfileMessage({
+        text: 'Profil uppdaterad!',
+        type: 'success'
+      });
+      setIsEditingProfile(false);
+      
+      // Hämta alla data från backend för att säkerställa synkronisering
+      setTimeout(() => fetchOrders(), 1000);
+    } catch (error) {
+      console.error('Failed to update profile:', error);
+      setProfileMessage({
+        text: 'Kunde inte uppdatera profil. Försök igen.',
+        type: 'error'
+      });
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const handleCancelEditProfile = () => {
+    setIsEditingProfile(false);
+    setEditFormData({});
+    setProfileMessage(null);
+  };
+
   if (loading) {
     return (
       <div className="profile-page">
@@ -182,6 +283,9 @@ function ProfilePage() {
               <p className="profile-address">{profile.address}</p>
             )}
           </div>
+          <button className="edit-profile-btn" onClick={handleStartEditProfile}>
+            Redigera profil
+          </button>
         </section>
 
         {/* Orderhistorik */}
@@ -249,6 +353,73 @@ function ProfilePage() {
             onSuccess={handleEditOrderSuccess}
           />
         )}
+
+        {/* Edit Profile Modal */}
+        {isEditingProfile && (
+          <div className="modal-backdrop" onClick={handleCancelEditProfile}>
+            <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+              <h2>Redigera profil</h2>
+              {profileMessage && (
+                <div className={`message message--${profileMessage.type}`}>
+                  {profileMessage.text}
+                </div>
+              )}
+              <form className="edit-profile-form">
+                <div className="form-group">
+                  <label htmlFor="edit-email">Email</label>
+                  <input
+                    type="email"
+                    id="edit-email"
+                    name="email"
+                    value={editFormData.email || ''}
+                    onChange={handleEditProfileChange}
+                    placeholder="Email"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="edit-phone">Telefonnummer</label>
+                  <input
+                    type="tel"
+                    id="edit-phone"
+                    name="phoneNumber"
+                    value={editFormData.phoneNumber || ''}
+                    onChange={handleEditProfileChange}
+                    placeholder="Telefonnummer"
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="edit-address">Adress</label>
+                  <input
+                    type="text"
+                    id="edit-address"
+                    name="address"
+                    value={editFormData.address || ''}
+                    onChange={handleEditProfileChange}
+                    placeholder="Adress"
+                  />
+                </div>
+                <div className="form-actions">
+                  <button
+                    type="button"
+                    className="btn-save"
+                    onClick={handleSaveProfile}
+                    disabled={isSaving}
+                  >
+                    {isSaving ? 'Sparar...' : 'Spara'}
+                  </button>
+                  <button
+                    type="button"
+                    className="btn-cancel"
+                    onClick={handleCancelEditProfile}
+                    disabled={isSaving}
+                  >
+                    Avbryt
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );
@@ -257,4 +428,6 @@ function ProfilePage() {
 export default ProfilePage;
 
 /* Författare: Tim */
-/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras */
+/* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras*/
+/* edit :tim 
+edit profile , telefonnummer adress och email */
