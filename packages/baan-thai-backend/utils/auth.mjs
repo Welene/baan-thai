@@ -1,4 +1,4 @@
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
 
 function getSecret() {
   const secret = process.env.JWT_SECRET;
@@ -14,7 +14,7 @@ function verifyToken(token) {
   return jwt.verify(token, getSecret());
 }
 
-module.exports = { createToken, verifyToken };
+export { createToken, verifyToken };
 
 /* Författare: Tim */
 /* Hanterar skapande och verifiering av JWT-tokens */

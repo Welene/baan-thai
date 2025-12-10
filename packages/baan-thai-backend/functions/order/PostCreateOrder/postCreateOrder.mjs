@@ -21,17 +21,17 @@ export const handler = middy(async (event) => {
       try {
         product = await queryMenuItem(item.productId);
       } catch (dbError) {
-        console.error(`❌ DynamoDB error for product ${item.productId}:`, dbError.message);
+        console.error(`DynamoDB error for product ${item.productId}:`, dbError.message);
         // Använd mock data om DynamoDB failar
         product = {
           name: `Product ${item.productId}`,
           price: 99
         };
-        console.log(`✅ Using mock data for product ${item.productId}`);
+        console.log(`Using mock data for product ${item.productId}`);
       }
 
       if (!product) {
-        console.error(`❌ Product ${item.productId} not found`);
+        console.error(`Product ${item.productId} not found`);
         return sendResponse(404, {
           success: false,
           message: `Product ${item.productId} not found`
@@ -44,10 +44,10 @@ export const handler = middy(async (event) => {
         price: product.price
       });
       
-      console.log(`✅ Added product ${item.productId}: ${product.name} @ ${product.price} kr`);
+      console.log(`Added product ${item.productId}: ${product.name} @ ${product.price} kr`);
     }
 
-    console.log('💰 Populated order:', JSON.stringify(populatedOrder, null, 2));
+    console.log('Populated order:', JSON.stringify(populatedOrder, null, 2));
 
     // Skicka in fullständig order till addOrder()
     const order = await addOrder({
@@ -61,7 +61,7 @@ export const handler = middy(async (event) => {
       paymentStatus: body.paymentStatus || "pending"
     });
 
-    console.log('📝 Order result:', JSON.stringify(order, null, 2));
+    console.log('Order result:', JSON.stringify(order, null, 2));
 
     if (order.success) {
       return sendResponse(201, {
@@ -76,7 +76,7 @@ export const handler = middy(async (event) => {
       });
     }
   } catch (error) {
-    console.error('💥 Unexpected error in postCreateOrder:', error);
+    console.error('Unexpected error in postCreateOrder:', error);
     return sendResponse(500, {
       success: false,
       message: `Server error: ${error.message}`

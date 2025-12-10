@@ -1,4 +1,4 @@
-const bcrypt = require('bcryptjs');
+import bcrypt from 'bcryptjs';
 
 const DEFAULT_ROUNDS = 10;
 
@@ -10,7 +10,7 @@ async function compare(password, stored) {
   return bcrypt.compare(password, stored);
 }
 
-module.exports = { hash, compare };
+export { hash, compare };
 
 /* Författare: Tim */
 /* hanterar lösenords-hashing och jämförelse med bcrypt */

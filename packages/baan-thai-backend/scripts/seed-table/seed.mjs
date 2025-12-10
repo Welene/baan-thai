@@ -1,19 +1,22 @@
-require('dotenv').config();
-const AWS = require('aws-sdk');
-const fs = require('fs');
-const path = require('path');
-const crypto = require('crypto');
+import dotenv from 'dotenv';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
+import fs from 'fs';
+import path from 'path';
+import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+
+dotenv.config();
 
 const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 const REGION = process.env.AWS_REGION || 'eu-north-1';
 const BATCH_SIZE = 25;
 
-if (process.env.AWS_PROFILE) {
-  AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: process.env.AWS_PROFILE });
-}
-AWS.config.update({ region: REGION });
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
-const doc = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDBClient({ region: REGION });
+const docClient = DynamoDBDocumentClient.from(client);
 
 function shortId() {
   // Enkel 8-teckens id via native crypto
@@ -30,7 +33,7 @@ async function writeBatch(batch) {
   const params = { RequestItems: { [TABLE_NAME]: batch.map(Item => ({ PutRequest: { Item } })) } };
   // Enkel retry (max 3 försök) med liten väntan
   for (let attempt = 0; attempt < 3; attempt++) {
-    const res = await doc.batchWrite(params).promise();
+    const res = await docClient.send(new BatchWriteCommand(params));
     const unprocessed = res.UnprocessedItems && res.UnprocessedItems[TABLE_NAME] ? res.UnprocessedItems[TABLE_NAME] : [];
     if (!unprocessed || unprocessed.length === 0) return;
     console.log(`Batch had ${unprocessed.length} unprocessed items, retry ${attempt + 1}`);
@@ -41,7 +44,7 @@ async function writeBatch(batch) {
 }
 
 async function run() {
-  const seedPath = path.join(__dirname, '..', 'seed-data.json');
+  const seedPath = path.join(__dirname, '..', '..', 'seed-data.json');
   if (!fs.existsSync(seedPath)) {
     console.error('Missing', seedPath);
     process.exit(1);

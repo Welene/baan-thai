@@ -1,12 +1,11 @@
-const { DynamoDBClient } = require("@aws-sdk/client-dynamodb");
-const { DynamoDBDocumentClient, ScanCommand } = require("@aws-sdk/lib-dynamodb");
+import { DynamoDBDocumentClient, ScanCommand } from "@aws-sdk/lib-dynamodb";
+import { docClient } from "../../services/clients.mjs";
 
-const client = new DynamoDBClient({ region: "eu-north-1" });
-const dynamoDb = DynamoDBDocumentClient.from(client);
+const dynamoDb = docClient;
 
 const TABLE_NAME = process.env.RESTAURANT_TABLE || "RestaurantTable";
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   console.log("GET /api/menu - Fetching all menu items");
 
   try {

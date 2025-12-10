@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "deploy": "serverless deploy",
-    "seed": "node scripts/seed.js",
-    "import-menu": "node scripts/menu-import/import-menu-from-api.js"
+    "seed": "node scripts/seed.mjs",
+    "import-menu": "node scripts/menu-import/import-menu-from-api.mjs"
   },
   "keywords": [],
   "author": "",
@@ -26,10 +26,8 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "esbuild": "^0.25.12",
     "serverless": "^3.x",
     "serverless-dotenv-plugin": "^6.0.0",
-    "serverless-esbuild": "^1.56.1",
     "serverless-offline": "^14.4.0"
   }
 }
