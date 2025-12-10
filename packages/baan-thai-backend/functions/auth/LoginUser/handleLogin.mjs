@@ -63,6 +63,18 @@ export const handler = async (event) => {
     }
 
     const user = result.Items[0];
+    
+    // Om passwordHash saknas, returnera 401 istället för att låta bcrypt jämföra med undefined
+    if (!user.passwordHash) {
+      return {
+        statusCode: 401,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'Felaktig email eller lösenord' })
+      };
+    }
 
     // jämför lösenord med hashat lösenord i databasen
     const isValidPassword = await compare(password, user.passwordHash);
@@ -90,6 +102,7 @@ export const handler = async (event) => {
           userId: user.userId,
           email: user.email,
           name: user.name,
+          username: user.username,
           role: user.role,
           phoneNumber: user.phoneNumber
         }
@@ -105,3 +118,4 @@ export const handler = async (event) => {
   }
 };
 
+// Helene edit: added phoneNumber

@@ -27,6 +27,10 @@ export const handler = async (event) => {
 		if (role === 'admin' && body.adminSecret !== ADMIN_SECRET) {
 			return {
 				statusCode: 403,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({ error: 'Obehörig admin-registrering' })
 			};
 		}
@@ -37,6 +41,10 @@ export const handler = async (event) => {
 		if (!email || !password || !name || !username) {
 			return {
 				statusCode: 400,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({
 					error: 'Email, lösenord, namn och användarnamn krävs',
 				}),
@@ -82,6 +90,10 @@ export const handler = async (event) => {
 		if (existingUser.Items && existingUser.Items.length > 0) {
 			return {
 				statusCode: 409,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({
 					error: 'Email finns redan registrerad',
 				}),
@@ -97,7 +109,7 @@ export const handler = async (event) => {
 		// skapa timestamp
 		const timestamp = new Date().toISOString();
 
-		// skapa ny användare i databasen
+		// skapa ny användare i databasen.
 		const newUser = {
 			PK: `USER#${userId}`,
 			SK: 'PROFILE',
@@ -130,6 +142,10 @@ export const handler = async (event) => {
 		// returnera success med token och användarinfo
 		return {
 			statusCode: 201,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
 			body: JSON.stringify({
 				message: 'Registrering lyckades',
 				token: token,
@@ -148,6 +164,10 @@ export const handler = async (event) => {
 		console.error('Error stack:', error.stack);
 		return {
 			statusCode: 500,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
 			body: JSON.stringify({
 				error: 'Serverfel vid registrering',
 				details: error.message,
