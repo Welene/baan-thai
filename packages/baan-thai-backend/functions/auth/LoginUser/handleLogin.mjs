@@ -90,7 +90,8 @@ export const handler = async (event) => {
           userId: user.userId,
           email: user.email,
           name: user.name,
-          role: user.role
+          role: user.role,
+          phoneNumber: user.phoneNumber
         }
       })
     };

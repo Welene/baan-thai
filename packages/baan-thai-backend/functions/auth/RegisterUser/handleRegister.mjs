@@ -139,6 +139,7 @@ export const handler = async (event) => {
 					name: name,
 					username: username,
 					role: role,
+					phoneNumber: phoneNumber,
 				},
 			}),
 		};
@@ -155,8 +156,8 @@ export const handler = async (event) => {
 	}
 };
 
-// added phoneNumber & address edit: Helene
-// since we have that in our inputfields on the page
+
 
 /* Författare: Tim */
 /* Användarregistrering med email-validering och JWT-token */
+// Helene edit: added phoneNumber
