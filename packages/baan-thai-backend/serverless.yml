@@ -60,6 +60,27 @@ functions:
           path: /api/profile/{userId}
           method: PUT
 
+  getAdminUsers: # gets all users with admin role
+    handler: functions/auth/GetAdminUsers/getAdminUsers.handler
+    events:
+      - httpApi:
+          path: /api/users
+          method: GET
+
+  updateUser: # updates a specific user (admin only)
+    handler: functions/auth/UpdateUser/updateUser.handler
+    events:
+      - httpApi:
+          path: /api/users/{userId}
+          method: PUT
+
+  deleteUser: # deletes a specific user (admin only)
+    handler: functions/auth/DeleteUser/deleteUser.handler
+    events:
+      - httpApi:
+          path: /api/users/{userId}
+          method: DELETE
+
   #  -------------------MENU---------------------
   getMenu: # get all meals from the menu
     handler: functions/menu/getMenu.handler
