@@ -95,3 +95,16 @@
   border: 2.5px solid #aaa;
   color: #666;
 }
+
+.send-status {
+	font-size: 1rem;
+}
+
+.send-status.green {
+  color: green;
+}
+
+.send-status.red {
+  color: red;
+  font-weight: bold;
+}

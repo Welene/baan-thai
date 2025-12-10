@@ -178,8 +178,6 @@ export const editOrder = async (orderId, updateData) => {
   }
 };
 
-
-
 // PUT status uppdatering med confirmedAt, bara för ADMINS på köksvy sidan
 export const updateOrderStatus = async (orderId, status) => {
   const expressionNames = { "#status": "status" };
@@ -344,7 +342,48 @@ export const cancelOrder = async (orderId, userId) => {
   }
 };
 
-/* Författare: Tim */
+export const adminEditOrder = async (orderId, updateData) => {
+  const existingOrder = await queryOrder(orderId);
+
+  if (!existingOrder) {
+    return { success: false, message: `Order with id ${orderId} not found` };
+  }
+
+  let updateExp = "SET";
+  const exprAttrNames = {};
+  const exprAttrValues = {};
+  let hasUpdate = false;
+
+  if (updateData.adminMessages !== undefined) {
+    updateExp += " #adminMessages = :adminMessages"; // använd # för alias
+    exprAttrNames["#adminMessages"] = "adminMessages"; // mappa alias till riktig kolumn
+    exprAttrValues[":adminMessages"] = updateData.adminMessages;
+    hasUpdate = true;
+  }
+
+  if (!hasUpdate) {
+    return { success: false, message: "No fields to update" };
+  }
+
+  const command = new UpdateCommand({
+    TableName: "RestaurantTable",
+    Key: { PK: `ORDER#${orderId}`, SK: "ORDER" },
+    UpdateExpression: updateExp,
+    ExpressionAttributeNames: exprAttrNames,
+    ExpressionAttributeValues: exprAttrValues,
+    ReturnValues: "ALL_NEW"
+  });
+
+  try {
+    const result = await docClient.send(command);
+    return { success: true, updatedOrder: result.Attributes };
+  } catch (error) {
+    return { success: false, message: `Error updating order: ${error.message}` };
+  }
+};
+
+
+/* Författare: Felicia och Sunsanee */
 /*Hanterar all order-logik: skapa, hämta, uppdatera, radera, redigera och avbryta orders */
 
 // Helene: added confirmedAt with time so order containers on admin page can change color
