@@ -3,8 +3,6 @@ import { MenuCard } from '../../components/MenuCard/MenuCard';
 import { CategoryNav } from '../../components/CategoryNav/CategoryNav';
 import './SushiMenuPage.css';
 import sushiHero from '../../assets/sushi-tåg 1.png';
-// import { MenuItem } from '../../interfaces/menu';
-import Cart from '../../components/Cart/Cart';
 import { MenuPageProps } from '../../interfaces/menuProps';
 import { API_BASE_URL } from '../../config/api';
 
@@ -32,7 +30,6 @@ export default function SushiMenuPage({
 	onAddToCart,
 	cartItems,
 	setCartItems,
-	currentUser,
 }: MenuPageProps) {
 	const [items, setItems] = useState<any[]>([]);
 	const [loading, setLoading] = useState(true);

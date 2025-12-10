@@ -1,11 +1,10 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, ScanCommand } = require('@aws-sdk/lib-dynamodb');
+import { ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { docClient } from '../../../services/clients.mjs';
 
-const client = new DynamoDBClient({});
-const dynamodb = DynamoDBDocumentClient.from(client);
+const dynamodb = docClient;
 const TABLE_NAME = process.env.TABLE_NAME;
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
 	console.log('getAdminUsers invoked');
 	
 	try {

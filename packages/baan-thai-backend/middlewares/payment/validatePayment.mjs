@@ -1,4 +1,4 @@
-import { paymentSchema } from '../../models/paymentSchema.js';
+import { paymentSchema } from '../../models/paymentSchema.mjs';
 import { sendResponse } from '../../responses/response.mjs';
 
 export const validatePayment = () => {

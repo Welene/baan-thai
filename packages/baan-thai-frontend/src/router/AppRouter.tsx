@@ -6,7 +6,7 @@ import Layout from '../components/Layout/Layout';
 import LandingPage from '../pages/landingPage/landingPage';
 import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
-import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
+import { AboutUsPage } from '../pages/AboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { User } from '../interfaces/user';
@@ -16,8 +16,6 @@ import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
 import { EditUserPage } from '../pages/AdminPage/EditUser/EditUserPage';
 import { AdminUserPage } from '../pages/AdminPage/AdminUserPage/AdminUserPage';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute';
-
-
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
 import { MenuItem } from '../interfaces/menu';

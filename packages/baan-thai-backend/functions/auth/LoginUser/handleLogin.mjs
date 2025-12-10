@@ -1,14 +1,13 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, QueryCommand, ScanCommand } = require('@aws-sdk/lib-dynamodb');
-const { compare } = require('../../../utils/password');
-const { createToken } = require('../../../utils/auth');
+import { DynamoDBDocumentClient, QueryCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { compare } from '../../../utils/password.mjs';
+import { createToken } from '../../../utils/auth.mjs';
+import { docClient } from '../../../services/clients.mjs';
 
 // Setup DynamoDB client
-const client = new DynamoDBClient({});
-const dynamodb = DynamoDBDocumentClient.from(client);
+const dynamodb = docClient;
 const TABLE_NAME = process.env.TABLE_NAME;
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   try {
     // parsa input från event body
     const body = JSON.parse(event.body);
@@ -64,6 +63,18 @@ exports.handler = async (event) => {
     }
 
     const user = result.Items[0];
+    
+    // Om passwordHash saknas, returnera 401 istället för att låta bcrypt jämföra med undefined
+    if (!user.passwordHash) {
+      return {
+        statusCode: 401,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'Felaktig email eller lösenord' })
+      };
+    }
 
     // jämför lösenord med hashat lösenord i databasen
     const isValidPassword = await compare(password, user.passwordHash);
@@ -91,7 +102,9 @@ exports.handler = async (event) => {
           userId: user.userId,
           email: user.email,
           name: user.name,
-          role: user.role
+          username: user.username,
+          role: user.role,
+          phoneNumber: user.phoneNumber
         }
       })
     };
@@ -104,3 +117,5 @@ exports.handler = async (event) => {
     };
   }
 };
+
+// Helene edit: added phoneNumber

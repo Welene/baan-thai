@@ -88,7 +88,7 @@ const handleRemoveOrder = async (orderId: string) => {
 };
 
 
-  // waitStatus (colors) is updated by setInterval every min
+  // waitStatus (colors) is updated by setInterval every 30 sec
   useEffect(() => {
     const interval = setInterval(() => {
       setOrders((prevOrders) =>
@@ -98,7 +98,7 @@ const handleRemoveOrder = async (orderId: string) => {
             : order
         )
       );
-    }, 60000); // setInterval runs every minute
+    }, 30000); // setInterval runs every 30 seconds
 
     return () => clearInterval(interval); // cleanup when comp unmounts
   }, []);

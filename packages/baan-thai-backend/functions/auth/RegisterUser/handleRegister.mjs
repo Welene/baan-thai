@@ -1,18 +1,17 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const {	DynamoDBDocumentClient, QueryCommand, PutCommand, ScanCommand, } = require('@aws-sdk/lib-dynamodb');
-const { hash } = require('../../../utils/password');
-const { createToken } = require('../../../utils/auth');
-const crypto = require('crypto');
+import { DynamoDBDocumentClient, QueryCommand, PutCommand, ScanCommand } from '@aws-sdk/lib-dynamodb';
+import { hash } from '../../../utils/password.mjs';
+import { createToken } from '../../../utils/auth.mjs';
+import { docClient } from '../../../services/clients.mjs';
+import crypto from 'crypto';
 
 // Generate UUID using native crypto
 const generateUUID = () => crypto.randomUUID();
 
 // Setup DynamoDB client
-const client = new DynamoDBClient({});
-const dynamodb = DynamoDBDocumentClient.from(client);
+const dynamodb = docClient;
 const TABLE_NAME = process.env.TABLE_NAME;
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
 	console.log('handleRegister invoked');
 	try {
 		// parsa input från event body
@@ -28,6 +27,10 @@ exports.handler = async (event) => {
 		if (role === 'admin' && body.adminSecret !== ADMIN_SECRET) {
 			return {
 				statusCode: 403,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({ error: 'Obehörig admin-registrering' })
 			};
 		}
@@ -38,6 +41,10 @@ exports.handler = async (event) => {
 		if (!email || !password || !name || !username) {
 			return {
 				statusCode: 400,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({
 					error: 'Email, lösenord, namn och användarnamn krävs',
 				}),
@@ -83,6 +90,10 @@ exports.handler = async (event) => {
 		if (existingUser.Items && existingUser.Items.length > 0) {
 			return {
 				statusCode: 409,
+				headers: {
+					'Content-Type': 'application/json',
+					'Access-Control-Allow-Origin': '*'
+				},
 				body: JSON.stringify({
 					error: 'Email finns redan registrerad',
 				}),
@@ -98,7 +109,7 @@ exports.handler = async (event) => {
 		// skapa timestamp
 		const timestamp = new Date().toISOString();
 
-		// skapa ny användare i databasen
+		// skapa ny användare i databasen.
 		const newUser = {
 			PK: `USER#${userId}`,
 			SK: 'PROFILE',
@@ -131,6 +142,10 @@ exports.handler = async (event) => {
 		// returnera success med token och användarinfo
 		return {
 			statusCode: 201,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
 			body: JSON.stringify({
 				message: 'Registrering lyckades',
 				token: token,
@@ -140,7 +155,7 @@ exports.handler = async (event) => {
 					name: name,
 					username: username,
 					role: role,
-					// phoneNumber: phoneNumber,
+					phoneNumber: phoneNumber,
 				},
 			}),
 		};
@@ -149,6 +164,10 @@ exports.handler = async (event) => {
 		console.error('Error stack:', error.stack);
 		return {
 			statusCode: 500,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*'
+			},
 			body: JSON.stringify({
 				error: 'Serverfel vid registrering',
 				details: error.message,
@@ -157,8 +176,8 @@ exports.handler = async (event) => {
 	}
 };
 
-// added phoneNumber & address edit: Helene
-// since we have that in our inputfields on the page
+
 
 /* Författare: Tim */
 /* Användarregistrering med email-validering och JWT-token */
+// Helene edit: added phoneNumber

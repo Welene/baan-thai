@@ -1,13 +1,12 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, GetCommand } = require('@aws-sdk/lib-dynamodb');
+import { DynamoDBDocumentClient, GetCommand } from '@aws-sdk/lib-dynamodb';
+import { docClient } from '../../services/clients.mjs';
 
 const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 
 // Setup DynamoDB client
-const client = new DynamoDBClient({});
-const dynamodb = DynamoDBDocumentClient.from(client);
+const dynamodb = docClient;
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   try {
     // Hämta prodId från URL-parametern (t.ex. /api/menu/42 - prodId = 42)
     const prodId = event.pathParameters && event.pathParameters.prodId;

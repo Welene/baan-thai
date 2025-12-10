@@ -1,17 +1,16 @@
-require('dotenv').config();
-const AWS = require('aws-sdk');
-const https = require('https');
+import dotenv from 'dotenv';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, BatchWriteCommand } from '@aws-sdk/lib-dynamodb';
+import https from 'https';
+
+dotenv.config();
 
 const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 const REGION = process.env.AWS_REGION || 'eu-north-1';
 const API_URL = 'https://tivva34.github.io/MenuAPI/menu.json';
 
-if (process.env.AWS_PROFILE) {
-  AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: process.env.AWS_PROFILE });
-}
-AWS.config.update({ region: REGION });
-
-const doc = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDBClient({ region: REGION });
+const docClient = DynamoDBDocumentClient.from(client);
 
 // Hämta JSON från GitHub Pages
 function fetchMenuFromAPI(url) {
@@ -84,7 +83,7 @@ async function writeBatch(items) {
     };
 
     try {
-      await doc.batchWrite(params).promise();
+      await docClient.send(new BatchWriteCommand(params));
     } catch (err) {
       console.error(`Failed to write batch ${index + 1}:`, err.message);
       throw err;

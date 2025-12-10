@@ -1,12 +1,12 @@
-const { DynamoDBClient } = require('@aws-sdk/client-dynamodb');
-const { DynamoDBDocumentClient, UpdateCommand } = require('@aws-sdk/lib-dynamodb');
+import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
+import bcrypt from 'bcryptjs';
+import { docClient } from '../../../services/clients.mjs';
 
 // Ställ in DynamoDB-klient
-const client = new DynamoDBClient({});
-const dynamodb = DynamoDBDocumentClient.from(client);
+const dynamodb = docClient;
 const TABLE_NAME = process.env.TABLE_NAME;
 
-exports.handler = async (event) => {
+export const handler = async (event) => {
   try {
     const userId = event.pathParameters?.userId;
     const body = JSON.parse(event.body || '{}');

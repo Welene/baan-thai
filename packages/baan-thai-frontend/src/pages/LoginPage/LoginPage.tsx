@@ -46,6 +46,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 
 			const data = await response.json();
 
+
 			if (!response.ok) {
 				throw new Error(data.error || 'Kunde inte logga in');
 			}
@@ -59,6 +60,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 				email: data.user.email,
 				username: data.user.username,
 				role: data.user.role,
+				phoneNumber: data.user.phoneNumber, // added phoneNUmber so number input field on checkout page fills automatially
 			};
 			localStorage.setItem('currentUser', JSON.stringify(userToStore));
 
@@ -151,3 +153,4 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 }
 
 export default LoginPage;
+// Edit - Helene: added phoneNumber to localstorage

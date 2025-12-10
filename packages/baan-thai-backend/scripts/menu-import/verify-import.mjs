@@ -1,15 +1,14 @@
-require('dotenv').config();
-const AWS = require('aws-sdk');
+import dotenv from 'dotenv';
+import { DynamoDBClient } from '@aws-sdk/client-dynamodb';
+import { DynamoDBDocumentClient, ScanCommand } from '@aws-sdk/lib-dynamodb';
+
+dotenv.config();
 
 const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 const REGION = process.env.AWS_REGION || 'eu-north-1';
 
-if (process.env.AWS_PROFILE) {
-  AWS.config.credentials = new AWS.SharedIniFileCredentials({ profile: process.env.AWS_PROFILE });
-}
-AWS.config.update({ region: REGION });
-
-const doc = new AWS.DynamoDB.DocumentClient();
+const client = new DynamoDBClient({ region: REGION });
+const docClient = DynamoDBDocumentClient.from(client);
 
 async function countProducts() {
   let products = [];
@@ -31,7 +30,7 @@ async function countProducts() {
       params.ExclusiveStartKey = lastKey;
     }
     
-    const result = await doc.scan(params).promise();
+    const result = await docClient.send(new ScanCommand(params));
     products = products.concat(result.Items);
     lastKey = result.LastEvaluatedKey;
   } while (lastKey);
