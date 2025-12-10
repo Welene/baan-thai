@@ -174,6 +174,13 @@ functions:
           path: /api/orders/{orderId}
           method: DELETE
 
+  adminEditOrder: # changes an order in case user did something wrong/forgot to add something (only pending orders)
+    handler: functions/order/AdminEditOrder/adminEditOrder.handler
+    events:
+      - httpApi:
+          path: /api/orders/{orderId}/edit/admin
+          method: PUT
+
   #  -------------------NOTIFICATIONS---------------------
   getNotifications: # gets all notifications for a user
     handler: functions/notifications/GetNotifications/getNotifications.handler

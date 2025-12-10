@@ -28,6 +28,7 @@ const AdminPage: React.FC = () => {
   const [selectedOrder, setSelectedOrder] = useState<Order | null>(null);
   const [showPopup, setShowPopup] = useState(false);
   const [popupMessage, setPopupMessage] = useState("");
+  const [sendMeassageStatus, setSendMeassageStatus] = useState<{ text: string; color: string } | null>(null);
 
   // fetch all orders made, from the backend get all orders endpoint
   useEffect(() => {
@@ -129,8 +130,6 @@ const handleMarkCompleted = async (orderId: string) => {
   // updates order state by removing that orderId  from the page (AKA orders that have been marked "hämtad", AKA clicked hämtad
 };
 
-
-
   // EXTENDED/POPUP ORDER CONTAINER SECTION -- when order container is clicked on admin page ----------------------------------------------------------
    const openPopup = (order: Order) => {
     setSelectedOrder(order);
@@ -142,6 +141,7 @@ const handleMarkCompleted = async (orderId: string) => {
     setSelectedOrder(null);
     setShowPopup(false);
     setPopupMessage("");
+    setSendMeassageStatus(null);
   };
 
   const handleSendMessage = async (orderId: string) => {
@@ -151,7 +151,7 @@ const handleMarkCompleted = async (orderId: string) => {
     }
 
     try {
-      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ adminMessages: popupMessage }),
@@ -169,11 +169,13 @@ const handleMarkCompleted = async (orderId: string) => {
           setSelectedOrder(updatedOrder);
           setPopupMessage(updatedOrder.adminMessages ?? popupMessage);
         }
-
+        setSendMeassageStatus({ text: "Meddelandet är skickat!", color: "green" });
+      } else {
+        setSendMeassageStatus({ text: "Fel: kunde inte skicka meddelandet", color: "red" });
       }
     } catch (error) {
       console.error("Failed to send message:", error);
-      alert("Kunde inte skicka meddelande");
+      setSendMeassageStatus({ text: "Fel: kunde inte skicka meddelandet", color: "red" });
     }
   };
 
@@ -256,6 +258,9 @@ const handleMarkCompleted = async (orderId: string) => {
             <button onClick={() => handleSendMessage(selectedOrder.orderId)}>
               Skicka meddelande
             </button>
+            {sendMeassageStatus && (
+              <p className={`send-status ${sendMeassageStatus.color}`}>{sendMeassageStatus.text}</p>
+            )}
             <button onClick={closePopup}>Stäng</button>
           </div>
         </div>
