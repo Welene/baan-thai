@@ -6,13 +6,15 @@ import Layout from '../components/Layout/Layout';
 import LandingPage from '../pages/landingPage/landingPage';
 import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
-import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
+import { AboutUsPage } from '../pages/AboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { User } from '../interfaces/user';
 import AdminPage from '../pages/AdminPage/AdminPage';
 import { AdminMenuPage } from '../pages/AdminPage/CreateNewMenu/AdminMenuPage';
 import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
+import { EditUserPage } from '../pages/AdminPage/EditUser/EditUserPage';
+import { AdminUserPage } from '../pages/AdminPage/AdminUserPage/AdminUserPage';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute';
 
 
@@ -23,7 +25,7 @@ import LoginPage from '../pages/LoginPage/LoginPage';
 
 function CartFABWrapper({ cartItems, cartOpen, setCartOpen }: { cartItems: CartItem[], cartOpen: boolean, setCartOpen: (open: boolean) => void }) {
 	const location = useLocation();
-	const hideCartOnRoutes = ['/admin', '/admin/menu', '/admin/menu/edit'];
+	const hideCartOnRoutes = ['/admin', '/admin/menu', '/admin/menu/edit', '/admin/users', '/admin/users/edit'];
 	
 	if (hideCartOnRoutes.includes(location.pathname)) {
 		return null;
@@ -152,11 +154,30 @@ export default function AppRouter() {
 						} 
 					/>
 
+					<Route 
+						path="/admin/users/edit" 
+						element={
+							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+								<EditUserPage />
+							</ProtectedRoute>
+						} 
+					/>
+
+					<Route 
+						path="/admin/users" 
+						element={
+							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+								<AdminUserPage />
+							</ProtectedRoute>
+						} 
+					/>
+
 					<Route
 						path="/checkout"
 						element={
 							<CheckoutPage
 								cartItems={cartItems}
+								currentUser={currentUser}
 							/>
 						}
 					/>

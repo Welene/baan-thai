@@ -60,7 +60,7 @@ export function OrderSummary({
                 </section>
 
                 {/* CAMPAIGN CODE */}
-                <section className="confirm-group3">
+                {/* <section className="confirm-group3">
                     <label className="form-label confirm-article__field-container">
                         <span className="confirm-article__code">Kampanjkod</span>
                         <input
@@ -70,7 +70,7 @@ export function OrderSummary({
                             aria-label="Kampanjkod"
                         />
                     </label>
-                </section>
+                </section> */}
                 <hr className="divider" />
                 
                 {/* TOTAL PRICE */}
