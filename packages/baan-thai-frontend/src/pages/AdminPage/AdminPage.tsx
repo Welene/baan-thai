@@ -254,7 +254,15 @@ const handleMarkCompleted = async (orderId: string) => {
             </ul>
 
             <h3>Meddelande från kund:</h3>
-            <p>{selectedOrder.message || "Inga meddelanden från kund."}</p>
+            <p>
+              {selectedOrder.message
+                ? selectedOrder.message
+                  .replace(/^Avhämtning\s*-\s*Direkt\s*\|\s*Kommentar:\s*/i, "")
+                  .replace(/^Avhämtning\s*-\s*Direkt\s*\|?\s*/i, "")
+                  .trim() || "Inget meddelande från kund."
+                : "Inget meddelande från kund."}
+            </p>
+    
 
             <h3>Meddelande till köken:</h3>
             <textarea
