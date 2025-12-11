@@ -1,10 +1,10 @@
 const CSP = "default-src 'none'; " +
   "base-uri 'self'; " +
-  "script-src 'self'; " +
-  "style-src 'self' 'unsafe-inline'; " +
-  "img-src 'self' data: https://baan-thai-bucket.s3-website.eu-north-1.amazonaws.com; " +
+  "script-src 'self' http://localhost:5173 'unsafe-eval' 'unsafe-inline'; " +
+  "style-src 'self' 'unsafe-inline' http://localhost:5173; " +
+  "img-src 'self' data: https://baan-thai-bucket.s3-website.eu-north-1.amazonaws.com http://localhost:5173; " +
   "font-src 'self' data:; " +
-  "connect-src 'self' https://nicx8149f2.execute-api.eu-north-1.amazonaws.com; " +
+  "connect-src 'self' https://nicx8149f2.execute-api.eu-north-1.amazonaws.com http://localhost:3000 ws://localhost:5173 wss://localhost:5173; " +
   "object-src 'none'; " +
   "form-action 'self'; " +
   "frame-ancestors 'none'; " +
