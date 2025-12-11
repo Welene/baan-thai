@@ -50,6 +50,12 @@ main {
 	position: relative;
 }
 
+.header__icon--admin img {
+    width: 32px; 
+    height: 31px;
+	margin-top: 0.4rem;
+}
+
 .header__icon--profile img {
     width: 25px; 
     height: 27px;
@@ -191,7 +197,7 @@ main {
 }
 
 /* MOBILE */
-@media (max-width: 600px) {
+@media (max-width: 768px) {
 	.header {
 		font-size: 1.1rem;
 		flex-direction: row;
@@ -206,6 +212,7 @@ main {
 		margin-right: 1rem;
 	}
 }
+
 
 
 
