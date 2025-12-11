@@ -14,7 +14,12 @@ const TABLE_NAME = process.env.TABLE_NAME;
 export const handler = async (event) => {
 	console.log('handleRegister invoked');
 	// API_KEY START ----------------------------------------------
-	const incomingKey = event.headers?.["x-api-key"];
+	// const incomingKey = event.headers?.["x-api-key"];
+	const incomingKey =
+    event.headers?.["x-api-key"] ||
+    event.headers?.["X-API-Key"] ||
+    event.headers?.["X-Api-Key"]; // fungerar till serverless offline
+	
 	const expectedKey = process.env.API_KEY;
 
 	if (incomingKey !== expectedKey) {
