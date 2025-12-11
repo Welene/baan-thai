@@ -1,3 +1,5 @@
+# "org" ensures this Service is used with the correct Serverless Framework Access Key.
+org: fe24sunper
 service: baan-thai-backend
 
 useDotenv: true
@@ -294,3 +296,5 @@ functions:
 #             Projection:
 #               ProjectionType: ALL
 #         BillingMode: PAY_PER_REQUEST
+
+# Helene, Tim

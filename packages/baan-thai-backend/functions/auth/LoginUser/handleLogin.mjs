@@ -93,6 +93,19 @@ export const handler = async (event) => {
       };
     }
 
+    // Kontrollera att passwordHash ser ut som en bcrypt-hash innan vi jämför
+    if (typeof user.passwordHash !== 'string' || !/^\$2[aby]\$/.test(user.passwordHash)) {
+      console.warn('Malformed or unexpected passwordHash for user:', user.userId || user.PK);
+      return {
+        statusCode: 401,
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': '*'
+        },
+        body: JSON.stringify({ error: 'Felaktig email eller lösenord' })
+      };
+    }
+
     // jämför lösenord med hashat lösenord i databasen
     const isValidPassword = await compare(password, user.passwordHash);
     if (!isValidPassword) {
@@ -136,3 +149,4 @@ export const handler = async (event) => {
 };
 
 // Helene edit: added phoneNumber
+// Helene edit: added fetchWithApiKey in every api call for extra api protection
