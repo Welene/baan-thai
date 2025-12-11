@@ -5,6 +5,7 @@ import './SushiMenuPage.css';
 import sushiHero from '../../assets/sushi-tåg 1.png';
 import { MenuPageProps } from '../../interfaces/menuProps';
 import { API_BASE_URL } from '../../config/api';
+import { fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 // Sushi-kategorier
 const SUSHI_CATEGORIES = [
@@ -35,17 +36,20 @@ export default function SushiMenuPage({
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
 		console.log('SushiMenuPage! Fetching menu...');
-		fetch(
-			`${API_BASE_URL}/api/menu`,
-			{
+		// fetch(
+		// 	`${API_BASE_URL}/api/menu`,
+		// 	{
+		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 			}
 		)
+	// ---------------------------------------- END OF FETCH --------------------------------------------
 			.then((res) => {
 				if (!res.ok) throw new Error(`HTTP ${res.status}`);
 				return res.json();
@@ -256,3 +260,4 @@ export default function SushiMenuPage({
 // added onAddToCart and MenuItem type here. Removed mockup alert. Added cart prompt mode/comp.- Helene
 /* Tim: löste problem med notifications under Hero image och kommenterade ut static cart från botten */
 // Felicia: add cartitems och setcartitem för att kontrollera antal och koppla den med quanity button i menucard funktion
+// Helene edit: la till fetchWithApiKey istället för fetch för att få med api-nyckel i headern

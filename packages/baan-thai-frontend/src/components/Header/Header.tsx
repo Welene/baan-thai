@@ -11,6 +11,7 @@ import NotificationBadge from '../NotificationBadge/NotificationBadge';
 import NotificationModal from '../NotificationModal/NotificationModal';
 import type { Notification } from '../../interfaces/notification';
 import { API_BASE_URL } from '../../config/api';
+import {fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 function Header() {
 	// Försök först med 'currentUser', sedan 'user' som fallback
@@ -46,7 +47,9 @@ function Header() {
 		
 		try {
 			// Hämta användarens orders istället
-			const response = await fetch(`${API_BASE_URL}/api/orders/${userId}`);
+			// const response = await fetch(`${API_BASE_URL}/api/orders/${userId}`);
+
+			const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${userId}`); // PROTECTED WITH API_KEY
 			
 			if (response.ok) {
 				const data = await response.json();
@@ -230,5 +233,4 @@ export default Header;
 // Författare: Helene
 // Header komponent
 
-// Eventuell buggfix av: *namn-här:
-// Vad blev fixad: *skriv vad som (evt) fixades*
+// Helene: dded fetch with API_KEY 

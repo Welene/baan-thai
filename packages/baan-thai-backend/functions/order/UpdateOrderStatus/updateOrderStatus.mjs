@@ -6,6 +6,18 @@ import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 import { updateOrderStatusSchema } from "../../../models/updateOrderStatusSchema.mjs";
 
 export const handler = middy(async (event) => {
+  //API KEY START---------------------------------------------
+  const incomingKey = event.headers?.["x-api-key"];
+  const expectedKey = process.env.API_KEY;
+
+  if (incomingKey !== expectedKey) {
+    return sendResponse(401, { 
+      success: false,
+      message: "Invalid API Key"
+    });
+  }
+  
+  //API KEY END---------------------------------------------
   const { orderId } = event.pathParameters;
   if (!orderId) {
     return sendResponse(400, { success: false, message: "Missing orderId in path parameters" });

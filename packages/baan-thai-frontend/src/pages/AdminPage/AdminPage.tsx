@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import OrderCard from "../../components/OrderAdminCard/OrderAdminCard";
 import { AdminNavBar } from "../../components/AdminNavBar/AdminNavBar";
 import { API_BASE_URL } from "../../config/api";
+import {fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 type OrderItem = {
   name: string;
@@ -30,16 +31,38 @@ const AdminPage: React.FC = () => {
   const [popupMessage, setPopupMessage] = useState("");
   const [sendMeassageStatus, setSendMeassageStatus] = useState<{ text: string; color: string } | null>(null);
 
+
+  // ---------------------------------------START OF FETCH 1---------------------------------------------------------------
   // fetch all orders made, from the backend get all orders endpoint
+  // useEffect(() => {
+  //   fetch(`${API_BASE_URL}/api/orders`)
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       // console.log("Fetched orders:", data);
+  //       setOrders(data.orders || []);
+  //     })
+  //     .catch((err) => console.error("Failed to fetch orders", err));
+  // }, []);
+
   useEffect(() => {
-    fetch(`${API_BASE_URL}/api/orders`)
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log("Fetched orders:", data);
-        setOrders(data.orders || []);
-      })
-      .catch((err) => console.error("Failed to fetch orders", err));
-  }, []);
+  const fetchOrders = async () => {
+    try {
+      const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders`);
+      if (!response.ok) {
+        console.error("Failed to fetch orders:", response.status);
+        return;
+      }
+      const data = await response.json();
+      setOrders(data.orders || []);
+    } catch (err) {
+      console.error("Failed to fetch orders:", err);
+    }
+  };
+
+  fetchOrders();
+}, []);
+
+// ----------------------------------------END OF FETCH 1-------------------------------------------
 
 
   // calculates waitStatus (for colors) based on when confirmed btn was clicked
@@ -51,13 +74,36 @@ const AdminPage: React.FC = () => {
     return "overdue";
   };
 
+
+  // ----------------------------------------START OF FETCH 2--------------------------------------------
    // confirms order with the help of the backend status changer
+  // const handleConfirm = async (orderId: string) => {
+  //   await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+  //     method: "PUT",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify({ status: "confirmed" }),
+  //   });
+
+  //   // updates LS with confirmedAt when clicked by admin
+  //   setOrders((prevOrders) =>
+  //     prevOrders.map((o) =>
+  //       o.orderId === orderId ? { ...o, status: "confirmed", confirmedAt: new Date().toISOString() } : o
+  //     )
+  //   );
+  // };
+
   const handleConfirm = async (orderId: string) => {
-    await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+  try {
+    const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ status: "confirmed" }),
     });
+
+    if (!response.ok) {
+      console.error("Failed to confirm order:", response.status);
+      return;
+    }
 
     // updates LS with confirmedAt when clicked by admin
     setOrders((prevOrders) =>
@@ -65,11 +111,19 @@ const AdminPage: React.FC = () => {
         o.orderId === orderId ? { ...o, status: "confirmed", confirmedAt: new Date().toISOString() } : o
       )
     );
-  };
+  } catch (error) {
+    console.error("Error confirming order:", error);
+  }
+};
 
+//---------------------------------------------END OF FETCH 2-------------------------------------------------------------
+
+// ------------------------------------------START OF FETCH 3--------------------------------------------------------------
 const handleRemoveOrder = async (orderId: string) => {
   try {
-    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
+    const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}`, {
+
       method: "DELETE",
       headers: { "Content-Type": "application/json" },
     });
@@ -86,6 +140,7 @@ const handleRemoveOrder = async (orderId: string) => {
     alert("Kunde inte radera beställningen");
   }
 };
+//------------------------------------------END OF FETCH 3--------------------------------------------------------------
 
 
   // waitStatus (colors) is updated by setInterval every 30 sec
@@ -104,13 +159,33 @@ const handleRemoveOrder = async (orderId: string) => {
   }, []);
 
 
+  // --------------------------------------------- START OF FETCH 4 ----------------------------------------------------------
   // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD) -------------------------------------------------------------
-  const handleMarkReady = async (orderId: string) => {
-  await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+//   const handleMarkReady = async (orderId: string) => {
+//   await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+//     method: "PUT",
+//     headers: { "Content-Type": "application/json" },
+//     body: JSON.stringify({ status: "ready" }),
+//   });
+
+//   setOrders(prev =>
+//     prev.map(o =>
+//       o.orderId === orderId ? { ...o, status: "ready" } : o
+//     )
+//   );
+// };
+
+const handleMarkReady = async (orderId: string) => {
+  const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "ready" }),
   });
+
+  if (!response.ok) {
+    console.error("Failed to mark order as ready:", response.status);
+    return;
+  }
 
   setOrders(prev =>
     prev.map(o =>
@@ -119,16 +194,34 @@ const handleRemoveOrder = async (orderId: string) => {
   );
 };
 
+
+// ------------------------------------------------END OF FETCH 4 ----------------------------------------------------------
+
+
+// ------------------------------------------------- START OF FETCH 5 ----------------------------------------------------------
 const handleMarkCompleted = async (orderId: string) => {
-  await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+  // await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
+  //   method: "PUT",
+  //   headers: { "Content-Type": "application/json" },
+  //   body: JSON.stringify({ status: "completed" }),
+  // });
+
+  const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ status: "completed" }),
   });
+
+  if (!response.ok) {
+    console.error("Failed to mark order as completed:", response.status);
+    return;
+  }
  // when clicking completed/hämtad button - it is removed from admin page only
   setOrders(prev => prev.filter(o => o.orderId !== orderId));
   // updates order state by removing that orderId  from the page (AKA orders that have been marked "hämtad", AKA clicked hämtad
 };
+
+// ------------------------------------------------- END OF FETCH 5 ----------------------------------------------------------
 
   // EXTENDED/POPUP ORDER CONTAINER SECTION -- when order container is clicked on admin page ----------------------------------------------------------
    const openPopup = (order: Order) => {
@@ -149,9 +242,10 @@ const handleMarkCompleted = async (orderId: string) => {
       alert("Meddelande kan inte vara tomt");
       return;
     }
-
+// ----------------------------------------START OF FETCH 6--------------------------------------------
     try {
-      const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
+      // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
+      const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ adminMessages: popupMessage }),
@@ -159,9 +253,12 @@ const handleMarkCompleted = async (orderId: string) => {
 
       if (response.ok) {
         // Ladda om alla orders från backend för att få uppdaterade meddelanden
-        const ordersResponse = await fetch(`${API_BASE_URL}/api/orders`);
+        // const ordersResponse = await fetch(`${API_BASE_URL}/api/orders`);
+        const ordersResponse = await fetchWithApiKey(`${API_BASE_URL}/api/orders`);
         const ordersData = await ordersResponse.json();
         setOrders(ordersData.orders || []);
+
+        // ------------------------------------END OF FETCH 6--------------------------------------------
 
         // Uppdatera selectedOrder med nya data och fyll textarea med sparat meddelande
         const updatedOrder = ordersData.orders?.find((o: Order) => o.orderId === orderId);
@@ -287,7 +384,8 @@ const handleMarkCompleted = async (orderId: string) => {
 
 export default AdminPage;
 
-// Helene
+// Author: Helene
 // Felicia : Popup för att skicka meddelande till köken när admin klickar på en order
 // Tim: fix wrong url
 // Felicia : Lägg till meddelande från kund i orderkortet och i popupen
+// Helene: added fetch with API_KEY added to all url fetches in AdminPage

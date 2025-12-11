@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '../config/api';
+import { fetchWithApiKey } from '../api/fetchWithApiKey';
 
 interface UpdateUserData {
 	name?: string;
@@ -22,8 +23,11 @@ interface User {
 	updatedAt?: string;
 }
 
+
+// ---------------------------------------- START OF FETCH 1 --------------------------------------------
 export async function updateUser(userId: string, updateData: UpdateUserData): Promise<{ success: boolean; user: User }> {
-	const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+	// const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users/${userId}`, {
 		method: 'PUT',
 		headers: {
 			'Content-Type': 'application/json',
@@ -38,9 +42,13 @@ export async function updateUser(userId: string, updateData: UpdateUserData): Pr
 
 	return response.json();
 }
+// ---------------------------------------- END OF FETCH 1 --------------------------------------------
 
+
+// ---------------------------------------- START OF FETCH 2 --------------------------------------------
 export async function getAllUsers(): Promise<{ success: boolean; users: User[] }> {
-	const response = await fetch(`${API_BASE_URL}/api/users`);
+	// const response = await fetch(`${API_BASE_URL}/api/users`);
+	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users`);
 
 	if (!response.ok) {
 		throw new Error('Kunde inte hämta användare');
@@ -49,8 +57,13 @@ export async function getAllUsers(): Promise<{ success: boolean; users: User[] }
 	return response.json();
 }
 
+// ---------------------------------------- END OF FETCH 2 --------------------------------------------
+
+
+// ---------------------------------------- START OF FETCH 3 --------------------------------------------
 export async function deleteUser(userId: string): Promise<{ success: boolean; message: string }> {
-	const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+	// const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
+	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users/${userId}`, {
 		method: 'DELETE',
 		headers: {
 			'Content-Type': 'application/json',
@@ -64,3 +77,8 @@ export async function deleteUser(userId: string): Promise<{ success: boolean; me
 
 	return response.json();
 }
+
+// ---------------------------------------- END OF FETCH 3 --------------------------------------------
+
+
+// Helene edit: changed fetch to fetchWithApiKey

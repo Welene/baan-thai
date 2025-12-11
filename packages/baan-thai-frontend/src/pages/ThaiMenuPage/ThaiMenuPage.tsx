@@ -5,6 +5,7 @@ import './ThaiMenuPage.css';
 import thaiHero from '../../assets/Tom-yam-Goong 1.png';
 import { MenuPageProps } from '../../interfaces/menuProps';
 import { API_BASE_URL } from '../../config/api';
+import { fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 // Thailändska kategorier (inkluderar alla som ska visas)
 const THAI_CATEGORIES = [
@@ -34,17 +35,21 @@ export default function ThaiMenuPage({
 	const [loading, setLoading] = useState(true);
 	const [error, setError] = useState<string | null>(null);
 
+	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
 		console.log('ThaiMenuPage! Fetching menu...');
-		fetch(
-			`${API_BASE_URL}/api/menu`,
-			{
+		// fetch(
+		// 	`${API_BASE_URL}/api/menu`,
+		// 	{
+		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
 				},
 			}
 		)
+
+	// ---------------------------------------- END OF FETCH --------------------------------------------
 			.then((res) => {
 				if (!res.ok) throw new Error(`HTTP ${res.status}`);
 				return res.json();

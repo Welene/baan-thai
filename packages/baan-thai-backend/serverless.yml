@@ -16,6 +16,7 @@ provider:
   environment:
     TABLE_NAME: RestaurantTable
     JWT_SECRET: ${env:JWT_SECRET}
+    API_KEY: ${env:API_KEY}
 
   httpApi:
     cors:

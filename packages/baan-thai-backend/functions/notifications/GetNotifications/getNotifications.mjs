@@ -5,6 +5,20 @@ import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 import middy from "@middy/core";
 
 export const handler = middy(async (event) => {
+
+  //API KEY START---------------------------------------------
+  const incomingKey = event.headers?.["x-api-key"];
+  const expectedKey = process.env.API_KEY;
+
+  if (incomingKey !== expectedKey) {
+    return sendResponse(401, { 
+      success: false,
+      message: "Invalid API Key"
+    });
+  }
+  
+  //API KEY END---------------------------------------------
+
   const { userId } = event.pathParameters;
 
   if (!userId) {
