@@ -1,4 +1,5 @@
 import { API_BASE_URL } from '../config/api';
+import { fetchWithApiKey } from '../api/fetchWithApiKey';
 
 interface OrderData {
     userId: string;
@@ -26,8 +27,11 @@ interface OrderResponse {
     };
 }
 
+
+// ---------------------------------------- START OF FETCH 1 --------------------------------------------
 export async function createOrder(orderData: OrderData): Promise<OrderResponse> {
-    const response = await fetch(`${API_BASE_URL}/api/orders`, {
+    // const response = await fetch(`${API_BASE_URL}/api/orders`, {
+    const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -41,9 +45,13 @@ export async function createOrder(orderData: OrderData): Promise<OrderResponse> 
 
     return response.json();
 }
+// ---------------------------------------- END OF FETCH 1 --------------------------------------------
 
+
+// ---------------------------------------- START OF FETCH 2 --------------------------------------------
 export async function cancelOrder(orderId: string, userId: string): Promise<{ success: boolean; message: string }> {
-    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
+    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
+    const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -59,8 +67,13 @@ export async function cancelOrder(orderId: string, userId: string): Promise<{ su
     return response.json();
 }
 
+// ---------------------------------------- END OF FETCH 2 --------------------------------------------
+
+
+// ---------------------------------------- START OF FETCH 3 --------------------------------------------
 export async function editOrder(orderId: string, orderData: { order: Array<{ productId: number; quantity: number }> }): Promise<{ success: boolean; message: string; booking?: any }> {
-    const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
+    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
+    const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -75,6 +88,8 @@ export async function editOrder(orderId: string, orderData: { order: Array<{ pro
 
     return response.json();
 }
+// ---------------------------------------- END OF FETCH 3 --------------------------------------------
 
 /* Author: Tim  
 Definierar TypeScript-interfaces för orderdata och tre API-funktioner: skapa, avbryta och redigera beställningar*/
+// Helene edit: changed fetch to fetchWithApiKey 

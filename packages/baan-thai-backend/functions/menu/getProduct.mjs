@@ -7,6 +7,22 @@ const TABLE_NAME = process.env.TABLE_NAME || 'RestaurantTable';
 const dynamodb = docClient;
 
 export const handler = async (event) => {
+  // API_KEY START ----------------------------------------------
+	const incomingKey = event.headers?.["x-api-key"];
+	const expectedKey = process.env.API_KEY;
+
+	if (incomingKey !== expectedKey) {
+		return {
+			statusCode: 401,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Credentials': true,
+			},
+			body: JSON.stringify({ error: 'Invalid API Key' }),
+		};
+	}
+	// API_KEY END ------------------------------------------------
   try {
     // Hämta prodId från URL-parametern (t.ex. /api/menu/42 - prodId = 42)
     const prodId = event.pathParameters && event.pathParameters.prodId;

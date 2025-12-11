@@ -4,6 +4,7 @@ import { API_BASE_URL } from '../../config/api';
 import { cancelOrder } from '../../services/paymentService';
 import { EditOrderModal } from './EditOrderModal';
 import './ProfilePage.css';
+import { fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 interface Order {
   orderId: string;
@@ -67,11 +68,14 @@ function ProfilePage() {
     return () => clearInterval(interval);
   }, [userId, navigate]);
 
+  // ----------------------------------------START OF FETCH 1--------------------------------------------
   const fetchOrders = async () => {
     try {
       setLoading(true);
-      const response = await fetch(`${API_BASE_URL}/api/profile/${userId}`);
+      // const response = await fetch(`${API_BASE_URL}/api/profile/${userId}`);
+      const response = await fetchWithApiKey(`${API_BASE_URL}/api/profile/${userId}`);
       
+      // ----------------------------------------END OF FETCH 1--------------------------------------------
       if (response.ok) {
         const data = await response.json();
         setOrders(data.orders || []);
@@ -187,12 +191,15 @@ function ProfilePage() {
     }));
   };
 
+
+  //  ----------------------------------------START OF FETCH 2--------------------------------------------
   const handleSaveProfile = async () => {
     if (!userId) return;
 
     setIsSaving(true);
     try {
-      const response = await fetch(`${API_BASE_URL}/api/profile/${userId}`, {
+      // const response = await fetch(`${API_BASE_URL}/api/profile/${userId}`, {
+      const response = await fetchWithApiKey(`${API_BASE_URL}/api/profile/${userId}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -205,6 +212,7 @@ function ProfilePage() {
       if (!response.ok) {
         throw new Error('Kunde inte uppdatera profil');
       }
+      //-----------------------------------------END OF FETCH 2--------------------------------------------
 
       // Uppdatera profileData state med nya värdena
       setProfileData(prev => prev ? {
@@ -422,3 +430,4 @@ export default ProfilePage;
 /* edit :tim 
 edit profile , telefonnummer adress och email */
 /* Felicia byta amout till quantity */
+// Helene edit: added fetch with API_KEY

@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './adminMenuPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
+import { fetchWithApiKey } from '../../../api/fetchWithApiKey';
 
 export const AdminMenuPage = () => {
 	const [formData, setFormData] = useState({
@@ -36,8 +37,10 @@ export const AdminMenuPage = () => {
 			imageUrl: formData.imageUrl
 		};
 
+		// ----------------------------------------START OF FETCH--------------------------------------------
 		try {
-			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu', {
+			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu', {
+			const response = await fetchWithApiKey('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -65,6 +68,7 @@ export const AdminMenuPage = () => {
 			alert('Ett fel uppstod vid skapande av menyobjekt');
 		}
 	};
+	// ----------------------------------------END OF FETCH--------------------------------------------
 
 	return (
 		<div className="admin-menu-page">
@@ -167,3 +171,6 @@ export const AdminMenuPage = () => {
 		</div>
 	);
 };
+
+
+// Helene edit: added fetch with API_KEY

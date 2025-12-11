@@ -5,6 +5,18 @@ import { cancelOrder } from "../../../services/orders.mjs";
 import { errorHandler } from "../../../middlewares/errorHandler.mjs";
 
 export const handler = middy(async (event) => {
+  //API KEY START---------------------------------------------
+  const incomingKey = event.headers?.["x-api-key"];
+  const expectedKey = process.env.API_KEY;
+
+  if (incomingKey !== expectedKey) {
+    return sendResponse(401, { 
+      success: false,
+      message: "Invalid API Key"
+    });
+  }
+  
+  //API KEY END---------------------------------------------
   const { orderId } = event.pathParameters;
   
   if (!orderId) {
