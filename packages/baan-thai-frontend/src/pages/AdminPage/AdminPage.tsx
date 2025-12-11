@@ -214,20 +214,28 @@ const handleMarkCompleted = async (orderId: string) => {
       <h1 className="admin-page__heading">Alla ordrar</h1>
 
       <section className="orders-container">
-        {sortedOrders.map((order) => (
-          <OrderCard
-            key={order.orderId}
-            orderId={order.orderId}
-            status={order.status}
-            waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
-            items={order.order}
-            onConfirm={handleConfirm}
-            onRemove={handleRemoveOrder}
-            onMarkReady={handleMarkReady}
-            onMarkCompleted={handleMarkCompleted}
-            onClick={() => openPopup(order)}
-          />
-        ))}
+        {sortedOrders.map((order) => {
+          const cleanedMessage = order.message
+          ?.replace(/^Avhämtning\s*-\s*Direkt\s*\|\s*Kommentar:\s*/i, "")
+          ?.replace(/^Avhämtning\s*-\s*Direkt\s*\|?\s*/i, "")
+          .trim();
+
+          return (
+            <OrderCard
+              key={order.orderId}
+              orderId={order.orderId}
+              status={order.status}
+              waitStatus={order.status === "confirmed" ? calculateWaitStatus(order.confirmedAt) : undefined} 
+              items={order.order}
+              message={cleanedMessage}
+              onConfirm={handleConfirm}
+              onRemove={handleRemoveOrder}
+              onMarkReady={handleMarkReady}
+              onMarkCompleted={handleMarkCompleted}
+              onClick={() => openPopup(order)}
+            />
+          );
+        })}
       </section>
       {showPopup && selectedOrder && (
         <div className="popup-backdrop" onClick={closePopup}>
@@ -246,7 +254,15 @@ const handleMarkCompleted = async (orderId: string) => {
             </ul>
 
             <h3>Meddelande från kund:</h3>
-            <p>{selectedOrder.message || "Inga meddelanden från kund."}</p>
+            <p>
+              {selectedOrder.message
+                ? selectedOrder.message
+                  .replace(/^Avhämtning\s*-\s*Direkt\s*\|\s*Kommentar:\s*/i, "")
+                  .replace(/^Avhämtning\s*-\s*Direkt\s*\|?\s*/i, "")
+                  .trim() || "Inget meddelande från kund."
+                : "Inget meddelande från kund."}
+            </p>
+    
 
             <h3>Meddelande till köken:</h3>
             <textarea
@@ -272,5 +288,6 @@ const handleMarkCompleted = async (orderId: string) => {
 export default AdminPage;
 
 // Helene
-// Popup för att skicka meddelande till köken när admin klickar på en order //Felicia
+// Felicia : Popup för att skicka meddelande till köken när admin klickar på en order
 // Tim: fix wrong url
+// Felicia : Lägg till meddelande från kund i orderkortet och i popupen
