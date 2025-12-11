@@ -62,8 +62,13 @@
 }
 
 .dropdown-arrow {
+	color: white;
 	font-size: 0.7rem;
 	transition: transform 0.3s ease;
+}
+
+.dropdown-arrow:hover {
+	color: #d4af37;
 }
 
 .dropdown-arrow.open {
@@ -110,3 +115,111 @@
 	color: #d4af37;
 }
 
+/* Hamburger menu button */
+.admin-hamburger-btn {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+}
+
+.admin-hamburger-btn .hamburger-icon {
+	width: 30px;
+	height: 30px;
+	filter: brightness(0) invert(1);
+}
+
+/* Close button */
+.admin-close-btn {
+	display: none;
+	background: none;
+	border: none;
+	cursor: pointer;
+	padding: 0;
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+}
+
+.admin-close-btn .close-icon {
+	width: 25px;
+	height: 25px;
+	filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+	.admin-nav-content {
+		position: relative;
+	}
+
+	.admin-nav-content h2 {
+		font-size: 18px;
+	}
+
+	/* Show hamburger button on mobile */
+	.admin-hamburger-btn {
+		display: block;
+	}
+
+	/* Hide nav links by default on mobile */
+	.admin-nav-links {
+		position: fixed;
+		top: 0;
+		right: -100%;
+		width: 70%;
+		max-width: 300px;
+		height: 100vh;
+		background-color: #333;
+		flex-direction: column;
+		align-items: flex-start;
+		padding: 4rem 2rem 2rem 2rem;
+		gap: 1.5rem;
+		transition: right 0.3s ease-in-out;
+		z-index: 1000;
+		overflow-y: auto;
+		box-shadow: -2px 0 10px rgba(0, 0, 0, 0.3);
+	}
+
+	/* Show menu when toggled */
+	.admin-nav-links.show-menu {
+		right: 0;
+	}
+
+	/* Show close button on mobile */
+	.admin-close-btn {
+		display: block;
+	}
+
+	.admin-nav-links a {
+		font-size: 16px;
+		width: 100%;
+		padding: 0.5rem 0;
+	}
+
+	/* Dropdown adjustments for mobile */
+	.dropdown-container {
+		width: 100%;
+	}
+
+	.dropdown-toggle {
+		width: 100%;
+		justify-content: space-between;
+		padding: 0.5rem 0;
+		font-size: 16px;
+	}
+
+	.dropdown-menu {
+		position: static;
+		width: 100%;
+		margin-top: 0.5rem;
+		margin-left: 1rem;
+		box-shadow: none;
+		background-color: #3a3a3a;
+	}
+
+	.dropdown-item {
+		font-size: 14px;
+		padding: 0.5rem 1rem;
+	}
+}

@@ -3,6 +3,7 @@ import './Header.css';
 import logo from '../../assets/logo.png';
 import manIcon from '../../assets/man.png';
 import bellIcon from '../../assets/bell.png';
+import briefcase from '../../assets/Briefcase.png';
 import hamburMenu from '../../assets/burger-menu.png';
 import close from '../../assets/close.png';
 import { useNavigate } from 'react-router-dom';
@@ -115,6 +116,11 @@ function Header() {
 		window.location.reload();
 	};
 
+	// Admin användare kan gå tillbaka till Admin sida
+	const handleWorkPlace = () => {
+		navigate('/admin');
+	};
+
 	const navMenuRef = useRef(null);
 	const [menuOpen, setMenuOpen] = useState(false);
 
@@ -155,6 +161,15 @@ function Header() {
 							className='close-icon'
 						/>
 					</i>
+					{user?.role === 'admin' && (
+						<figure className="header__icon header__icon--admin">
+							<img
+								src={briefcase}
+								alt="Admin ikon"
+								onClick={handleWorkPlace}
+							/>
+						</figure>
+					)}
 					<figure className="header__icon header__icon--profile">
 						{userId ? (
 							<button
@@ -186,6 +201,7 @@ function Header() {
 						/>
 						{userId && <NotificationBadge count={unreadCount} />}
 					</figure>
+					
 				</section>
 
 				{/* Notification Modal */}
