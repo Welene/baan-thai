@@ -1,6 +1,6 @@
 import "./AdminPage.css";
 import React, { useEffect, useState } from "react";
-import OrderCard from "../OrderAdminCard/OrderAdminCard";
+import OrderCard from "../../components/OrderAdminCard/OrderAdminCard";
 import { AdminNavBar } from "../../components/AdminNavBar/AdminNavBar";
 import { API_BASE_URL } from "../../config/api";
 
