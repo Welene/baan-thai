@@ -14,7 +14,6 @@ import AdminPage from '../pages/AdminPage/AdminPage';
 import { AdminMenuPage } from '../pages/AdminPage/CreateNewMenu/AdminMenuPage';
 import { EditMenuPage } from '../pages/AdminPage/EditMenu/EditMenuPage';
 import { EditUserPage } from '../pages/AdminPage/EditUser/EditUserPage';
-import { AdminUserPage } from '../pages/AdminPage/AdminUserPage/AdminUserPage';
 import { ProtectedRoute } from '../components/ProtectedRoute/ProtectedRoute';
 import { useState } from 'react';
 import { CartItem } from '../interfaces/cart';
@@ -90,8 +89,8 @@ export default function AppRouter() {
 			/>
 			
 			<Routes>
-				<Route
-					element={<Layout />}>
+				{/* Routes MED Layout (Header + Footer) */}
+				<Route element={<Layout />}>
 					<Route
 						path="/"
 						element={<Navigate to="/landing" replace />}
@@ -126,52 +125,6 @@ export default function AppRouter() {
 						element={<LoginPage setCurrentUser={setCurrentUser} />}
 					/>
 					<Route path="/profile" element={<ProfilePage />} />
-
-					<Route 
-						path="/admin" 
-						element={
-							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-								<AdminPage />
-							</ProtectedRoute>
-						} 
-					/>
-
-					<Route 
-						path="/admin/menu" 
-						element={
-							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-								<AdminMenuPage />
-							</ProtectedRoute>
-						} 
-					/>
-
-					<Route 
-						path="/admin/menu/edit" 
-						element={
-							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-								<EditMenuPage />
-							</ProtectedRoute>
-						} 
-					/>
-
-					<Route 
-						path="/admin/users/edit" 
-						element={
-							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-								<EditUserPage />
-							</ProtectedRoute>
-						} 
-					/>
-
-					<Route 
-						path="/admin/users" 
-						element={
-							<ProtectedRoute currentUser={currentUser} requiredRole="admin">
-								<AdminUserPage />
-							</ProtectedRoute>
-						} 
-					/>
-
 					<Route
 						path="/checkout"
 						element={
@@ -182,6 +135,44 @@ export default function AppRouter() {
 						}
 					/>
 				</Route>
+
+				{/* Admin routes UTAN Layout */}
+				<Route 
+					path="/admin" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<AdminPage />
+						</ProtectedRoute>
+					} 
+				/>
+
+				<Route 
+					path="/admin/menu" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<AdminMenuPage />
+						</ProtectedRoute>
+					} 
+				/>
+
+				<Route 
+					path="/admin/menu/edit" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<EditMenuPage />
+						</ProtectedRoute>
+					} 
+				/>
+
+				<Route 
+					path="/admin/users/edit" 
+					element={
+						<ProtectedRoute currentUser={currentUser} requiredRole="admin">
+							<EditUserPage />
+						</ProtectedRoute>
+					} 
+				/>
+
 			</Routes>
 		</BrowserRouter>
 	);

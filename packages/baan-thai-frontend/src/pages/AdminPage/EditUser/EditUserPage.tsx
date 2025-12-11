@@ -18,6 +18,8 @@ interface User {
 export const EditUserPage = () => {
 	const [users, setUsers] = useState<User[]>([]);
 	const [selectedUser, setSelectedUser] = useState<User | null>(null);
+	const [searchQuery, setSearchQuery] = useState('');
+	const [statusMessage, setStatusMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
 	const [formData, setFormData] = useState<User>({
 		userId: '',
 		name: '',
@@ -41,7 +43,8 @@ export const EditUserPage = () => {
 			setUsers(allUsers);
 		} catch (error) {
 			console.error('Error loading users:', error);
-			alert('Kunde inte hämta användare');
+			setStatusMessage({ type: 'error', text: 'Kunde inte hämta användare' });
+			setTimeout(() => setStatusMessage(null), 5000);
 		}
 	};
 
@@ -83,13 +86,22 @@ export const EditUserPage = () => {
 			}
 
 			await updateUser(selectedUser.userId, updateData);
-			alert('Användare uppdaterad!');
+			setStatusMessage({ type: 'success', text: 'Användare uppdaterad!' });
 			await loadUsers();
-			setSelectedUser(null);
-			setNewPassword('');
+			
+			// Auto-hide efter 3 sekunder
+			setTimeout(() => {
+				setStatusMessage(null);
+				setSelectedUser(null);
+				setNewPassword('');
+			}, 3000);
 		} catch (error: any) {
 			console.error('Error updating user:', error);
-			alert(`Fel: ${error.message || 'Kunde inte uppdatera användare'}`);
+			setStatusMessage({ 
+				type: 'error', 
+				text: `Fel: ${error.message || 'Kunde inte uppdatera användare'}`
+			});
+			setTimeout(() => setStatusMessage(null), 5000);
 		}
 	};
 
@@ -109,26 +121,84 @@ export const EditUserPage = () => {
 
 		try {
 			await deleteUser(selectedUser.userId);
-			alert('Användare borttagen!');
+			setStatusMessage({ type: 'success', text: 'Användare borttagen!' });
 			await loadUsers();
-			setSelectedUser(null);
+			
+			// Auto-hide efter 3 sekunder
+			setTimeout(() => {
+				setStatusMessage(null);
+				setSelectedUser(null);
+			}, 3000);
 		} catch (error: any) {
 			console.error('Error deleting user:', error);
-			alert(`Fel: ${error.message || 'Kunde inte ta bort användare'}`);
+			setStatusMessage({ 
+				type: 'error', 
+				text: `Fel: ${error.message || 'Kunde inte ta bort användare'}`
+			});
+			setTimeout(() => setStatusMessage(null), 5000);
 		}
 	};
+
+	// Filtrera användare baserat på sökning
+	const filteredUsers = users.filter(user => {
+		if (!searchQuery) return true;
+		const query = searchQuery.toLowerCase();
+		return (
+			user.name.toLowerCase().includes(query) ||
+			user.username.toLowerCase().includes(query) ||
+			user.email.toLowerCase().includes(query)
+		);
+	});
 
 	return (
 		<>
 			<AdminNavBar />
 			<div className="edit-user-page">
 				<div className="edit-user-container">
-					<h1>Admin-användare</h1>
+					<h1>Användare</h1>
+
+					{/* Statusmeddelande */}
+					{statusMessage && (
+						<div className={`status-message status-${statusMessage.type}`}>
+							<p>{statusMessage.text}</p>
+						</div>
+					)}
+
+					{/* Sökfält */}
+					<div className="search-section">
+						<div className="search-bar">
+							<input
+								type="text"
+								placeholder="Sök användare (namn, användarnamn, email)..."
+								value={searchQuery}
+								onChange={(e) => setSearchQuery(e.target.value)}
+							/>
+							{searchQuery && (
+								<button
+									type="button"
+									className="clear-search-button"
+									onClick={() => setSearchQuery('')}
+								>
+									Rensa
+								</button>
+							)}
+						</div>
+						{searchQuery && (
+							<p className="search-results-text">
+								Visar {filteredUsers.length} av {users.length} användare
+							</p>
+						)}
+					</div>
 
 					{/* Användarlista */}
 					<div className="user-results">
 						<div className="user-list">
-							{users.map((user) => (
+							{filteredUsers.length === 0 ? (
+								<div className="no-results">
+									<p>Inga användare hittades{searchQuery ? ' för din sökning' : ''}.</p>
+								</div>
+							) : (
+								filteredUsers.map((user) => (
 								<div
 									key={user.userId}
 									className={`user-card ${selectedUser?.userId === user.userId ? 'expanded' : ''}`}
@@ -193,7 +263,7 @@ export const EditUserPage = () => {
 												</div>
 											</div>
 
-											<form onSubmit={handleSubmit} className="edit-form">
+											<form onSubmit={handleSubmit} className="edit-form" onClick={(e) => e.stopPropagation()}>
 												<h4>Redigera användare</h4>
 												
 												<div className="form-grid">
@@ -206,6 +276,7 @@ export const EditUserPage = () => {
 															value={formData.name}
 															onChange={handleInputChange}
 															required
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 
@@ -218,6 +289,7 @@ export const EditUserPage = () => {
 															value={formData.username}
 															onChange={handleInputChange}
 															required
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 
@@ -230,6 +302,7 @@ export const EditUserPage = () => {
 															value={formData.email}
 															onChange={handleInputChange}
 															required
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 
@@ -240,7 +313,8 @@ export const EditUserPage = () => {
 															name="role"
 															value={formData.role}
 															onChange={handleInputChange}
-															required>
+															required
+															onClick={(e) => e.stopPropagation()}>
 															<option value="customer">Kund</option>
 															<option value="admin">Admin</option>
 														</select>
@@ -254,6 +328,7 @@ export const EditUserPage = () => {
 															name="phoneNumber"
 															value={formData.phoneNumber || ''}
 															onChange={handleInputChange}
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 
@@ -265,6 +340,7 @@ export const EditUserPage = () => {
 															name="address"
 															value={formData.address || ''}
 															onChange={handleInputChange}
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 
@@ -278,16 +354,29 @@ export const EditUserPage = () => {
 															value={newPassword}
 															onChange={(e) => setNewPassword(e.target.value)}
 															placeholder="Ange nytt lösenord"
+															onClick={(e) => e.stopPropagation()}
 														/>
 													</div>
 												</div>
 
 												<div className="form-actions">
-													<button type="button" onClick={handleDelete} className="btn-delete">
+													<button 
+														type="button" 
+														onClick={(e) => {
+															e.stopPropagation();
+															handleDelete();
+														}} 
+														className="btn-delete">
 														Ta bort användare
 													</button>
 													<div className="action-buttons-right">
-														<button type="button" onClick={handleCancel} className="btn-cancel">
+														<button 
+															type="button" 
+															onClick={(e) => {
+																e.stopPropagation();
+																handleCancel();
+															}} 
+															className="btn-cancel">
 															Avbryt
 														</button>
 														<button type="submit" className="btn-submit">
@@ -299,7 +388,8 @@ export const EditUserPage = () => {
 										</div>
 									)}
 								</div>
-							))}
+								))
+							)}
 						</div>
 					</div>
 				</div>

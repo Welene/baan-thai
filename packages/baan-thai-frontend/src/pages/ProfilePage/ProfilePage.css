@@ -127,6 +127,30 @@
   font-weight: 600;
 }
 
+.order-status.status-pending {
+  background-color: #f0ad4e;
+}
+
+.order-status.status-locked {
+  background-color: #5bc0de;
+}
+
+.order-status.status-ready {
+  background-color: #5cb85c;
+}
+
+.order-status.status-completed {
+  background-color: #28a745;
+}
+
+.order-status.status-cancelled {
+  background-color: #d9534f;
+}
+
+.order-status.status-default {
+  background-color: #777;
+}
+
 .order-details {
   display: flex;
   justify-content: space-between;
