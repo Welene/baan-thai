@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import './EditMenuPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
+import { fetchWithApiKey } from '../../../api/fetchWithApiKey';
 
 interface MenuItem {
 	productId: string;
@@ -30,9 +31,12 @@ export const EditMenuPage = () => {
 		console.log('selectedItem changed:', selectedItem);
 	}, [selectedItem]);
 
+
+	// ---------------------------------------- START OF FETCH 1--------------------------------------------
 	const handleSearch = async () => {
 		try {
-			const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
+			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
+			const response = await fetchWithApiKey('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
 			const data = await response.json();
 			
 			console.log('Fetched data:', data);
@@ -47,6 +51,7 @@ export const EditMenuPage = () => {
 				price: String(item.price || '0'),
 				imageUrl: item.imageUrl || ''
 			}));
+		// ---------------------------------------- END OF FETCH 1--------------------------------------------
 
 			if (searchTerm) {
 				const filtered = transformedData.filter(
@@ -91,9 +96,13 @@ export const EditMenuPage = () => {
 				...formData,
 				price: parseFloat(formData.price)
 			};
+// ----------------------------------------START OF FETCH 2--------------------------------------------
 
-			const response = await fetch(
-				`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
+			// const response = await fetch(
+			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
+			// 	{
+			const response = await fetchWithApiKey(
+    			`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -102,6 +111,7 @@ export const EditMenuPage = () => {
 					body: JSON.stringify(menuItem)
 				}
 			);
+// ----------------------------------------END OF FETCH 2--------------------------------------------
 
 			if (response.ok) {
 				alert('Menyobjekt uppdaterat!');
@@ -126,19 +136,24 @@ export const EditMenuPage = () => {
 		}
 	};
 
+
+// ---------------------------------------- START OF FETCH 3--------------------------------------------
 	const handleDelete = async () => {
 		if (!selectedItem) return;
 
 		if (!confirm('Är du säker på att du vill ta bort detta menyobjekt?')) return;
 
 		try {
-			const response = await fetch(
-				`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
-				{
+			// const response = await fetch(
+			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
+			// 	{
+			const response = await fetchWithApiKey(
+    			`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
+			{
 					method: 'DELETE'
 				}
 			);
-
+// ---------------------------------------- END OF FETCH 3--------------------------------------------
 			if (response.ok) {
 				alert('Menyobjekt borttaget!');
 				handleSearch();
@@ -323,3 +338,5 @@ export const EditMenuPage = () => {
 		</div>
 	);
 };
+
+// Helene edit: added fetch with API_KEY

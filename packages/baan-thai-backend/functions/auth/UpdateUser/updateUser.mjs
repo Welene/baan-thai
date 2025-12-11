@@ -7,6 +7,22 @@ const TABLE_NAME = process.env.TABLE_NAME;
 
 export const handler = async (event) => {
 	console.log('updateUser invoked');
+	// API_KEY START ----------------------------------------------
+	const incomingKey = event.headers?.["x-api-key"];
+	const expectedKey = process.env.API_KEY;
+
+	if (incomingKey !== expectedKey) {
+		return {
+			statusCode: 401,
+			headers: {
+				'Content-Type': 'application/json',
+				'Access-Control-Allow-Origin': '*',
+				'Access-Control-Allow-Credentials': true,
+			},
+			body: JSON.stringify({ error: 'Invalid API Key' }),
+		};
+	}
+	// API_KEY END ------------------------------------------------
 	
 	try {
 		const userId = event.pathParameters?.userId;

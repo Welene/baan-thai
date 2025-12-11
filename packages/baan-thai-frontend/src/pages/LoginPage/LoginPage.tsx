@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { LoginPageProps } from '../../interfaces/login';
 import { API_BASE_URL } from '../../config/api';
+import { fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 interface LoginFormData {
 	Email: string;
@@ -31,9 +32,13 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 	const handleLogin = async (e: FormEvent): Promise<void> => {
 		e.preventDefault();
 
+		// ----------------------------------------START OF FETCH--------------------------------------------
 		try {
-			const response = await fetch(
-				`${API_BASE_URL}/api/login`,
+			// const response = await fetch(
+			// 	`${API_BASE_URL}/api/login`,
+			// 	{
+				const response = await fetchWithApiKey(
+        		`${API_BASE_URL}/api/login`,
 				{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
@@ -43,6 +48,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 					}),
 				}
 			);
+		// ----------------------------------------END OF FETCH--------------------------------------------
 
 			const data = await response.json();
 
@@ -153,4 +159,4 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 }
 
 export default LoginPage;
-// Edit - Helene: added phoneNumber to localstorage
+// Edit - Helene: added phoneNumber to localstorage + added fetchWithApiKey

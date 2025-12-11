@@ -3,6 +3,7 @@ import { RegisterUser } from '../../interfaces/register';
 import { useNavigate } from 'react-router-dom';
 import { useState, FormEvent, ChangeEvent } from 'react';
 import { API_BASE_URL } from '../../config/api';
+import { fetchWithApiKey } from '../../api/fetchWithApiKey';
 
 function RegisterPage() {
 	const navigate = useNavigate();
@@ -37,11 +38,14 @@ function RegisterPage() {
 		e.preventDefault();
 
 		console.log('Försöker registrera med data:', formData);
-
+// ----------------------------------------START OF FETCH--------------------------------------------
 		try {
-			const response = await fetch(
+			// const response = await fetch(
+			// 	`${API_BASE_URL}/api/register`,
+			// 	{
+			const response = await fetchWithApiKey(
 				`${API_BASE_URL}/api/register`,
-				{
+  			{
 					method: 'POST',
 					headers: { 'Content-Type': 'application/json' },
 					body: JSON.stringify(formData),
@@ -55,6 +59,7 @@ function RegisterPage() {
 			if (!response.ok) {
 				throw new Error(data.error || 'Could not register user');
 			}
+	// ----------------------------------------END OF FETCH--------------------------------------------
 
 			setMessage({
 				text: 'Registrering lyckades! Du skickas nu till inloggningen...',

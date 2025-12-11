@@ -7,6 +7,18 @@ import { addOrder } from '../../../services/orders.mjs'
 import { queryMenuItem } from '../../menu/queryMenuItem.mjs'
 
 export const handler = middy(async (event) => {
+  //API KEY START---------------------------------------------
+  const incomingKey = event.headers?.["x-api-key"];
+  const expectedKey = process.env.API_KEY;
+
+  if (incomingKey !== expectedKey) {
+    return sendResponse(401, { 
+      success: false,
+      message: "Invalid API Key"
+    });
+  }
+  
+  //API KEY END---------------------------------------------
   try {
     const body = event.body;
     console.log('📦 Received order request:', JSON.stringify(body, null, 2));
