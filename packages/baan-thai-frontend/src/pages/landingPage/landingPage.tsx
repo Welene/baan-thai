@@ -84,3 +84,5 @@ export const LandingPage = () => {
 }   
  
 export default LandingPage;
+
+// Author: Felicia

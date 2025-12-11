@@ -300,7 +300,7 @@ export const cancelOrder = async (orderId, userId) => {
     return { 
       success: false, 
       statusCode: 403,
-      message: "Unauthorized to cancel this order" 
+      message: "Unorized to cancel this order" 
     };
   }
 

@@ -103,3 +103,4 @@ export const handler = async (event) => {
 };
 
 // Create: Sunsanee
+// Helene edit: added fetchWithApiKey in every api call for extra api protection

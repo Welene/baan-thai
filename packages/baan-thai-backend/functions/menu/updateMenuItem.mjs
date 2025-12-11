@@ -141,3 +141,4 @@ export const handler = async (event) => {
 
 /* Författare: Tim */
 /* Uppdaterar menyprodukt i DynamoDB */
+// Helene edit: added fetchWithApiKey in every api call for extra api protection
