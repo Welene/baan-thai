@@ -1,4 +1,6 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Radley:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
     box-sizing: border-box;
@@ -26,10 +28,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
-   
-    
 }
+
 .page__images-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -55,6 +55,7 @@
     object-fit: cover;
     border-radius: 12px;
 }
+
 .story-section {
     width: 60%;
     display: flex;
@@ -63,20 +64,28 @@
     justify-content: center;
     color: #59390B;
     overflow-wrap: break-word;
-    margin: 2rem 0;    
+    margin: 2rem 0;  
+    letter-spacing: .1rem;  
+    text-align: center;
 }
-h2 {
+
+.team-section .page-subtitle {
     color: #59390B;
     font-size: 36px;
+    font-family: 'Radley', serif;
 }
-h3 {
+
+.aboutUs-section .page-title__big {
     color: #59390B;
     font-size: 28px;
+    font-family: 'Radley', serif;
 }
+
 span {
     color: #59390B;
     font-size: 24px;
 }
+
 p {
     color: #59390B;
     font-size: 24px;
@@ -161,4 +170,11 @@ p {
         grid-row: auto;
         grid-column: auto;
     }
+
+    .story-section {
+    width: 80%;   
 }
+}
+
+
+/* Helene edit: edited styling a bit */

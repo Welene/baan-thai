@@ -43,9 +43,9 @@ export const AboutUsPage: React.FC = () => {
             </section>
             <section className="story-section">
                 <p className="content-text">
-                    Vår passion för att tillaga thailändska rätter med en touch av kärlek och med noggrant utvalda färska ingredienser gör oss unika. 
-                    Kom och besök vår restaurang på Kyrkogatan 36 i Arvika eller beställ en takeaway för att njuta av en smakupplevelse utöver det vanliga. 
-                    Vårt kök bjuder på en kulinarisk resa som lockar dina sinnen och lämnar dig med en minnesvärd erfarenhet.
+                    Vår passion för att tillaga thailändska rätter med en touch av kärlek & med noggrant utvalda färska ingredienser gör oss unika. 
+                    Besök vår restaurang på Kyrkogatan 36 i Arvika eller beställ en takeaway för att njuta av en smakupplevelse utöver det vanliga! <br /><br />
+                    Vårt kök bjuder på en kulinarisk resa som lockar dina sinnen & lämnar dig med en minnesvärd erfarenhet.
                 </p>
             </section>
             <section className="team-section">
