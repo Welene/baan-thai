@@ -26,7 +26,7 @@
 }
 
 .divider--h1 {
-    width: 96%;
+    max-width: 96%;
     margin: 0 auto;
     border-radius: 2px;
     border: none;
@@ -67,6 +67,7 @@
     max-width: 1200px;
     display: flex;
     justify-content: center;
+    gap: 3rem;
     min-width: 100%;
 }
 
@@ -74,7 +75,7 @@
     max-width: 1200px;
     display: flex;
     flex-direction: column;
-    padding: 2rem;
+    /* padding: 2rem; */
 }
 
 .order-section__heading {
@@ -107,7 +108,8 @@
 
 /* ORDER-SECTION ARTICLES  */
 .order-section article {
-    width: 48rem;
+    width: 100%;
+    max-width: 40rem;
     background: rgb(233, 233, 233);
     color: rgb(49, 49, 49);
     padding: 2rem;
@@ -125,11 +127,18 @@
     margin-left: 2rem;
     background-color: #59390b;
     border-radius: 0.5rem;
-    max-height: 40rem;
+    max-height: 55rem;
     padding: 1.8rem;
     margin: 1rem;
-    margin-top: 9.5rem;
-    min-width: 35rem;
+    margin-top: 7.5rem;
+   
+    max-width: 38rem;
+    min-width: 0;
+
+     flex: 1; 
+
+
+    width: 100%;
     /* filter: drop-shadow(#3023168e 0px 5px 10px); */
     box-shadow: 0px 6px 8px rgba(0, 0, 0, 0.301);
     color: rgb(241, 241, 241);
@@ -165,6 +174,16 @@ input {
     border-radius: 0.3rem;
     padding: 1.5rem;
     cursor: pointer;
+    font-style: italic;
+    font-size: 1.1rem;
+    color: rgb(63, 63, 63);
+    font-family: 'Quicksand', sans-serif;
+
+}
+
+input:focus {
+    color: #2a2218;
+    outline: 2px solid black;
 }
 
 .text-label input::placeholder,
@@ -188,6 +207,7 @@ input[type='radio'] {
     transform: scale(1.8);
     cursor: pointer;
     accent-color: #59390b;
+    outline: none;
 }
 
 .customer-info__notice {
@@ -221,8 +241,12 @@ input[type='radio'] {
     color: rgb(241, 241, 241);
     bottom: 2rem;
     font-weight: bold;
+    right: 50%;
+    /* transform: translateX(50%);
+    margin-top: 5rem; */
+
     display: block;
-    margin: 1rem auto 0;
+    margin: 3rem auto 1rem auto;
 }
 
 .confirm-article__pay-btn:hover {
@@ -395,7 +419,8 @@ input[type='radio'] {
 
 /* Comment Section */
 .comment-section {
-    width: 48rem;
+    width: 100%;
+    max-width: 48rem;
     background: #a88661;
     color: rgb(49, 49, 49);
     padding: 2rem;
@@ -440,6 +465,111 @@ input[type='radio'] {
     display: block;
     text-align: right;
     font-size: 1.3rem;
-    color: rgb(100, 100, 100);
+    color: #212121;
     margin-top: 0.5rem;
+}
+
+/* MEDIA QUERY SMALLER DESKTOP SIZES */
+@media (max-width: 1024px) {
+    .checkout-section {
+        padding: 0 2rem;
+    }
+
+    .order-section article,
+    .comment-section {
+        max-width: 40rem;
+    }
+
+    .confirm-order__section {
+        max-width: 30rem;
+        min-width: 22rem;
+        margin-top: 9.5rem;
+    }
+
+    .text-label {
+        font-size: 1.4rem;
+    }
+
+    input {
+        padding: 1.2rem;
+        font-size: 1rem;
+    }
+
+    .confirm-article__pay-btn {
+        margin-top: 3rem;
+        width: 14rem;
+        height: 3.5rem;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .checkout-section {
+        flex-direction: column;
+        align-items: center;
+        padding: 0 1rem;
+    }
+
+    .order-section {
+        width: 100%;
+        /* padding: 1rem; */
+    }
+
+    .order-section article,
+    .comment-section {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .confirm-order__section {
+        width: 100%;
+        max-width: 100%;
+        min-width: auto;
+        margin-top: 3rem;
+        padding: 1.5rem;
+        max-height: none; 
+    }
+
+    .hero-section {
+        min-height: 20rem;
+        font-size: 1rem; 
+    }
+
+    .hero-section__heading {
+        padding: 2rem;
+        width: 100%;
+        font-size: 1rem;
+
+        /* in case we don't want the heading to be 100% wide on phone */
+        /* remove width 100% and comment in this one vvv */
+        /* border-radius: .5rem;  */
+    }
+
+    input {
+        padding: 1rem;
+        font-size: 1rem;
+    }
+
+    .text-label {
+        font-size: 1.2rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .radio-label {
+        padding: 0.8rem;
+        font-size: 1.1rem;
+    }
+
+    .confirm-article__pay-btn {
+        width: 100%;
+        max-width: 20rem;
+        height: 3.5rem;
+        margin: 2rem auto 0 auto;
+        display: block;
+    }
+
+    .order-section {
+        align-items: center;
+    }
+
 }

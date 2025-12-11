@@ -118,7 +118,7 @@ function Header() {
 				<img
 					src={logo}
 					alt="Baan Thaikök logo"
-					className="header__logo"
+					className="header__logo header__logo--hidden"
 					onClick={() => navigate('/')}
 					// / = PATH TIL LANDINGPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ LANDINGPAGE
 				/>
