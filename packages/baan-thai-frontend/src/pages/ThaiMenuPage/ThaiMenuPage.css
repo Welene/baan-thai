@@ -3,7 +3,10 @@
 }
 
 .thai-menu {
-  padding: 2rem;
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
 }
 
 /* Hero Image - Full bredd */
@@ -64,9 +67,10 @@
 
 .thai-menu .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 3rem;
-  margin-top: 1rem;
+  margin: 1rem 3rem; /* inset from page edges */
+  padding-inline: 0.5rem;
 }
 
 

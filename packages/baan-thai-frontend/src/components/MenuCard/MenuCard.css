@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
-/* Endast tillfälligt styling */
+
 
 .menu-card {
   border-radius: 0.8rem;
@@ -17,9 +17,15 @@
   flex-direction: column;
 }
 
+
+.menu-card {
+  position: relative;
+}
+
 .menu-card h3 {
   margin: 0 0 0.5rem;
   flex-shrink: 0;
+
   color: #dedcdc;
   font-family: 'Raleway', serif;
 }
@@ -39,58 +45,93 @@
 
 .menu-card .price {
   font-weight: bold;
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   color: #dedcdc;
 }
 
 .add-button {
-  padding: 0.7rem 1.8rem;
+  padding: 0.6rem 1rem;
   background: #59390b;
   color: rgb(228, 228, 228);
   border: none;
   font-weight: bold;
   border-radius: 0.5rem;
   cursor: pointer;
-  width: 12rem;
-  display: flex;
+  display: inline-flex;
   justify-content: center;
-  margin: 0 auto;
-  transition: all 0.3s ease;
+  min-width: 6.5rem;
+  height: 35px;
+  transition: all 0.18s ease;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 5;
 }
 
 .menu-card .add-button:hover {
   background: #472d09;
   transform: translateY(-2px);
-  /* box-shadow: 0 4px 8px #998667; */
 }
+
+
 
 .menu-card .quantity-controls {
   display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  align-items: center;
+  
   border-radius: 0.5rem;
+  position: absolute;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 5;
 }
 
 .menu-card .qty-button {
-  width: 5.5rem;
+  min-width: 2.6rem;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  padding: 0.1rem 0.25rem;
 }
 
+
+.menu-card .quantity-controls .add-button,
+.menu-card .quantity-controls .qty-button {
+  position: static !important;
+  right: auto !important;
+  bottom: auto !important;
+  margin: 0;
+  padding: 0.12rem 0.28rem;
+  min-width: 2.6rem;
+  height: 35px;
+  font-size: 0.95rem;
+}
+
+.menu-card .quantity-controls .add-button:hover {
+  transform: none;
+}
 .menu-card .qty {
-  text-align: center;
-  width: 4rem;
+  min-width: 2.8rem;
+  height: 35px;
+  line-height: 35px;
   display: flex;
   justify-content: center;
-  align-items: center;  
+  align-items: center;
   background-color: #e5ddd2;
   font-weight: bold;
   font-family: 'Raleway', serif;
+  text-align: center;
+  font-size: 1.05rem;
+  border-radius: 0rem;
 }
 
 .menu-card .quantity-controls {
   display: flex;
-  justify-content: space-between;
-  width: 12rem; 
-  margin: 0 auto;
+  justify-content: center;
+  width: auto;
+  margin: 0;
   border-radius: 0.5rem;
 }
 
@@ -105,3 +146,4 @@
 }
 
 /* Edit styling: Helene */
+/* edit: Tim styling */
