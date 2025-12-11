@@ -60,7 +60,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({
 				<button
 					className="add-button"
 					onClick={handleAdd}>
-					Lägg till
+					LÄGG TILL
 				</button>
       ) : (
         <div className="quantity-controls">

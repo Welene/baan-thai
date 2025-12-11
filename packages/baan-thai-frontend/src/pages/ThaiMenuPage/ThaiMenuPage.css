@@ -55,16 +55,19 @@
 }
 
 .thai-menu .category-title {
-  font-size: 1.8rem;
+  /* font-size: 1.8rem;
   color: #8B4513;
   margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid #D2691E;
+  padding-bottom: 0.5rem; */
+  border-bottom: 2px solid #2d2d2d;
 }
 
 .thai-menu .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
+  gap: 3rem;
   margin-top: 1rem;
 }
+
+
+/* Edit in styling: Helene */

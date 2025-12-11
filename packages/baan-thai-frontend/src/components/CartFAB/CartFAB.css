@@ -5,10 +5,10 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%);
+    /* background: linear-gradient(135deg, #8B4513 0%, #A0522D 100%); */
+    background-color: #59390b;
     border: none;
-    box-shadow: 0 4px 12px rgba(139, 69, 19, 0.4),
-                0 8px 24px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -19,8 +19,7 @@
 
 .cart-fab:hover {
     transform: scale(1.1);
-    box-shadow: 0 6px 16px rgba(139, 69, 19, 0.5),
-                0 12px 32px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.3);
 }
 
 .cart-fab:active {
