@@ -37,11 +37,17 @@ export default function ThaiMenuPage({
 
 	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
+<<<<<<< Updated upstream
 		console.log('ThaiMenuPage! Fetching menu...');
 		// fetch(
 		// 	`${API_BASE_URL}/api/menu`,
 		// 	{
 		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
+=======
+		fetch(
+			`${API_BASE_URL}/api/menu`,
+			{
+>>>>>>> Stashed changes
 				method: 'GET',
 				headers: {
 					'Content-Type': 'application/json',
