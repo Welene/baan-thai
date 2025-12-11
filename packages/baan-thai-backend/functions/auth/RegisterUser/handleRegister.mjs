@@ -197,3 +197,4 @@ export const handler = async (event) => {
 /* Författare: Tim */
 /* Användarregistrering med email-validering och JWT-token */
 // Helene edit: added phoneNumber
+// Helene edit: added fetchWithApiKey in every api call for extra api protection

@@ -71,3 +71,5 @@ export const handler = middy(processPaymentHandler)
     .use(httpJsonBodyPaser())
     .use(validatePayment())
     .use(errorHandler());
+
+    // Helene edit: added fetchWithApiKey in every api call for extra api protection

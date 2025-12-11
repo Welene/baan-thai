@@ -136,3 +136,4 @@ export const handler = async (event) => {
 };
 
 // Helene edit: added phoneNumber
+// Helene edit: added fetchWithApiKey in every api call for extra api protection

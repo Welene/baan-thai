@@ -27,3 +27,5 @@ export const handler = middy(async (event) => {
   return sendResponse(200, { success: true, orders });
 })
   .use(errorHandler());
+
+  // Helene edit: added fetchWithApiKey in every api call for extra api protection
