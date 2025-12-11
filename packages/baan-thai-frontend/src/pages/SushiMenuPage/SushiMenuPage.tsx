@@ -38,7 +38,6 @@ export default function SushiMenuPage({
 
 	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
-<<<<<<< Updated upstream
 		console.log('SushiMenuPage! Fetching menu...');
 		// fetch(
 		// 	`${API_BASE_URL}/api/menu`,
@@ -51,12 +50,6 @@ export default function SushiMenuPage({
 			}
 		)
 	// ---------------------------------------- END OF FETCH --------------------------------------------
-=======
-		fetch(`${API_BASE_URL}/api/menu`, {
-			method: 'GET',
-			headers: { 'Content-Type': 'application/json' },
-		})
->>>>>>> Stashed changes
 			.then((res) => {
 				if (!res.ok) throw new Error(`HTTP ${res.status}`);
 				return res.json();
@@ -85,7 +78,22 @@ export default function SushiMenuPage({
 					new Map(mappedItems.map((it: any) => [it.id, it])).values()
 				);
 
-				// Sätt menyn utan att logga hela innehållet
+				// Logga vilka produkter som hämtades
+				console.log('Antal sushi-produkter:', unique.length);
+				console.log(
+					'Produkt-ID:n som hämtades:',
+					unique.map((it: any) => it.id).sort((a, b) => a - b)
+				);
+				console.table(
+					unique
+						.map((it: any) => ({
+							id: it.id,
+							namn: it.name,
+							kategori: it.categoryKey,
+						}))
+						.sort((a, b) => a.id - b.id)
+				);
+
 				setItems(unique);
 			})
 			.catch((err: any) => {
