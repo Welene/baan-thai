@@ -234,3 +234,6 @@ export default Header;
 // Header komponent
 
 // Helene: dded fetch with API_KEY 
+
+/*Edit: Felicia
+Lägg till hamburger meny*/
