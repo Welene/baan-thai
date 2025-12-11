@@ -66,3 +66,5 @@ export const handler = middy(async (event) => {
 })
   .use(httpJsonBodyParser())
   .use(errorHandler());
+
+  // Helene edit: added fetchWithApiKey in every api call for extra api protection

@@ -1,4 +1,6 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Radley:ital@0;1&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rakkas&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,100..900;1,100..900&display=swap');
 
 *{
     box-sizing: border-box;
@@ -16,8 +18,8 @@
     
 }
 .page-title__big {
-    font-family: Georgia, 'Times New Roman', Times, serif;
     color: #59390B;
+    margin-bottom: 2rem;
 }
 .aboutUs-section {
     width: 80%;
@@ -26,10 +28,8 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    
-   
-    
 }
+
 .page__images-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -55,6 +55,7 @@
     object-fit: cover;
     border-radius: 12px;
 }
+
 .story-section {
     width: 60%;
     display: flex;
@@ -63,20 +64,28 @@
     justify-content: center;
     color: #59390B;
     overflow-wrap: break-word;
-    margin: 2rem 0;    
+    margin: 2rem 0;  
+    letter-spacing: .1rem;  
+    text-align: center;
 }
-h2 {
+
+.team-section .page-subtitle {
     color: #59390B;
     font-size: 36px;
+    font-family: 'Radley', serif;
 }
-h3 {
+
+.aboutUs-section .page-title__big {
     color: #59390B;
     font-size: 28px;
+    font-family: 'Radley', serif;
 }
+
 span {
     color: #59390B;
     font-size: 24px;
 }
+
 p {
     color: #59390B;
     font-size: 24px;
@@ -94,9 +103,7 @@ p {
     text-align: center;
     font-size: 42px;
     margin-bottom: 3rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     color: #59390B;
-    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
@@ -111,7 +118,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    /* gap: 15px; */
 }
 
 .team-image {
@@ -120,13 +127,17 @@ p {
     background-color: #A88661;
     border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 1rem;
 }
 .member-name {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.member-role {
+    font-style: italic;
 }
 
 /* Responsive för personal section */
@@ -161,4 +172,11 @@ p {
         grid-row: auto;
         grid-column: auto;
     }
+
+    .story-section {
+    width: 80%;   
 }
+}
+
+
+/* Helene edit: edited styling a bit */

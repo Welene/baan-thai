@@ -66,3 +66,4 @@ export const handler = middy(async (event) => {
 
   // Författare: Tim
   // Markerar en notifikation som läst för en användare
+  // Helene edit: added fetchWithApiKey in every api call for extra api protection
