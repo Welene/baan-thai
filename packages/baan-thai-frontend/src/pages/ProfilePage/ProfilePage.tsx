@@ -109,16 +109,7 @@ function ProfilePage() {
     }
   };
 
-  const getStatusColor = (status: string) => {
-    switch (status) {
-      case 'pending': return '#f0ad4e';    // Orange - väntar på accept
-      case 'locked': return '#5bc0de';     // Blå - accepterad, tillagas
-      case 'ready': return '#5cb85c';      // Grön - redo att hämtas
-      case 'completed': return '#28a745';  // Mörkgrön - slutförd
-      case 'cancelled': return '#d9534f';  // Röd - avbruten
-      default: return '#777';
-    }
-  };
+
 
   const getStatusText = (status: string) => {
     switch (status) {
@@ -308,8 +299,7 @@ function ProfilePage() {
                   <div className="order-header">
                     <span className="order-id">Order #{order.orderId}</span>
                     <span
-                      className="order-status"
-                      style={{ backgroundColor: getStatusColor(order.status) }}
+                      className={`order-status status-${order.status || 'default'}`}
                     >
                       {getStatusText(order.status)}
                     </span>
