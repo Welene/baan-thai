@@ -6,6 +6,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
+  gap: 1.8rem;
   justify-content: center;
   margin-bottom: 2.5rem;
   padding: 1.5rem;
@@ -15,18 +16,18 @@
 
 .category-nav-button {
   padding: 0.6rem 1.2rem;
-  background: #fff;
-  color: #8B4513;
-  border: 2px solid #D2691E;
+  background: #59390b;
+  color: white;
   border-radius: 20px;
   font-size: 0.95rem;
   font-weight: 500;
+  border-style: none;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 .category-nav-button:hover {
-  background: #D2691E;
+  background: #472d09;
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(210, 105, 30, 0.3);
