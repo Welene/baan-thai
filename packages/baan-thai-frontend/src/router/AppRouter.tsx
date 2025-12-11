@@ -6,7 +6,7 @@ import Layout from '../components/Layout/Layout';
 import LandingPage from '../pages/landingPage/landingPage';
 import ThaiMenuPage from '../pages/ThaiMenuPage/ThaiMenuPage';
 import SushiMenuPage from '../pages/SushiMenuPage/SushiMenuPage';
-import { AboutUsPage } from '../pages/AboutUsPage/aboutUsPage';
+import { AboutUsPage } from '../pages/aboutUsPage/aboutUsPage';
 import RegisterPage from '../pages/RegisterPage/RegisterPage';
 import ProfilePage from '../pages/ProfilePage/ProfilePage';
 import { User } from '../interfaces/user';
@@ -28,10 +28,12 @@ function CartFABWrapper({ cartItems, cartOpen, setCartOpen }: { cartItems: CartI
 	if (hideCartOnRoutes.includes(location.pathname)) {
 		return null;
 	}
+
+	const totalItems = cartItems.reduce((total, item) => total + item.quantity, 0);
 	
 	return (
 		<CartFAB 
-			itemCount={cartItems.length}
+			itemCount={totalItems}
 			onClick={() => setCartOpen(!cartOpen)}
 		/>
 	);
