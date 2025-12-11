@@ -12,7 +12,7 @@ interface Order {
   createdAt: string;
   order: Array<{
     name: string;
-    amount: number;
+    quantity: number;
     price: number;
   }>;
 }
@@ -310,7 +310,7 @@ function ProfilePage() {
                     <div className="order-items">
                       {order.order?.map((item, index) => (
                         <span key={index} className="order-item-name">
-                          {item.amount}x {item.name}
+                          {item.quantity} x {item.name}
                         </span>
                       ))}
                     </div>
@@ -431,3 +431,4 @@ export default ProfilePage;
 /* Visar användarprofil med orderhistorik och möjlighet att avbryta pending orders, kan även ändra order innan den accepteras*/
 /* edit :tim 
 edit profile , telefonnummer adress och email */
+/* Felicia byta amout till quantity */
