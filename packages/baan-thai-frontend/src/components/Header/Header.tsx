@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import './Header.css';
 import logo from '../../assets/logo.png';
 import manIcon from '../../assets/man.png';
 import bellIcon from '../../assets/bell.png';
+import hamburMenu from '../../assets/burger-menu.png';
+import close from '../../assets/close.png';
 import { useNavigate } from 'react-router-dom';
 import type { User } from '../../interfaces/user';
 import NotificationBadge from '../NotificationBadge/NotificationBadge';
@@ -113,6 +115,12 @@ function Header() {
 		window.location.reload();
 	};
 
+	const navMenuRef = useRef(null);
+	const [menuOpen, setMenuOpen] = useState(false);
+
+	const toggleMenu = () => setMenuOpen(prev => !prev);
+	const closeMenu = () => setMenuOpen(false);
+
 	// State för notifikationer
 
 	return (
@@ -125,10 +133,28 @@ function Header() {
 					onClick={() => navigate('/')}
 					// / = PATH TIL LANDINGPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ LANDINGPAGE
 				/>
-				</section>
+			</section>
 
-			<section className="header__options-section">
+			<i className="header__hamburger-btn" onClick={toggleMenu}>
+				<img 
+					src={hamburMenu}
+					alt="hamburger menu icon"
+					className='hamburger-icon'
+				/>
+			</i>
+
+			<section className={`header__options-section ${menuOpen ? 'show-menu' : ''}`}
+				ref={navMenuRef}
+				onClick={e => e.target === navMenuRef.current && closeMenu()}
+			>
 				<section className="header__icons">
+					<i className="header__close-btn" onClick={closeMenu}>
+						<img 
+							src={close}
+							alt="close icon"
+							className='close-icon'
+						/>
+					</i>
 					<figure className="header__icon header__icon--profile">
 						{userId ? (
 							<button
@@ -175,22 +201,22 @@ function Header() {
 						<ul className="header__nav-list">
 							<li
 								className="header__nav-item"
-								onClick={() => navigate('/')}>
+								onClick={() => {navigate('/'); closeMenu();}}>
 								Hem
 							</li>
 							<li
 								className="header__nav-item"
-								onClick={() => navigate('/menu/sushi')}>
+								onClick={() => {navigate('/menu/sushi'); closeMenu();}}>
 								Sushi
 							</li>
 							<li
 								className="header__nav-item"
-								onClick={() => navigate('/menu/thai')}>
+								onClick={() => {navigate('/menu/thai'); closeMenu();}}>
 								Thailändsk mat
 							</li>
 							<li
 								className="header__nav-item"
-								onClick={() => navigate('/about')}>
+								onClick={() => {navigate('/about'); closeMenu();}}>
 								Om oss
 							</li>
 							{/* har inte skapad alla pages än, så ändra / path bara när man vet */}
@@ -208,3 +234,6 @@ export default Header;
 // Header komponent
 
 // Helene: dded fetch with API_KEY 
+
+/*Edit: Felicia
+Lägg till hamburger meny*/
