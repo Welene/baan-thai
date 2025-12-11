@@ -34,7 +34,7 @@ export const AboutUsPage: React.FC = () => {
     return (
         <div className="aboutUs-page">
             <section className="aboutUs-section">
-                <h1 className="page-title__big">OM OSS</h1>
+                <h1 className="page-title__big">Om oss</h1>
                 <figure className="page__images-grid">
                     <img src={omOssBig} alt="Thaikök restaurant" />
                     <img src={omOssSmall1} alt="Thaikök restaurant" />

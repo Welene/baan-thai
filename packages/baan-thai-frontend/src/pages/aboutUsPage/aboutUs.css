@@ -18,8 +18,8 @@
     
 }
 .page-title__big {
-    font-family: Georgia, 'Times New Roman', Times, serif;
     color: #59390B;
+    margin-bottom: 2rem;
 }
 .aboutUs-section {
     width: 80%;
@@ -103,9 +103,7 @@ p {
     text-align: center;
     font-size: 42px;
     margin-bottom: 3rem;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     color: #59390B;
-    text-transform: uppercase;
     letter-spacing: 2px;
 }
 
@@ -120,7 +118,7 @@ p {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 15px;
+    /* gap: 15px; */
 }
 
 .team-image {
@@ -129,13 +127,17 @@ p {
     background-color: #A88661;
     border-radius: 20px;
     overflow: hidden;
+    margin-bottom: 1rem;
 }
 .member-name {
     font-size: 24px;
     font-weight: bold;
     color: #000;
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.member-role {
+    font-style: italic;
 }
 
 /* Responsive för personal section */

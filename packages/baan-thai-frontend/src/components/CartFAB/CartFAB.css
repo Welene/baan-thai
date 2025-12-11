@@ -63,16 +63,23 @@
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+    .cart {
+		width: 90%;
+		gap: 2.5rem;
+		right: 5%;
+		top: 10%;
+	}
+
     .cart-fab {
-        width: 56px;
-        height: 56px;
+        width: 90px;
+        height: 90px;
         bottom: 20px;
         right: 20px;
     }
 
     .cart-fab__icon {
-        width: 28px;
-        height: 28px;
+        width: 35px;
+        height: 35px;
     }
 
     .cart-fab__badge {

@@ -125,8 +125,8 @@ function Cart({
 				<footer className="cart__footer">
 					<button className="cart__checkout" onClick={handleCheckout}>
 						{isCheckoutPage
-							? `TILL BETALING: ${total} kr`
-							: `TILL KASSAN: ${total} kr`}
+							? `BETALA: ${total} kr`
+							: `KASSAN: ${total} kr →`}
 					</button>
 				</footer>
 			</aside>
