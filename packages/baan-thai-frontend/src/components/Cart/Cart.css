@@ -20,7 +20,7 @@
 	background-color: #492f07;
 	border-radius: 0.5rem;
 	box-shadow: 0 4px 16px rgba(0, 0, 0, 0.377);
-	z-index: 3;
+	z-index: 7;
 	padding: 1.5rem;
 	display: flex;
 	flex-direction: column;

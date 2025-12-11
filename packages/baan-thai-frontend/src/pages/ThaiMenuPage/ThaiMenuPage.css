@@ -1,5 +1,6 @@
 .menu-page.thai-menu {
   background-color: #E4DACE;
+  margin:0 7rem;
 }
 
 .thai-menu {
@@ -18,7 +19,7 @@
   width: 100%;
   height: auto;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .thai-hero .hero-text {
@@ -64,10 +65,12 @@
 
 .thai-menu .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 3rem;
-  margin-top: 1rem;
+  margin: 1rem 3rem; /* inset from page edges */
+  padding-inline: 0.5rem;
 }
 
 
 /* Edit in styling: Helene */
+/* edit: Tim styling */
