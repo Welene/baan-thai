@@ -39,3 +39,8 @@ build/
 # OS
 Thumbs.db
 ~$*
+
+# GitHub Copilot
+.github/copilot/
+**/.copilot/
+copilot-*.json

@@ -97,6 +97,12 @@ export const handler = async (event) => {
 		
 		// Om nytt lösenord, hasha det
 		if (password) {
+			if (typeof password === 'string' && password.startsWith('$2')) {
+				return {
+					statusCode: 400,
+					body: JSON.stringify({ error: 'Skicka plaintext-lösenord för uppdatering (inte en bcrypt-hash)'}),
+				};
+			}
 			const passwordHash = await hash(password);
 			updateExpression += ', passwordHash = :passwordHash';
 			expressionAttributeValues[':passwordHash'] = passwordHash;
