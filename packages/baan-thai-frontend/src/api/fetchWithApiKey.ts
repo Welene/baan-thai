@@ -20,11 +20,11 @@ export const fetchWithApiKey = async (url: string, options: RequestInit = {}) =>
   };
   
   const response = await fetch(url, { ...options, headers });
-  const data = await response.json();
-  
+
   return {
     ok: response.ok,
     status: response.status,
-    json: () => Promise.resolve(data),
+    json: () => response.json(),
+    text: () => response.text(),
   };
 };

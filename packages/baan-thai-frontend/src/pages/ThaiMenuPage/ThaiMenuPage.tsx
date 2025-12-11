@@ -37,39 +37,34 @@ export default function ThaiMenuPage({
 
 	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
-<<<<<<< Updated upstream
-		console.log('ThaiMenuPage! Fetching menu...');
-		// fetch(
-		// 	`${API_BASE_URL}/api/menu`,
-		// 	{
-		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
-=======
-		fetch(
-			`${API_BASE_URL}/api/menu`,
-			{
->>>>>>> Stashed changes
-				method: 'GET',
-				headers: {
-					'Content-Type': 'application/json',
-				},
-			}
-		)
-
-	// ---------------------------------------- END OF FETCH --------------------------------------------
-			.then((res) => {
+		const fetchMenu = async () => {
+			console.log('ThaiMenuPage! Fetching menu...');
+			try {
+				const res = await fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
+					method: 'GET',
+					headers: { 'Content-Type': 'application/json' },
+				});
 				if (!res.ok) throw new Error(`HTTP ${res.status}`);
-				return res.json();
-			})
-			.then((data) => {
-				const arr = Array.isArray(data) ? data : data?.items ?? [];
+				const text = await res.text();
+				if (!text || text.trim() === '') {
+					console.warn('Empty response body from /api/menu');
+					setItems([]);
+					return;
+				}
+				let data: any;
+				try {
+					data = JSON.parse(text);
+				} catch (parseErr) {
+					console.error('Invalid JSON from /api/menu:', text);
+					throw parseErr;
+				}
 
-				// Filtrera endast thailändska produkter
+				const arr = Array.isArray(data) ? data : data?.items ?? [];
 				const thaiItems = arr.filter((item: any) => {
 					const categoryKey = item.categoryKey?.toLowerCase() || '';
 					return THAI_CATEGORIES.some((cat) => categoryKey === cat);
 				});
 
-				// Mappa AWS-fält till MenuCard-format
 				const mappedItems = thaiItems.map((item: any) => ({
 					id: item.productId,
 					name: item.title || item.name || 'Namn saknas',
@@ -79,19 +74,18 @@ export default function ThaiMenuPage({
 					category: item.category,
 				}));
 
-				// Ta bort dubbletter baserat på id
-				const unique = Array.from(
-					new Map(mappedItems.map((it: any) => [it.id, it])).values()
-				);
-
+				const unique = Array.from(new Map(mappedItems.map((it: any) => [it.id, it])).values());
 				setItems(unique);
-			})
-			.catch((err: any) => {
+			} catch (err: any) {
 				console.error('Failed to fetch menu:', err);
 				setError(String(err?.message ?? err));
 				setItems([]);
-			})
-			.finally(() => setLoading(false));
+			} finally {
+				setLoading(false);
+			}
+		};
+
+		fetchMenu();
 	}, []);
 
 	// Kategori-namn för visning
