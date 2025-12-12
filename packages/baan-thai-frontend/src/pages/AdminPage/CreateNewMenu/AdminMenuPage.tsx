@@ -37,7 +37,7 @@ export const AdminMenuPage = () => {
 			imageUrl: formData.imageUrl
 		};
 
-		// ----------------------------------------START OF FETCH--------------------------------------------
+		// ---------------------------------------START OF FETCH-------------------------------------------
 		try {
 			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu', {
 			const response = await fetchWithApiKey('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',{
