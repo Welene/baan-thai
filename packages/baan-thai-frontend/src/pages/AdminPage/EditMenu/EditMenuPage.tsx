@@ -187,7 +187,9 @@ export const EditMenuPage = () => {
 				{!selectedItem && (
 					<>
 						<div className="search-section">
+							<label htmlFor="productSearch" className="sr-only">Sök produkt</label>
 							<input
+								id="productSearch"
 								type="text"
 								placeholder="Sök efter namn eller produkt-ID..."
 								value={searchTerm}

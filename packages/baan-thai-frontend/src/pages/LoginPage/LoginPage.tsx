@@ -34,9 +34,6 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 
 		// ----------------------------------------START OF FETCH--------------------------------------------
 		try {
-			// const response = await fetch(
-			// 	`${API_BASE_URL}/api/login`,
-			// 	{
 				const response = await fetchWithApiKey(
         		`${API_BASE_URL}/api/login`,
 				{
@@ -110,7 +107,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 				)}
 				<form className="login__form" onSubmit={handleLogin}>
 					<div>
-						<label htmlFor="usernameOrEmail" className="sr-only">
+						<label htmlFor="Email" className="login__label">
 							Email
 						</label>
 						<input

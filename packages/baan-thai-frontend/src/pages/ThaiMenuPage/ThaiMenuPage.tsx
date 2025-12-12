@@ -38,9 +38,7 @@ export default function ThaiMenuPage({
 	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
 		console.log('ThaiMenuPage! Fetching menu...');
-		// fetch(
-		// 	`${API_BASE_URL}/api/menu`,
-		// 	{
+		
 		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
 				method: 'GET',
 				headers: {
@@ -180,9 +178,9 @@ export default function ThaiMenuPage({
 		<>
 			{/* Hero Image med text overlay - full bredd */}
 			<div className="hero-image thai-hero">
-				<img src={thaiHero} alt="Tom Yam Goong" />
+				<img src={thaiHero} alt="Thailändsk maträtt" />
 				<div className="hero-text">
-					<h1>EN SMAKFULL UPPLEVELSE</h1>
+					<h1>En smakfull upplevelse</h1>
 				</div>
 			</div>
 
