@@ -209,7 +209,7 @@
   }
 
   .landing-container__text-brown {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .landing-container__third {
@@ -267,20 +267,24 @@
 /* Mobile */
 @media (max-width: 600px) {
   .landing-container__title-big-brown {
-    font-size: 2rem;
+    font-size: 1.8rem;
     padding: 2rem;
   }
 
   .landing-container__title {
-    font-size: 2rem;
+    font-size: 1.8rem;
+  }
+
+  .landing-container__title-brown {
+    font-size: 1.5rem;
   }
 
   .landing-container__text-brown {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
 
   .landing-container__title-fat-yellow {
-    font-size: 2rem;
+    font-size: 1.5rem;
   }
 
   .landing-container__text-light-yellow {
