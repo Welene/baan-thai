@@ -29,6 +29,7 @@ main {
 	flex-direction: column;
 	color: #59390b;
 	justify-content: space-between;
+	z-index: 8;
 }
 
 .header__hamburger-btn, .header__close-btn {
