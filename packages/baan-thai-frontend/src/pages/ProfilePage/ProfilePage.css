@@ -72,6 +72,22 @@
   font-weight: bold;
 }
 
+.profile__logout-btn {
+	background-color: #59390b;
+	color: #fff;
+	border: none;
+	border-radius: 6px;
+	padding: 0.5rem 1.2rem;
+	font-size: 1rem;
+	font-family: 'Radley', serif;
+	cursor: pointer;
+	transition: background 0.2s;
+}
+
+.profile__logout-btn:hover {
+	background-color: #472d09;
+}
+
 /* Orders Section */
 .orders-section {
   background: rgba(89, 57, 11, 0.05);

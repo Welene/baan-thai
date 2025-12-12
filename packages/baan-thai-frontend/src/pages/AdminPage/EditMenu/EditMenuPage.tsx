@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './EditMenuPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
 import { fetchWithApiKey } from '../../../api/fetchWithApiKey';
+import { API_BASE_URL } from '../../../config/api';
 
 interface MenuItem {
 	productId: string;
@@ -36,7 +37,7 @@ export const EditMenuPage = () => {
 	const handleSearch = async () => {
 		try {
 			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
-			const response = await fetchWithApiKey('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
+			const response = await fetchWithApiKey(`${API_BASE_URL}/api/menu`);
 			const data = await response.json();
 			
 			console.log('Fetched data:', data);
@@ -102,7 +103,7 @@ export const EditMenuPage = () => {
 			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
 			// 	{
 			const response = await fetchWithApiKey(
-    			`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
+				`${API_BASE_URL}/api/menu/${selectedItem.productId}`,
 				{
 					method: 'PUT',
 					headers: {
@@ -148,8 +149,8 @@ export const EditMenuPage = () => {
 			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
 			// 	{
 			const response = await fetchWithApiKey(
-    			`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
-			{
+				`${API_BASE_URL}/api/menu/${selectedItem.productId}`,
+				{
 					method: 'DELETE'
 				}
 			);
@@ -233,7 +234,8 @@ export const EditMenuPage = () => {
 							← Tillbaka till listan
 						</button>
 						<form onSubmit={handleSubmit} className="edit-form">
-						<h2>Redigera: {selectedItem.name}</h2>						<div className="form-group">
+						<h2>Redigera: {selectedItem.name}</h2>						
+						<div className="form-group">
 							<label htmlFor="productId">Produkt ID:</label>
 							<input
 								type="text"
@@ -316,7 +318,6 @@ export const EditMenuPage = () => {
 								name="imageUrl"
 								value={formData.imageUrl}
 								onChange={handleInputChange}
-								required
 							/>
 						</div>
 

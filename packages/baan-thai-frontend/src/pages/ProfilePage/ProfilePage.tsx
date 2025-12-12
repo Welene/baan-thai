@@ -256,6 +256,13 @@ function ProfilePage() {
     setProfileMessage(null);
   };
 
+  	// Logga ut-knapp visas om användaren är inloggad
+	const handleLogout = () => {
+		localStorage.removeItem('currentUser');
+		localStorage.removeItem('user');
+		window.location.reload();
+	};
+
   if (loading) {
     return (
       <div className="profile-page">
@@ -285,6 +292,9 @@ function ProfilePage() {
           <button className="edit-profile-btn" onClick={handleStartEditProfile}>
             Redigera profil
           </button>
+          <button	className="profile__logout-btn" onClick={handleLogout}>
+								Logga ut
+					</button>
         </section>
 
         {/* Orderhistorik */}
@@ -431,3 +441,4 @@ export default ProfilePage;
 edit profile , telefonnummer adress och email */
 /* Felicia byta amout till quantity */
 // Helene edit: added fetch with API_KEY
+// Felicia: la till logout knapp

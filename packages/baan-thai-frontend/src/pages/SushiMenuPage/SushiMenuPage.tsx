@@ -39,9 +39,7 @@ export default function SushiMenuPage({
 	// ---------------------------------------- START OF FETCH --------------------------------------------
 	useEffect(() => {
 		console.log('SushiMenuPage! Fetching menu...');
-		// fetch(
-		// 	`${API_BASE_URL}/api/menu`,
-		// 	{
+		
 		fetchWithApiKey(`${API_BASE_URL}/api/menu`, {
 				method: 'GET',
 				headers: {
@@ -223,8 +221,7 @@ export default function SushiMenuPage({
 							key={categoryKey}
 							id={`category-${categoryKey}`}
 							className="category-section">
-							<h2 className="category-title">
-								{categoryNames[categoryKey] || categoryKey}
+							<h2 className="category-title" aria-label={`Kategori: ${categoryNames[categoryKey] || categoryKey}`}> {categoryNames[categoryKey] || categoryKey}
 							</h2>
 							<div className="grid">
 								{groupedItems[categoryKey].map((item: any) => (
@@ -232,22 +229,13 @@ export default function SushiMenuPage({
 										key={item.id}
 										menuItem={item}
 										onAddToCart={onAddToCart}
-    								cartItems={cartItems}
+    									cartItems={cartItems}
 										setCartItems={setCartItems}
 									/>
 								))}
 							</div>
 						</section>
 					))}
-				{/* <section className="cart-section">
-					<Cart
-						cartItems={cartItems}
-						setCartItems={setCartItems}
-						onClose={() => {}}
-						user={currentUser}
-						mode="inline" // cart is inline/static on menu pages
-					/>
-				</section> */}
 			</div>
 		</>
 	);
