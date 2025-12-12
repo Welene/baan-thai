@@ -30,7 +30,6 @@
 	},
 	"homepage": "https://github.com/Welene/baan-thai#readme",
 	"dependencies": {
-		"react-router-dom": "^7.9.6",
-		"yarn": "^1.22.22"
+		"react-router-dom": "^7.9.6"
 	}
 }
