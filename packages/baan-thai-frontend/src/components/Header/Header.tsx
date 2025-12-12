@@ -170,13 +170,13 @@ function Header() {
 							<img
 								src={manIcon}
 								alt="Profil ikon"
-								onClick={() => navigate('/profile')}
+								onClick={() => {navigate('/profile'); closeMenu();}}
 							/>
 						) : (
 							<img
 								src={manIcon}
 								alt="Profil ikon"
-								onClick={() => navigate('/login')}
+								onClick={() => {navigate('/login'); closeMenu();}}
 							/>
 						)}
 						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAMN PÅ PROFILPAGE */}
