@@ -109,12 +109,7 @@ function Header() {
 	};
 
 	
-	// Logga ut-knapp visas om användaren är inloggad
-	const handleLogout = () => {
-		localStorage.removeItem('currentUser');
-		localStorage.removeItem('user');
-		window.location.reload();
-	};
+
 
 	// Admin användare kan gå tillbaka till Admin sida
 	const handleWorkPlace = () => {
@@ -172,25 +167,18 @@ function Header() {
 					)}
 					<figure className="header__icon header__icon--profile">
 						{userId ? (
-							<button
-								className="header__logout-btn"
-								onClick={handleLogout}
-							>
-								Logga ut
-							</button>
+							<img
+								src={manIcon}
+								alt="Profil ikon"
+								onClick={() => navigate('/profile')}
+							/>
 						) : (
-							<button
-								className="header__login-btn"
+							<img
+								src={manIcon}
+								alt="Profil ikon"
 								onClick={() => navigate('/login')}
-							>
-								Logga in
-							</button>
+							/>
 						)}
-						<img
-							src={manIcon}
-							alt="Profil ikon"
-							onClick={() => navigate('/profile')}
-						/>
 						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAMN PÅ PROFILPAGE */}
 					</figure>
 					<figure className="header__icon header__icon--notification">
@@ -252,4 +240,5 @@ export default Header;
 // Helene: dded fetch with API_KEY 
 
 /*Edit: Felicia
-Lägg till hamburger meny*/
+Lägg till hamburger meny och ta bort login och logut knapp, fixa till profile knappen
+om user är inlogga navigate till profilesida annars till loginsidan*/

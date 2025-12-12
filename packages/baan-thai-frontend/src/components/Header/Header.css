@@ -88,42 +88,6 @@ main {
 	cursor: pointer;
 }
 
-.header__logout-btn {
-	background-color: #59390b;
-	color: #fff;
-	border: none;
-	border-radius: 6px;
-	padding: 0.5rem 1.2rem;
-	font-size: 1rem;
-	font-family: 'Radley', serif;
-	cursor: pointer;
-	margin-right: 2rem;
-	transition: background 0.2s;
-}
-
-.header__logout-btn:hover {
-	background-color: #472d09;
-}
-
-.header__login-btn {
-	background-color: #59390b;
-	color: rgb(233, 233, 233);
-	letter-spacing: 0.1rem;
-	border: none;
-	border-radius: 6px;
-	padding: 0.5rem 1.2rem;
-	font-size: 1rem;
-	font-family: 'Radley', serif;
-	cursor: pointer;
-	margin-right: 2rem;
-	transition: background 0.2s;
-	font-weight: 600;
-}
-
-.header__login-btn:hover {
-	background-color: #472d09;
-}
-
 /* MEDIA QUERY SECTION */
 @media (max-width: 1024px) {
 	.header {
