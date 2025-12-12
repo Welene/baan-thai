@@ -210,8 +210,7 @@ export default function ThaiMenuPage({
 							key={categoryKey}
 							id={`category-${categoryKey}`}
 							className="category-section">
-							<h2 className="category-title">
-								{categoryNames[categoryKey] || categoryKey}
+							<h2 className="category-title" aria-label={`Kategori: ${categoryNames[categoryKey] || categoryKey}`}> {categoryNames[categoryKey] || categoryKey}
 							</h2>
 							<div className="grid">
 								{groupedItems[categoryKey].map((item: any) => (

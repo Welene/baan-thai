@@ -50,8 +50,10 @@ export const MenuCard: React.FC<MenuCardProps> = ({
 	}
 
 	return (
-		<div className="menu-card">
-			<h3>{menuItem.name}</h3>
+		    <div
+		      className="menu-card"
+		      aria-label={`Maträtt: ${menuItem.name}${menuItem.price ? `, Pris: ${menuItem.price} kr` : ''}${menuItem.description ? `, ${menuItem.description}` : ''}`}>
+			    <h3>{menuItem.name}</h3>
 			<p className="description">{menuItem.description}</p>
 
 			<p className="price">{menuItem.price} kr</p>
@@ -74,3 +76,4 @@ export const MenuCard: React.FC<MenuCardProps> = ({
 };
 
 //Felicia // lägga till plus, minus och antal knapp 
+//Tim: tillgänglighets anpassning  / styling
