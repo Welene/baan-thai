@@ -11,7 +11,7 @@ export const LandingPage = () => {
     <section className="page-body landing-page">
       <section className="landing-container landing-container__first" style={{ backgroundImage: `url(${firstImage})` }}>
         <h1 className="landing-container__title-big-brown">
-          EN SMAKUPPLEVELSE UTAN DESS LIKE
+          En smakupplevelse utan dess like
         </h1>
       </section>
 
@@ -46,7 +46,7 @@ export const LandingPage = () => {
               Ta en paus från vardagen och unna dig en resa till Bangkok mitt på dagen!
             </p>
             <h2 className="landing-container__title-fat-yellow">
-              Måndag till Fredag 11:00 - 14:30
+              Måndag till Fredag <br/> 11:00 - 14:30
             </h2>
             <p className="landing-container__text-light-yellow">
               135 SEK / person<br/> 
@@ -67,7 +67,7 @@ export const LandingPage = () => {
               <img src={qrImage} alt="QR code" className='landing-container__image-qr'/>
             </a>
             <p className="landing-container__title-brown">
-              Klicka eller scanna QR-koden<br/> 
+              Klicka eller scanna QR-koden<br/><br/> 
               Eller ring oss:<br/> 
               0570-155 17 <br/> 
               076-019 91 79
