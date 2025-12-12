@@ -165,40 +165,30 @@ export const EditUserPage = () => {
 					)}
 
 					{/* Sökfält */}
-					<form
-  className="search-section"
-  role="search"
-  aria-label="Sök användare"
-  onSubmit={(e) => e.preventDefault()} // for å unngå reload hvis enter trykkes
->
-  <div className="search-bar">
-
-    {/* Label wrap: input ligger INNE i label — 100% robust */}
-    <label htmlFor="userSearch" className="search-label" style={{display: 'inline-block'}}>
-      Sök användare
-      <input
-        id="userSearch"
-        name="userSearch"
-        type="text"
-        placeholder="Sök användare (namn, användarnamn, email)..."
-        value={searchQuery}
-        onChange={(e) => setSearchQuery(e.target.value)}
-        aria-label="Sök användare"
-      />
-    </label>
-
-    {searchQuery && (
-      <button
-        type="button"
-        className="clear-search-button"
-        onClick={() => setSearchQuery('')}
-        aria-label="Rensa sökning"
-      >
-        Rensa
-      </button>
-    )}
-  </div>
-</form>
+					<div className="search-section">
+						<div className="search-bar">
+							<input
+								type="text"
+								placeholder="Sök användare (namn, användarnamn, email)..."
+								value={searchQuery}
+								onChange={(e) => setSearchQuery(e.target.value)}
+							/>
+							{searchQuery && (
+								<button
+									type="button"
+									className="clear-search-button"
+									onClick={() => setSearchQuery('')}
+								>
+									Rensa
+								</button>
+							)}
+						</div>
+						{searchQuery && (
+							<p className="search-results-text">
+								Visar {filteredUsers.length} av {users.length} användare
+							</p>
+						)}
+					</div>
 
 					{/* Användarlista */}
 					<div className="user-results">

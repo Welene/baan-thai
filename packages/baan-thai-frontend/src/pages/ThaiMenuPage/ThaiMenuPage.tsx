@@ -182,7 +182,7 @@ export default function ThaiMenuPage({
 			<div className="hero-image thai-hero">
 				<img src={thaiHero} alt="Tom Yam Goong" />
 				<div className="hero-text">
-					<h1>EN SMAKFULL UPPLEVELSE</h1>
+					<h1>En smakfull upplevelse</h1>
 				</div>
 			</div>
 
