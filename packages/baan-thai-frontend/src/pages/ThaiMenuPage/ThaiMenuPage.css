@@ -7,6 +7,9 @@
   height: auto;
   display: block;
   object-fit: contain;
+  padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /* Hero Image - Full bredd */
@@ -63,15 +66,54 @@
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem; */
   border-bottom: 2px solid #2d2d2d;
+  padding-inline: 2rem;
 }
 
 .thai-menu .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 3rem;
-  margin: 1rem 3rem; /* inset from page edges */
-  padding-inline: 0.5rem;
+  margin: 1rem auto;
+  max-width: 1200px;
+  padding-inline: 1rem;
+  justify-items: center;
 }
 
 
+
+@media (max-width: 1024px) {
+  .thai-hero .hero-text h1 {
+    font-size: 2rem;
+    padding: 2rem;
+  }
+
+  .thai-menu .grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: 1rem auto;
+    max-width: 1100px;
+    justify-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .thai-hero .hero-text h1 {
+    font-size: 1.4rem;
+    padding: 1rem;
+  }
+
+  .thai-menu .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0.5rem auto;
+    padding-inline: 0.25rem;
+    justify-items: center;
+  }
+
+  .thai-hero .hero-text {
+    top: 55%;
+  }
+}
 /* Edit in styling: Helene */
+
+/* edit styling tim */
