@@ -1,5 +1,6 @@
 .menu-page.sushi-menu{
   background-color: #E4DACE;
+  margin:0 7rem;
 }
 
 .sushi-menu {
@@ -63,9 +64,10 @@
 
 .sushi-menu .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(500px, 1fr));
   gap: 3rem;
-  margin-top: 1rem;
+  margin: 3rem 5rem;
+  padding-inline: 0.5rem;
 }
 
 /* Edit styling: Helene */
