@@ -2,6 +2,7 @@ import { useState } from 'react';
 import './adminMenuPage.css';
 import { AdminNavBar } from '../../../components/AdminNavBar/AdminNavBar';
 import { fetchWithApiKey } from '../../../api/fetchWithApiKey';
+import { API_BASE_URL } from '../../../config/api';
 
 export const AdminMenuPage = () => {
 	const [formData, setFormData] = useState({
@@ -40,7 +41,7 @@ export const AdminMenuPage = () => {
 		// ---------------------------------------START OF FETCH-------------------------------------------
 		try {
 			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu', {
-			const response = await fetchWithApiKey('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu',{
+			const response = await fetchWithApiKey(`${API_BASE_URL}/api/menu`,{
 				method: 'POST',
 				headers: {
 					'Content-Type': 'application/json'
@@ -159,7 +160,6 @@ export const AdminMenuPage = () => {
 							name="imageUrl"
 							value={formData.imageUrl}
 							onChange={handleInputChange}
-							required
 						/>
 					</div>
 
