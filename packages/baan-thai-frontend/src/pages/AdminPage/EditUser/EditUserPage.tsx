@@ -167,8 +167,10 @@ export const EditUserPage = () => {
 					{/* Sökfält */}
 					<div className="search-section">
 						<div className="search-bar">
+							<label htmlFor="userSearch" className="sr-only">Sök användare</label>
 							<input
 								type="text"
+								id="userSearch"
 								placeholder="Sök användare (namn, användarnamn, email)..."
 								value={searchQuery}
 								onChange={(e) => setSearchQuery(e.target.value)}
