@@ -2,7 +2,7 @@
 .category-nav {
   position: sticky;
   top: 0;
-  z-index: 1;
+  z-index: 6;
   display: flex;
   flex-wrap: wrap;
   gap: 0.75rem;
@@ -31,4 +31,34 @@
   color: white;
   transform: translateY(-2px);
   box-shadow: 0 4px 8px rgba(210, 105, 30, 0.3);
+}
+
+/* Responsive: smaller category nav on tablet and mobile */
+@media (max-width: 1024px) {
+  .category-nav {
+    gap: 0.6rem;
+    padding: 1rem;
+  }
+
+  .category-nav-button {
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
+    border-radius: 16px;
+  }
+}
+
+@media (max-width: 600px) {
+  .category-nav {
+    gap: 0.45rem;
+    padding: 0.6rem 0.5rem;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .category-nav-button {
+    padding: 0.35rem 0.7rem;
+    font-size: 0.85rem;
+    border-radius: 14px;
+    display: inline-block;
+  }
 }

@@ -1,9 +1,15 @@
-.menu-page.sushi-menu{
+.menu-page.sushi-menu {
   background-color: #E4DACE;
 }
 
 .sushi-menu {
+  width: 100%;
+  height: auto;
+  display: block;
+  object-fit: contain;
   padding: 2rem;
+  max-width: 1280px;
+  margin: 0 auto;
 }
 
 /* Hero Image */
@@ -21,21 +27,26 @@
   object-fit:contain;
 }
 
+.sushi-hero .hero-text,
 .hero-text {
   position: absolute;
-  top: 80%;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
   width: 100%;
-  
 }
 
+.sushi-hero .hero-text h1,
 .hero-text h1 {
-  font-size: 3rem;
-  margin-bottom: 0.5rem;
-  font-weight:200;
-  color: #464444;
+  font-family: var(--font);
+  color: var(--color-brown);
+  font-size: 2.5rem;
+  text-align: center;
+  background-color: rgba(228, 218, 206, 0.6);
+  padding: 3rem;
+  height: auto;
+  width: 100%;
 }
 
 
@@ -59,13 +70,60 @@
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem; */
   border-bottom: 2px solid #2d2d2d;
+  padding-inline: 5rem;
 }
 
 .sushi-menu .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
   gap: 3rem;
-  margin-top: 1rem;
+  margin: 1rem auto;
+  max-width: 1200px;
+  padding-inline: 1rem;
+  justify-items: center;
 }
 
+
+/* Responsive: tablet and phone */
+@media (max-width: 1024px) {
+  .hero-text h1 {
+    font-size: 2rem;
+  }
+
+  .sushi-menu {
+    padding: 0;
+    max-width: 1100px;
+    margin: 1rem auto;
+  }
+
+  .sushi-menu .grid {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 2rem;
+    margin: 1rem auto;
+    max-width: 1100px;
+    justify-items: center;
+  }
+}
+
+@media (max-width: 600px) {
+  .hero-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .sushi-menu {
+    padding: 0;
+    margin: 0.5rem auto;
+  }
+
+  .sushi-menu .grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    margin: 0.75rem auto;
+    padding-inline: 0.25rem;
+    justify-items: center;
+  }
+}
+
+
 /* Edit styling: Helene */
+/* edit styling : Tim */
