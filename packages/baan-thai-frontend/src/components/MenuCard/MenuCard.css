@@ -11,7 +11,7 @@
   height: 100%;
   min-height: 140px;
   box-sizing: border-box;
-  background: #A88661;
+  background: #8e6b45;
   box-shadow: 0 4px 8px #786951;
   display: flex;
   flex-direction: column;
@@ -26,7 +26,7 @@
   margin: 0 0 0.5rem;
   flex-shrink: 0;
 
-  color: #dedcdc;
+  color: #ffffff;
   font-family: 'Raleway', serif;
 }
 
@@ -38,7 +38,7 @@
 
 .menu-card .description {
   margin: 1rem 0 0.8rem;
-  color: #dedcdc;
+  color: #ffffff;
   flex-grow: 1;
   font-style: italic;
 }
@@ -46,7 +46,7 @@
 .menu-card .price {
   font-weight: bold;
   margin-bottom: 0;
-  color: #dedcdc;
+  color: #ffffff;
 }
 
 .add-button {
@@ -119,7 +119,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #e5ddd2;
+  background-color: #ecebe9;
   font-weight: bold;
   font-family: 'Raleway', serif;
   text-align: center;
