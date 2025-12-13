@@ -107,7 +107,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 				)}
 				<form className="login__form" onSubmit={handleLogin}>
 					<div>
-						<label htmlFor="Email" className="login__label">
+						<label htmlFor="Email" className="sr-only">
 							Email
 						</label>
 						<input

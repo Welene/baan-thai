@@ -8,8 +8,7 @@ const CSP = "default-src 'self' https://baan-thai-bucket.s3-website.eu-north-1.a
   "worker-src 'self' blob:; " +
   "object-src 'none'; " +
   "base-uri 'self'; " +
-  "form-action 'self'; " +
-  "upgrade-insecure-requests;";
+  "form-action 'self'; ";
 
 export const sendResponse = (code, data) => {
   return {

@@ -3,198 +3,120 @@ import { hash } from '../../../utils/password.mjs';
 import { createToken } from '../../../utils/auth.mjs';
 import { docClient } from '../../../services/clients.mjs';
 import crypto from 'crypto';
+import { sendResponse } from '../../../responses/response.mjs';
 
-// Generate UUID using native crypto
 const generateUUID = () => crypto.randomUUID();
 
-// Setup DynamoDB client
 const dynamodb = docClient;
+
 const TABLE_NAME = process.env.TABLE_NAME;
 
 export const handler = async (event) => {
-	console.log('handleRegister invoked');
-	// API_KEY START ----------------------------------------------
-	// const incomingKey = event.headers?.["x-api-key"];
-	const incomingKey =
-    event.headers?.["x-api-key"] ||
-    event.headers?.["X-API-Key"] ||
-    event.headers?.["X-Api-Key"]; // fungerar till serverless offline
-	
-	const expectedKey = process.env.API_KEY;
+  try {
+    // API_KEY START ----------------------------------------------
+    // Läs `x-api-key` från headers. Vi stödjer flera varianter för lokala tester.
+    const incomingKey = event.headers?.["x-api-key"] || event.headers?.["X-API-Key"] || event.headers?.["X-Api-Key"];
+    if (incomingKey !== process.env.API_KEY) {
+      return sendResponse(401, { error: 'Invalid API Key' });
+    }
+    // API_KEY END ------------------------------------------------
 
-	if (incomingKey !== expectedKey) {
-		return {
-			statusCode: 401,
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*',
-				'Access-Control-Allow-Credentials': true,
-			},
-			body: JSON.stringify({ error: 'Invalid API Key' }),
-		};
-	}
-	// API_KEY END ------------------------------------------------
-	try {
-		// parsa input från event body
-		const body = JSON.parse(event.body);
-		const email = body.email;
-		const password = body.password;
-		const name = body.name;
-		const username = body.username;
-		const role = body.role || 'customer'; // default role är customer
+    // Parsar JSON-body från request
+    const body = JSON.parse(event.body);
+    const email = body.email;
+    const password = body.password;
+    const name = body.name;
+    const username = body.username;
+    const role = body.role || 'customer';
 
-		// Skydda så inte vem som helst kan bli admin
-		const ADMIN_SECRET = process.env.ADMIN_SECRET || 'dev-secret-123';
-		if (role === 'admin' && body.adminSecret !== ADMIN_SECRET) {
-			return {
-				statusCode: 403,
-				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
-				},
-				body: JSON.stringify({ error: 'Obehörig admin-registrering' })
-			};
-		}
-		const address = body.address || null;
-		const phoneNumber = body.phoneNumber || null;
+    // Skydd mot obehörig admin-registrering via en separat secret
+    const ADMIN_SECRET = process.env.ADMIN_SECRET || 'dev-secret-123';
+    if (role === 'admin' && body.adminSecret !== ADMIN_SECRET) {
+      return sendResponse(403, { error: 'Obehörig admin-registrering' });
+    }
 
-		// Validera input
-		if (!email || !password || !name || !username) {
-			return {
-				statusCode: 400,
-				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
-				},
-				body: JSON.stringify({
-					error: 'Email, lösenord, namn och användarnamn krävs',
-				}),
-			};
-		}
+    const address = body.address || null;
+    const phoneNumber = body.phoneNumber || null;
 
-		// kontrollera om email redan finns (Query mot EmailIndex)
-		const normalizedEmail = String(email).toLowerCase();
-		const checkEmailParams = {
-			TableName: TABLE_NAME,
-			IndexName: 'EmailIndex',
-			KeyConditionExpression: 'email = :email',
-			ExpressionAttributeValues: { ':email': normalizedEmail },
-			Limit: 1,
-		};
+    // Enkel inputvalidering
+    if (!email || !password || !name || !username) {
+      return sendResponse(400, { error: 'Email, lösenord, namn och användarnamn krävs' });
+    }
 
-		let existingUser;
-		try {
-			existingUser = await dynamodb.send(
-				new QueryCommand(checkEmailParams)
-			);
-		} catch (err) {
-			// If EmailIndex doesn't exist or Query fails, fallback to Scan (less efficient)
-			if (
-				err.name === 'ValidationException' ||
-				(err.message && err.message.includes('index'))
-			) {
-				const scanParams = {
-					TableName: TABLE_NAME,
-					FilterExpression:
-						'email = :email AND begins_with(PK, :userPrefix)',
-					ExpressionAttributeValues: {
-						':email': normalizedEmail,
-						':userPrefix': 'USER#',
-					},
-				};
-				existingUser = await dynamodb.send(new ScanCommand(scanParams));
-			} else {
-				throw err;
-			}
-		}
+    // Normalisera email för att göra sökningen case-insensitiv
+    const normalizedEmail = String(email).toLowerCase();
+    let existingUser;
 
-		if (existingUser.Items && existingUser.Items.length > 0) {
-			return {
-				statusCode: 409,
-				headers: {
-					'Content-Type': 'application/json',
-					'Access-Control-Allow-Origin': '*'
-				},
-				body: JSON.stringify({
-					error: 'Email finns redan registrerad',
-				}),
-			};
-		}
+    // Försök Query mot EmailIndex. Om index saknas fallbacka till Scan.
+    try {
+      existingUser = await dynamodb.send(new QueryCommand({
+        TableName: TABLE_NAME,
+        IndexName: 'EmailIndex',
+        KeyConditionExpression: 'email = :email',
+        ExpressionAttributeValues: { ':email': normalizedEmail },
+        Limit: 1,
+      }));
+    } catch (err) {
+      // Om EmailIndex inte finns, använd en Scan med filter som begränsar till användar-PK
+      if (err.name === 'ValidationException' || (err.message && err.message.includes('index'))) {
+        existingUser = await dynamodb.send(new ScanCommand({
+          TableName: TABLE_NAME,
+          FilterExpression: 'email = :email AND begins_with(PK, :userPrefix)',
+          ExpressionAttributeValues: { ':email': normalizedEmail, ':userPrefix': 'USER#' },
+        }));
+      } else {
+        throw err;
+      }
+    }
 
-		// generera userId (8 tecken hex)
-		const userId = generateUUID().replace(/-/g, '').slice(0, 8);
+    // Om en användare med samma email finns, returnera konflikt
+    if (existingUser.Items && existingUser.Items.length > 0) {
+      return sendResponse(409, { error: 'Email finns redan registrerad' });
+    }
 
-		// hasha lösenordet
-		const passwordHash = await hash(password);
+    // Generera ett kort userId (8 tecken)
+    const userId = generateUUID().replace(/-/g, '').slice(0, 8);
 
-		// skapa timestamp
-		const timestamp = new Date().toISOString();
+    // Hasha lösenordet 
+    const passwordHash = await hash(password);
 
-		// skapa ny användare i databasen.
-		const newUser = {
-			PK: `USER#${userId}`,
-			SK: 'PROFILE',
-			userId: userId,
-			email: normalizedEmail,
-			passwordHash: passwordHash,
-			name: name,
-			username: username,
-			address,
-			phoneNumber,
-			role: role,
-			createdAt: timestamp,
-			updatedAt: timestamp,
-		};
+    // Skapa timestamp
+    const timestamp = new Date().toISOString();
 
-		await dynamodb.send(
-			new PutCommand({
-				TableName: TABLE_NAME,
-				Item: newUser,
-			})
-		);
+    // Bygg användarobjekt
+    const newUser = {
+      PK: `USER#${userId}`,
+      SK: 'PROFILE',
+      userId,
+      email: normalizedEmail,
+      passwordHash,
+      name,
+      username,
+      address,
+      phoneNumber,
+      role,
+      createdAt: timestamp,
+      updatedAt: timestamp,
+    };
 
-		// Generera JWT token för den nya användaren
-		const token = createToken({
-			userId: userId,
-			email: email,
-			role: role,
-		});
+    // Skriv den nya användaren till databasen
+    await dynamodb.send(new PutCommand({ TableName: TABLE_NAME, Item: newUser }));
 
-		// returnera success med token och användarinfo
-		return {
-			statusCode: 201,
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
-			},
-			body: JSON.stringify({
-				message: 'Registrering lyckades',
-				token: token,
-				user: {
-					userId: userId,
-					email: email,
-					name: name,
-					username: username,
-					role: role,
-					phoneNumber: phoneNumber,
-				},
-			}),
-		};
-	} catch (error) {
-		console.error('Registration error:', error);
-		console.error('Error stack:', error.stack);
-		return {
-			statusCode: 500,
-			headers: {
-				'Content-Type': 'application/json',
-				'Access-Control-Allow-Origin': '*'
-			},
-			body: JSON.stringify({
-				error: 'Serverfel vid registrering',
-				details: error.message,
-			}),
-		};
-	}
+    // Generera en JWT-token för användaren
+    const token = createToken({ userId, email, role });
+
+    // Returnera registrering lyckades med token och användarinfo
+    return sendResponse(201, {
+      message: 'Registrering lyckades',
+      token,
+      user: { userId, email, name, username, role, phoneNumber },
+    });
+
+  } catch (error) {
+    console.error('Registration error:', error);
+    console.error('Error stack:', error.stack);
+    return sendResponse(500, { error: 'Serverfel vid registrering', details: error.message });
+  }
 };
 
 
@@ -203,3 +125,4 @@ export const handler = async (event) => {
 /* Användarregistrering med email-validering och JWT-token */
 // Helene edit: added phoneNumber
 // Helene edit: added fetchWithApiKey in every api call for extra api protection
+// Tim edit: Refaktorerad till sendResponse, förenklad felhantering, renare struktur, ingen ändrad funktionalitet.
