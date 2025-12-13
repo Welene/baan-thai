@@ -1,5 +1,4 @@
 import { DynamoDBDocumentClient, UpdateCommand } from '@aws-sdk/lib-dynamodb';
-import bcrypt from 'bcryptjs';
 import { docClient } from '../../../services/clients.mjs';
 
 // Ställ in DynamoDB-klient

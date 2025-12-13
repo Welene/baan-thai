@@ -1,8 +1,11 @@
-# "org" ensures this Service is used with the correct Serverless Framework Access Key.
-org: fe24sunper
 service: baan-thai-backend
 
 useDotenv: true
+
+package:
+  patterns:
+    - "node_modules/**"
+    - "!node_modules/aws-sdk/**"
 
 plugins:
   - serverless-dotenv-plugin
@@ -27,11 +30,22 @@ provider:
       allowedHeaders:
         - Content-Type
         - Authorization
+        - x-api-key
       allowedMethods:
         - GET
         - POST
         - PUT
         - DELETE
+
+build:
+  esbuild:
+    bundle: true
+    minify: false
+    sourcemap: true
+    exclude:
+      - "aws-sdk"
+    target: node20
+    platform: node
 
 functions:
   #  -------------------USER---------------------
@@ -206,22 +220,6 @@ functions:
           path: /api/notifications/{userId}/read-all
           method: PUT
 
-  # TODO: Skapa message handlers
-  # #  -------------------MESSAGES---------------------
-  # addOrderMessage: # add message to order (customer or staff)
-  #   handler: functions/addOrderMessage.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/orders/{orderId}/messages
-  #         method: POST
-
-  # getOrderMessages: # get all messages for an order
-  #   handler: functions/getOrderMessages.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/orders/{orderId}/messages
-  #         method: GET
-
   #  -------------------PAYMENTS---------------------
   processPayment: # process payment for order
     handler: functions/payment/processPayment.handler
@@ -229,45 +227,6 @@ functions:
       - httpApi:
           path: /api/orders/{orderId}/payment
           method: POST
-
-  # EJ FÄRDIG - getPayment: get payment status
-  # getPayment:
-  #   handler: functions/payment/getPayment.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/orders/{orderId}/payment
-  #         method: GET
-
-  # EJ FÄRDIG - updatePaymentStatus: webhook from payment provider
-  # updatePaymentStatus:
-  #   handler: functions/payment/updatePaymentStatus.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/payments/{paymentId}/status
-  #         method: PUT
-
-  # TODO: Skapa cart handlers
-  # #  -------------------CART---------------------
-  # getCart: # gets the userId's cart
-  #   handler: functions/getCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: GET
-
-  # updateCart: # updates the userId's cart
-  #   handler: functions/updateCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: PUT
-
-  # clearCart: # empties the userId's cart
-  #   handler: functions/clearCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: PUT
 # resources:
 #   Resources:
 #     CloudDbTable:

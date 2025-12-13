@@ -1,0 +1,597 @@
+{
+  "C:\\Users\\Tivva\\OneDrive\\Skrivbord\\Thai baan\\baan-thai\\packages\\baan-thai-backend\\serverless.yml": {
+    "versionFramework": "4.28.0",
+    "servicePath": "C:\\Users\\Tivva\\OneDrive\\Skrivbord\\Thai baan\\baan-thai\\packages\\baan-thai-backend\\serverless.yml",
+    "serviceConfigFileName": "serverless.yml",
+    "service": {
+      "service": "baan-thai-backend",
+      "useDotenv": true,
+      "package": {
+        "patterns": [
+          "node_modules/**",
+          "!node_modules/aws-sdk/**"
+        ],
+        "artifactsS3KeyDirname": "serverless/baan-thai-backend/dev/code-artifacts"
+      },
+      "plugins": [
+        "serverless-dotenv-plugin",
+        "serverless-offline"
+      ],
+      "provider": {
+        "name": "aws",
+        "runtime": "nodejs20.x",
+        "region": "eu-north-1",
+        "iam": {
+          "role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+        },
+        "environment": {
+          "TABLE_NAME": "RestaurantTable",
+          "JWT_SECRET": "<REDACTED>",
+          "API_KEY": "<REDACTED>",
+          "IAM_ROLE_ARN": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent",
+          "FRONTEND_URL": "http://baan-thai-bucket.s3-website.eu-north-1.amazonaws.com"
+        },
+        "httpApi": {
+          "cors": {
+            "allowedOrigins": [
+              "*"
+            ],
+            "allowedHeaders": [
+              "Content-Type",
+              "Authorization",
+              "x-api-key"
+            ],
+            "allowedMethods": [
+              "GET",
+              "POST",
+              "PUT",
+              "DELETE"
+            ]
+          }
+        },
+        "stage": "dev",
+        "versionFunctions": true
+      },
+      "functions": {
+        "handleRegister": {
+          "handler": "functions/auth/RegisterUser/handleRegister.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/register",
+                "method": "POST"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-handleRegister"
+        },
+        "handleLogin": {
+          "handler": "functions/auth/LoginUser/handleLogin.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/login",
+                "method": "POST"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-handleLogin"
+        },
+        "getUserProfile": {
+          "handler": "functions/auth/GetUserProfile/getUserProfile.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/profile/{userId}",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getUserProfile"
+        },
+        "updateUserProfile": {
+          "handler": "functions/auth/UpdateUserProfile/updateUserProfile.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/profile/{userId}",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-updateUserProfile"
+        },
+        "getAdminUsers": {
+          "handler": "functions/auth/GetAdminUsers/getAdminUsers.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/users",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getAdminUsers"
+        },
+        "updateUser": {
+          "handler": "functions/auth/UpdateUser/updateUser.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/users/{userId}",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-updateUser"
+        },
+        "deleteUser": {
+          "handler": "functions/auth/DeleteUser/deleteUser.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/users/{userId}",
+                "method": "DELETE"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-deleteUser"
+        },
+        "getMenu": {
+          "handler": "functions/menu/getMenu.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getMenu"
+        },
+        "getProduct": {
+          "handler": "functions/menu/getProduct.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getProduct"
+        },
+        "createMenuItem": {
+          "handler": "functions/menu/createMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu",
+                "method": "POST"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-createMenuItem"
+        },
+        "updateMenuItem": {
+          "handler": "functions/menu/updateMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-updateMenuItem"
+        },
+        "deleteMenuItem": {
+          "handler": "functions/menu/deleteMenuItem.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/menu/{prodId}",
+                "method": "DELETE"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-deleteMenuItem"
+        },
+        "createOrder": {
+          "handler": "functions/order/PostCreateOrder/postCreateOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders",
+                "method": "POST"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-createOrder"
+        },
+        "getAllOrders": {
+          "handler": "functions/order/GetAllOrders/getAllOrders.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getAllOrders"
+        },
+        "getOrderbyUserId": {
+          "handler": "functions/order/GetOrdersByUserId/getOrdersByUserId.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{userId}",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getOrderbyUserId"
+        },
+        "getOrdersByStatus": {
+          "handler": "functions/order/GetOrdersByStatus/getOrdersByStatus.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/status/{status}",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getOrdersByStatus"
+        },
+        "updateOrderStatus": {
+          "handler": "functions/order/UpdateOrderStatus/updateOrderStatus.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/status",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-updateOrderStatus"
+        },
+        "cancelOrder": {
+          "handler": "functions/order/CancelOrder/cancelOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/cancel",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-cancelOrder"
+        },
+        "editOrder": {
+          "handler": "functions/order/EditOrder/editOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/edit",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-editOrder"
+        },
+        "deleteOrder": {
+          "handler": "functions/order/DeleteOrder/deleteOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}",
+                "method": "DELETE"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-deleteOrder"
+        },
+        "adminEditOrder": {
+          "handler": "functions/order/AdminEditOrder/adminEditOrder.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/edit/admin",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-adminEditOrder"
+        },
+        "getNotifications": {
+          "handler": "functions/notifications/GetNotifications/getNotifications.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/notifications/{userId}",
+                "method": "GET"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-getNotifications"
+        },
+        "markNotificationAsRead": {
+          "handler": "functions/notifications/MarkAsRead/markAsRead.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/notifications/{notificationId}/read",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-markNotificationAsRead"
+        },
+        "markAllNotificationsAsRead": {
+          "handler": "functions/notifications/MarkAllAsRead/markAllAsRead.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/notifications/{userId}/read-all",
+                "method": "PUT"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-markAllNotificationsAsRead"
+        },
+        "processPayment": {
+          "handler": "functions/payment/processPayment.handler",
+          "events": [
+            {
+              "httpApi": {
+                "path": "/api/orders/{orderId}/payment",
+                "method": "POST"
+              }
+            }
+          ],
+          "name": "baan-thai-backend-dev-processPayment"
+        }
+      }
+    },
+    "provider": {
+      "name": "aws",
+      "runtime": "nodejs20.x",
+      "region": "eu-north-1",
+      "iam": {
+        "role": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent"
+      },
+      "environment": {
+        "TABLE_NAME": "RestaurantTable",
+        "JWT_SECRET": "<REDACTED>",
+        "API_KEY": "<REDACTED>",
+        "IAM_ROLE_ARN": "arn:aws:iam::405474549497:role/FullDynamo-FullEvent",
+        "FRONTEND_URL": "http://baan-thai-bucket.s3-website.eu-north-1.amazonaws.com"
+      },
+      "httpApi": {
+        "cors": {
+          "allowedOrigins": [
+            "*"
+          ],
+          "allowedHeaders": [
+            "Content-Type",
+            "Authorization",
+            "x-api-key"
+          ],
+          "allowedMethods": [
+            "GET",
+            "POST",
+            "PUT",
+            "DELETE"
+          ]
+        }
+      },
+      "stage": "dev",
+      "versionFunctions": true
+    },
+    "dashboard": {
+      "isEnabledForService": false,
+      "requiredAuthentication": false,
+      "orgFeaturesInUse": null,
+      "orgObservabilityIntegrations": null,
+      "serviceAppId": null,
+      "serviceProvider": null,
+      "instanceParameters": null
+    },
+    "error": {
+      "message": "No serverless-state.json file found in the package path you provided.",
+      "stack": "ServerlessError2: No serverless-state.json file found in the package path you provided.\n    at AwsDeploy.extendedValidate (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1087:428)\n    at before:deploy:deploy (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1101:6594)\n    at async PluginManager.runHooks (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1366:11105)\n    at async PluginManager.invoke (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1366:11815)\n    at async PluginManager.run (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1366:12607)\n    at async Serverless.run (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1373:10524)\n    at async runFramework (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1400:1781)\n    at async TraditionalRunner.run (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1396:28508)\n    at async route (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1571:2848)\n    at async Object.run (file:///C:/Users/Tivva/.serverless/releases/4.28.0/package/dist/sf-core.js:1572:3876)",
+      "code": "MISSING_SERVICE_STATE_FILE"
+    },
+    "serviceRawFile": "service: baan-thai-backend\n\nuseDotenv: true\n\npackage:\n  patterns:\n    - 'node_modules/**'\n    - '!node_modules/aws-sdk/**'\n\nplugins:\n  - serverless-dotenv-plugin\n  - serverless-offline\n\nprovider:\n  name: aws\n  runtime: nodejs20.x\n  region: eu-north-1\n  iam:\n    role: ${env:IAM_ROLE_ARN}\n\n  environment:\n    TABLE_NAME: RestaurantTable\n    JWT_SECRET: ${env:JWT_SECRET}\n    API_KEY: ${env:API_KEY}\n\n  httpApi:\n    cors:\n      allowedOrigins:\n        - \"*\"\n      allowedHeaders:\n        - Content-Type\n        - Authorization\n        - x-api-key\n      allowedMethods:\n        - GET\n        - POST\n        - PUT\n        - DELETE\n\nfunctions:\n  #  -------------------USER---------------------\n  handleRegister: # register as user or admin\n    handler: functions/auth/RegisterUser/handleRegister.handler\n    events:\n      - httpApi:\n          path: /api/register\n          method: POST\n\n  handleLogin: # logs in user or admin\n    handler: functions/auth/LoginUser/handleLogin.handler\n    events:\n      - httpApi:\n          path: /api/login\n          method: POST\n\n  getUserProfile: # gets the userId's profile\n    handler: functions/auth/GetUserProfile/getUserProfile.handler\n    events:\n      - httpApi:\n          path: /api/profile/{userId}\n          method: GET\n\n  updateUserProfile: # updates user profile (email, phoneNumber, address)\n    handler: functions/auth/UpdateUserProfile/updateUserProfile.handler\n    events:\n      - httpApi:\n          path: /api/profile/{userId}\n          method: PUT\n\n  getAdminUsers: # gets all users with admin role\n    handler: functions/auth/GetAdminUsers/getAdminUsers.handler\n    events:\n      - httpApi:\n          path: /api/users\n          method: GET\n\n  updateUser: # updates a specific user (admin only)\n    handler: functions/auth/UpdateUser/updateUser.handler\n    events:\n      - httpApi:\n          path: /api/users/{userId}\n          method: PUT\n\n  deleteUser: # deletes a specific user (admin only)\n    handler: functions/auth/DeleteUser/deleteUser.handler\n    events:\n      - httpApi:\n          path: /api/users/{userId}\n          method: DELETE\n\n  #  -------------------MENU---------------------\n  getMenu: # get all meals from the menu\n    handler: functions/menu/getMenu.handler\n    events:\n      - httpApi:\n          path: /api/menu\n          method: GET\n\n  getProduct: # gets a single menu item\n    handler: functions/menu/getProduct.handler\n    events:\n      - httpApi:\n          path: /api/menu/{prodId}\n          method: GET\n\n  createMenuItem: # add a new meal to menu\n    handler: functions/menu/createMenuItem.handler\n    events:\n      - httpApi:\n          path: /api/menu\n          method: POST\n\n  updateMenuItem: # change a meal in menu\n    handler: functions/menu/updateMenuItem.handler\n    events:\n      - httpApi:\n          path: /api/menu/{prodId}\n          method: PUT\n\n  deleteMenuItem: # removes menu product (menu item === a meal)\n    handler: functions/menu/deleteMenuItem.handler\n    events:\n      - httpApi:\n          path: /api/menu/{prodId}\n          method: DELETE\n\n  #  -------------------ORDERS---------------------\n  createOrder: # creates an order\n    handler: functions/order/PostCreateOrder/postCreateOrder.handler\n    events:\n      - httpApi:\n          path: /api/orders\n          method: POST\n\n  getAllOrders: # gets all orders\n    handler: functions/order/GetAllOrders/getAllOrders.handler\n    events:\n      - httpApi:\n          path: /api/orders\n          method: GET\n\n  getOrderbyUserId: # gets all orders by userId\n    handler: functions/order/GetOrdersByUserId/getOrdersByUserId.handler\n    events:\n      - httpApi:\n          path: /api/orders/{userId}\n          method: GET\n\n  getOrdersByStatus: # gets all orders by status (pending, locked, completed)\n    handler: functions/order/GetOrdersByStatus/getOrdersByStatus.handler\n    events:\n      - httpApi:\n          path: /api/orders/status/{status}\n          method: GET\n\n  updateOrderStatus: # change order status (pending, locked, complete)\n    handler: functions/order/UpdateOrderStatus/updateOrderStatus.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}/status\n          method: PUT\n\n  cancelOrder: # userId cancels order (only pending orders)\n    handler: functions/order/CancelOrder/cancelOrder.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}/cancel\n          method: PUT\n\n  editOrder: # changes an order in case user did something wrong/forgot to add something (only pending orders)\n    handler: functions/order/EditOrder/editOrder.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}/edit\n          method: PUT\n\n  deleteOrder: # deletes an order completely\n    handler: functions/order/DeleteOrder/deleteOrder.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}\n          method: DELETE\n\n  adminEditOrder: # changes an order in case user did something wrong/forgot to add something (only pending orders)\n    handler: functions/order/AdminEditOrder/adminEditOrder.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}/edit/admin\n          method: PUT\n\n  #  -------------------NOTIFICATIONS---------------------\n  getNotifications: # gets all notifications for a user\n    handler: functions/notifications/GetNotifications/getNotifications.handler\n    events:\n      - httpApi:\n          path: /api/notifications/{userId}\n          method: GET\n\n  markNotificationAsRead: # marks a single notification as read\n    handler: functions/notifications/MarkAsRead/markAsRead.handler\n    events:\n      - httpApi:\n          path: /api/notifications/{notificationId}/read\n          method: PUT\n\n  markAllNotificationsAsRead: # marks all notifications as read for a user\n    handler: functions/notifications/MarkAllAsRead/markAllAsRead.handler\n    events:\n      - httpApi:\n          path: /api/notifications/{userId}/read-all\n          method: PUT\n\n  # TODO: Skapa message handlers\n  # #  -------------------MESSAGES---------------------\n  # addOrderMessage: # add message to order (customer or staff)\n  #   handler: functions/addOrderMessage.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/orders/{orderId}/messages\n  #         method: POST\n\n  # getOrderMessages: # get all messages for an order\n  #   handler: functions/getOrderMessages.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/orders/{orderId}/messages\n  #         method: GET\n\n  #  -------------------PAYMENTS---------------------\n  processPayment: # process payment for order\n    handler: functions/payment/processPayment.handler\n    events:\n      - httpApi:\n          path: /api/orders/{orderId}/payment\n          method: POST\n\n  # EJ FÄRDIG - getPayment: get payment status\n  # getPayment:\n  #   handler: functions/payment/getPayment.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/orders/{orderId}/payment\n  #         method: GET\n\n  # EJ FÄRDIG - updatePaymentStatus: webhook from payment provider\n  # updatePaymentStatus:\n  #   handler: functions/payment/updatePaymentStatus.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/payments/{paymentId}/status\n  #         method: PUT\n\n  # TODO: Skapa cart handlers\n  # #  -------------------CART---------------------\n  # getCart: # gets the userId's cart\n  #   handler: functions/getCart.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/cart/{userId}\n  #         method: GET\n\n  # updateCart: # updates the userId's cart\n  #   handler: functions/updateCart.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/cart/{userId}\n  #         method: PUT\n\n  # clearCart: # empties the userId's cart\n  #   handler: functions/clearCart.handler\n  #   events:\n  #     - httpApi:\n  #         path: /api/cart/{userId}\n  #         method: PUT\n# resources:\n#   Resources:\n#     CloudDbTable:\n#       Type: AWS::DynamoDB::Table\n#       Properties:\n#         TableName: RestaurantTable\n#         AttributeDefinitions:\n#           - AttributeName: PK\n#             AttributeType: S\n#           - AttributeName: SK\n#             AttributeType: S\n#           - AttributeName: categoryKey\n#             AttributeType: S\n#         KeySchema:\n#           - AttributeName: PK\n#             KeyType: HASH\n#           - AttributeName: SK\n#             KeyType: RANGE\n#         GlobalSecondaryIndexes:\n#           - IndexName: CategoryIndex\n#             KeySchema:\n#               - AttributeName: categoryKey\n#                 KeyType: HASH\n#               - AttributeName: SK\n#                 KeyType: RANGE\n#             Projection:\n#               ProjectionType: ALL\n#         BillingMode: PAY_PER_REQUEST\n\n# Helene, Tim\n",
+    "command": [
+      "deploy"
+    ],
+    "options": {
+      "stage": "dev",
+      "package": ".serverless_pkg_for_deploy",
+      "verbose": true,
+      "force": true
+    },
+    "orgId": "b692151b-4d2b-4023-92eb-18ddb933f1fd",
+    "orgName": "fe24tim",
+    "userId": "hcRbSyR0H6xmmDD9pv",
+    "userName": "fe24tim",
+    "serviceProviderAwsAccountId": "405474549497",
+    "serviceProviderAwsCfStackName": "baan-thai-backend-dev",
+    "serviceProviderAwsCfStackId": "arn:aws:cloudformation:eu-north-1:405474549497:stack/baan-thai-backend-dev/0beb0cb0-cb93-11f0-b372-0ea2fec12041",
+    "serviceProviderAwsCfStackCreated": "2025-11-27T13:14:47.052Z",
+    "serviceProviderAwsCfStackUpdated": "2025-12-13T15:54:17.280Z",
+    "serviceProviderAwsCfStackStatus": "UPDATE_COMPLETE",
+    "serviceProviderAwsCfStackOutputs": [
+      {
+        "OutputKey": "GetMenuLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getMenu:155",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetMenuLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetAdminUsersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getAdminUsers:44",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetAdminUsersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "MarkNotificationAsReadLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-markNotificationAsRead:75",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-MarkNotificationAsReadLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "HttpApiId",
+        "OutputValue": "nicx8149f2",
+        "Description": "Id of the HTTP API",
+        "ExportName": "sls-baan-thai-backend-dev-HttpApiId"
+      },
+      {
+        "OutputKey": "ServerlessDeploymentBucketName",
+        "OutputValue": "baan-thai-backend-dev-serverlessdeploymentbucket-s11tuu0w33og",
+        "ExportName": "sls-baan-thai-backend-dev-ServerlessDeploymentBucketName"
+      },
+      {
+        "OutputKey": "GetProductLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getProduct:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetProductLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "MarkAllNotificationsAsReadLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-markAllNotificationsAsRead:75",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-MarkAllNotificationsAsReadLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "HttpApiUrl",
+        "OutputValue": "https://nicx8149f2.execute-api.eu-north-1.amazonaws.com",
+        "Description": "URL of the HTTP API",
+        "ExportName": "sls-baan-thai-backend-dev-HttpApiUrl"
+      },
+      {
+        "OutputKey": "GetOrderbyUserIdLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getOrderbyUserId:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetOrderbyUserIdLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-deleteOrder:135",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-DeleteOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateMenuItemLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-createMenuItem:153",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-CreateMenuItemLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetAllOrdersLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getAllOrders:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetAllOrdersLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateOrderStatusLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-updateOrderStatus:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-UpdateOrderStatusLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CancelOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-cancelOrder:145",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-CancelOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "ProcessPaymentLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-processPayment:66",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-ProcessPaymentLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "HandleRegisterLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-handleRegister:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-HandleRegisterLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "CreateOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-createOrder:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-CreateOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteUserLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-deleteUser:50",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-DeleteUserLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateUserProfileLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-updateUserProfile:62",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-UpdateUserProfileLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateUserLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-updateUser:50",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-UpdateUserLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "AdminEditOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-adminEditOrder:52",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-AdminEditOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetNotificationsLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getNotifications:75",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetNotificationsLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "DeleteMenuItemLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-deleteMenuItem:153",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-DeleteMenuItemLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "EditOrderLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-editOrder:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-EditOrderLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetOrdersByStatusLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getOrdersByStatus:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetOrdersByStatusLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "HandleLoginLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-handleLogin:157",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-HandleLoginLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "GetUserProfileLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-getUserProfile:154",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-GetUserProfileLambdaFunctionQualifiedArn"
+      },
+      {
+        "OutputKey": "UpdateMenuItemLambdaFunctionQualifiedArn",
+        "OutputValue": "arn:aws:lambda:eu-north-1:405474549497:function:baan-thai-backend-dev-updateMenuItem:153",
+        "Description": "Current Lambda function version",
+        "ExportName": "sls-baan-thai-backend-dev-UpdateMenuItemLambdaFunctionQualifiedArn"
+      }
+    ]
+  }
+}
