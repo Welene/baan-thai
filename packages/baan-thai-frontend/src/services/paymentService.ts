@@ -30,7 +30,6 @@ interface OrderResponse {
 
 // ---------------------------------------- START OF FETCH 1 --------------------------------------------
 export async function createOrder(orderData: OrderData): Promise<OrderResponse> {
-    // const response = await fetch(`${API_BASE_URL}/api/orders`, {
     const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders`, {
         method: 'POST',
         headers: {
@@ -50,7 +49,6 @@ export async function createOrder(orderData: OrderData): Promise<OrderResponse> 
 
 // ---------------------------------------- START OF FETCH 2 --------------------------------------------
 export async function cancelOrder(orderId: string, userId: string): Promise<{ success: boolean; message: string }> {
-    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
     const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/cancel`, {
         method: 'PUT',
         headers: {
@@ -72,7 +70,6 @@ export async function cancelOrder(orderId: string, userId: string): Promise<{ su
 
 // ---------------------------------------- START OF FETCH 3 --------------------------------------------
 export async function editOrder(orderId: string, orderData: { order: Array<{ productId: number; quantity: number }> }): Promise<{ success: boolean; message: string; booking?: any }> {
-    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
     const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/edit`, {
         method: 'PUT',
         headers: {
@@ -92,4 +89,5 @@ export async function editOrder(orderId: string, orderData: { order: Array<{ pro
 
 /* Author: Tim  
 Definierar TypeScript-interfaces för orderdata och tre API-funktioner: skapa, avbryta och redigera beställningar*/
+
 // Helene edit: changed fetch to fetchWithApiKey 

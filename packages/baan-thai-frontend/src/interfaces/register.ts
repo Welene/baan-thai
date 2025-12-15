@@ -11,6 +11,3 @@ export interface RegisterUser {
 
 // Författare: Helene
 // RegisterUser form interface
-
-// Eventuell buggfix av: *namn-här:
-// Vad blev fixad: *skriv vad som (evt) fixades*

@@ -5,3 +5,5 @@ export const updateOrderStatusSchema = Joi.object({
     .valid("pending", "confirmed", "locked", "cancelled", "ready", "completed")
     .required(),
 });
+
+// Helene edit: added completed!... I think?

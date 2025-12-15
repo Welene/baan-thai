@@ -81,4 +81,5 @@ export const handler = async (event) => {
 
 /* Författare: Tim */
 /* hämtar alla menyprodukter från DynamoDB */
-// Helene edit: added fetchWithApiKey in every api call for extra api protection
+
+ // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection

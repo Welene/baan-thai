@@ -1,15 +1,3 @@
-// export const fetchWithApiKey = async (url: string, options: RequestInit = {}) => {
-//   const API_KEY = import.meta.env.VITE_API_KEY; // hent fra .env
-//   const headers = {
-//     "Content-Type": "application/json",
-//     "x-api-key": API_KEY,
-//     ...options.headers,
-//   };
-//   const res = await fetch(url, { ...options, headers });
-//   return res.json();
-// };
-
-
 // new helper that returns object that looks like the old response object - easier to implement into every file without changing every response to data
 export const fetchWithApiKey = async (url: string, options: RequestInit = {}) => {
   const API_KEY = import.meta.env.VITE_API_KEY;
@@ -39,6 +27,6 @@ export const fetchWithApiKey = async (url: string, options: RequestInit = {}) =>
   };
 };
 
-//Author: helene
-// Api helper function to include API key in headers
-//Edit:Tim - changed to return object that looks like old response
+//Author: Helene
+// API helper function to include API key in headers, object matches the old response
+//Edit: Tim - changed to return object that looks like old response

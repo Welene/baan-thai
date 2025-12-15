@@ -16,8 +16,8 @@ type OrderItem = {
 
 type Order = {
   orderId: string;
-  status: "pending" | "confirmed" | "ready" | "completed"; // removed done -- added ready + completed
-  confirmedAt?: string; // when admin confirms customers order
+  status: "pending" | "confirmed" | "ready" | "completed";
+  confirmedAt?: string; // when admin confirms customers order - used for starting timer on confirmed orders
   createdAt: string; // when customer makes order
   order: OrderItem[];
   message?: string; // meddelanden från kund
@@ -33,16 +33,6 @@ const AdminPage: React.FC = () => {
 
 
   // ---------------------------------------START OF FETCH 1---------------------------------------------------------------
-  // fetch all orders made, from the backend get all orders endpoint
-  // useEffect(() => {
-  //   fetch(`${API_BASE_URL}/api/orders`)
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       // console.log("Fetched orders:", data);
-  //       setOrders(data.orders || []);
-  //     })
-  //     .catch((err) => console.error("Failed to fetch orders", err));
-  // }, []);
 
   useEffect(() => {
   const fetchOrders = async () => {
@@ -65,34 +55,20 @@ const AdminPage: React.FC = () => {
 // ----------------------------------------END OF FETCH 1-------------------------------------------
 
 
-  // calculates waitStatus (for colors) based on when confirmed btn was clicked
+  // calculates waitStatus (for colors) based on when confirmed btn was clicked, using confirmedAt
   const calculateWaitStatus = (confirmedAt?: string) => {
     if (!confirmedAt) return undefined; // går til pending (ingen waitStatus hvis ikke confirmed)
     const diffMinutes = (Date.now() - new Date(confirmedAt).getTime()) / 1000 / 60;
-    if (diffMinutes < 5) return "new";
-    if (diffMinutes < 25) return "waiting";
-    return "overdue";
+    if (diffMinutes < 5) return "new"; // new if time is 5 min or less (styled to green)
+    if (diffMinutes < 25) return "waiting"; // waiting if less than 25 min (should be 15), (styled to orange)
+    return "overdue"; // over 25 minutes and status changes to overdue (styled to red)
   };
 
 
   // ----------------------------------------START OF FETCH 2--------------------------------------------
-   // confirms order with the help of the backend status changer
-  // const handleConfirm = async (orderId: string) => {
-  //   await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
-  //     method: "PUT",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify({ status: "confirmed" }),
-  //   });
-
-  //   // updates LS with confirmedAt when clicked by admin
-  //   setOrders((prevOrders) =>
-  //     prevOrders.map((o) =>
-  //       o.orderId === orderId ? { ...o, status: "confirmed", confirmedAt: new Date().toISOString() } : o
-  //     )
-  //   );
-  // };
 
   const handleConfirm = async (orderId: string) => {
+    // when this is clicked, this orderId / order card confirms an order AKA the kitchen has received & accepted it
   try {
     const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
       method: "PUT",
@@ -120,8 +96,8 @@ const AdminPage: React.FC = () => {
 
 // ------------------------------------------START OF FETCH 3--------------------------------------------------------------
 const handleRemoveOrder = async (orderId: string) => {
+  // when clicking this orderId / order card will be deleted from the page
   try {
-    // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}`, {
     const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}`, {
 
       method: "DELETE",
@@ -143,7 +119,9 @@ const handleRemoveOrder = async (orderId: string) => {
 //------------------------------------------END OF FETCH 3--------------------------------------------------------------
 
 
-  // waitStatus (colors) is updated by setInterval every 30 sec
+  // waitStatus (colors) is updated by setInterval every 30 sec by updating the orders
+  // confirmedAt + amount of time will make them change color if the amount of time is above the set amount
+  // does not mean that color  will update every 30 seconds, but rather like a update/check
   useEffect(() => {
     const interval = setInterval(() => {
       setOrders((prevOrders) =>
@@ -160,22 +138,9 @@ const handleRemoveOrder = async (orderId: string) => {
 
 
   // --------------------------------------------- START OF FETCH 4 ----------------------------------------------------------
-  // BUTTON FUNCTION FOR "ready" (KLAR) & "completed" (HÄMTAD) -------------------------------------------------------------
-//   const handleMarkReady = async (orderId: string) => {
-//   await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
-//     method: "PUT",
-//     headers: { "Content-Type": "application/json" },
-//     body: JSON.stringify({ status: "ready" }),
-//   });
-
-//   setOrders(prev =>
-//     prev.map(o =>
-//       o.orderId === orderId ? { ...o, status: "ready" } : o
-//     )
-//   );
-// };
 
 const handleMarkReady = async (orderId: string) => {
+  // when clicked, this orderId / order card will change status to ready AKA food is done & van be picked up
   const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
     headers: { "Content-Type": "application/json" },
@@ -200,11 +165,7 @@ const handleMarkReady = async (orderId: string) => {
 
 // ------------------------------------------------- START OF FETCH 5 ----------------------------------------------------------
 const handleMarkCompleted = async (orderId: string) => {
-  // await fetch(`${API_BASE_URL}/api/orders/${orderId}/status`, {
-  //   method: "PUT",
-  //   headers: { "Content-Type": "application/json" },
-  //   body: JSON.stringify({ status: "completed" }),
-  // });
+  // when clicked, this orderId / order card will change status to completed AKA customer has picked it up
 
   const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/status`, {
     method: "PUT",
@@ -216,7 +177,7 @@ const handleMarkCompleted = async (orderId: string) => {
     console.error("Failed to mark order as completed:", response.status);
     return;
   }
- // when clicking completed/hämtad button - it is removed from admin page only
+ // when clicking completed/hämtad button - it is removed from admin page only using the filter method
   setOrders(prev => prev.filter(o => o.orderId !== orderId));
   // updates order state by removing that orderId  from the page (AKA orders that have been marked "hämtad", AKA clicked hämtad
 };
@@ -237,14 +198,14 @@ const handleMarkCompleted = async (orderId: string) => {
     setSendMeassageStatus(null);
   };
 
+    // ----------------------------------------START OF FETCH 6--------------------------------------------
   const handleSendMessage = async (orderId: string) => {
     if (!popupMessage.trim()) {
       alert("Meddelande kan inte vara tomt");
       return;
     }
-// ----------------------------------------START OF FETCH 6--------------------------------------------
+
     try {
-      // const response = await fetch(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
       const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${orderId}/edit/admin`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
@@ -278,7 +239,7 @@ const handleMarkCompleted = async (orderId: string) => {
 
   const popupClass = selectedOrder ? (() => {
     if (selectedOrder.status === 'pending') return 'pending';
-    if (selectedOrder.status === 'ready') return 'ready'; // CHANGED FROM DONE TO READY HERE
+    if (selectedOrder.status === 'ready') return 'ready'; 
     if (selectedOrder.status === 'confirmed') {
       const w = calculateWaitStatus(selectedOrder.confirmedAt);
       return `confirmed ${w || 'new'}`;
@@ -385,6 +346,7 @@ const handleMarkCompleted = async (orderId: string) => {
 export default AdminPage;
 
 // Author: Helene
+
 // Felicia : Popup för att skicka meddelande till köken när admin klickar på en order
 // Tim: fix wrong url
 // Felicia : Lägg till meddelande från kund i orderkortet och i popupen

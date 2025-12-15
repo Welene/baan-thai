@@ -63,7 +63,7 @@ function LoginPage({ setCurrentUser }: LoginPageProps) {
 				email: data.user.email,
 				username: data.user.username,
 				role: data.user.role,
-				phoneNumber: data.user.phoneNumber, // added phoneNUmber so number input field on checkout page fills automatially
+				phoneNumber: data.user.phoneNumber,
 			};
 			localStorage.setItem('currentUser', JSON.stringify(userToStore));
 

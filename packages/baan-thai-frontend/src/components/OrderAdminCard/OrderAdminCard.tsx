@@ -1,6 +1,9 @@
 import React from "react";
 import "./OrderAdminCard.css";
 
+// OrderCard === each order item/card/container on the admin "arbetsyta" page
+
+
 type OrderItem = {
   name: string;
   quantity: number;  
@@ -9,9 +12,11 @@ type OrderItem = {
   productId: string;
 };
 
+// OrderCard has this prop with status and waitStatus, which is connected to color/wait time color, 
+// change/notification updates/profile order status change etc...
 type OrderCardProps = {
   orderId: string;
-  status: "pending" | "confirmed" | "ready" | "completed"; // removed done -- added ready + completed
+  status: "pending" | "confirmed" | "ready" | "completed";
   waitStatus?: "new" | "waiting" | "overdue";
   items: OrderItem[];
   message?: string;
@@ -26,7 +31,6 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
   // base className + status + waitstatus
   let className = "order";
   let sortOrderValue = 0;
-    // console.log("onRemove:", onRemove);
 
   if (status === "pending") {
     className += " pending";
@@ -41,7 +45,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
   sortOrderValue = 4;
   } else if (status === "completed") { // and completed classname for styling here
     className += " completed";
-    sortOrderValue = 5;
+    sortOrderValue = 5; // completed status/orders are shown last on page
 }
 
   const handleRemoveClick = () => {
@@ -75,7 +79,7 @@ const OrderCard: React.FC<OrderCardProps> = ({ orderId, status, waitStatus, item
       {status === "pending" && onConfirm && (
         <button
           className="order-confirm"
-          onClick={(e) => { e.stopPropagation(); onConfirm(orderId); }} //stopPropagation -- trigger ikke onCLick på artikkelen (popup), når man trykker på en knapp
+          onClick={(e) => { e.stopPropagation(); onConfirm(orderId); }} //stopPropagation -- does not trigger onCLick on article ("popup") when you click on btn inside article
         >
           BEKRÄFTA
         </button> 

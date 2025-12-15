@@ -59,18 +59,6 @@ export function OrderSummary({
                     <hr className="divider" />
                 </section>
 
-                {/* CAMPAIGN CODE */}
-                {/* <section className="confirm-group3">
-                    <label className="form-label confirm-article__field-container">
-                        <span className="confirm-article__code">Kampanjkod</span>
-                        <input
-                            className="confirm-article__field"
-                            type="text"
-                            placeholder="Ange kod"
-                            aria-label="Kampanjkod"
-                        />
-                    </label>
-                </section> */}
                 <hr className="divider" />
                 
                 {/* TOTAL PRICE */}
@@ -93,3 +81,7 @@ export function OrderSummary({
         </section>
     );
 }
+
+// Author: Helene
+
+// Edit: added payment modal --> WHO? WRITE HERE

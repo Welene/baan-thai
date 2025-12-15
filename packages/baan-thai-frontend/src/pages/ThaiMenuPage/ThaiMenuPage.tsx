@@ -223,15 +223,6 @@ export default function ThaiMenuPage({
 							</div>
 						</section>
 					))}
-				{/* <section className="cart-section">
-					<Cart
-						cartItems={cartItems}
-						setCartItems={setCartItems}
-						onClose={() => {}}
-						user={currentUser}
-						mode="inline" // cart is inline/static on menu pages
-					/>
-				</section> */}
 			</div>
 		</>
 	);

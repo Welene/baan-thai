@@ -143,9 +143,6 @@ function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
                         </h1>
                     </div>
                 </section>
-                {/* <hr className="divider--h1" /> */}
-                {/* <h1 className="checkout-wrapper__heading">DIN BESTÄLLNING</h1>
-                <hr className="divider--h1" /> */}
 
                 <section className="checkout-section">
                     <section className="order-section">
@@ -302,8 +299,11 @@ function CheckoutPage({ currentUser, cartItems = [] }: CheckoutPageProps) {
 
 export default CheckoutPage;
 
+// Author: Helene
+
 /* Changes made by: Sunsanee */
 /* Refactored with custom hooks and separate components */
+// Added payment and confirmation functions
 
 /* Changes made by: Tim */
 /* Added customer comment field */

@@ -124,4 +124,5 @@ export const handler = async (event) => {
 
 /* Författare: Tim */
 /* Hämtar användarprofil med notiser och orderhistorik */
-// Helene edit: added fetchWithApiKey in every api call for extra api protection
+
+ // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
