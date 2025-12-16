@@ -104,7 +104,7 @@ export const handler = async (event) => {
   }
 };
 // author: Tim 
-//sköter ingångsprocessen för användare */
+// sköter inloggnings-processen för användare */
 
 // Helene edit: added phoneNumber
 // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
