@@ -63,3 +63,5 @@ export const AboutUsPage: React.FC = () => {
         </div>
     )
 }
+
+// Create: Sunsanee
