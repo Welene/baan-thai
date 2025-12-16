@@ -238,3 +238,7 @@ export default Header;
 /*Edit: Felicia
 Lägg till hamburger meny och ta bort login och logut knapp, fixa till profile knappen
 om user är inlogga navigate till profilesida annars till loginsidan*/
+
+// Edit: Sunsanee
+// Har lagt till briefcase knapp för att admin användare skulle kunna navigera till Admin-page.
+// Den knappen synas enbart för Admin användare.
