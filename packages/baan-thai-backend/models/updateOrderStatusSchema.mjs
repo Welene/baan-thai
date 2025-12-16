@@ -6,4 +6,5 @@ export const updateOrderStatusSchema = Joi.object({
     .required(),
 });
 
+// Author: Felicia
 // Helene edit: added completed!... I think?

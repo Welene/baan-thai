@@ -98,5 +98,6 @@ export const handler = middy(async (event) => {
   .use(httpJsonBodyParser())
   .use(validateOrder())
   .use(errorHandler())
-
- // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+  
+// Author: Felicia
+// Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
