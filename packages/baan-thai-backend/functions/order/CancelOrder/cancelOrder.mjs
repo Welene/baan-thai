@@ -53,5 +53,6 @@ export const handler = middy(async (event) => {
 })
   .use(httpJsonBodyParser())
   .use(errorHandler());
-
+//author : Tim
+// cancels an order by orderId and userId
  // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection

@@ -115,4 +115,7 @@ export const handler = async (event) => {
   }
 };
 
- // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+// Author: Tim 
+// detta script uppdaterar användarprofilen med email, phoneNumber och address fält
+
+// Helene edit: added incoming API_KEY and expected API_KEY for extra api protection

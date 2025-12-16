@@ -227,45 +227,6 @@ functions:
       - httpApi:
           path: /api/orders/{orderId}/payment
           method: POST
-
-  # EJ FÄRDIG - getPayment: get payment status
-  # getPayment:
-  #   handler: functions/payment/getPayment.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/orders/{orderId}/payment
-  #         method: GET
-
-  # EJ FÄRDIG - updatePaymentStatus: webhook from payment provider
-  # updatePaymentStatus:
-  #   handler: functions/payment/updatePaymentStatus.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/payments/{paymentId}/status
-  #         method: PUT
-
-  # TODO: Skapa cart handlers
-  # #  -------------------CART---------------------
-  # getCart: # gets the userId's cart
-  #   handler: functions/getCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: GET
-
-  # updateCart: # updates the userId's cart
-  #   handler: functions/updateCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: PUT
-
-  # clearCart: # empties the userId's cart
-  #   handler: functions/clearCart.handler
-  #   events:
-  #     - httpApi:
-  #         path: /api/cart/{userId}
-  #         method: PUT
 # resources:
 #   Resources:
 #     CloudDbTable:

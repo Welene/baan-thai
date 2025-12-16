@@ -4,3 +4,5 @@ import { DynamoDBDocumentClient } from "@aws-sdk/lib-dynamodb";
 export const client = new DynamoDBClient({ region: "eu-north-1" });
 
 export const docClient = DynamoDBDocumentClient.from(client);
+
+//clitents skapades för att integreras i andra filer och användas för att kommunicera med dynamodb

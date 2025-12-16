@@ -125,5 +125,6 @@ export const handler = async (event) => {
 /* Användarregistrering med email-validering och JWT-token */
 
 // Helene edit: added phoneNumber
- // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+// Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+
 // Tim edit: Refaktorerad till sendResponse, förenklad felhantering, renare struktur, ingen ändrad funktionalitet.

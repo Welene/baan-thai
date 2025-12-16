@@ -103,7 +103,10 @@ export const handler = async (event) => {
     return sendResponse(500, { error: 'Serverfel vid inloggning', details: err.message });
   }
 };
+// author: Tim 
+//sköter ingångsprocessen för användare */
 
 // Helene edit: added phoneNumber
- // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+// Helene edit: added incoming API_KEY and expected API_KEY for extra api protection
+
 //Tim edit: Refaktorerade sendResponse, samlad validering, svar, oförändrat inloggningsflöde.

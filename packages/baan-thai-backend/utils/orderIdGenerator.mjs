@@ -1,10 +1,9 @@
 import { docClient } from "../services/clients.mjs";
 import { ScanCommand, PutCommand } from "@aws-sdk/lib-dynamodb";
 
-/**
- * Genererar ett sekventiellt ordernummer
- * Format: 1001, 1002, 1003, etc.
- * Startar från 1001 för att ge ett professionellt intryck
+/*
+  Genererar ett sekventiellt ordernummer
+  Format: 1001, 1002, 1003, etc.
  */
 export const generateOrderId = async () => {
   const TABLE_NAME = process.env.TABLE_NAME || "RestaurantTable";

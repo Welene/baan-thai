@@ -23,3 +23,5 @@ export const CategoryNav = ({ categories, categoryNames, onCategoryClick }: Cate
 };
 
 export default CategoryNav;
+//author: Tim
+// Component for navigating between categories in the menu

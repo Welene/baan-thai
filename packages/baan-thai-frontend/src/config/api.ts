@@ -10,3 +10,7 @@ const API_URLS = {
 };
 
 export const API_BASE_URL = USE_LOCAL ? API_URLS.local : API_URLS.aws;
+
+
+//author: Tim
+// Configuration file for API base URL depending on environment
