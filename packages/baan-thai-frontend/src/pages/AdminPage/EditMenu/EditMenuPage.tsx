@@ -36,7 +36,6 @@ export const EditMenuPage = () => {
 	// ---------------------------------------- START OF FETCH 1--------------------------------------------
 	const handleSearch = async () => {
 		try {
-			// const response = await fetch('https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu');
 			const response = await fetchWithApiKey(`${API_BASE_URL}/api/menu`);
 			const data = await response.json();
 			
@@ -99,9 +98,6 @@ export const EditMenuPage = () => {
 			};
 // ----------------------------------------START OF FETCH 2--------------------------------------------
 
-			// const response = await fetch(
-			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
-			// 	{
 			const response = await fetchWithApiKey(
 				`${API_BASE_URL}/api/menu/${selectedItem.productId}`,
 				{
@@ -145,9 +141,6 @@ export const EditMenuPage = () => {
 		if (!confirm('Är du säker på att du vill ta bort detta menyobjekt?')) return;
 
 		try {
-			// const response = await fetch(
-			// 	`https://nicx8149f2.execute-api.eu-north-1.amazonaws.com/api/menu/${selectedItem.productId}`,
-			// 	{
 			const response = await fetchWithApiKey(
 				`${API_BASE_URL}/api/menu/${selectedItem.productId}`,
 				{

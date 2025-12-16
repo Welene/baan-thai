@@ -3,7 +3,7 @@ export interface MenuPageProps {
 } // menuProps is a newer version of this interface
 
 export interface MenuItem {
-	id: number; // tog bort string här
+	id: number; 
 	name: string;
 	description: string;
 	price: number;

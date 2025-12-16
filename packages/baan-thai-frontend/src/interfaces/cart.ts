@@ -6,6 +6,5 @@ export interface CartItem {
 	quantity: number;
 }
 
-// add user wishes
 
 // Helene

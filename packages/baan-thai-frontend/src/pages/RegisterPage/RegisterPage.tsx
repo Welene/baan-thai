@@ -40,9 +40,6 @@ function RegisterPage() {
 		console.log('Försöker registrera med data:', formData);
 // ----------------------------------------START OF FETCH--------------------------------------------
 		try {
-			// const response = await fetch(
-			// 	`${API_BASE_URL}/api/register`,
-			// 	{
 			const response = await fetchWithApiKey(
 				`${API_BASE_URL}/api/register`,
   			{
@@ -92,10 +89,9 @@ function RegisterPage() {
 					</div>
 				)}
 				<form className="register__form" onSubmit={handleRegister}>
-					{/* connected to the register button with "type = submit" // formData has all data noe, when the form is submitted the handleRegister function runs */}
+					{/* connected to the register button with "type = submit" // formData has all data now, when the form is submitted the handleRegister function runs */}
 					{/* async backend function needs to wait for this data from the inputfields before posting new user */}
 
-					{/* CONNECT TO BACKEND LATER (AKA NEXT WORKDAY) */}
 					<div>
 						<label htmlFor="namn" className="sr-only">
 							Namn
@@ -112,7 +108,6 @@ function RegisterPage() {
 						/>
 					</div>
 
-					{/* behövs username? */}
 					<div>
 						<label htmlFor="username" className="sr-only">
 							Användarnamn
@@ -202,7 +197,6 @@ function RegisterPage() {
 							type="button"
 							className="register__button register__button--login"
 							onClick={handleLogin}>
-							{/* when clicked --> navigates to login page instead using useNavigate */}
 							LOGGA IN
 						</button>
 					</div>

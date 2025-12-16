@@ -26,7 +26,7 @@ function Cart({
 		setCartItems(updated);
 	};
 
-	// calculated total price
+	// calculated total price in the cart
 	const total = cartItems.reduce(
 		(sum, item) => sum + item.price * item.quantity,
 		0
@@ -35,9 +35,9 @@ function Cart({
 	const handleCheckout = useCallback(() => {
 		// useCallBack only rerenders/changes the handleCheckout --> inside checkout button
 		
-		// Check if user is logged in - localStorage
+		// Check if user is logged in - checks currentUser in localStorage
 		const currentUser = JSON.parse(localStorage.getItem('currentUser') || 'null');
-		const isLoggedIn = currentUser && currentUser.userId;
+		const isLoggedIn = currentUser && currentUser.userId; // gets userId of currentUser, stores in isLoggedIn
 
 		if (!isLoggedIn) {
 			// if not logged in redirect to login page

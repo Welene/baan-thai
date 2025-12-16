@@ -23,7 +23,7 @@ function Header() {
 	// changes the JSON string from localstorage into a User object (parsing it) - or empty (null) if user hasn't been made yet
 
 	const userId = user?.userId ?? '';
-	// get userId, or empty if no user is made yet
+	// get userId, or is empty if no user is made yet
 
 	const navigate = useNavigate();
 
@@ -48,7 +48,6 @@ function Header() {
 		
 		try {
 			// Hämta användarens orders istället
-			// const response = await fetch(`${API_BASE_URL}/api/orders/${userId}`);
 
 			const response = await fetchWithApiKey(`${API_BASE_URL}/api/orders/${userId}`); // PROTECTED WITH API_KEY
 			
@@ -79,7 +78,7 @@ function Header() {
 						};
 					})
 					.sort((a: any, b: any) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
-					.slice(0, 10); // Visa max 10 senaste
+					.slice(0, 10); // Visa max 10 senaste notifikationer
 				
 				setNotifications(orderNotifications);
 				setUnreadCount(orderNotifications.length);
@@ -132,7 +131,6 @@ function Header() {
 					alt="Baan Thaikök logo"
 					className="header__logo header__logo--hidden"
 					onClick={() => navigate('/')}
-					// / = PATH TIL LANDINGPAGE, ENDRE PATH INNI ('/') OM ANNET NAVN PÅ LANDINGPAGE
 				/>
 			</section>
 
@@ -179,7 +177,6 @@ function Header() {
 								onClick={() => {navigate('/login'); closeMenu();}}
 							/>
 						)}
-						{/* /profile = PATH TIL PROFIL, ENDRE PATH INNI ('/') OM ANNET NAMN PÅ PROFILPAGE */}
 					</figure>
 					<figure className="header__icon header__icon--notification">
 						<img
@@ -223,7 +220,6 @@ function Header() {
 								onClick={() => {navigate('/about'); closeMenu();}}>
 								Om oss
 							</li>
-							{/* har inte skapad alla pages än, så ändra / path bara när man vet */}
 						</ul>
 					</nav>
 				</section>

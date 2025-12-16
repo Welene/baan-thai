@@ -26,7 +26,6 @@ interface User {
 
 // ---------------------------------------- START OF FETCH 1 --------------------------------------------
 export async function updateUser(userId: string, updateData: UpdateUserData): Promise<{ success: boolean; user: User }> {
-	// const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
 	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users/${userId}`, {
 		method: 'PUT',
 		headers: {
@@ -47,7 +46,6 @@ export async function updateUser(userId: string, updateData: UpdateUserData): Pr
 
 // ---------------------------------------- START OF FETCH 2 --------------------------------------------
 export async function getAllUsers(): Promise<{ success: boolean; users: User[] }> {
-	// const response = await fetch(`${API_BASE_URL}/api/users`);
 	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users`);
 
 	if (!response.ok) {
@@ -62,7 +60,6 @@ export async function getAllUsers(): Promise<{ success: boolean; users: User[] }
 
 // ---------------------------------------- START OF FETCH 3 --------------------------------------------
 export async function deleteUser(userId: string): Promise<{ success: boolean; message: string }> {
-	// const response = await fetch(`${API_BASE_URL}/api/users/${userId}`, {
 	const response = await fetchWithApiKey(`${API_BASE_URL}/api/users/${userId}`, {
 		method: 'DELETE',
 		headers: {

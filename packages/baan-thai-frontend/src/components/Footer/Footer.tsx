@@ -70,6 +70,3 @@ export default Footer;
 
 // Författare: Helene
 // Footer komponent
-
-// Eventuell buggfix av: *namn-här:
-// Vad blev fixad: *skriv vad som (evt) fixades*

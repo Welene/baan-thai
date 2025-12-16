@@ -11,7 +11,7 @@ export const AdminNavBar = () => {
 	const navMenuRef = useRef<HTMLDivElement>(null);
 	
 
-	// Stäng dropdowns när man klickar utanför
+	// -------------------------------- Stäng dropdowns när man klickar utanför --------------------------------
 	useEffect(() => {
 		const handleClickOutside = (event: MouseEvent) => {
 			if (menuDropdownRef.current && !menuDropdownRef.current.contains(event.target as Node)) {
