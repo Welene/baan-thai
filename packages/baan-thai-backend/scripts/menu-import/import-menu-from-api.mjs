@@ -143,4 +143,5 @@ async function run() {
 run();
 
 /* Författare: Tim */
-/* Hämtar meny-data från GitHub Pages API och importerar produkter till DynamoDB */
+/* Hämtar meny-data från GitHub Pages API och importerar produkter till DynamoDB, 
+   skapade först ett statiskt api på github pages för att slippa lägga in alla produkter var för sig */

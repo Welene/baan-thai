@@ -20,3 +20,5 @@ export async function queryMenuItem(productId) {
 		throw error;
 	}
 }
+// author: tim
+// detta script hämtar en meny item från dynamodb baserat på productId

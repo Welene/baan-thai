@@ -22,3 +22,6 @@ export const sendResponse = (code, data) => {
     }),
   };
 }
+
+//edit: Tim 
+// added content security policy to responses 

@@ -74,6 +74,7 @@ export const MenuCard: React.FC<MenuCardProps> = ({
 		</div>
 	);
 };
-
+//author tim	
+// Component for displaying a menu item with add to cart functionality
 //Felicia // lägga till plus, minus och antal knapp 
 //Tim: tillgänglighets anpassning  / styling

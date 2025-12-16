@@ -81,4 +81,4 @@ run().catch(err => {
 });
 
 /* Författare: Tim */
-/* Seedar DynamoDB-tabellen med testdata från seed-data.json */
+/* Seedar DynamoDB-tabellen med testdata från seed-data.json detta användes tidigt i projektet och vissa saker kan ha ändrats sedan vi använde det*/

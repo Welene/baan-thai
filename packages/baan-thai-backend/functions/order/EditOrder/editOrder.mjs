@@ -66,5 +66,6 @@ export const handler = middy(async (event) => {
 })
   .use(httpJsonBodyParser())
   .use(errorHandler());
-
+//author: Tim
+// Edits an order by orderId
  // Helene edit: added incoming API_KEY and expected API_KEY for extra api protection

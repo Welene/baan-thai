@@ -103,3 +103,6 @@ function NotificationModal({
 }
 
 export default NotificationModal;
+//author: Tim
+// Component for displaying notifications in a modal dialog
+
